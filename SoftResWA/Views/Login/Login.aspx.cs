@@ -13,5 +13,10 @@ namespace SoftResWA.Views.Login
         {
 
         }
+        protected void BtnAcceder_Click(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }

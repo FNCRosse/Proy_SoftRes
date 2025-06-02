@@ -1,6 +1,15 @@
-﻿
-html,body {
+﻿html, body {
     height: 100%;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom right, #fce3e3, #f7c6c6);
+    overflow: hidden;
 }
 
 .bg {
@@ -10,106 +19,95 @@ html,body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%), radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%), radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 7% 99%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 69% 76%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 2% 35%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 14% 48%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%), radial-gradient(circle at 28% 87%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 65% 14%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 51% 36%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), radial-gradient(circle at 6% 93%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%), linear-gradient(135deg, #17e9ad, #1d18d0);
-}
-
-body {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #f5f5f5;
+    background: radial-gradient(circle at 30% 86%, rgba(255, 200, 200, 0.08) 0%, transparent 100%), radial-gradient(circle at 55% 100%, rgba(255, 180, 180, 0.08) 0%, transparent 100%), radial-gradient(circle at 40% 75%, rgba(255, 180, 180, 0.06) 0%, transparent 100%), radial-gradient(circle at 7% 99%, rgba(255, 160, 160, 0.06) 0%, transparent 100%), linear-gradient(to right bottom, #f5b7b1, #c0392b);
 }
 
 .form-signin {
     width: 100%;
-    max-width: 330px;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.05);
+    max-width: 380px;
+    background: rgba(255, 230, 230, 0.15); /* fondo translúcido rosado */
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 180, 180, 0.3);
+    box-shadow: 0 8px 24px rgba(192, 57, 43, 0.25); /* sombra roja suave */
 }
 
+
     .form-signin h1 {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        border-left: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-        margin-top: 0px;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        color: #fff;
-        padding: 15px;
         text-align: center;
+        color: white;
+        margin-bottom: 25px;
+        font-size: 1.8em;
     }
 
-    .form-signin form {
-        padding: 15px;
+.form-floating {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    background-color: #f9f9f9 !important;
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(50, 100, 255, 0.6);
     }
 
-        .form-signin form .btn {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
+.form-check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* <-- esto alinea a la izquierda */
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
 
-            .form-signin form .btn:hover, .form-signin form .btn:focus {
-                background: rgba(255, 255, 255, 0.1);
-                box-shadow: none;
-            }
+.simple-checkbox input[type="checkbox"] {
+    transform: scale(1.2);
+    accent-color: #007bff;
+    margin-right: 8px;
+    vertical-align: middle;
+}
 
-        .form-signin form .form-control:focus {
-            border-color: #ced4da;
-            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-        }
+.simple-checkbox {
+    color: white;
+    font-size: 0.95em;
+    display: flex;
+    align-items: initial;
+}
 
-    .form-signin .copyright {
-        text-align: center;
-        color: rgba(255, 255, 255, 0.65);
+.form-check-label {
+    color: white;
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.btn {
+    background: linear-gradient(to right, #e74c3c, #c0392b);
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    font-size: 1.05em;
+}
+
+    .btn:hover {
+        background: linear-gradient(to right, #c0392b, #922b21);
     }
 
-    .form-signin .form-control {
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    .form-signin .form-check {
-        display: flex;
-        align-items: center;
-        color: rgba(255, 255, 255, 0.65);
-    }
-
-        .form-signin .form-check label {
-            font-size: 0.9em;
-        }
-
-        .form-signin .form-check input {
-            margin-right: 0.5em;
-        }
-
-            .form-signin .form-check input:checked {
-                background-color: #9ce060;
-                border-color: #81c63f;
-            }
-
-    .form-signin .form-floating:focus-within {
-        z-index: 2;
-    }
-
-    .form-signin input[type=email] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type=password] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
+.copyright {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    font-size: 0.9em;
+}

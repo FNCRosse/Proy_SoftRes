@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TuNamespace
+namespace SoftResWA.Views.Login
 {
 
 
