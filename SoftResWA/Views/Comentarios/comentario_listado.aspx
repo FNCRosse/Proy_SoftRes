@@ -60,6 +60,12 @@
     <div class="row">
         <asp:GridView ID="dgvComentarios" runat="server" AllowPaging="false" AutoGenerateColumns="false" CssClass="table table-hover table-responsive table-striped">
             <Columns>
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="modificarReserva('<%# Eval("IdComentario") %>')">M</button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarCancelacion('<%# Eval("IdComentario) %>')">C</button>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField HeaderText="ID" DataField="COMENTARIO_ID" />
                 <asp:BoundField HeaderText="Comentario" DataField="MENSAJE" />
                 <asp:BoundField HeaderText="Puntuación" DataField="PUNTUACION" />

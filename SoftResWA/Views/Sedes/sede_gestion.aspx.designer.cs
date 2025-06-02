@@ -33,6 +33,15 @@ namespace SoftResWA.Views.Sedes
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control hdnIdSede.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdSede;
+
+        /// <summary>
         /// Control txtNombreSede.
         /// </summary>
         /// <remarks>

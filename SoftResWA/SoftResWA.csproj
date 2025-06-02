@@ -89,7 +89,6 @@
     <Content Include="Content\Fonts\css\brands.min.css" />
     <Content Include="Content\Fonts\css\fontawesome.css" />
     <Content Include="Content\Fonts\css\fontawesome.min.css" />
-    <Content Include="Content\Fonts\css\Login.css" />
     <Content Include="Content\Fonts\css\regular.css" />
     <Content Include="Content\Fonts\css\regular.min.css" />
     <Content Include="Content\Fonts\css\sb-admin-2.css" />
@@ -131,7 +130,6 @@
     <Content Include="Content\Fonts\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\Fonts\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Scripts\MyScripts.js" />
-    <Content Include="Scripts\script_blockUI.js" />
     <Content Include="Views\Comentarios\comentario_listado.aspx" />
     <Content Include="Views\Home\home.aspx" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
@@ -154,7 +152,6 @@
     <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="Views\Horarios\horario_gestion.aspx" />
     <Content Include="Views\Locales\local_gestion.aspx" />
-    <Content Include="Views\Login\Login.aspx" />
     <Content Include="Views\Mesas\mesas_gestion.aspx" />
     <Content Include="Views\Reportes\reporte_cliente.aspx" />
     <Content Include="Views\Reportes\reporte_reservas.aspx" />
@@ -205,13 +202,6 @@
     </Compile>
     <Compile Include="Views\Locales\local_gestion.aspx.designer.cs">
       <DependentUpon>local_gestion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Login\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Login\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Mesas\mesas_gestion.aspx.cs">
       <DependentUpon>mesas_gestion.aspx</DependentUpon>
