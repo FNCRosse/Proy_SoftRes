@@ -47,17 +47,9 @@
 
     <!-- Tabla -->
     <div class="row">
-        <asp:GridView ID="dgvSede" runat="server" AllowPaging="false" AutoGenerateColumns="false" OnRowCommand="dgvSede_RowCommand"
+        <asp:GridView ID="dgvSede" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:TemplateField HeaderText="">
-                    <ItemTemplate>
-                        <asp:Button runat="server" Text="M" CssClass="btn btn-sm btn-primary"
-                            CommandName="Modificar"
-                            CommandArgument='<%# Eval("SedeId") %>' />
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarCancelacion('<%# Eval("IdSede") %>')">C</button>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:BoundField HeaderText="Código" DataField="SedeId" />
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Distrito" DataField="Distrito" />
@@ -84,7 +76,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <asp:HiddenField ID="hdnIdSede" runat="server" />
                     <!-- Información general -->
                     <div class="border p-3 mb-3">
                         <h6 class="fw-bold mb-3">Información General</h6>
@@ -176,3 +167,6 @@
         </div>
     </div>
 </asp:Content>
+
+
+

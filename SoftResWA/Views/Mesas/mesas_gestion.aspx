@@ -67,12 +67,6 @@
         <asp:GridView ID="dgvLocal" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:TemplateField HeaderText="">
-                    <ItemTemplate>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="modificarReserva('<%# Eval("IdMesa") %>')">M</button>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarCancelacion('<%# Eval("IdMesa") %>')">C</button>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:BoundField HeaderText="Código" DataField="SedeId" />
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Dirección" DataField="Direccion" />

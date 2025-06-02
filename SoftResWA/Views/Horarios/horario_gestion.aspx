@@ -63,12 +63,6 @@
         <asp:GridView ID="dgvHorario" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:TemplateField HeaderText="">
-                    <ItemTemplate>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="modificarReserva('<%# Eval("IdHorario") %>')">M</button>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmarCancelacion('<%# Eval("IdHorario") %>')">C</button>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:BoundField HeaderText="Código" DataField="SedeId" />
                 <asp:BoundField HeaderText="Dia de la semana" DataField="DiaSem" />
                 <asp:BoundField HeaderText="Hora Inicio" DataField="HInicio" />
