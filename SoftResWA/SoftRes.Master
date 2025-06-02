@@ -1,0 +1,200 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SoftRes.master.cs" Inherits="SoftResWA.SoftRes" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Fonts/css/all.css" rel="stylesheet" type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="Content/Fonts/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Para las alertas -->
+    <title>
+        <asp:ContentPlaceHolder ID="cphTitulo" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+</head>
+<body>
+    <div class="container-fluid d-flex p-0 h-100">
+        <!--Menu Lateral-->
+        <div id="menuLateral" class="sidebar-bg d-flex flex-column flex-shrink-0 p-3 text-white offcanvas-md offcanvas-start bg-rojo-custom" style="width: 250px; min-height: 100vh;">
+            <a class="navbar-brand">
+                <img src="/Image/isologo_sinFondo.png" width="150" />
+            </a>
+            <hr>
+            <ul class="mynav nav nav-pills flex-column mb-auto">
+                <!-- Ítem con submenú -->
+                <li class="nav-item mb-1">
+                    <a href="/Views/Home/home.aspx"><i class="fa-solid fa-square-poll-vertical me-2"></i>Home</a>
+                </li>
+                <li class="nav-item submenu mb-2">
+                    <a href="/Views/Sedes/sede_gestion.aspx" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-house me-2"></i>Sedes
+                    </a>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="/Views/Locales/local_gestion.aspx" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-location-dot me-2"></i>Locales
+                    </a>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="/Views/Horarios/horario_gestion.aspx" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-calendar-days me-2"></i>Horarios
+                    </a>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="#" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-file-lines me-2"></i>Reservas
+                    </a>
+                    <ul class="nav flex-column subitems ps-4">
+                        <li><a class="nav-link text-white" href="/Views/Reservas/registrar_reserva_comun.aspx">Registrar R.Común</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Reservas/registrar_reserva_evento.aspx">Registrar R.Evento</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Reservas/reserva_gestion.aspx">Listar</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-user me-2"></i>Usuarios
+                    </a>
+                    <ul class="nav flex-column subitems ps-4">
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/registro_cliente.aspx">Registrar Cliente</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/registro_empleado.aspx">Registrar Empleado</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_cliente.aspx">Listar Clientes</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_empleado.aspx">Listar Empleado</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="/Views/Mesas/mesas_gestion.aspx" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-table me-2"></i>Mesas
+                    </a>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="/Views/Comentarios/comentario_listado.aspx" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-comments me-2"></i>Comentarios
+                    </a>
+                </li>
+
+                <li class="nav-item submenu mb-2">
+                    <a href="#" class="nav-link text-white d-flex align-items-center">
+                        <i class="fa-solid fa-file-lines me-2"></i>Reportes
+                    </a>
+                    <ul class="nav flex-column subitems ps-4">
+                        <li><a class="nav-link text-white" href="/Views/Reportes/reporte_cliente.aspx">Reporte Clientes</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Reportes/reporte_reservas.aspx">Reporte Reservas</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <hr>
+            <div class="d-flex">
+                <img src="/Image/Logotipo_sinFondo.png" width="150" />
+            </div>
+        </div>
+        <!-- Contenido Derecha -->
+        <div class="bg-light flex-fill overflow-auto">
+            <!-- Barra superior para dispositivos pequeños -->
+            <div class="p-2 d-md-none d-flex text-white bg-rojo-custom">
+                <a class="text-white" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" role="button">
+                    <i class="fa-solid fa-bars fs-4"></i>
+                </a>
+                <img src="/Image/isotipo_sinFondo.png" class="ms-3" width="75" />
+            </div>
+            <!-- Barra de Usuario y Notificaciones -->
+            <nav class="navbar navbar-dark bg-rojo-custom">
+                <div class="container-fluid justify-content-between">
+                    <a class="navbar-brand d-sm-none d-md-block d-none d-sm-block">Gestión de Reservas</a>
+
+                    <div class="d-flex align-items-center">
+                        <!-- Icono de notificaciones -->
+                        <div class="nav-item dropdown no-arrow mx-2">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw text-white"></i>
+                                <span class="badge bg-danger badge-counter">1+</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">Centro de Alertas</h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="me-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">12 de diciembre</div>
+                                        <span class="fw-bold">¡Nuevo reporte disponible!</span>
+                                    </div>
+                                </a>
+                                <!-- Puedes añadir más alertas aquí -->
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Ver todas</a>
+                            </div>
+                        </div>
+
+                        <!-- Usuario -->
+                        <div class="dropdown ps-2">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="me-2 d-none d-lg-inline text-white small">Carlos Sanchez</span>
+                                <img src="/Image/undraw_profile.svg" class="rounded-circle" width="32" height="32">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2 text-gray-400"></i>Perfil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cogs me-2 text-gray-400"></i>Cambiar Contraseña</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt me-2 text-gray-400"></i>Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Logout Modal -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">¿Deseas cerrar sesión?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            Selecciona "Cerrar Sesión" para salir del sistema.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a class="btn btn-danger" href="#">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido de la Página Web -->
+            <div class="p-4">
+                <form runat="server">
+                    <asp:ContentPlaceHolder ID="cphContenido" runat="server">
+                    </asp:ContentPlaceHolder>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/Scripts/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/Scripts/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/Scripts/demo/chart-area-demo.js"></script>
+    <script src="/Scripts/demo/chart-pie-demo.js"></script>
+    <script src="/Scripts/sb-admin-2.min.js"></script>
+    <script src="Scripts/MyScripts.js"></script>
+</body>
+</html>
