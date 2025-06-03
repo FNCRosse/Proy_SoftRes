@@ -40,25 +40,34 @@
                         </div>
                     </div>
 
-                    <!-- Información del Local -->
+                    <!-- Información del Local + Estado -->
                     <div class="col-md-6">
                         <div class="border rounded p-3 mb-3">
                             <h6 class="fw-bold mb-3">Información del Local</h6>
-                            <div class="input-group mb-2">
-                                <asp:TextBox ID="txtIdLocal" runat="server" CssClass="form-control" placeholder="ID del Local" />
-                                <asp:Button ID="btnBuscarLocal" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary" />
+                            <div class="mb-3">
+                                <asp:DropDownList ID="ddlLocales" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Seleccionar Local" Value="" />
+                                    <asp:ListItem Text="San Miguel" Value="1" />
+                                    <asp:ListItem Text="Callao" Value="2" />
+                                </asp:DropDownList>
                             </div>
-                            <asp:TextBox ID="txtNombreLocal" runat="server" CssClass="form-control" placeholder="Nombre" ReadOnly="true" />
-                        </div>
-
-                        <!-- Información de la ubicación de mesa preferida -->
-                        <div class="border rounded p-3">
                             <h6 class="fw-bold mb-3">Ubicación de Mesa Preferida</h6>
-                            <div class="input-group mb-2">
-                                <asp:TextBox ID="txtIdTipoMesa" runat="server" CssClass="form-control" placeholder="ID del Tipo de Mesa" />
-                                <asp:Button ID="btnBuscarTipoMesa" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary" />
+                            <div class="mb-3">
+                                <asp:DropDownList ID="ddlUbicacionMesa" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Seleccionar Ubicación" Value="" />
+                                    <asp:ListItem Text="Ventana" Value="Ventana" />
+                                    <asp:ListItem Text="Centro" Value="Centro" />
+                                    <asp:ListItem Text="Esquina" Value="Esquina" />
+                                </asp:DropDownList>
                             </div>
-                            <asp:TextBox ID="txtNombreTipoMesa" runat="server" CssClass="form-control" placeholder="Nombre" ReadOnly="true" />
+                            <h6 class="fw-bold mb-3">Estado de Fila de espera</h6>
+                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                                <asp:ListItem Text="Seleccionar Estado" Value="" />
+                                <asp:ListItem Text="Pendiente" Value="Pendiente" />
+                                <asp:ListItem Text="Notificado" Value="Confirmado" />
+                                <asp:ListItem Text="Cancelado" Value="Cancelado" />
+                                <asp:ListItem Text="Vacio" Value="Cancelado" />
+                            </asp:DropDownList>
                         </div>
                     </div>
                 </div>

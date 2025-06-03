@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="registrar_reserva_evento.aspx.cs" Inherits="SoftResWA.Views.Reservas.registrar_reserva_evento" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Registrar reservas evento
 </asp:Content>
@@ -49,26 +50,37 @@
                         </div>
                     </div>
 
-                    <!-- Información del Local, Mesa, y Usuario -->
+                    <!-- Información del Local, Mesa, Estado y Usuario -->
                     <div class="col-md-6">
                         <!-- Local -->
                         <div class="border rounded p-3 mb-3">
                             <h6 class="fw-bold mb-3">Información del local</h6>
-                            <div class="input-group mb-2">
-                                <asp:TextBox ID="txtIdLocal" runat="server" CssClass="form-control" placeholder="Id del Local" />
-                                <asp:Button ID="btnBuscarLocal" runat="server" Text="buscar" CssClass="btn btn-outline-secondary" />
-                            </div>
-                            <asp:TextBox ID="txtNombreLocal" runat="server" CssClass="form-control" placeholder="Nombre" ReadOnly="true" />
+                            <asp:DropDownList ID="ddlLocal" runat="server" CssClass="form-select mb-2">
+                                <asp:ListItem Text="Seleccionar Local" Value="" />
+                                <asp:ListItem Text="San Miguel" Value="1" />
+                                <asp:ListItem Text="Miraflores" Value="2" />
+                            </asp:DropDownList>
                         </div>
 
                         <!-- Ubicación Mesa Preferida -->
                         <div class="border rounded p-3 mb-3">
-                            <h6 class="fw-bold mb-3">Información de la ubicación de mesa preferida</h6>
-                            <div class="input-group mb-2">
-                                <asp:TextBox ID="txtIdTipoMesa" runat="server" CssClass="form-control" placeholder="Id del tipo de mesa" />
-                                <asp:Button ID="btnBuscarTipoMesa" runat="server" Text="buscar" CssClass="btn btn-outline-secondary" />
-                            </div>
-                            <asp:TextBox ID="txtNombreTipoMesa" runat="server" CssClass="form-control" placeholder="Nombre" ReadOnly="true" />
+                            <h6 class="fw-bold mb-3">Ubicación de mesa preferida</h6>
+                            <asp:DropDownList ID="ddlUbicacionMesa" runat="server" CssClass="form-select mb-2">
+                                <asp:ListItem Text="Seleccionar ubicación" Value="" />
+                                <asp:ListItem Text="Ventana" Value="1" />
+                                <asp:ListItem Text="Terraza" Value="2" />
+                            </asp:DropDownList>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="border rounded p-3 mb-3">
+                            <h6 class="fw-bold mb-3">Estado de la Reserva</h6>
+                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                                <asp:ListItem Text="Seleccionar estado" Value="" />
+                                <asp:ListItem Text="Pendiente" Value="Pendiente" />
+                                <asp:ListItem Text="Confirmado" Value="Confirmado" />
+                                <asp:ListItem Text="Cancelado" Value="Cancelado" />
+                            </asp:DropDownList>
                         </div>
 
                         <!-- Usuario -->
@@ -112,3 +124,4 @@
         </div>
     </div>
 </asp:Content>
+
