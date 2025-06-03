@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContenido" runat="server">
     <div class="text-start mb-3">
         <h1 class="h3 text-danger fw-bold mb-0 me-3">
-            <i class="fas fa-gears me-2"></i>Mantenimiento de Locales
+            <i class="fas fa-gears me-2"></i>Mantenimiento de Reservas
         </h1>
     </div>
     <!-- Filtros para  -->

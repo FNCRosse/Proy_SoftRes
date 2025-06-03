@@ -94,6 +94,7 @@
     <Content Include="Content\Fonts\css\regular.min.css" />
     <Content Include="Content\Fonts\css\sb-admin-2.css" />
     <Content Include="Content\Fonts\css\sb-admin-2.min.css" />
+    <Content Include="Content\Fonts\css\site-cliente.css" />
     <Content Include="Content\Fonts\css\solid.css" />
     <Content Include="Content\Fonts\css\solid.min.css" />
     <Content Include="Content\Fonts\css\svg-with-js.css" />
@@ -106,16 +107,30 @@
     <Content Include="Content\Fonts\css\v5-font-face.min.css" />
     <Content Include="Content\Fonts\LICENSE.txt" />
     <Content Include="Content\site.css" />
+    <Content Include="Image\999a07fae5d0119f8ecd865ec2d38ec7.jpg" />
+    <Content Include="Image\aditya-romansa-m6p4lqWxfy0-unsplash.jpg" />
+    <Content Include="Image\chifa-la-gran-muralla.jpg" />
+    <Content Include="Image\CHIFA-Main-Dining-1_ok-scaled.jpg" />
+    <Content Include="Image\christian-chen-QZNUBA2qbmo-unsplash.jpg" />
+    <Content Include="Image\cloris-ying-LuNsl-Slwec-unsplash.jpg" />
+    <Content Include="Image\debbie-tea-LO7rNP0LRro-unsplash.jpg" />
+    <Content Include="Image\hendrik-will-w3OoTGYI-vA-unsplash.jpg" />
     <Content Include="Image\isologo_sinFondo.png" />
     <Content Include="Image\isotipo2_sinFondo.png" />
     <Content Include="Image\isotipo_sinFondo.png" />
+    <Content Include="Image\israel-albornoz--SsC5Fpp-9o-unsplash.jpg" />
+    <Content Include="Image\jason-leung-poI7DelFiVA-unsplash.jpg" />
     <Content Include="Image\Logotipo2_sinFondo.png" />
     <Content Include="Image\Logotipo_sinFondo.png" />
+    <Content Include="Image\mae-mu-H5Hj8QV2Tx4-unsplash.jpg" />
     <Content Include="Image\undraw_posting_photo.svg" />
     <Content Include="Image\undraw_profile.svg" />
     <Content Include="Image\undraw_profile_1.svg" />
     <Content Include="Image\undraw_profile_2.svg" />
     <Content Include="Image\undraw_profile_3.svg" />
+    <Content Include="Image\wagg1.jpg" />
+    <Content Include="Image\wan-san-yip-EVsLI2sU2OU-unsplash.jpg" />
+    <Content Include="Image\wengang-zhai-8TV_eAmrMXQ-unsplash.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -131,7 +146,15 @@
     <Content Include="Content\Fonts\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\Fonts\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Scripts\MyScripts.js" />
+    <Content Include="Scripts\Scripts_cliente.js" />
     <Content Include="Scripts\script_blockUI.js" />
+    <Content Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx" />
+    <Content Include="Views\Cliente\Home\Home_Cliente.aspx" />
+    <Content Include="Views\Cliente\Home\Login_Home.aspx" />
+    <Content Include="Views\Cliente\Locales\Locales_cliente.aspx" />
+    <Content Include="Views\Cliente\Reservas\MisReservas.aspx" />
+    <Content Include="Views\Cliente\Reservas\Reg_Resev_Comun.aspx" />
+    <Content Include="Views\Cliente\Reservas\Reg_Resev_Evento.aspx" />
     <Content Include="Views\Comentarios\comentario_listado.aspx" />
     <Content Include="Views\Home\home.aspx" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
@@ -155,6 +178,7 @@
     <Content Include="Views\Horarios\horario_gestion.aspx" />
     <Content Include="Views\Locales\local_gestion.aspx" />
     <Content Include="Views\Login\Login.aspx" />
+    <Content Include="Views\Login\RecuperarContraseña.aspx" />
     <Content Include="Views\Mesas\mesas_gestion.aspx" />
     <Content Include="Views\Reportes\reporte_cliente.aspx" />
     <Content Include="Views\Reportes\reporte_reservas.aspx" />
@@ -177,6 +201,62 @@
     </Compile>
     <Compile Include="SoftRes.Master.designer.cs">
       <DependentUpon>SoftRes.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SoftResCliente.Master.cs">
+      <DependentUpon>SoftResCliente.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SoftResCliente.Master.designer.cs">
+      <DependentUpon>SoftResCliente.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx.cs">
+      <DependentUpon>Comentarios_Listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx.designer.cs">
+      <DependentUpon>Comentarios_Listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Home\Home_Cliente.aspx.cs">
+      <DependentUpon>Home_Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Home\Home_Cliente.aspx.designer.cs">
+      <DependentUpon>Home_Cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Home\Login_Home.aspx.cs">
+      <DependentUpon>Login_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Home\Login_Home.aspx.designer.cs">
+      <DependentUpon>Login_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Locales\Locales_cliente.aspx.cs">
+      <DependentUpon>Locales_cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Locales\Locales_cliente.aspx.designer.cs">
+      <DependentUpon>Locales_cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\MisReservas.aspx.cs">
+      <DependentUpon>MisReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\MisReservas.aspx.designer.cs">
+      <DependentUpon>MisReservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\Reg_Resev_Comun.aspx.cs">
+      <DependentUpon>Reg_Resev_Comun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\Reg_Resev_Comun.aspx.designer.cs">
+      <DependentUpon>Reg_Resev_Comun.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\Reg_Resev_Evento.aspx.cs">
+      <DependentUpon>Reg_Resev_Evento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Reservas\Reg_Resev_Evento.aspx.designer.cs">
+      <DependentUpon>Reg_Resev_Evento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Comentarios\comentario_listado.aspx.cs">
       <DependentUpon>comentario_listado.aspx</DependentUpon>
@@ -212,6 +292,13 @@
     </Compile>
     <Compile Include="Views\Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\RecuperarContraseña.aspx.cs">
+      <DependentUpon>RecuperarContraseña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Login\RecuperarContraseña.aspx.designer.cs">
+      <DependentUpon>RecuperarContraseña.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Mesas\mesas_gestion.aspx.cs">
       <DependentUpon>mesas_gestion.aspx</DependentUpon>
@@ -317,6 +404,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="SoftResCliente.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
