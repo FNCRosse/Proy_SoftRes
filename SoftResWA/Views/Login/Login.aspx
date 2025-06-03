@@ -29,6 +29,9 @@
             </div>
 
             <asp:Button ID="BtnAcceder" runat="server" Text="Acceder" CssClass="w-100 btn btn-lg" OnClick="BtnAcceder_Click" />
+            <div class="mt-3 text-center">
+                <a href="RecuperarContraseña.aspx" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            </div>
 
             <p class="copyright mt-3">&copy; 2024</p>
         </main>

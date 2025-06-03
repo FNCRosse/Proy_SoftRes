@@ -111,3 +111,16 @@ body {
     margin-top: 20px;
     font-size: 0.9em;
 }
+
+.forgot-link {
+    color: white; /* blanco */
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    .forgot-link:hover {
+        color: #ffe6e6; /* blanco suave al pasar el mouse */
+        text-decoration: underline;
+    }
+
