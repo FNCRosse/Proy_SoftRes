@@ -136,3 +136,10 @@ function togglePassword(inputId, icon) {
     icon.classList.toggle("fa-eye");
     icon.classList.toggle("fa-eye-slash");
 }
+/*Activar modal si no hay mesas disponibles*/
+function simularDisponibilidad() {
+    // Aquí puedes colocar lógica real con AJAX si luego conectas a BD
+    // Por ahora, siempre simula que no hay disponibilidad
+    let modal = new bootstrap.Modal(document.getElementById('modalListaEspera'));
+    modal.show();
+}

@@ -80,13 +80,42 @@
                         <textarea class="form-control custom-input" rows="4" placeholder="Escriba sus observaciones aquí..."></textarea>
                     </div>
 
-                    <!-- Botón -->
-                    <div class="text-center mt-3">
+                    <!-- Botón Para registrar -->
+                    <%--<div class="text-center mt-3">
                         <button class="btn btn-danger rounded-pill px-5 py-2 fw-bold" style="background-color: #BC1F1F; border: none;">Enviar</button>
+                    </div>--%>
+                    <!-- Botón para simular mesas no disponibles -->
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-danger rounded-pill px-5 py-2 fw-bold"
+                            style="background-color: #BC1F1F; border: none;" onclick="simularDisponibilidad()">
+                            Enviar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Modal Lista de Espera -->
+    <div class="modal fade" id="modalListaEspera" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header bg-warning rounded-top-4">
+                    <h5 class="modal-title fw-bold text-dark" id="modalLabel">¡Casi lo logras!
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-clock fa-3x text-danger mb-3"></i>
+                    <p class="mb-2">En este momento no hay mesas disponibles para tu selección.</p>
+                    <p class="text-muted">¿Deseas unirte a nuestra lista de espera? Te notificaremos por correo si se libera un espacio.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">No, gracias</button>
+                    <asp:Button ID="btnUnirseEspera" runat="server" Text="Sí, avisarme" CssClass="btn btn-danger px-4" OnClick="btnUnirseEspera_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
 

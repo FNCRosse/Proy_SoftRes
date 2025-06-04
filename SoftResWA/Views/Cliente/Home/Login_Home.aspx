@@ -54,7 +54,8 @@
                     </div>
 
                     <button class="btn btn-danger w-100 mb-2 fw-bold">Iniciar sesión</button>
-                    <a href="#" class="text-primary small d-block text-center mt-1">Olvidé mi contraseña</a>
+                    <a href="#" class="text-primary small d-block text-center mt-1" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?
+                    </a>
                 </div>
             </div>
         </div>
@@ -117,5 +118,28 @@
             </div>
         </div>
     </div>
+    <!-- Modal Recuperar Contraseña -->
+    <div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-modal border-0 rounded-4">
+                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Cerrar">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-body text-center px-4 py-4">
+                    <h4 class="text-danger fw-bold mb-3">¿Olvidaste tu contraseña?</h4>
+                    <p class="text-muted mb-3">No te preocupes, ingresa tu correo electrónico y te enviaremos un enlace para restablecerla.</p>
+
+                    <input type="email" class="form-control mb-3" placeholder="Tu correo electrónico" />
+
+                    <button class="btn btn-warning w-100 fw-bold" style="color: #000;">
+                        Enviar enlace de recuperación
+                    </button>
+
+                    <p class="small text-muted mt-3">Revisa también tu bandeja de spam o promociones.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
 

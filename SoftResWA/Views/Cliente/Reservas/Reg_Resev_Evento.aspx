@@ -94,7 +94,7 @@
 
                     <!-- Botón -->
                     <div class="text-center mt-3">
-                        <button class="btn btn-danger rounded-pill px-5 py-2 fw-bold" style="background-color: #BC1F1F; border: none;">Enviar</button>
+                        <button class="btn btn-danger rounded-pill px-5 py-2 fw-bold" style="background-color: #BC1F1F; border: none;" OnClick="btnRegReserva_Click">Enviar</button>
                     </div>
                 </div>
             </div>

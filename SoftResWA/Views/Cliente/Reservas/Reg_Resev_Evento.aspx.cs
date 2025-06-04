@@ -13,5 +13,9 @@ namespace SoftResWA.Views.Cliente.Reservas
         {
 
         }
+        protected void btnRegReserva_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Reserva registrada!', 'El registro se completó correctamente.', 'success');", true);
+        }
     }
 }

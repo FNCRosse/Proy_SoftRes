@@ -43,5 +43,10 @@ namespace SoftResWA.Views.Cliente.Comentarios
             rptComentarios.DataSource = dt;
             rptComentarios.DataBind();
         }
+        protected void btnAgregarComentario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Cliente/Comentarios/Comentarios_Registrar.aspx");
+        }
+
     }
 }
