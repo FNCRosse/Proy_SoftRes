@@ -13,5 +13,12 @@ namespace SoftResWA.Views.Cliente.Reservas
         {
 
         }
+        protected void btnUnirseEspera_Click(object sender, EventArgs e)
+        {
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess",
+                "Swal.fire('¡Listo!', 'Has sido añadido a la lista de espera. Te notificaremos al correo registrado.', 'success');", true);
+        }
+
     }
 }

@@ -13,5 +13,14 @@ namespace SoftResWA.Views.Cliente.Reservas
 
     public partial class Reg_Resev_Comun
     {
+
+        /// <summary>
+        /// Control btnUnirseEspera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUnirseEspera;
     }
 }

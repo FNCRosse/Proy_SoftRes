@@ -11,25 +11,43 @@ namespace SoftResWA.Views.Cliente.Comentarios
 {
 
 
-    public partial class Comentarios_Listado
+    public partial class Comentarios_Registrar
     {
 
         /// <summary>
-        /// Control btnAgregarComentario.
+        /// Control ddlReserva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarComentario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlReserva;
 
         /// <summary>
-        /// Control rptComentarios.
+        /// Control txtMensaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptComentarios;
+        protected global::System.Web.UI.WebControls.TextBox txtMensaje;
+
+        /// <summary>
+        /// Control rblPuntuacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPuntuacion;
+
+        /// <summary>
+        /// Control btnEnviar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnviar;
     }
 }

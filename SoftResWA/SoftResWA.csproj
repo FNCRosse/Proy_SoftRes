@@ -149,6 +149,7 @@
     <Content Include="Scripts\Scripts_cliente.js" />
     <Content Include="Scripts\script_blockUI.js" />
     <Content Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx" />
+    <Content Include="Views\Cliente\Comentarios\Comentarios_Registrar.aspx" />
     <Content Include="Views\Cliente\Home\Home_Cliente.aspx" />
     <Content Include="Views\Cliente\Home\Login_Home.aspx" />
     <Content Include="Views\Cliente\Locales\Locales_cliente.aspx" />
@@ -215,6 +216,13 @@
     </Compile>
     <Compile Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx.designer.cs">
       <DependentUpon>Comentarios_Listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cliente\Comentarios\Comentarios_Registrar.aspx.cs">
+      <DependentUpon>Comentarios_Registrar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\Comentarios\Comentarios_Registrar.aspx.designer.cs">
+      <DependentUpon>Comentarios_Registrar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Cliente\Home\Home_Cliente.aspx.cs">
       <DependentUpon>Home_Cliente.aspx</DependentUpon>
