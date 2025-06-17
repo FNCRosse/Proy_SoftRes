@@ -26,6 +26,9 @@
                     <option value="0">Sede Lima Metropolitana</option>
                     <option value="0">Sede Ica</option>
                 </select>
+                <asp:DropDownList ID="ddlSede" runat="server" CssClass="form-select"
+                    AutoPostBack="true" OnSelectedIndexChanged="ddlHorarios_SelectedIndexChanged">
+                </asp:DropDownList>
             </div>
             <!-- Estado -->
             <div class="col-auto">
