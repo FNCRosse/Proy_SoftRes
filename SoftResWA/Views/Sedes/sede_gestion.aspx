@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="sede_gestion.aspx.cs" Inherits="SoftResWA.Views.Sedes.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="sede_gestion.aspx.cs" Inherits="SoftResWA.Views.Sedes.SedeGestion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Mantenimiento de Sedes
@@ -15,32 +15,25 @@
             <!-- Nombre -->
             <div class="col-auto">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <input type="text" id="txtNombre" class="form-control" placeholder="Ej. Sede Central" />
-            </div>
-            <!-- Distrito -->
-            <div class="col-auto">
-                <label for="txtDistrito" class="form-label">Distrito</label>
-                <input type="text" id="txtDistrito" class="form-control" placeholder="Ej. San Miguel" />
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ej. Sede Central" />
             </div>
             <!-- Estado -->
             <div class="col-auto">
                 <label for="ddlEstado" class="form-label">Estado</label>
-                <select id="ddlEstado" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
+                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="Activo" Value="1" />
+                    <asp:ListItem Text="Inactivo" Value="0" />
+                </asp:DropDownList>
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <button type="button" class="btn btn-danger me-2">
-                    <i class="fas fa-search me-1"></i>Buscar
-                </button>
-                <button type="button" class="btn shadow-sm"
-                    style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;"
-                    data-bs-toggle="modal" data-bs-target="#modalRegistrarSede">
-                    <i class="fas fa-plus me-2"></i>Nuevo
-                </button>
+                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2"
+                    Text="Buscar"
+                    OnClick="btnBuscar_Click" />
+                <asp:Button ID="btnNuevoSede" runat="server" CssClass="btn shadow-sm"
+                    Text="Nuevo"
+                    OnClick="btnNuevoSede_Click"
+                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
             </div>
         </div>
     </div>
@@ -50,27 +43,39 @@
         <asp:GridView ID="dgvSede" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:BoundField HeaderText="Código" DataField="SedeId" />
-                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-                <asp:BoundField HeaderText="Distrito" DataField="Distrito" />
-                <asp:BoundField HeaderText="Horario" DataField="Horario" />
-                <asp:BoundField HeaderText="Fecha Creacion" DataField="FechaCrea" />
-                <asp:BoundField HeaderText="Usuario Creacion" DataField="UsuarioCrea" />
-                <asp:BoundField HeaderText="Fecha Modificacion" DataField="FechaMod" />
-                <asp:BoundField HeaderText="Usuario Modificacion" DataField="UsuarioMod" />
-                <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            CommandArgument='<%# Eval("idSede") %>'
+                            OnCommand="btnModificar_Command">M</asp:LinkButton>
+                        <%# "<button type='button' class='btn btn-sm btn-danger' onclick=\"confirmarEliminacion(" + Eval("idSede") + ", '" + hdnIdEliminar.ClientID + "', '" + btnEliminarSede.ClientID + "')\">C</button>" %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField HeaderText="Código" DataField="idSede" />
+                <asp:BoundField HeaderText="Nombre" DataField="nombre" />
+                <asp:BoundField HeaderText="Distrito" DataField="distrito" />
+                <asp:BoundField HeaderText="Horarios" DataField="horarios" />
+                <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" />
+                <asp:BoundField HeaderText="Usuario Creación" DataField="usuarioCreacion" />
+                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" />
+                <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
+                <asp:BoundField HeaderText="Estado" DataField="estado" />
             </Columns>
         </asp:GridView>
+        <asp:HiddenField ID="hdnIdEliminar" runat="server" />
+        <asp:Button ID="btnEliminarSede" runat="server" Style="display: none;" OnClick="btn_eliminar_Click" />
     </div>
     <!-- Modales -->
     <!-- Modal Registrar Sede -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
+    <asp:HiddenField ID="hdnIdSede" runat="server" />
+    <asp:HiddenField ID="hdnModoModal" runat="server" />
     <!-- Modal Registrar Sede -->
     <div class="modal fade" id="modalRegistrarSede" tabindex="-1" aria-labelledby="modalRegistrarSedeLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-warning">
                 <div class="modal-header bg-warning-subtle">
-                    <h5 class="modal-title fw-bold" id="modalRegistrarSedeLabel">
+                    <h5 class="modal-title fw-bold" id="tituloModalSede">
                         <i class="fas fa-map-marker-alt me-2 text-danger"></i>Registrar Sede
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -99,14 +104,10 @@
 
                                 <!-- ID + Buscar -->
                                 <div class="mb-3">
-                                    <label for="txtIdHorario" class="form-label">ID del Horario</label>
-                                    <div class="input-group">
-                                        <asp:TextBox ID="txtIdHorario" runat="server" CssClass="form-control" />
-                                        <asp:Button ID="btnBuscarHorario" runat="server" Text="Buscar"
-                                            CssClass="btn btn-secondary"
-                                            UseSubmitBehavior="false"
-                                            OnClick="btnBuscarHorario_Click" />
-                                    </div>
+                                    <label for="ddlHorarios" class="form-label">Seleccionar Horario</label>
+                                    <asp:DropDownList ID="ddlHorarios" runat="server" CssClass="form-select"
+                                        AutoPostBack="true" OnSelectedIndexChanged="ddlHorarios_SelectedIndexChanged">
+                                    </asp:DropDownList>
                                 </div>
 
                                 <!-- Campos visuales -->
@@ -146,11 +147,11 @@
                                 <asp:GridView ID="gvDetalleHorario" runat="server" AutoGenerateColumns="false"
                                     CssClass="table table-sm table-bordered text-center">
                                     <Columns>
-                                        <asp:BoundField HeaderText="ID" DataField="IdHorario" />
-                                        <asp:BoundField HeaderText="Día Semana" DataField="DiaSemana" />
-                                        <asp:BoundField HeaderText="Hora Inicio" DataField="HoraInicio" />
-                                        <asp:BoundField HeaderText="Hora Fin" DataField="HoraFin" />
-                                        <asp:BoundField HeaderText="Feriado" DataField="FeriadoTexto" />
+                                        <asp:BoundField HeaderText="ID" DataField="idHorario" />
+                                        <asp:BoundField HeaderText="Día Semana" DataField="diaSemana" />
+                                        <asp:BoundField HeaderText="Hora Inicio" DataField="horaInicio" />
+                                        <asp:BoundField HeaderText="Hora Fin" DataField="horaFin" />
+                                        <asp:BoundField HeaderText="Es Feriado?" DataField="feriadoTexto" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -167,6 +168,3 @@
         </div>
     </div>
 </asp:Content>
-
-
-

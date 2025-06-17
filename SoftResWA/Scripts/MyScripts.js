@@ -15,7 +15,7 @@ function mostrarTipoReserva() {
     });
 }
 
-function confirmarCancelacion(idReserva) {
+function confirmarCancelacionReserva(idReserva) {
     Swal.fire({
         title: '¿Desea cancelar la reservación?',
         showCancelButton: true,
@@ -52,4 +52,22 @@ function solicitarMotivoCancelacion(idReserva) {
 
 function modificarReserva(idReserva) {
     window.location.href = 'modificar_reserva.aspx?id=' + idReserva;
+}
+
+function confirmarEliminacion(id, hiddenFieldId, buttonId) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción pondra en inactivo la entidad',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(hiddenFieldId).value = id;
+            document.getElementById(buttonId).click();
+        }
+    });
 }
