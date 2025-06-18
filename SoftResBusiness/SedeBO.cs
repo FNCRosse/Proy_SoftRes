@@ -2,42 +2,46 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using SoftResBusiness.SedeWSClient;
 
 namespace SoftResBusiness
 {
     public class SedeBO
     {
-        //private SedesWAClient sedesClienteWA;
+        private SedeClient sedesClienteWA;
 
-        //public SedeBO()
-        //{
-        //    this.sedesClienteWA = new SedesWAClient();
-        //}
+        public SedeBO()
+        {
+            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/sedes");
+            var binding = new BasicHttpBinding();
+            this.sedesClienteWA = new SedeClient(binding, endpoint);
+        }
 
-        //public SedeDTO Insertar(SedeDTO sede)
-        //{
-        //    return this.sedesClienteWA.insertar(sede);
-        //}
-        //public SedeDTO ObtenerPorID(int sedeID)
-        //{
-        //    return this.sedesClienteWA.obtenerPorId(sedeID);
-        //}
-        //public int Modificar(SedeDTO sede)
-        //{
-        //    return this.sedesClienteWA.modificar(sede);
-        //}
+        public int Insertar(sedeDTO sede)
+        {
+            return this.sedesClienteWA.insertar(sede);
+        }
+        public sedeDTO ObtenerPorID(int sedeID)
+        {
+            return this.sedesClienteWA.obtenerPorId(sedeID);
+        }
+        public int Modificar(sedeDTO sede)
+        {
+            return this.sedesClienteWA.modificar(sede);
+        }
 
-        //public int Eliminar(SedeDTO sede)
-        //{
-        //    return this.sedesClienteWA.eliminar(sede);
-        //}
+        public int Eliminar(sedeDTO sede)
+        {
+            return this.sedesClienteWA.eliminar(sede);
+        }
 
-        //public BindingList<SedeDTO> Listar(SedeParametros parametros)
-        //{
-        //    SedeDTO[] lista = this.sedesClienteWA.listar();
-        //    return new BindingList<SedeDTO>(lista);
-        //}
+        public BindingList<sedeDTO> Listar(sedeParametros parametros)
+        {
+            sedeDTO[] lista = this.sedesClienteWA.listar(parametros);
+            return new BindingList<sedeDTO>(lista);
+        }
     }
 }

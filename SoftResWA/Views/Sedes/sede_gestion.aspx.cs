@@ -9,46 +9,35 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using System.ComponentModel;
+using SoftResBusiness.SedeWSClient;
 
 namespace SoftResWA.Views.Sedes
 {
     public partial class SedeGestion : System.Web.UI.Page
     {
+        private SedeBO sedeBO;
+        private BindingList<sedeDTO> listadoSedes;
+
+        public SedeBO SedeBO { get => sedeBO; set => sedeBO = value; }
+        public BindingList<sedeDTO> ListadoSedes { get => listadoSedes; set => listadoSedes = value; }
+
+        public SedeGestion()
+        {
+            this.sedeBO = new SedeBO();
+            sedeParametros parametros = new sedeParametros();
+            parametros.nombre = null;
+            parametros.estado = true;
+            this.listadoSedes = this.sedeBO.Listar(parametros);
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                List<SedeFake> sedes = new List<SedeFake>
-                {
-                    new SedeFake
-                    {
-                        idSede = 1,
-                        nombre = "Sede Central",
-                        distrito = "San Isidro",
-                        horarios = "Lun-Vie 9am-6pm",
-                        fechaCreacion = "2024-01-01",
-                        usuarioCreacion = "admin",
-                        fechaModificacion = "2024-02-01",
-                        usuarioModificacion = "admin2",
-                        estado = "Activo"
-                    },
-                    new SedeFake
-                    {
-                        idSede = 2,
-                        nombre = "Sede Norte",
-                        distrito = "Los Olivos",
-                        horarios = "Sab-Dom 10am-4pm",
-                        fechaCreacion = "2024-03-10",
-                        usuarioCreacion = "admin",
-                        fechaModificacion = "",
-                        usuarioModificacion = "",
-                        estado = "Inactivo"
-                    }
-                };
-
-                dgvSede.DataSource = sedes;
+                dgvSede.DataSource = ListadoSedes;
                 dgvSede.DataBind();
 
+                //Esto es provicional en lo que termina los demas
                 var horariosOriginales = new List<HorarioFake>
                     {
                         new HorarioFake { idHorario = 1, diaSemana = "Lunes", horaInicio = "09:00", horaFin = "18:00" },

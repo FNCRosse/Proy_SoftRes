@@ -15,19 +15,13 @@
             <!-- Nombre -->
             <div class="col-auto">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <input type="text" id="txtNombre" class="form-control" placeholder="Ej. Local San Miguel" />
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ej. Local San Miguel" />
             </div>
             <!-- Sede -->
             <div class="col-auto">
                 <label for="ddlSede" class="form-label">Sede</label>
-                <select id="ddlSede" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Sede Callao</option>
-                    <option value="0">Sede Lima Metropolitana</option>
-                    <option value="0">Sede Ica</option>
-                </select>
                 <asp:DropDownList ID="ddlSede" runat="server" CssClass="form-select"
-                    AutoPostBack="true" OnSelectedIndexChanged="ddlHorarios_SelectedIndexChanged">
+                    AutoPostBack="true" >
                 </asp:DropDownList>
             </div>
             <!-- Estado -->
