@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="3e168dcc-2bfe-4351-a841-c7c97ba2b27e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="31ca6fea-5108-4402-a798-88ff3f5e5128" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/SoftResWSCliente/sedes?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/SoftResWSCliente/notificaciones?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="sedes.xsd" MetadataType="Schema" ID="a7254131-c562-4a38-8059-3365b791c560" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/sedes?xsd=1" />
-    <MetadataFile FileName="sedes.wsdl" MetadataType="Wsdl" ID="26263323-a294-4911-a7a6-827a4833452f" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/sedes?wsdl" />
+    <MetadataFile FileName="notificaciones.xsd" MetadataType="Schema" ID="d6840036-c40a-4520-ab60-848da3499cd9" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/notificaciones?xsd=1" />
+    <MetadataFile FileName="notificaciones.wsdl" MetadataType="Wsdl" ID="223365c8-4557-45fa-9bf8-8487f2972b40" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/notificaciones?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

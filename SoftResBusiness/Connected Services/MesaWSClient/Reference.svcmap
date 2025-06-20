@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="3e168dcc-2bfe-4351-a841-c7c97ba2b27e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d93129d7-e84f-428e-bdd2-3e9eeff2ae1d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/SoftResWSCliente/sedes?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/SoftResWSCliente/mesas?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="sedes.xsd" MetadataType="Schema" ID="a7254131-c562-4a38-8059-3365b791c560" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/sedes?xsd=1" />
-    <MetadataFile FileName="sedes.wsdl" MetadataType="Wsdl" ID="26263323-a294-4911-a7a6-827a4833452f" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/sedes?wsdl" />
+    <MetadataFile FileName="mesas.xsd" MetadataType="Schema" ID="4426a7d6-5afa-464a-b06e-984b1ea08093" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/mesas?xsd=1" />
+    <MetadataFile FileName="mesas.wsdl" MetadataType="Wsdl" ID="9b750f8f-695b-48a4-b0ab-156ea6ad42ef" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/mesas?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
