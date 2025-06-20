@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="local_gestion.aspx.cs" Inherits="SoftResWA.Views.Locales.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="local_gestion.aspx.cs" Inherits="SoftResWA.Views.Locales.LocalGestion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Mantenimiento de Locales
@@ -21,28 +21,26 @@
             <div class="col-auto">
                 <label for="ddlSede" class="form-label">Sede</label>
                 <asp:DropDownList ID="ddlSede" runat="server" CssClass="form-select"
-                    AutoPostBack="true" >
+                    AutoPostBack="true">
                 </asp:DropDownList>
             </div>
             <!-- Estado -->
             <div class="col-auto">
                 <label for="ddlEstado" class="form-label">Estado</label>
-                <select id="ddlEstado" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
+                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="Activo" Value="1" />
+                    <asp:ListItem Text="Inactivo" Value="0" />
+                </asp:DropDownList>
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <button type="button" class="btn btn-danger me-2">
-                    <i class="fas fa-search me-1"></i>Buscar
-                </button>
-                <button type="button" class="btn shadow-sm"
-                    style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;"
-                    data-bs-toggle="modal" data-bs-target="#modalRegistrarLocal">
-                    <i class="fas fa-plus me-2"></i>Nuevo
-                </button>
+                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2"
+                    Text="Buscar"
+                    OnClick="btnBuscar_Click" />
+                <asp:Button ID="btnNuevoSede" runat="server" CssClass="btn shadow-sm"
+                    Text="Nuevo"
+                    OnClick="btnNuevo_Click"
+                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
             </div>
         </div>
     </div>
@@ -52,28 +50,40 @@
         <asp:GridView ID="dgvLocal" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:BoundField HeaderText="Código" DataField="SedeId" />
-                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-                <asp:BoundField HeaderText="Dirección" DataField="Direccion" />
-                <asp:BoundField HeaderText="Sede" DataField="Sede" />
-                <asp:BoundField HeaderText="Teléfono" DataField="Telefono" />
-                <asp:BoundField HeaderText="Cantidad Mesas" DataField="CantMesas" />
-                <asp:BoundField HeaderText="Fecha Creacion" DataField="FechaCrea" />
-                <asp:BoundField HeaderText="Usuario Creacion" DataField="UsuarioCrea" />
-                <asp:BoundField HeaderText="Fecha Modificacion" DataField="FechaMod" />
-                <asp:BoundField HeaderText="Usuario Modificacion" DataField="UsuarioMod" />
-                <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            CommandArgument='<%# Eval("idLocal") %>'
+                            OnCommand="btnModificar_Command">M</asp:LinkButton>
+                        <%# "<button type='button' class='btn btn-sm btn-danger' onclick=\"confirmarEliminacion(" + Eval("idLocal") + ", '" + hdnIdEliminar.ClientID + "', '" + btnEliminarLocal.ClientID + "')\">C</button>" %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField HeaderText="Código" DataField="idLocal" />
+                <asp:BoundField HeaderText="Nombre" DataField="nombre" />
+                <asp:BoundField HeaderText="Dirección" DataField="direccion" />
+                <asp:BoundField HeaderText="Sede" DataField="sedeNombre" />
+                <asp:BoundField HeaderText="Teléfono" DataField="telefono" />
+                <asp:BoundField HeaderText="Cantidad Mesas" DataField="cantidadMesas" />
+                <asp:BoundField HeaderText="Fecha Creacion" DataField="fechaCreacion" />
+                <asp:BoundField HeaderText="Usuario Creacion" DataField="usuarioCreacion" />
+                <asp:BoundField HeaderText="Fecha Modificacion" DataField="fechaModificacion" />
+                <asp:BoundField HeaderText="Usuario Modificacion" DataField="usuarioModificacion" />
+                <asp:BoundField HeaderText="Estado" DataField="estado" />
             </Columns>
         </asp:GridView>
+        <asp:HiddenField ID="hdnIdEliminar" runat="server" />
+        <asp:Button ID="btnEliminarLocal" runat="server" Style="display: none;" OnClick="btn_eliminar_Click" />
     </div>
     <!-- Modales -->
     <!-- Modal Registrar Local -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
-    <div class="modal fade" id="modalRegistrarLocal" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarLocalLabel" aria-hidden="true">
+    <asp:HiddenField ID="hdnIdLocal" runat="server" />
+    <asp:HiddenField ID="hdnModoModal" runat="server" />
+    <div class="modal fade" id="modalRegistrarLocal" tabindex="-1" aria-labelledby="modalRegistrarLocalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-warning ">
-                    <h5 class="modal-title fw-bold" id="modalRegistrarLocalLabel">
+                    <h5 class="modal-title fw-bold" id="tituloModal">
                         <i class="fas fa-map-marker-alt me-2 text-danger"></i>Registrar Local
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -97,53 +107,6 @@
                                     <asp:TextBox ID="txtTelefonoLocal" runat="server" CssClass="form-control" />
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Detalles de Mesas -->
-                        <div class="col-md-6 border rounded p-3">
-                            <h6 class="fw-bold mb-3">Detalles de mesas</h6>
-                            <asp:GridView ID="gvMesas" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False">
-                                <Columns>
-                                    <asp:BoundField DataField="Id" HeaderText="ID" />
-                                    <asp:BoundField DataField="Numero" HeaderText="Número" />
-                                    <asp:BoundField DataField="Capacidad" HeaderText="Capacidad" />
-                                    <asp:BoundField DataField="Estado" HeaderText="Estado" />
-                                    <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" />
-                                </Columns>
-                            </asp:GridView>
-                        </div>
-                    </div>
-
-                    <!-- Información de la Mesa -->
-                    <div class="row">
-                        <div class="col-md-6 border rounded p-3">
-                            <h6 class="fw-bold mb-3">Información de la mesa</h6>
-
-                            <div class="mb-2">
-                                <label for="txtIdMesa" class="form-label">ID de la Mesa</label>
-                                <div class="input-group">
-                                    <asp:TextBox ID="txtIdMesa" runat="server" CssClass="form-control" />
-                                    <asp:Button ID="btnBuscarMesa" runat="server" Text="Buscar" CssClass="btn btn-secondary" UseSubmitBehavior="false" OnClick="btnBuscarMesa_Click" />
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <label for="txtNumeroMesa" class="form-label">Número</label>
-                                <asp:TextBox ID="txtNumeroMesa" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="txtCapacidadMesa" class="form-label">Capacidad</label>
-                                <asp:TextBox ID="txtCapacidadMesa" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="txtEstadoMesa" class="form-label">Estado</label>
-                                <asp:TextBox ID="txtEstadoMesa" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="txtUbicacionMesa" class="form-label">Ubicación</label>
-                                <asp:TextBox ID="txtUbicacionMesa" runat="server" CssClass="form-control" />
-                            </div>
-
-                            <asp:Button ID="btnAñadirMesa" runat="server" Text="Añadir" CssClass="btn btn-outline-success mt-2" UseSubmitBehavior="false" OnClick="btnAñadirMesa_Click" />
                         </div>
                     </div>
                 </div>

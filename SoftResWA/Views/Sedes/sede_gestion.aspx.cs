@@ -27,6 +27,7 @@ namespace SoftResWA.Views.Sedes
             this.sedeBO = new SedeBO();
             sedeParametros parametros = new sedeParametros();
             parametros.nombre = null;
+            parametros.estadoSpecified = true;
             parametros.estado = true;
             this.listadoSedes = this.sedeBO.Listar(parametros);
         }
@@ -77,7 +78,7 @@ namespace SoftResWA.Views.Sedes
             {
                 int idHorario = int.Parse(ddlHorarios.SelectedValue);
 
-                // Simulación de búsqueda real
+                // Simulación de búsqueda real esto se cambia por un obtenerHorarioPorID
                 var horario = new HorarioFake
                 {
                     idHorario = idHorario,
@@ -150,18 +151,23 @@ namespace SoftResWA.Views.Sedes
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            //var parametros = new SedeParametros
-            //{
-            //    Nombre = txtNombre.Text.Trim(),
-            //    Estado = string.IsNullOrEmpty(ddlEstado.SelectedValue) ? null : (int?)int.Parse(ddlEstado.SelectedValue)
-            //};
+            sedeParametros parametros = new sedeParametros();
+            parametros.nombre = txtNombre.Text.Trim();
 
-            //// Llama a tu BO
-            //var listaFiltrada = sedeBO.Listar(parametros); // Simulado
+            // Leer el valor seleccionado del DropDownList
+            if (string.IsNullOrEmpty(ddlEstado.SelectedValue))
+            {
+                parametros.estadoSpecified = false;
+            }
+            else
+            {
+                parametros.estadoSpecified = true;
+                parametros.estado = ddlEstado.SelectedValue == "1"; // true si "Activo", false si "Inactivo"
+            }
 
-            //// Recarga el GridView
-            //dgvSede.DataSource = listaFiltrada;
-            //dgvSede.DataBind();
+            listadoSedes = this.sedeBO.Listar(parametros);
+            dgvSede.DataSource = listadoSedes;
+            dgvSede.DataBind();
         }
 
     }

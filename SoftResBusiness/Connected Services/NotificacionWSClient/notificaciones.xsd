@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softres.pucp.edu.pe/" targetNamespace="http://services.softres.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="eliminar" type="tns:eliminar" />
+  <xs:element name="eliminarResponse" type="tns:eliminarResponse" />
+  <xs:element name="insertar" type="tns:insertar" />
+  <xs:element name="insertarResponse" type="tns:insertarResponse" />
+  <xs:element name="listar" type="tns:listar" />
+  <xs:element name="listarResponse" type="tns:listarResponse" />
+  <xs:element name="modificar" type="tns:modificar" />
+  <xs:element name="modificarResponse" type="tns:modificarResponse" />
+  <xs:element name="obtenerPorId" type="tns:obtenerPorId" />
+  <xs:element name="obtenerPorIdResponse" type="tns:obtenerPorIdResponse" />
+  <xs:complexType name="notificacionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estado" type="tns:estadoNotificacion" />
+      <xs:element minOccurs="0" name="idNotificacion" type="xs:int" />
+      <xs:element minOccurs="0" name="leida" type="xs:boolean" />
+      <xs:element minOccurs="0" name="mensaje" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoNotificacion" type="tns:tipoNotificacion" />
+      <xs:element minOccurs="0" name="usuario" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuariosDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadReservacion" type="xs:int" />
+      <xs:element minOccurs="0" name="contrasenha" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaContratacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="nombreComp" type="xs:string" />
+      <xs:element minOccurs="0" name="numeroDocumento" type="xs:string" />
+      <xs:element minOccurs="0" name="rol" type="tns:rolDTO" />
+      <xs:element minOccurs="0" name="sueldo" type="xs:double" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoDocumento" type="tns:tipoDocumentoDTO" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rolDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="esCliente" type="xs:boolean" />
+      <xs:element minOccurs="0" name="idRol" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tipoDocumentoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idTipoDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="notificacionParametros">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estado" type="tns:estadoNotificacion" />
+      <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="tipoNotificacion" type="tns:tipoNotificacion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:notificacionParametros" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="estadoNotificacion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PENDIENTE" />
+      <xs:enumeration value="ENVIADO" />
+      <xs:enumeration value="FALLIDO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoNotificacion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CONFIRMACION" />
+      <xs:enumeration value="CANCELACION" />
+      <xs:enumeration value="RECORDATORIO" />
+      <xs:enumeration value="MODIFICACION" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

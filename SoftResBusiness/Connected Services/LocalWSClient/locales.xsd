@@ -12,6 +12,21 @@
   <xs:element name="modificarResponse" type="tns:modificarResponse" />
   <xs:element name="obtenerPorId" type="tns:obtenerPorId" />
   <xs:element name="obtenerPorIdResponse" type="tns:obtenerPorIdResponse" />
+  <xs:complexType name="localDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadMesas" type="xs:int" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idLocal" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="sede" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="sedeDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="distrito" type="xs:string" />
@@ -25,18 +40,19 @@
       <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="sedeParametros">
+  <xs:complexType name="localParametros">
     <xs:sequence>
       <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="idSede" type="xs:int" />
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertar">
+  <xs:complexType name="eliminar">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="arg0" type="tns:localDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertarResponse">
+  <xs:complexType name="eliminarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
@@ -51,26 +67,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:sedeParametros" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:sedeDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:sedeDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="obtenerPorId">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
@@ -78,17 +74,37 @@
   </xs:complexType>
   <xs:complexType name="obtenerPorIdResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="return" type="tns:localDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:localDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="modificar">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="arg0" type="tns:localDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="modificarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:localParametros" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:localDTO" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

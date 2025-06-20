@@ -20,7 +20,8 @@
             <!-- Estado -->
             <div class="col-auto">
                 <label for="ddlEstado" class="form-label">Estado</label>
-                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select" AutoPostBack="False">
+                    <asp:ListItem Text="-- Todos --" Value="" Selected="True" />
                     <asp:ListItem Text="Activo" Value="1" />
                     <asp:ListItem Text="Inactivo" Value="0" />
                 </asp:DropDownList>
