@@ -28,6 +28,7 @@
             <div class="col-auto">
                 <label for="ddlEstado" class="form-label">Estado</label>
                 <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="-- Todos --" Value="" Selected="True" />
                     <asp:ListItem Text="Activo" Value="1" />
                     <asp:ListItem Text="Inactivo" Value="0" />
                 </asp:DropDownList>
@@ -80,39 +81,61 @@
     <asp:HiddenField ID="hdnIdLocal" runat="server" />
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <div class="modal fade" id="modalRegistrarLocal" tabindex="-1" aria-labelledby="modalRegistrarLocalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-warning ">
+                <div class="modal-header bg-warning">
                     <h5 class="modal-title fw-bold" id="tituloModal">
                         <i class="fas fa-map-marker-alt me-2 text-danger"></i>Registrar Local
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Información General -->
-                    <div class="row mb-3">
-                        <div class="col-md-6 border rounded p-3">
-                            <h6 class="fw-bold mb-3">Información General</h6>
-                            <div class="mb-2">
-                                <label for="txtNombreLocal" class="form-label">Nombre</label>
-                                <asp:TextBox ID="txtNombreLocal" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="txtDireccionLocal" class="form-label">Dirección</label>
-                                <asp:TextBox ID="txtDireccionLocal" runat="server" CssClass="form-control" />
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="txtTelefonoLocal" class="form-label">Teléfono</label>
-                                    <asp:TextBox ID="txtTelefonoLocal" runat="server" CssClass="form-control" />
-                                </div>
-                            </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="txtNombreLocal" class="form-label">Nombre</label>
+                            <asp:TextBox ID="txtNombreLocal" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvNombre" runat="server"
+                                ControlToValidate="txtNombreLocal"
+                                ErrorMessage="Campo obligatorio"
+                                CssClass="text-danger"
+                                Display="Dynamic"
+                                ValidationGroup="vgLocal" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="txtTelefonoLocal" class="form-label">Teléfono</label>
+                            <asp:TextBox ID="txtTelefonoLocal" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvTelefono" runat="server"
+                                ControlToValidate="txtTelefonoLocal"
+                                ErrorMessage="Campo obligatorio"
+                                CssClass="text-danger"
+                                Display="Dynamic"
+                                ValidationGroup="vgLocal" />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="txtDireccionLocal" class="form-label">Dirección</label>
+                            <asp:TextBox ID="txtDireccionLocal" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvDireccion" runat="server"
+                                ControlToValidate="txtDireccionLocal"
+                                ErrorMessage="Campo obligatorio"
+                                CssClass="text-danger"
+                                Display="Dynamic"
+                                ValidationGroup="vgLocal" />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="ddlSedeOp" class="form-label">Sede</label>
+                            <asp:DropDownList ID="ddlSedeOp" runat="server" CssClass="form-select">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="rfvSede" runat="server"
+                                ControlToValidate="ddlSedeOp"
+                                ErrorMessage="Campo obligatorio"
+                                CssClass="text-danger"
+                                Display="Dynamic"
+                                ValidationGroup="vgLocal" />
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer">
-                    <asp:Button ID="btnGuardarLocal" runat="server" Text="Guardar" CssClass="btn btn-warning fw-bold text-dark" OnClick="btnGuardarLocal_Click" />
+                    <asp:Button ID="btnGuardarLocal" runat="server" Text="Guardar" CssClass="btn btn-warning fw-bold text-dark" OnClick="btnGuardarLocal_Click" ValidationGroup="vgLocal" />
                 </div>
             </div>
         </div>
