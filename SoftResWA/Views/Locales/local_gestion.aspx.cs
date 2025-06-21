@@ -29,18 +29,15 @@ namespace SoftResWA.Views.Locales
             this.localBO = new LocalBO();
             this.sedeBO = new SedeBO();
             localParametros parametros = new localParametros();
-            parametros.estadoSpecified = true;
+            parametros.estadoSpecified = false;
             parametros.idSedeSpecified = false;
             parametros.nombre = null;
-            parametros.estado = true;
-            parametros.idSede = null;
             this.listadoLocal = this.localBO.Listar(parametros);
             sedeParametros parametrosSede = new sedeParametros();
             parametrosSede.estadoSpecified = true;
             parametrosSede.nombre = null;
             parametrosSede.estado = true;
             this.listaOpSedes = this.sedeBO.Listar(parametrosSede);
-
         }
 
         protected List<object> ConfigurarListado(BindingList<localDTO> lista)
@@ -61,8 +58,29 @@ namespace SoftResWA.Views.Locales
             }).ToList<Object>();
             return listaAdaptada;
         }
+        private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
+        {
+            ddl.DataSource = dataSource;
+            ddl.DataTextField = textField;
+            ddl.DataValueField = valueField;
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem(textoDefault, ""));
+        }
+        private void MostrarModal(string modo, string titulo)
+        {
+            hdnModoModal.Value = modo;
+
+            string script = "setTimeout(function() {" +
+                            $"document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>{titulo}';" +
+                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarLocal'));" +
+                            "modal.show();" +
+                            "}, 200);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             if (!IsPostBack)
             {
                 //Aqui van para mostrar el listado de lcoales
@@ -72,18 +90,32 @@ namespace SoftResWA.Views.Locales
                 dgvLocal.DataBind();
 
                 //Aqui los listados de los filtros para sede
-                ddlSede.DataSource = ListaOpSedes;
-                ddlSede.DataTextField = "nombre";
-                ddlSede.DataValueField = "idSede";
-                ddlSede.DataBind();
-                ddlSede.Items.Insert(0, new ListItem("-- Seleccione --", "")); //Esto no es null, en setearlo en los parametros tenemos que ponerlo null
-
+                this.CargarDropDownList(ddlSede, ListaOpSedes, "nombre", "idSede", "-- Seleccione --");
+                this.CargarDropDownList(ddlSedeOp, ListaOpSedes, "nombre", "idSede", "Seleccione Sede");
             }
         }
         protected void btnGuardarLocal_Click(object sender, EventArgs e)
         {
-            // Aquí irá la lógica para guardar el local
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Local registrado!', 'El registro se completó correctamente.', 'success');", true);
+            var local = new SoftResBusiness.LocalWSClient.localDTO();
+            var sede = new SoftResBusiness.LocalWSClient.sedeDTO();
+            sede.idSedeSpecified = true;
+            sede.idSede = int.Parse(ddlSedeOp.SelectedValue);
+            local.sede = sede;
+            local.nombre = txtNombreLocal.Text;
+            local.direccion = txtDireccionLocal.Text;
+            local.telefono = txtTelefonoLocal.Text;
+            local.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+            local.fechaCreacionSpecified = true;
+            local.estadoSpecified = true;
+            local.estado = true;
+            if (this.localBO.Insertar(local) > 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Local registrado!', 'El registro se completó correctamente.', 'success');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Local NO registrado!', 'El registro NO se completó correctamente.', 'success');", true);
+            }
 
         }
 
@@ -95,43 +127,33 @@ namespace SoftResWA.Views.Locales
             txtTelefonoLocal.Text = "";
 
             // Cambia título a "Registrar"
-            hdnModoModal.Value = "registrar";
-            string script = "setTimeout(function() {" +
-                "document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>Registrar Local';" +
-                "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarLocal'));" +
-                "modal.show();" +
-            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "mostrarModalNuevo", script, true);
+            this.MostrarModal("registrar", "Registrar Local");
         }
         protected void btnModificar_Command(object sender, CommandEventArgs e)
         {
             int idLocal = int.Parse(e.CommandArgument.ToString());
 
-            //var sede = sedeBO.ObtenerPorId(idSede);
-
-            //txtNombreSede.Text = sede.Nombre;
-            //txtDistritoSede.Text = sede.Distrito;
-            //hdnIdSede.Value = idSede.ToString();
-
-            hdnModoModal.Value = "modificar";
-            string script = "setTimeout(function() {" +
-                "document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>Modificar Local';" +
-                "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarLocal'));" +
-                "modal.show();" +
-            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalModificar", script, true);
+            localDTO local = this.localBO.ObtenerPorID(idLocal);
+            if(local != null)
+            {
+                txtNombreLocal.Text = local.nombre;
+                txtDireccionLocal.Text = local.direccion;
+                txtTelefonoLocal.Text = local.telefono;
+                ddlSedeOp.SelectedValue = local.sede.idSede.ToString();
+                this.MostrarModal("modificar", "Modificar Local");
+            }
         }
         protected void btn_eliminar_Click(object sender, EventArgs e)
         {
             int id = int.Parse(hdnIdEliminar.Value);
+            localDTO local = this.localBO.ObtenerPorID(id);
 
-            // Eliminar por tipo de entidad según la página
-            // Por ejemplo: eliminar sede, local, usuario...
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminado",
+            if(local != null)
+            {
+                this.localBO.Eliminar(local);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminado",
                 "Swal.fire('¡Eliminado!', 'El registro fue eliminado correctamente.', 'success');", true);
+            }
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -144,7 +166,7 @@ namespace SoftResWA.Views.Locales
             else
             {
                 parametros.estadoSpecified = true;
-                parametros.estado = ddlEstado.SelectedValue == "1"; // true si "Activo", false si "Inactivo"
+                parametros.estado = ddlEstado.SelectedValue == "1"; 
             }
             if (string.IsNullOrEmpty(ddlSede.SelectedValue))
             {
