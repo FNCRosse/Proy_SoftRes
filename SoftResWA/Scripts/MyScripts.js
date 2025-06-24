@@ -70,4 +70,5 @@ function confirmarEliminacion(id, hiddenFieldId, buttonId) {
             document.getElementById(buttonId).click();
         }
     });
+    return false;
 }

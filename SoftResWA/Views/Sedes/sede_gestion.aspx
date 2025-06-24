@@ -76,7 +76,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-warning">
                 <div class="modal-header bg-warning-subtle">
-                    <h5 class="modal-title fw-bold" id="tituloModalSede">
+                    <h5 class="modal-title fw-bold" id="tituloModal">
                         <i class="fas fa-map-marker-alt me-2 text-danger"></i>Registrar Sede
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>

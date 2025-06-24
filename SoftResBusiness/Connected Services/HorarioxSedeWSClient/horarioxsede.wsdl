@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.softres.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="horarioxsede" targetNamespace="http://services.softres.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/horarioxsede?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
+  </message>
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
+  </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="eliminar">
+    <part name="parameters" element="tns:eliminar" />
+  </message>
+  <message name="eliminarResponse">
+    <part name="parameters" element="tns:eliminarResponse" />
+  </message>
+  <message name="listar">
+    <part name="parameters" element="tns:listar" />
+  </message>
+  <message name="listarResponse">
+    <part name="parameters" element="tns:listarResponse" />
+  </message>
+  <portType name="HorarioxSede">
+    <operation name="insertar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertarResponse" message="tns:insertarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="eliminar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarRequest" message="tns:eliminar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarResponse" message="tns:eliminarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="listar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/listarRequest" message="tns:listar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/listarResponse" message="tns:listarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/listar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioxSede/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+  </portType>
+  <binding name="HorarioxSedePortBinding" type="tns:HorarioxSede">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="insertar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="horarioxsede">
+    <port name="HorarioxSedePort" binding="tns:HorarioxSedePortBinding">
+      <soap:address location="http://localhost:8080/SoftResWSCliente/horarioxsede" />
+    </port>
+  </service>
+</definitions>

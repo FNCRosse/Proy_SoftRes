@@ -51,12 +51,15 @@
         <asp:GridView ID="dgvLocal" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:TemplateField HeaderText="">
+                <asp:TemplateField HeaderText="Opciones">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            Text="M"
                             CommandArgument='<%# Eval("idLocal") %>'
-                            OnCommand="btnModificar_Command">M</asp:LinkButton>
-                        <%# "<button type='button' class='btn btn-sm btn-danger' onclick=\"confirmarEliminacion(" + Eval("idLocal") + ", '" + hdnIdEliminar.ClientID + "', '" + btnEliminarLocal.ClientID + "')\">C</button>" %>
+                            OnCommand="btnModificar_Command" />
+
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm btn-danger"
+                            Text="C" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField HeaderText="Código" DataField="idLocal" />

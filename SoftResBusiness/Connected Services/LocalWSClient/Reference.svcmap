@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="6a1e75dd-441d-416f-b8ff-4fb63137d309" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d8b89b46-bd57-49ed-b69c-0196526e9596" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:8080/SoftResWSCliente/locales?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="locales.wsdl" MetadataType="Wsdl" ID="55ca9346-57bc-40c3-8328-bc6425fc60cf" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/locales?wsdl" />
-    <MetadataFile FileName="locales.xsd" MetadataType="Schema" ID="9c028f07-d2fd-4a06-b4c7-079c1f50a529" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/locales?xsd=1" />
+    <MetadataFile FileName="locales.wsdl" MetadataType="Wsdl" ID="943c163d-68fc-44d8-9464-e21f1e55c57d" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/locales?wsdl" />
+    <MetadataFile FileName="locales.xsd" MetadataType="Schema" ID="224c1c00-c126-467e-9a7f-6ad8a3b3baf5" SourceId="1" SourceUrl="http://localhost:8080/SoftResWSCliente/locales?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
