@@ -44,7 +44,7 @@ namespace SoftResBusiness
             localDTO[] lista = this.LocalClienteWA.listar(parametros);
 
             if (lista == null)
-                return new BindingList<localDTO>(); // retorna una lista vacía sin error
+                return new BindingList<localDTO>(); 
 
             return new BindingList<localDTO>(lista);
         }

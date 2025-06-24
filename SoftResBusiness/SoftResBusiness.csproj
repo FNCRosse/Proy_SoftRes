@@ -49,6 +49,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\FilaEsperaWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\HorarioAtencionWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\HorarioxSedeWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LocalWSClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -59,7 +74,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MotivoCancelacionWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\NotificacionWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ReservaWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ReservaxMesaWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\RolWSClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -69,17 +104,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\TipoDocumentoWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TipoMesaWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UsuarioWSClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="HorarioFake.cs" />
+    <Compile Include="FilaEsperaBO.cs" />
+    <Compile Include="HorarioAtencionBO.cs" />
+    <Compile Include="HorarioxSedeBO.cs" />
     <Compile Include="LocalBO.cs" />
     <Compile Include="MesaBO.cs" />
+    <Compile Include="MotivoCancelacionBO.cs" />
     <Compile Include="NotificacionBO.cs" />
+    <Compile Include="ReservaBO.cs" />
+    <Compile Include="ReservaxMesaBO.cs" />
+    <Compile Include="RolBO.cs" />
     <Compile Include="SedeBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoDocumentoBO.cs" />
+    <Compile Include="TipoMesaBO.cs" />
     <Compile Include="UsuarioBO.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +160,66 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ComentarioWSClient\SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\filaEspera.wsdl" />
+    <None Include="Connected Services\FilaEsperaWSClient\filaEspera.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\horarioAtencion.wsdl" />
+    <None Include="Connected Services\HorarioAtencionWSClient\horarioAtencion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.horarioAtencionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioAtencionWSClient\SoftResBusiness.HorarioAtencionWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioxSedeWSClient\horarioxsede.wsdl" />
+    <None Include="Connected Services\HorarioxSedeWSClient\horarioxsede.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HorarioxSedeWSClient\SoftResBusiness.HorarioxSedeWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioxSedeWSClient\SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioxSedeWSClient\SoftResBusiness.HorarioxSedeWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HorarioxSedeWSClient\SoftResBusiness.HorarioxSedeWSClient.listarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\LocalWSClient\locales.wsdl" />
@@ -153,6 +266,28 @@
     <None Include="Connected Services\MesaWSClient\SoftResBusiness.MesaWSClient.obtenerPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\motivoCancelacion.wsdl" />
+    <None Include="Connected Services\MotivoCancelacionWSClient\motivoCancelacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MotivoCancelacionWSClient\SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\NotificacionWSClient\notificaciones.wsdl" />
     <None Include="Connected Services\NotificacionWSClient\notificaciones.xsd">
       <SubType>Designer</SubType>
@@ -173,6 +308,66 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\NotificacionWSClient\SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\reservas.wsdl" />
+    <None Include="Connected Services\ReservaWSClient\reservas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.reservaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaxMesaWSClient\reservaxmesa.wsdl" />
+    <None Include="Connected Services\ReservaxMesaWSClient\reservaxmesa.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\rol.wsdl" />
+    <None Include="Connected Services\RolWSClient\rol.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RolWSClient\SoftResBusiness.RolWSClient.rolDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SedeWSClient\sedes.wsdl" />
@@ -196,6 +391,50 @@
     </None>
     <None Include="Connected Services\SedeWSClient\SoftResBusiness.SedeWSClient.sedeDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoDocumentoWSClient\tipoDocumento.wsdl" />
+    <None Include="Connected Services\TipoDocumentoWSClient\tipoDocumento.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.listarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\SoftResBusiness.TipoMesaWSClient.tipoMesaDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TipoMesaWSClient\tipoMesa.wsdl" />
+    <None Include="Connected Services\TipoMesaWSClient\tipoMesa.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.eliminarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -222,10 +461,19 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ComentarioWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\FilaEsperaWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\HorarioAtencionWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\HorarioxSedeWSClient\" />
     <WCFMetadataStorage Include="Connected Services\LocalWSClient\" />
     <WCFMetadataStorage Include="Connected Services\MesaWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\MotivoCancelacionWSClient\" />
     <WCFMetadataStorage Include="Connected Services\NotificacionWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\ReservaWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\ReservaxMesaWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\RolWSClient\" />
     <WCFMetadataStorage Include="Connected Services\SedeWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoDocumentoWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\TipoMesaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\UsuarioWSClient\" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +544,114 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\LocalWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FilaEsperaWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FilaEsperaWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FilaEsperaWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioAtencionWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioAtencionWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioAtencionWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioxSedeWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioxSedeWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HorarioxSedeWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MotivoCancelacionWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MotivoCancelacionWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MotivoCancelacionWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaxMesaWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaxMesaWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReservaxMesaWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoDocumentoWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoDocumentoWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoDocumentoWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoMesaWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoMesaWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TipoMesaWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RolWSClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

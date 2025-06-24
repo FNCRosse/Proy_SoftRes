@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softres.pucp.edu.pe/" targetNamespace="http://services.softres.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="eliminar" type="tns:eliminar" />
+  <xs:element name="eliminarResponse" type="tns:eliminarResponse" />
+  <xs:element name="insertar" type="tns:insertar" />
+  <xs:element name="insertarResponse" type="tns:insertarResponse" />
+  <xs:element name="listar" type="tns:listar" />
+  <xs:element name="listarResponse" type="tns:listarResponse" />
+  <xs:element name="modificar" type="tns:modificar" />
+  <xs:element name="modificarResponse" type="tns:modificarResponse" />
+  <xs:element name="obtenerPorId" type="tns:obtenerPorId" />
+  <xs:element name="obtenerPorIdResponse" type="tns:obtenerPorIdResponse" />
+  <xs:complexType name="motivosCancelacionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" name="idMotivo" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

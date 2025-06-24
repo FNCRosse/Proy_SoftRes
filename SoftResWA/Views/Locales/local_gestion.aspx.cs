@@ -52,8 +52,9 @@ namespace SoftResWA.Views.Locales
                 l.cantidadMesas,
                 l.fechaCreacion,
                 l.usuarioCreacion,
-                l.fechaModificacion,
+                fechaModificacion = l.fechaModificacionSpecified ? l.fechaModificacion : (DateTime?)null,
                 l.usuarioModificacion,
+                estadoBool = l.estado,
                 Estado = l.estado ? "Activo" : "Inactivo"
             }).ToList<Object>();
             return listaAdaptada;
@@ -78,9 +79,68 @@ namespace SoftResWA.Views.Locales
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
         }
+        private localDTO ConstruirLocalDTO(localDTO local)
+        {
+            if (local == null)
+                local = new SoftResBusiness.LocalWSClient.localDTO();
+            var sede = new SoftResBusiness.LocalWSClient.sedeDTO();
+            sede.idSede = int.Parse(ddlSedeOp.SelectedValue);
+            sede.idSedeSpecified = true;
+            local.sede = sede;
+            local.nombre = txtNombreLocal.Text;
+            local.direccion = txtDireccionLocal.Text;
+            local.telefono = txtTelefonoLocal.Text;
+            local.estado = true;
+            local.estadoSpecified = true;
+            return local;
+        }
+        private void MostrarResultado(bool exito, string entidad, string modo)
+        {
+            string accion = (modo == "modificar") ? "modificado" :
+                            (modo == "eliminar") ? "eliminado" : "registrado";
+
+            string accionNo = (modo == "modificar") ? "modificar" :
+                              (modo == "eliminar") ? "eliminar" : "registrar";
+
+            string baseMensaje = exito ? $"El {accion}" : $"El {accionNo} NO";
+            string tipo = exito ? "success" : "warning";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
+                $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} se completó correctamente.', '{tipo}');", true);
+        }
+        protected void dgvLocal_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var dataItem = e.Row.DataItem;
+
+                // Obtener estadoBool vía reflexión
+                bool estado = false;
+                var prop = dataItem.GetType().GetProperty("estadoBool");
+                if (prop != null)
+                {
+                    estado = (bool)prop.GetValue(dataItem);
+                }
+
+                int idLocal = (int)dataItem.GetType().GetProperty("idLocal")?.GetValue(dataItem);
+
+                LinkButton btnModificar = (LinkButton)e.Row.FindControl("btnModificar");
+                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
+
+                btnModificar.Visible = estado;
+                btnEliminar.Visible = estado;
+
+                if (estado)
+                {
+                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idLocal}, '{hdnIdEliminar.ClientID}', '{btnEliminarLocal.ClientID}');";
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+            dgvLocal.RowDataBound += dgvLocal_RowDataBound;
             if (!IsPostBack)
             {
                 //Aqui van para mostrar el listado de lcoales
@@ -96,29 +156,37 @@ namespace SoftResWA.Views.Locales
         }
         protected void btnGuardarLocal_Click(object sender, EventArgs e)
         {
-            var local = new SoftResBusiness.LocalWSClient.localDTO();
-            var sede = new SoftResBusiness.LocalWSClient.sedeDTO();
-            sede.idSedeSpecified = true;
-            sede.idSede = int.Parse(ddlSedeOp.SelectedValue);
-            local.sede = sede;
-            local.nombre = txtNombreLocal.Text;
-            local.direccion = txtDireccionLocal.Text;
-            local.telefono = txtTelefonoLocal.Text;
-            local.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-            local.fechaCreacionSpecified = true;
-            local.estadoSpecified = true;
-            local.estado = true;
-            if (this.localBO.Insertar(local) > 0)
+            string modo = hdnModoModal.Value;
+            bool exito = false;
+            if (modo == "registrar")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Local registrado!', 'El registro se completó correctamente.', 'success');", true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Local NO registrado!', 'El registro NO se completó correctamente.', 'success');", true);
-            }
+                localDTO local = new SoftResBusiness.LocalWSClient.localDTO();
+                local = ConstruirLocalDTO(local);
+                local.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                local.fechaCreacionSpecified = true;
+                local.fechaModificacionSpecified = false;
+                local.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
 
+                exito = this.localBO.Insertar(local) > 0;
+            }
+            else if (modo == "modificar")
+            {
+                int idLocal = int.Parse(hdnIdLocal.Value);
+                localDTO local = this.localBO.ObtenerPorID(idLocal);
+
+                local = ConstruirLocalDTO(local); // actualiza campos pero mantiene ID, creación, etc.
+                local.idLocal = idLocal;
+                local.idLocalSpecified = true;
+
+                local.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                local.fechaModificacionSpecified = true;
+                local.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+
+                exito = this.localBO.Modificar(local) > 0;
+            }
+            MostrarResultado(exito, "Local", modo);
+            if (exito) btnBuscar_Click(sender, e);
         }
-
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             // Limpia campos
@@ -132,57 +200,47 @@ namespace SoftResWA.Views.Locales
         protected void btnModificar_Command(object sender, CommandEventArgs e)
         {
             int idLocal = int.Parse(e.CommandArgument.ToString());
-
-            localDTO local = this.localBO.ObtenerPorID(idLocal);
-            if(local != null)
+            if (idLocal > 0)
             {
-                txtNombreLocal.Text = local.nombre;
-                txtDireccionLocal.Text = local.direccion;
-                txtTelefonoLocal.Text = local.telefono;
-                ddlSedeOp.SelectedValue = local.sede.idSede.ToString();
-                this.MostrarModal("modificar", "Modificar Local");
+                localDTO local = this.localBO.ObtenerPorID(idLocal);
+                if (local != null)
+                {
+                    hdnIdLocal.Value = local.idLocal.ToString();
+                    txtNombreLocal.Text = local.nombre;
+                    txtDireccionLocal.Text = local.direccion;
+                    txtTelefonoLocal.Text = local.telefono;
+                    ddlSedeOp.SelectedValue = local.sede.idSede.ToString();
+                    this.MostrarModal("modificar", "Modificar Local");
+                }
             }
         }
         protected void btn_eliminar_Click(object sender, EventArgs e)
         {
             int id = int.Parse(hdnIdEliminar.Value);
-            localDTO local = this.localBO.ObtenerPorID(id);
-
-            if(local != null)
+            if (id > 0)
             {
-                this.localBO.Eliminar(local);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminado",
-                "Swal.fire('¡Eliminado!', 'El registro fue eliminado correctamente.', 'success');", true);
+                localDTO local = this.localBO.ObtenerPorID(id);
+                if (local != null)
+                {
+                    local.idLocal = id;
+                    local.idLocalSpecified = true;
+                    bool exito = this.localBO.Eliminar(local) > 0;
+                    MostrarResultado(exito, "Local", "eliminar");
+                    if (exito) btnBuscar_Click(sender, e);
+                }
             }
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             localParametros parametros = new localParametros();
             parametros.nombre = txtNombre.Text.Trim();
-            if (string.IsNullOrEmpty(ddlEstado.SelectedValue))
-            {
-                parametros.estadoSpecified = false;
-            }
-            else
-            {
-                parametros.estadoSpecified = true;
-                parametros.estado = ddlEstado.SelectedValue == "1"; 
-            }
-            if (string.IsNullOrEmpty(ddlSede.SelectedValue))
-            {
-                parametros.idSedeSpecified = false;
-            }
-            else
-            {
-                parametros.idSedeSpecified = true;
-                parametros.idSede = int.Parse(ddlSede.SelectedValue);
-            }
+            parametros.estadoSpecified = !string.IsNullOrEmpty(ddlEstado.SelectedValue);
+            parametros.estado = ddlEstado.SelectedValue == "1";
+            parametros.idSedeSpecified = !string.IsNullOrEmpty(ddlSede.SelectedValue);
+            parametros.idSede = !string.IsNullOrEmpty(ddlSede.SelectedValue) ? int.Parse(ddlSede.SelectedValue) : 0;
 
-            // Llama a tu BO
             var lista = this.localBO.Listar(parametros);
             var listaAdaptada = this.ConfigurarListado(lista);
-
-            // Recarga el GridView
             dgvLocal.DataSource = listaAdaptada;
             dgvLocal.DataBind();
         }

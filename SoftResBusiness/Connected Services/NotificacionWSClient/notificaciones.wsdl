@@ -5,23 +5,17 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/notificaciones?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="insertar">
-    <part name="parameters" element="tns:insertar" />
+  <message name="listar">
+    <part name="parameters" element="tns:listar" />
   </message>
-  <message name="insertarResponse">
-    <part name="parameters" element="tns:insertarResponse" />
+  <message name="listarResponse">
+    <part name="parameters" element="tns:listarResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
   </message>
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
-  </message>
-  <message name="obtenerPorId">
-    <part name="parameters" element="tns:obtenerPorId" />
-  </message>
-  <message name="obtenerPorIdResponse">
-    <part name="parameters" element="tns:obtenerPorIdResponse" />
   </message>
   <message name="eliminar">
     <part name="parameters" element="tns:eliminar" />
@@ -35,24 +29,24 @@
   <message name="modificarResponse">
     <part name="parameters" element="tns:modificarResponse" />
   </message>
-  <message name="listar">
-    <part name="parameters" element="tns:listar" />
+  <message name="obtenerPorId">
+    <part name="parameters" element="tns:obtenerPorId" />
   </message>
-  <message name="listarResponse">
-    <part name="parameters" element="tns:listarResponse" />
+  <message name="obtenerPorIdResponse">
+    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  </message>
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
+  </message>
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
   </message>
   <portType name="Notificacion">
-    <operation name="insertar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertarRequest" message="tns:insertar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertarResponse" message="tns:insertarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="obtenerPorId">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorIdRequest" message="tns:obtenerPorId" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="listar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listarRequest" message="tns:listar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listarResponse" message="tns:listarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="eliminar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest" message="tns:eliminar" />
@@ -66,31 +60,22 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="listar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listarRequest" message="tns:listar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listarResponse" message="tns:listarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="obtenerPorId">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorIdRequest" message="tns:obtenerPorId" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="insertar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertarResponse" message="tns:insertarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="NotificacionPortBinding" type="tns:Notificacion">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="insertar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="obtenerPorId">
+    <operation name="listar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -135,7 +120,22 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="listar">
+    <operation name="obtenerPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="insertar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

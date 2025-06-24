@@ -11,56 +11,149 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 using System.ComponentModel;
 using SoftResBusiness.SedeWSClient;
+using SoftResBusiness.HorarioAtencionWSClient;
+using SoftResBusiness.HorarioxSedeWSClient;
+using sedeDTO = SoftResBusiness.SedeWSClient.sedeDTO;
+using horarioAtencionDTO = SoftResBusiness.HorarioAtencionWSClient.horarioAtencionDTO;
 
 namespace SoftResWA.Views.Sedes
 {
     public partial class SedeGestion : System.Web.UI.Page
     {
         private SedeBO sedeBO;
+        private HorarioAtencionBO horarioAtencionBO;
+        private HorarioxSedeBO horarioxSedeBO;
+        private BindingList<horarioAtencionDTO> listadoHorarios;
+        private BindingList<horariosxSedesDTO> listarHorarioxSede;
         private BindingList<sedeDTO> listadoSedes;
 
         public SedeBO SedeBO { get => sedeBO; set => sedeBO = value; }
+        public HorarioAtencionBO HorarioAtencionBO { get => horarioAtencionBO; set => horarioAtencionBO = value; }
+        public HorarioxSedeBO HorarioxSedeBO { get => horarioxSedeBO; set => horarioxSedeBO = value; }
+        public BindingList<horarioAtencionDTO> ListadoHorarios { get => listadoHorarios; set => listadoHorarios = value; }
+        public BindingList<horariosxSedesDTO> ListarHorarioxSede { get => listarHorarioxSede; set => listarHorarioxSede = value; }
         public BindingList<sedeDTO> ListadoSedes { get => listadoSedes; set => listadoSedes = value; }
 
         public SedeGestion()
         {
-            this.sedeBO = new SedeBO();
+            this.SedeBO = new SedeBO();
+            this.horarioAtencionBO = new HorarioAtencionBO();
+            this.horarioxSedeBO = new HorarioxSedeBO();
+
             sedeParametros parametros = new sedeParametros();
             parametros.nombre = null;
-            parametros.estadoSpecified = true;
-            parametros.estado = true;
-            this.listadoSedes = this.sedeBO.Listar(parametros);
+            parametros.estadoSpecified = false;
+            this.ListadoSedes = this.SedeBO.Listar(parametros);
+
+            horarioParametros hParametros = new horarioParametros();
+            hParametros.diaSemanaSpecified = false;
+            hParametros.esFeriadoSpecified = false;
+            hParametros.estadoSpecified = true;
+            hParametros.estado = true;
+            this.ListadoHorarios = this.horarioAtencionBO.Listar(hParametros);
+        }
+        protected List<object> ConfigurarListado(BindingList<sedeDTO> lista)
+        {
+            var listaAdaptada = lista.Select(l => new
+            {
+                l.idSede,
+                l.nombre,
+                l.distrito,
+                l.horarios,
+                l.fechaCreacion,
+                l.usuarioCreacion,
+                fechaModificacion = l.fechaModificacionSpecified ? l.fechaModificacion : (DateTime?)null,
+                l.usuarioModificacion,
+                estadoBool = l.estado,
+                Estado = l.estado ? "Activo" : "Inactivo"
+            }).ToList<Object>();
+            return listaAdaptada;
+        }
+        private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
+        {
+            ddl.DataSource = dataSource;
+            ddl.DataTextField = textField;
+            ddl.DataValueField = valueField;
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem(textoDefault, ""));
+        }
+        private void MostrarModal(string modo, string titulo)
+        {
+            hdnModoModal.Value = modo;
+
+            string script = "setTimeout(function() {" +
+                            $"document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>{titulo}';" +
+                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarSede'));" +
+                            "modal.show();" +
+                            "}, 200);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
+        }
+        private void MostrarResultado(bool exito, string entidad, string modo)
+        {
+            string accion = (modo == "modificar") ? "modificado" :
+                            (modo == "eliminar") ? "eliminado" : "registrado";
+
+            string accionNo = (modo == "modificar") ? "modificar" :
+                              (modo == "eliminar") ? "eliminar" : "registrar";
+
+            string baseMensaje = exito ? $"El {accion}" : $"El {accionNo} NO";
+            string tipo = exito ? "success" : "warning";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
+                $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} se completó correctamente.', '{tipo}');", true);
+        }
+        protected void dgvLocal_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var dataItem = e.Row.DataItem;
+
+                // Obtener estadoBool vía reflexión
+                bool estado = false;
+                var prop = dataItem.GetType().GetProperty("estadoBool");
+                if (prop != null)
+                {
+                    estado = (bool)prop.GetValue(dataItem);
+                }
+
+                int idLocal = (int)dataItem.GetType().GetProperty("idLocal")?.GetValue(dataItem);
+
+                LinkButton btnModificar = (LinkButton)e.Row.FindControl("btnModificar");
+                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
+
+                btnModificar.Visible = estado;
+                btnEliminar.Visible = estado;
+
+                if (estado)
+                {
+                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idLocal}, '{hdnIdEliminar.ClientID}', '{btnEliminarSede.ClientID}');";
+                }
+            }
+        }
+        private sedeDTO ConstruirSedeDTO(sedeDTO sede)
+        {
+            if (sede == null)
+                sede = new sedeDTO();
+            sede.nombre = txtNombreSede.Text;
+            sede.distrito = txtDistritoSede.Text;
+            sede.estado = true;
+            sede.estadoSpecified = true;
+            return sede;
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+            dgvSede.RowDataBound += dgvLocal_RowDataBound;
             if (!IsPostBack)
             {
-                dgvSede.DataSource = ListadoSedes;
+                var listaAdaptada = this.ConfigurarListado(ListadoSedes);
+                dgvSede.DataSource = listaAdaptada;
                 dgvSede.DataBind();
 
-                //Esto es provicional en lo que termina los demas
-                var horariosOriginales = new List<HorarioFake>
-                    {
-                        new HorarioFake { idHorario = 1, diaSemana = "Lunes", horaInicio = "09:00", horaFin = "18:00" },
-                        new HorarioFake { idHorario = 2, diaSemana = "Sábado", horaInicio = "10:00", horaFin = "14:00" }
-                    };
-
-                var horarios = horariosOriginales.Select(h => new
-                {
-                    idHorario = h.idHorario,
-                    descripcion = $"{h.diaSemana} - {h.horaInicio} a {h.horaFin}"
-                }).ToList();
-
-                ddlHorarios.DataSource = horarios;
-                ddlHorarios.DataTextField = "descripcion";
-                ddlHorarios.DataValueField = "idHorario";
-                ddlHorarios.DataBind();
-                ddlHorarios.Items.Insert(0, new ListItem("-- Seleccione un horario --", ""));
-
+                this.CargarDropDownList(ddlHorarios, ListadoHorarios, "descripcion", "idHorario", "-- Seleccione un horario --");
             }
         }
-
-
         protected void btnAñadirHorario_Click(object sender, EventArgs e)
         {
             // Aquí irá la lógica para añadir el horario
@@ -68,9 +161,36 @@ namespace SoftResWA.Views.Sedes
         }
         protected void btnGuardarSede_Click(object sender, EventArgs e)
         {
-            // Aquí irá la lógica para guardar la sede
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "registroExitoso", "Swal.fire('¡Sede registrada!', 'El registro se completó correctamente.', 'success');", true);
+            string modo = hdnModoModal.Value;
+            bool exito = false;
+            if (modo == "registrar")
+            {
+                sedeDTO sede = new sedeDTO();
+                sede = ConstruirSedeDTO(sede);
+                sede.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                sede.fechaCreacionSpecified = true;
+                sede.fechaModificacionSpecified = false;
+                sede.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
 
+                exito = this.sedeBO.Insertar(sede) > 0;
+            }
+            else if (modo == "modificar")
+            {
+                int id = int.Parse(hdnIdSede.Value);
+                sedeDTO sede = this.sedeBO.ObtenerPorID(id);
+
+                sede = ConstruirSedeDTO(sede); // actualiza campos pero mantiene ID, creación, etc.
+                sede.idSede = id;
+                sede.idSedeSpecified = true;
+
+                sede.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                sede.fechaModificacionSpecified = true;
+                sede.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+
+                exito = this.sedeBO.Modificar(sede) > 0;
+            }
+            MostrarResultado(exito, "Sede", modo);
+            if (exito) btnBuscar_Click(sender, e);
         }
         protected void ddlHorarios_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -78,27 +198,16 @@ namespace SoftResWA.Views.Sedes
             {
                 int idHorario = int.Parse(ddlHorarios.SelectedValue);
 
-                // Simulación de búsqueda real esto se cambia por un obtenerHorarioPorID
-                var horario = new HorarioFake
+                if(idHorario > 0)
                 {
-                    idHorario = idHorario,
-                    diaSemana = "Lunes",
-                    horaInicio = "09:00",
-                    horaFin = "18:00",
-                    esFeriado = false
-                };
-
-                lblDiaSemana.Text = horario.diaSemana;
-                lblHoraInicio.Text = horario.horaInicio;
-                lblHoraFin.Text = horario.horaFin;
-                lblFeriado.Text = horario.esFeriado ? "Sí" : "No";
-                string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
-                string script = "setTimeout(function() {" +
-                    $"document.getElementById('tituloModalSede').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>{titulo}';" +
-                    "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarSede'));" +
-                    "modal.show();" +
-                "}, 200);";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalHorario", script, true);
+                    horarioAtencionDTO horarioObtenido= this.horarioAtencionBO.ObtenerPorID(idHorario);
+                    lblDiaSemana.Text = horarioObtenido.diaSemana.ToString();
+                    lblHoraInicio.Text = horarioObtenido.horaInicio.ToString();
+                    lblHoraFin.Text = horarioObtenido.horaFin.ToString();
+                    lblFeriado.Text = horarioObtenido.esFeriado ? "Sí" : "No";
+                    string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
+                    this.MostrarModal(hdnModoModal.Value, titulo);
+                }
             }
         }
 
@@ -110,63 +219,50 @@ namespace SoftResWA.Views.Sedes
             hdnIdSede.Value = "";
 
             // Cambia título a "Registrar"
-            hdnModoModal.Value = "registrar";
-            string script = "setTimeout(function() {" +
-                "document.getElementById('tituloModalSede').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>Registrar Sede';" +
-                "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarSede'));" +
-                "modal.show();" +
-            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "mostrarModalNuevo", script, true);
+            this.MostrarModal("registrar", "Registrar Sede");
         }
 
         protected void btnModificar_Command(object sender, CommandEventArgs e)
         {
             int idSede = int.Parse(e.CommandArgument.ToString());
-
-            //var sede = sedeBO.ObtenerPorId(idSede);
-
-            //txtNombreSede.Text = sede.Nombre;
-            //txtDistritoSede.Text = sede.Distrito;
-            //hdnIdSede.Value = idSede.ToString();
-
-            hdnModoModal.Value = "modificar";
-            string script = "setTimeout(function() {" +
-                "document.getElementById('tituloModalSede').innerHTML = '<i class=\\\"fas fa-map-marker-alt me-2 text-danger\\\"></i>Modificar Sede';" +
-                "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarSede'));" +
-                "modal.show();" +
-            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalModificar", script, true);
+            if (idSede > 0)
+            {
+                sedeDTO sede = this.SedeBO.ObtenerPorID(idSede);
+                if (sede != null)
+                {
+                    txtNombreSede.Text = sede.nombre;
+                    txtDistritoSede.Text = sede.distrito;
+                    //Aqui falta lo de traer el listados de horario x sede
+                    this.MostrarModal("modificar", "Modificar Sede");
+                }
+            }
         }
         protected void btn_eliminar_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(hdnIdEliminar.Value);
-
-            // Eliminar por tipo de entidad según la página
-            // Por ejemplo: eliminar sede, local, usuario...
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminado",
-                "Swal.fire('¡Eliminado!', 'El registro fue eliminado correctamente.', 'success');", true);
+            int idSede = int.Parse(hdnIdEliminar.Value);
+            if (idSede > 0)
+            {
+                sedeDTO sede = this.SedeBO.ObtenerPorID(idSede);
+                if (sede != null)
+                {
+                    sede.idSede = idSede;
+                    sede.idSedeSpecified = true;
+                    bool exito = this.SedeBO.Eliminar(sede)>0;
+                    MostrarResultado(exito, "Sede", "eliminar");
+                    if (exito) btnBuscar_Click(sender, e);
+                }
+            }
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             sedeParametros parametros = new sedeParametros();
             parametros.nombre = txtNombre.Text.Trim();
+            parametros.estadoSpecified = !string.IsNullOrEmpty(ddlEstado.SelectedValue);
+            parametros.estado = ddlEstado.SelectedValue == "1";
 
-            // Leer el valor seleccionado del DropDownList
-            if (string.IsNullOrEmpty(ddlEstado.SelectedValue))
-            {
-                parametros.estadoSpecified = false;
-            }
-            else
-            {
-                parametros.estadoSpecified = true;
-                parametros.estado = ddlEstado.SelectedValue == "1"; // true si "Activo", false si "Inactivo"
-            }
-
-            listadoSedes = this.sedeBO.Listar(parametros);
-            dgvSede.DataSource = listadoSedes;
+            var lista = this.SedeBO.Listar(parametros);
+            var listaAdaptada = this.ConfigurarListado(lista);
+            dgvSede.DataSource = listaAdaptada;
             dgvSede.DataBind();
         }
 
