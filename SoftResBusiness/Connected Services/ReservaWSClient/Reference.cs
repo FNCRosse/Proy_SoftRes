@@ -1651,17 +1651,6 @@ namespace SoftResBusiness.ReservaWSClient {
     public interface Reserva {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Reserva/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Reserva/eliminar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ReservaWSClient.eliminarResponse eliminar(SoftResBusiness.ReservaWSClient.eliminarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaWSClient.eliminarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/insertarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Reserva/insertar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Reserva/insertar/Fault/InterruptedException", Name="InterruptedException")]
@@ -1682,6 +1671,17 @@ namespace SoftResBusiness.ReservaWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/modificarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.modificarResponse> modificarAsync(SoftResBusiness.ReservaWSClient.modificarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Reserva/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Reserva/eliminar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ReservaWSClient.eliminarResponse eliminar(SoftResBusiness.ReservaWSClient.eliminarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaWSClient.eliminarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/listarResponse")]
@@ -1705,42 +1705,6 @@ namespace SoftResBusiness.ReservaWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Reserva/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Reserva/obtenerPorIdResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.ReservaWSClient.obtenerPorIdRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ReservaWSClient.reservaDTO arg0;
-        
-        public eliminarRequest() {
-        }
-        
-        public eliminarRequest(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public eliminarResponse() {
-        }
-        
-        public eliminarResponse(int @return) {
-            this.@return = @return;
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1811,6 +1775,42 @@ namespace SoftResBusiness.ReservaWSClient {
         }
         
         public modificarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.ReservaWSClient.reservaDTO arg0;
+        
+        public eliminarRequest() {
+        }
+        
+        public eliminarRequest(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public eliminarResponse() {
+        }
+        
+        public eliminarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -2087,29 +2087,6 @@ namespace SoftResBusiness.ReservaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ReservaWSClient.eliminarResponse SoftResBusiness.ReservaWSClient.Reserva.eliminar(SoftResBusiness.ReservaWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
-        }
-        
-        public int eliminar(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
-            SoftResBusiness.ReservaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.ReservaWSClient.eliminarResponse retVal = ((SoftResBusiness.ReservaWSClient.Reserva)(this)).eliminar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> SoftResBusiness.ReservaWSClient.Reserva.eliminarAsync(SoftResBusiness.ReservaWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
-            SoftResBusiness.ReservaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.ReservaWSClient.Reserva)(this)).eliminarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SoftResBusiness.ReservaWSClient.insertarResponse SoftResBusiness.ReservaWSClient.Reserva.insertar(SoftResBusiness.ReservaWSClient.insertarRequest request) {
             return base.Channel.insertar(request);
         }
@@ -2153,6 +2130,29 @@ namespace SoftResBusiness.ReservaWSClient {
             SoftResBusiness.ReservaWSClient.modificarRequest inValue = new SoftResBusiness.ReservaWSClient.modificarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.ReservaWSClient.Reserva)(this)).modificarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.ReservaWSClient.eliminarResponse SoftResBusiness.ReservaWSClient.Reserva.eliminar(SoftResBusiness.ReservaWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
+        }
+        
+        public int eliminar(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
+            SoftResBusiness.ReservaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.ReservaWSClient.eliminarResponse retVal = ((SoftResBusiness.ReservaWSClient.Reserva)(this)).eliminar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> SoftResBusiness.ReservaWSClient.Reserva.eliminarAsync(SoftResBusiness.ReservaWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.ReservaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaWSClient.reservaDTO arg0) {
+            SoftResBusiness.ReservaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.ReservaWSClient.Reserva)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

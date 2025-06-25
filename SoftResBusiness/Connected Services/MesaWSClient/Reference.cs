@@ -888,26 +888,15 @@ namespace SoftResBusiness.MesaWSClient {
     public interface Mesa {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorId/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorId/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/insertarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/insertar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/insertar/Fault/InterruptedException", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MesaWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request);
+        SoftResBusiness.MesaWSClient.insertarResponse insertar(SoftResBusiness.MesaWSClient.insertarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/listar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MesaWSClient.listarResponse listar(SoftResBusiness.MesaWSClient.listarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> listarAsync(SoftResBusiness.MesaWSClient.listarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/insertarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.MesaWSClient.insertarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/modificarResponse")]
@@ -921,15 +910,26 @@ namespace SoftResBusiness.MesaWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.modificarResponse> modificarAsync(SoftResBusiness.MesaWSClient.modificarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/insertarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/insertar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/insertar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/listarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/listar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/listar/Fault/InterruptedException", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MesaWSClient.insertarResponse insertar(SoftResBusiness.MesaWSClient.insertarRequest request);
+        SoftResBusiness.MesaWSClient.listarResponse listar(SoftResBusiness.MesaWSClient.listarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/insertarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.MesaWSClient.insertarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/listarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> listarAsync(SoftResBusiness.MesaWSClient.listarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorId/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorId/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.MesaWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/obtenerPorIdResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Mesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Mesa/eliminarResponse")]
@@ -946,17 +946,17 @@ namespace SoftResBusiness.MesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
+        public SoftResBusiness.MesaWSClient.mesaDTO arg0;
         
-        public obtenerPorIdRequest() {
+        public insertarRequest() {
         }
         
-        public obtenerPorIdRequest(int arg0) {
+        public insertarRequest(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -964,17 +964,53 @@ namespace SoftResBusiness.MesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.MesaWSClient.mesaDTO @return;
+        public int @return;
         
-        public obtenerPorIdResponse() {
+        public insertarResponse() {
         }
         
-        public obtenerPorIdResponse(SoftResBusiness.MesaWSClient.mesaDTO @return) {
+        public insertarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.MesaWSClient.mesaDTO arg0;
+        
+        public modificarRequest() {
+        }
+        
+        public modificarRequest(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public modificarResponse() {
+        }
+        
+        public modificarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -1134,17 +1170,17 @@ namespace SoftResBusiness.MesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.MesaWSClient.mesaDTO arg0;
+        public int arg0;
         
-        public modificarRequest() {
+        public obtenerPorIdRequest() {
         }
         
-        public modificarRequest(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
+        public obtenerPorIdRequest(int arg0) {
             this.arg0 = arg0;
         }
     }
@@ -1152,53 +1188,17 @@ namespace SoftResBusiness.MesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
+        public SoftResBusiness.MesaWSClient.mesaDTO @return;
         
-        public modificarResponse() {
+        public obtenerPorIdResponse() {
         }
         
-        public modificarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.MesaWSClient.mesaDTO arg0;
-        
-        public insertarRequest() {
-        }
-        
-        public insertarRequest(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public insertarResponse() {
-        }
-        
-        public insertarResponse(int @return) {
+        public obtenerPorIdResponse(SoftResBusiness.MesaWSClient.mesaDTO @return) {
             this.@return = @return;
         }
     }
@@ -1267,49 +1267,26 @@ namespace SoftResBusiness.MesaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MesaWSClient.obtenerPorIdResponse SoftResBusiness.MesaWSClient.Mesa.obtenerPorId(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorId(request);
+        SoftResBusiness.MesaWSClient.insertarResponse SoftResBusiness.MesaWSClient.Mesa.insertar(SoftResBusiness.MesaWSClient.insertarRequest request) {
+            return base.Channel.insertar(request);
         }
         
-        public SoftResBusiness.MesaWSClient.mesaDTO obtenerPorId(int arg0) {
-            SoftResBusiness.MesaWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MesaWSClient.obtenerPorIdRequest();
+        public int insertar(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
+            SoftResBusiness.MesaWSClient.insertarRequest inValue = new SoftResBusiness.MesaWSClient.insertarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.MesaWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).obtenerPorId(inValue);
+            SoftResBusiness.MesaWSClient.insertarResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).insertar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> SoftResBusiness.MesaWSClient.Mesa.obtenerPorIdAsync(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorIdAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> SoftResBusiness.MesaWSClient.Mesa.insertarAsync(SoftResBusiness.MesaWSClient.insertarRequest request) {
+            return base.Channel.insertarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
-            SoftResBusiness.MesaWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MesaWSClient.obtenerPorIdRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
+            SoftResBusiness.MesaWSClient.insertarRequest inValue = new SoftResBusiness.MesaWSClient.insertarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).obtenerPorIdAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MesaWSClient.listarResponse SoftResBusiness.MesaWSClient.Mesa.listar(SoftResBusiness.MesaWSClient.listarRequest request) {
-            return base.Channel.listar(request);
-        }
-        
-        public SoftResBusiness.MesaWSClient.mesaDTO[] listar(SoftResBusiness.MesaWSClient.mesaParametros arg0) {
-            SoftResBusiness.MesaWSClient.listarRequest inValue = new SoftResBusiness.MesaWSClient.listarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.MesaWSClient.listarResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).listar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> SoftResBusiness.MesaWSClient.Mesa.listarAsync(SoftResBusiness.MesaWSClient.listarRequest request) {
-            return base.Channel.listarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> listarAsync(SoftResBusiness.MesaWSClient.mesaParametros arg0) {
-            SoftResBusiness.MesaWSClient.listarRequest inValue = new SoftResBusiness.MesaWSClient.listarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).listarAsync(inValue);
+            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).insertarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1336,26 +1313,49 @@ namespace SoftResBusiness.MesaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MesaWSClient.insertarResponse SoftResBusiness.MesaWSClient.Mesa.insertar(SoftResBusiness.MesaWSClient.insertarRequest request) {
-            return base.Channel.insertar(request);
+        SoftResBusiness.MesaWSClient.listarResponse SoftResBusiness.MesaWSClient.Mesa.listar(SoftResBusiness.MesaWSClient.listarRequest request) {
+            return base.Channel.listar(request);
         }
         
-        public int insertar(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
-            SoftResBusiness.MesaWSClient.insertarRequest inValue = new SoftResBusiness.MesaWSClient.insertarRequest();
+        public SoftResBusiness.MesaWSClient.mesaDTO[] listar(SoftResBusiness.MesaWSClient.mesaParametros arg0) {
+            SoftResBusiness.MesaWSClient.listarRequest inValue = new SoftResBusiness.MesaWSClient.listarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.MesaWSClient.insertarResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).insertar(inValue);
+            SoftResBusiness.MesaWSClient.listarResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).listar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> SoftResBusiness.MesaWSClient.Mesa.insertarAsync(SoftResBusiness.MesaWSClient.insertarRequest request) {
-            return base.Channel.insertarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> SoftResBusiness.MesaWSClient.Mesa.listarAsync(SoftResBusiness.MesaWSClient.listarRequest request) {
+            return base.Channel.listarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.MesaWSClient.mesaDTO arg0) {
-            SoftResBusiness.MesaWSClient.insertarRequest inValue = new SoftResBusiness.MesaWSClient.insertarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.listarResponse> listarAsync(SoftResBusiness.MesaWSClient.mesaParametros arg0) {
+            SoftResBusiness.MesaWSClient.listarRequest inValue = new SoftResBusiness.MesaWSClient.listarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).insertarAsync(inValue);
+            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).listarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.MesaWSClient.obtenerPorIdResponse SoftResBusiness.MesaWSClient.Mesa.obtenerPorId(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorId(request);
+        }
+        
+        public SoftResBusiness.MesaWSClient.mesaDTO obtenerPorId(int arg0) {
+            SoftResBusiness.MesaWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MesaWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.MesaWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.MesaWSClient.Mesa)(this)).obtenerPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> SoftResBusiness.MesaWSClient.Mesa.obtenerPorIdAsync(SoftResBusiness.MesaWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.MesaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
+            SoftResBusiness.MesaWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MesaWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.MesaWSClient.Mesa)(this)).obtenerPorIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

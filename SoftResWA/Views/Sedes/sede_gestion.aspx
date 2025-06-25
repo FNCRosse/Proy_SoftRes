@@ -44,12 +44,15 @@
         <asp:GridView ID="dgvSede" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:TemplateField HeaderText="">
+                <asp:TemplateField HeaderText="Opciones">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            Text="M"
                             CommandArgument='<%# Eval("idSede") %>'
-                            OnCommand="btnModificar_Command">M</asp:LinkButton>
-                        <%# "<button type='button' class='btn btn-sm btn-danger' onclick=\"confirmarEliminacion(" + Eval("idSede") + ", '" + hdnIdEliminar.ClientID + "', '" + btnEliminarSede.ClientID + "')\">C</button>" %>
+                            OnCommand="btnModificar_Command" />
+
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm btn-danger"
+                            Text="C" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField HeaderText="Código" DataField="idSede" />
@@ -153,6 +156,15 @@
                                         <asp:BoundField HeaderText="Hora Inicio" DataField="horaInicio" />
                                         <asp:BoundField HeaderText="Hora Fin" DataField="horaFin" />
                                         <asp:BoundField HeaderText="Es Feriado?" DataField="feriadoTexto" />
+                                        <asp:TemplateField HeaderText="Eliminar">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnEliminarHorario" runat="server"
+                                                    Text="❌"
+                                                    CommandArgument='<%# Eval("idHorario") %>'
+                                                    OnCommand="btnEliminarHorario_Command"
+                                                    CssClass="btn btn-sm btn-danger" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
                             </div>

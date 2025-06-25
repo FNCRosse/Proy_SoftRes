@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/horarioAtencion?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="modificar">
-    <part name="parameters" element="tns:modificar" />
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
   </message>
-  <message name="modificarResponse">
-    <part name="parameters" element="tns:modificarResponse" />
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -29,11 +29,11 @@
   <message name="listarResponse">
     <part name="parameters" element="tns:listarResponse" />
   </message>
-  <message name="insertar">
-    <part name="parameters" element="tns:insertar" />
+  <message name="modificar">
+    <part name="parameters" element="tns:modificar" />
   </message>
-  <message name="insertarResponse">
-    <part name="parameters" element="tns:insertarResponse" />
+  <message name="modificarResponse">
+    <part name="parameters" element="tns:modificarResponse" />
   </message>
   <message name="obtenerPorId">
     <part name="parameters" element="tns:obtenerPorId" />
@@ -42,11 +42,11 @@
     <part name="parameters" element="tns:obtenerPorIdResponse" />
   </message>
   <portType name="HorarioAtencion">
-    <operation name="modificar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificarRequest" message="tns:modificar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificarResponse" message="tns:modificarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="insertar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertarResponse" message="tns:insertarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="eliminar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/eliminarRequest" message="tns:eliminar" />
@@ -60,11 +60,11 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/listar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="insertar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertarRequest" message="tns:insertar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertarResponse" message="tns:insertarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="modificar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificarRequest" message="tns:modificar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificarResponse" message="tns:modificarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="obtenerPorId">
       <input wsam:Action="http://services.softres.pucp.edu.pe/HorarioAtencion/obtenerPorIdRequest" message="tns:obtenerPorId" />
@@ -75,7 +75,7 @@
   </portType>
   <binding name="HorarioAtencionPortBinding" type="tns:HorarioAtencion">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="modificar">
+    <operation name="insertar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -120,7 +120,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="insertar">
+    <operation name="modificar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

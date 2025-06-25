@@ -134,7 +134,7 @@
       <xs:element minOccurs="0" name="idLocal" type="xs:int" />
       <xs:element minOccurs="0" name="idReserva" type="xs:int" />
       <xs:element minOccurs="0" name="puntuacion" type="xs:int" />
-      <xs:element minOccurs="0" name="numDocCliente" type="xs:int" />
+      <xs:element minOccurs="0" name="numDocCliente" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminar">

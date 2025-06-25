@@ -140,6 +140,30 @@ namespace SoftResBusiness.TipoDocumentoWSClient {
     public interface TipoDocumento {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/listarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/listar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/listar/Fault/InterruptedExcepti" +
+            "on", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.TipoDocumentoWSClient.listarResponse listar(SoftResBusiness.TipoDocumentoWSClient.listarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/listarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> listarAsync(SoftResBusiness.TipoDocumentoWSClient.listarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/insertarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertar/Fault/InterruptedExcep" +
+            "tion", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.TipoDocumentoWSClient.insertarResponse insertar(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/insertarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> insertarAsync(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/obtenerPorIdResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/obtenerPorId/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/obtenerPorId/Fault/InterruptedE" +
@@ -174,30 +198,70 @@ namespace SoftResBusiness.TipoDocumentoWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/eliminarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.TipoDocumentoWSClient.eliminarRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarRequest {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/insertarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertar/Fault/InterruptedExcep" +
-            "tion", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.TipoDocumentoWSClient.insertarResponse insertar(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request);
+        public listarRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarResponse {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/insertarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> insertarAsync(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] @return;
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoDocumentoWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoDocumento/listar/Fault/InterruptedExcepti" +
-            "on", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.TipoDocumentoWSClient.listarResponse listar(SoftResBusiness.TipoDocumentoWSClient.listarRequest request);
+        public listarResponse() {
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoDocumento/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoDocumento/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> listarAsync(SoftResBusiness.TipoDocumentoWSClient.listarRequest request);
+        public listarResponse(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0;
+        
+        public insertarRequest() {
+        }
+        
+        public insertarRequest(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class insertarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public insertarResponse() {
+        }
+        
+        public insertarResponse(int @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -308,70 +372,6 @@ namespace SoftResBusiness.TipoDocumentoWSClient {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0;
-        
-        public insertarRequest() {
-        }
-        
-        public insertarRequest(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public insertarResponse() {
-        }
-        
-        public insertarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarRequest {
-        
-        public listarRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] @return;
-        
-        public listarResponse() {
-        }
-        
-        public listarResponse(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface TipoDocumentoChannel : SoftResBusiness.TipoDocumentoWSClient.TipoDocumento, System.ServiceModel.IClientChannel {
     }
@@ -397,6 +397,50 @@ namespace SoftResBusiness.TipoDocumentoWSClient {
         
         public TipoDocumentoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.TipoDocumentoWSClient.listarResponse SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.listar(SoftResBusiness.TipoDocumentoWSClient.listarRequest request) {
+            return base.Channel.listar(request);
+        }
+        
+        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] listar() {
+            SoftResBusiness.TipoDocumentoWSClient.listarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.listarRequest();
+            SoftResBusiness.TipoDocumentoWSClient.listarResponse retVal = ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).listar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.listarAsync(SoftResBusiness.TipoDocumentoWSClient.listarRequest request) {
+            return base.Channel.listarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> listarAsync() {
+            SoftResBusiness.TipoDocumentoWSClient.listarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.listarRequest();
+            return ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).listarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.TipoDocumentoWSClient.insertarResponse SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.insertar(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request) {
+            return base.Channel.insertar(request);
+        }
+        
+        public int insertar(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
+            SoftResBusiness.TipoDocumentoWSClient.insertarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.insertarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.TipoDocumentoWSClient.insertarResponse retVal = ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).insertar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.insertarAsync(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request) {
+            return base.Channel.insertarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> insertarAsync(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
+            SoftResBusiness.TipoDocumentoWSClient.insertarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.insertarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).insertarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -466,50 +510,6 @@ namespace SoftResBusiness.TipoDocumentoWSClient {
             SoftResBusiness.TipoDocumentoWSClient.eliminarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.eliminarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).eliminarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.TipoDocumentoWSClient.insertarResponse SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.insertar(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request) {
-            return base.Channel.insertar(request);
-        }
-        
-        public int insertar(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
-            SoftResBusiness.TipoDocumentoWSClient.insertarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.insertarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.TipoDocumentoWSClient.insertarResponse retVal = ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).insertar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.insertarAsync(SoftResBusiness.TipoDocumentoWSClient.insertarRequest request) {
-            return base.Channel.insertarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.insertarResponse> insertarAsync(SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO arg0) {
-            SoftResBusiness.TipoDocumentoWSClient.insertarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.insertarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).insertarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.TipoDocumentoWSClient.listarResponse SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.listar(SoftResBusiness.TipoDocumentoWSClient.listarRequest request) {
-            return base.Channel.listar(request);
-        }
-        
-        public SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO[] listar() {
-            SoftResBusiness.TipoDocumentoWSClient.listarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.listarRequest();
-            SoftResBusiness.TipoDocumentoWSClient.listarResponse retVal = ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).listar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> SoftResBusiness.TipoDocumentoWSClient.TipoDocumento.listarAsync(SoftResBusiness.TipoDocumentoWSClient.listarRequest request) {
-            return base.Channel.listarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.TipoDocumentoWSClient.listarResponse> listarAsync() {
-            SoftResBusiness.TipoDocumentoWSClient.listarRequest inValue = new SoftResBusiness.TipoDocumentoWSClient.listarRequest();
-            return ((SoftResBusiness.TipoDocumentoWSClient.TipoDocumento)(this)).listarAsync(inValue);
         }
     }
 }

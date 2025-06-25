@@ -42,6 +42,8 @@ namespace SoftResBusiness
         public BindingList<comentariosDTO> Listar(comentarioParametros parametros)
         {
             comentariosDTO[] lista = this.comentClienteWA.listar(parametros);
+            if (lista == null)
+                return new BindingList<comentariosDTO>();
             return new BindingList<comentariosDTO>(lista);
         }
     }

@@ -108,6 +108,7 @@ namespace SoftResWA.Views.Locales
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} se completó correctamente.', '{tipo}');", true);
         }
+        //Esta funcion es para que se oculte los botones de modificar y cancelar cuando la entidad esta inactiva
         protected void dgvLocal_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
