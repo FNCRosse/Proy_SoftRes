@@ -12,48 +12,39 @@
     <!-- Filtros para  -->
     <div class="container-fluid mb-4 ps-4">
         <div class="row gx-3">
-            <!-- Dia de la semana -->
             <div class="col-auto">
                 <label for="ddlDia" class="form-label">Dia de la Semana</label>
-                <select id="ddlDia" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Lunes</option>
-                    <option value="0">Martes</option>
-                    <option value="0">Miercoles</option>
-                    <option value="0">Jueves</option>
-                    <option value="0">Viernes</option>
-                    <option value="0">Sabado</option>
-                    <option value="0">Domingo</option>
-                </select>
+                <asp:DropDownList ID="ddlDia" runat="server" CssClass="form-select" />
             </div>
             <!-- Es Feriano -->
             <div class="col-auto">
-                <label for="ddlSede" class="form-label">Es Feriado</label>
-                <select id="ddlSede" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Si</option>
-                    <option value="0">No</option>
-                </select>
+                <label for="ddlFeriado" class="form-label">Es Feriado</label>
+                <asp:DropDownList ID="ddlFeriado" runat="server" CssClass="form-select" AutoPostBack="False">
+                    <asp:ListItem Text="-- Todos --" Value="" Selected="True" />
+                    <asp:ListItem Text="Si" Value="1" />
+                    <asp:ListItem Text="No" Value="0" />
+                </asp:DropDownList>
             </div>
             <!-- Estado -->
             <div class="col-auto">
                 <label for="ddlEstado" class="form-label">Estado</label>
-                <select id="ddlEstado" class="form-select">
-                    <option selected disabled>Seleccionar...</option>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
+                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select" AutoPostBack="False">
+                    <asp:ListItem Text="-- Todos --" Value="" Selected="True" />
+                    <asp:ListItem Text="Activo" Value="1" />
+                    <asp:ListItem Text="Inactivo" Value="0" />
+                </asp:DropDownList>
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <button type="button" class="btn btn-danger me-2">
-                    <i class="fas fa-search me-1"></i>Buscar
-                </button>
-                <button type="button" class="btn shadow-sm"
-                    style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;"
-                    data-bs-toggle="modal" data-bs-target="#modalRegistrarHorario">
-                    <i class="fas fa-plus me-2"></i>Nuevo
-                </button>
+                <div class="col-auto d-flex align-items-end">
+                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2"
+                        Text="Buscar"
+                        OnClick="btnBuscar_Click" />
+                    <asp:Button ID="btnNuevoHorario" runat="server" CssClass="btn shadow-sm"
+                        Text="Nuevo"
+                        OnClick="btnNuevo_Click"
+                        Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
+                </div>
             </div>
         </div>
     </div>
@@ -63,28 +54,43 @@
         <asp:GridView ID="dgvHorario" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:BoundField HeaderText="Código" DataField="SedeId" />
-                <asp:BoundField HeaderText="Dia de la semana" DataField="DiaSem" />
-                <asp:BoundField HeaderText="Hora Inicio" DataField="HInicio" />
-                <asp:BoundField HeaderText="Hora Fin" DataField="HFin" />
-                <asp:BoundField HeaderText="Es Feriado" DataField="EsFeriado" />
-                <asp:BoundField HeaderText="Fecha Creacion" DataField="FechaCrea" />
-                <asp:BoundField HeaderText="Usuario Creacion" DataField="UsuarioCrea" />
-                <asp:BoundField HeaderText="Fecha Modificacion" DataField="FechaMod" />
-                <asp:BoundField HeaderText="Usuario Modificacion" DataField="UsuarioMod" />
-                <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                <asp:TemplateField HeaderText="Opciones">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            Text="M"
+                            CommandArgument='<%# Eval("idHorario") %>'
+                            OnCommand="btnModificar_Command" />
+
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm btn-danger"
+                            Text="C" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField HeaderText="Código" DataField="idHorario" />
+                <asp:BoundField HeaderText="Dia de la semana" DataField="diaSemana" />
+                <asp:BoundField HeaderText="Hora Inicio" DataField="horaInicioStr" />
+                <asp:BoundField HeaderText="Hora Fin" DataField="horaFinStr" />
+                <asp:BoundField HeaderText="Es Feriado" DataField="esFeriado" />
+                <asp:BoundField HeaderText="Fecha Creacion" DataField="fechaCreacion" />
+                <asp:BoundField HeaderText="Usuario Creacion" DataField="usuarioCreacion" />
+                <asp:BoundField HeaderText="Fecha Modificacion" DataField="fechaModificacion" />
+                <asp:BoundField HeaderText="Usuario Modificacion" DataField="usuarioModificacion" />
+                <asp:BoundField HeaderText="Estado" DataField="estado" />
             </Columns>
         </asp:GridView>
+        <asp:HiddenField ID="hdnIdEliminar" runat="server" />
+        <asp:Button ID="btnEliminarHorario" runat="server" Style="display: none;" OnClick="btn_eliminar_Click" />
     </div>
     <!-- Modales -->
     <!-- Modal para Registrar Horario -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
+    <asp:HiddenField ID="hdnIdHorario" runat="server" />
+    <asp:HiddenField ID="hdnModoModal" runat="server" />
     <div class="modal fade" id="modalRegistrarHorario" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarHorarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <!-- Título -->
                 <div class="modal-header bg-warning text-black">
-                    <h5 class="modal-title fw-bold" id="modalRegistrarHorarioLabel">
+                    <h5 class="modal-title fw-bold" id="tituloModal">
                         <i class="fas fa-clock me-2"></i>Registrar Horario
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -98,16 +104,10 @@
                             <!-- Día de la Semana -->
                             <div class="col-md-3 mb-3">
                                 <label for="ddlDiaSemana" class="form-label">Día de la Semana</label>
-                                <asp:DropDownList ID="ddlDiaSemana" runat="server" CssClass="form-select">
-                                    <asp:ListItem Text="Seleccionar..." Value="" />
-                                    <asp:ListItem Text="Lunes" Value="Lunes" />
-                                    <asp:ListItem Text="Martes" Value="Martes" />
-                                    <asp:ListItem Text="Miércoles" Value="Miércoles" />
-                                    <asp:ListItem Text="Jueves" Value="Jueves" />
-                                    <asp:ListItem Text="Viernes" Value="Viernes" />
-                                    <asp:ListItem Text="Sábado" Value="Sábado" />
-                                    <asp:ListItem Text="Domingo" Value="Domingo" />
-                                </asp:DropDownList>
+                                <div class="col-md-3 mb-3">
+                                    <label for="ddlDiaSemana" class="form-label">Día de la Semana</label>
+                                    <asp:DropDownList ID="ddlDiaSemana" runat="server" CssClass="form-select" />
+                                </div>
                             </div>
 
                             <!-- Hora Inicio -->

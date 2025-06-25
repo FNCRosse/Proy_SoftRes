@@ -56,16 +56,6 @@
       <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:motivosCancelacionDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="insertarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="obtenerPorId">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
@@ -74,6 +64,16 @@
   <xs:complexType name="obtenerPorIdResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:motivosCancelacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

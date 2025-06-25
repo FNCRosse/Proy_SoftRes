@@ -24,14 +24,14 @@ namespace SoftResWA.Views.Sedes
         private HorarioAtencionBO horarioAtencionBO;
         private HorarioxSedeBO horarioxSedeBO;
         private BindingList<horarioAtencionDTO> listadoHorarios;
-        private BindingList<horariosxSedesDTO> listarHorarioxSede;
+        private BindingList<horarioAtencionDTO> listarHorarioxSede;
         private BindingList<sedeDTO> listadoSedes;
 
         public SedeBO SedeBO { get => sedeBO; set => sedeBO = value; }
         public HorarioAtencionBO HorarioAtencionBO { get => horarioAtencionBO; set => horarioAtencionBO = value; }
         public HorarioxSedeBO HorarioxSedeBO { get => horarioxSedeBO; set => horarioxSedeBO = value; }
         public BindingList<horarioAtencionDTO> ListadoHorarios { get => listadoHorarios; set => listadoHorarios = value; }
-        public BindingList<horariosxSedesDTO> ListarHorarioxSede { get => listarHorarioxSede; set => listarHorarioxSede = value; }
+        public BindingList<horarioAtencionDTO> ListarHorarioxSede { get => listarHorarioxSede; set => listarHorarioxSede = value; }
         public BindingList<sedeDTO> ListadoSedes { get => listadoSedes; set => listadoSedes = value; }
 
         public SedeGestion()
@@ -69,6 +69,15 @@ namespace SoftResWA.Views.Sedes
             }).ToList<Object>();
             return listaAdaptada;
         }
+        protected List<object> ConfigurarListado(BindingList<horarioAtencionDTO> lista)
+        {
+            var listaAdaptada = lista.Select(l => new
+            {
+                l.idHorario,
+                descripcion = $"{l.diaSemana} - {l.horaInicioStr} a {l.horaFinStr}",
+            }).ToList<Object>();
+            return listaAdaptada;
+        }
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
             ddl.DataSource = dataSource;
@@ -103,7 +112,7 @@ namespace SoftResWA.Views.Sedes
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} se completó correctamente.', '{tipo}');", true);
         }
-        protected void dgvLocal_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void dgv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -117,7 +126,7 @@ namespace SoftResWA.Views.Sedes
                     estado = (bool)prop.GetValue(dataItem);
                 }
 
-                int idLocal = (int)dataItem.GetType().GetProperty("idLocal")?.GetValue(dataItem);
+                int idSede = (int)dataItem.GetType().GetProperty("idSede")?.GetValue(dataItem);
 
                 LinkButton btnModificar = (LinkButton)e.Row.FindControl("btnModificar");
                 LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
@@ -127,7 +136,7 @@ namespace SoftResWA.Views.Sedes
 
                 if (estado)
                 {
-                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idLocal}, '{hdnIdEliminar.ClientID}', '{btnEliminarSede.ClientID}');";
+                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idSede}, '{hdnIdEliminar.ClientID}', '{btnEliminarSede.ClientID}');";
                 }
             }
         }
@@ -141,24 +150,116 @@ namespace SoftResWA.Views.Sedes
             sede.estadoSpecified = true;
             return sede;
         }
+        public List<horarioAtencionDTO> HorariosSeleccionados
+        {
+            get
+            {
+                // Si no existe, inicializa la lista
+                if (ViewState["HorariosSeleccionados"] == null)
+                {
+                    ViewState["HorariosSeleccionados"] = new List<horarioAtencionDTO>();
+                }
+                return (List<horarioAtencionDTO>)ViewState["HorariosSeleccionados"];
+            }
+            set
+            {
+                ViewState["HorariosSeleccionados"] = value;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            dgvSede.RowDataBound += dgvLocal_RowDataBound;
+            dgvSede.RowDataBound += dgv_RowDataBound;
             if (!IsPostBack)
             {
                 var listaAdaptada = this.ConfigurarListado(ListadoSedes);
                 dgvSede.DataSource = listaAdaptada;
                 dgvSede.DataBind();
-
-                this.CargarDropDownList(ddlHorarios, ListadoHorarios, "descripcion", "idHorario", "-- Seleccione un horario --");
+                var listaHorarioAdaptada = this.ConfigurarListado(ListadoHorarios);
+                this.CargarDropDownList(ddlHorarios, listaHorarioAdaptada, "descripcion", "idHorario", "-- Seleccione un horario --");
             }
         }
         protected void btnAñadirHorario_Click(object sender, EventArgs e)
         {
-            // Aquí irá la lógica para añadir el horario
+            // Verifica que se haya seleccionado un horario válido
+            if (!string.IsNullOrEmpty(ddlHorarios.SelectedValue))
+            {
+                int idHorario = int.Parse(ddlHorarios.SelectedValue);
 
+                if (idHorario > 0)
+                {
+                    horarioAtencionDTO horarioObtenido = this.horarioAtencionBO.ObtenerPorID(idHorario);
+                    if (horarioObtenido != null)
+                    {
+                        List<horarioAtencionDTO> lista = HorariosSeleccionados;
+                        bool yaExiste = false;
+                        foreach (var h in lista)
+                        {
+                            if (h.idHorario == horarioObtenido.idHorario)
+                            {
+                                yaExiste = true;
+                                break;
+                            }
+                        }
+                        if (!yaExiste)
+                        {
+                            lista.Add(horarioObtenido);
+                            HorariosSeleccionados = lista;
+                        }
+                        var listaVisual = new List<object>();
+                        foreach (var h in lista)
+                        {
+                            listaVisual.Add(new
+                            {
+                                idHorario = h.idHorario,
+                                diaSemana = h.diaSemana != null ? h.diaSemana.ToString() : "",
+                                horaInicio = h.horaInicioStr,
+                                horaFin = h.horaFinStr,
+                                feriadoTexto = h.esFeriado != null && h.esFeriado ? "Sí" : "No"
+                            });
+                        }
+
+                        gvDetalleHorario.DataSource = listaVisual;
+                        gvDetalleHorario.DataBind();
+                        string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
+                        this.MostrarModal(hdnModoModal.Value, titulo);
+                    }
+                }
+            }
         }
+        protected void btnEliminarHorario_Command(object sender, CommandEventArgs e)
+        {
+            int idHorario = int.Parse(e.CommandArgument.ToString());
+            List<horarioAtencionDTO> lista = HorariosSeleccionados;
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].idHorario == idHorario)
+                {
+                    lista.RemoveAt(i);
+                    break;
+                }
+            }
+
+            HorariosSeleccionados = lista;
+            var listaVisual = new List<object>();
+            foreach (var h in lista)
+            {
+                listaVisual.Add(new
+                {
+                    idHorario = h.idHorario,
+                    diaSemana = h.diaSemana != null ? h.diaSemana.ToString() : "",
+                    horaInicio = h.horaInicioStr,
+                    horaFin = h.horaFinStr,
+                    feriadoTexto = h.esFeriado != null && h.esFeriado ? "Sí" : "No"
+                });
+            }
+
+            gvDetalleHorario.DataSource = listaVisual;
+            gvDetalleHorario.DataBind();
+            string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
+            this.MostrarModal(hdnModoModal.Value, titulo);
+        }
+
         protected void btnGuardarSede_Click(object sender, EventArgs e)
         {
             string modo = hdnModoModal.Value;
@@ -172,7 +273,24 @@ namespace SoftResWA.Views.Sedes
                 sede.fechaModificacionSpecified = false;
                 sede.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
 
-                exito = this.sedeBO.Insertar(sede) > 0;
+                int idSede = this.sedeBO.Insertar(sede);
+                if (idSede > 0) exito = true;
+                if (exito)
+                {
+                    sedeDTO sedeInsertada = this.sedeBO.ObtenerPorID(idSede);
+                    if (sedeInsertada != null)
+                    {
+                        foreach (var horario in HorariosSeleccionados)
+                        {
+                            horariosxSedesDTO relacion = new horariosxSedesDTO();
+                            relacion.idHorario = horario.idHorario;
+                            relacion.idHorarioSpecified = true;
+                            relacion.idSedeSpecified = true;
+                            relacion.idSede= sedeInsertada.idSede;
+                            this.horarioxSedeBO.Insertar(relacion);
+                        }
+                    }
+                }
             }
             else if (modo == "modificar")
             {
@@ -190,7 +308,23 @@ namespace SoftResWA.Views.Sedes
                 exito = this.sedeBO.Modificar(sede) > 0;
             }
             MostrarResultado(exito, "Sede", modo);
-            if (exito) btnBuscar_Click(sender, e);
+            if (exito)
+            {
+                btnBuscar_Click(sender, e);
+                HorariosSeleccionados = new List<horarioAtencionDTO>(); // limpiar la lista
+                                                                        // Limpiar campos visuales del modal
+                txtNombreSede.Text = "";
+                txtDistritoSede.Text = "";
+                ddlHorarios.SelectedIndex = 0;
+                lblDiaSemana.Text = "";
+                lblHoraInicio.Text = "";
+                lblHoraFin.Text = "";
+                lblFeriado.Text = "";
+
+                // Limpiar tabla de detalle de horarios
+                gvDetalleHorario.DataSource = null;
+                gvDetalleHorario.DataBind();
+            }
         }
         protected void ddlHorarios_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -198,12 +332,12 @@ namespace SoftResWA.Views.Sedes
             {
                 int idHorario = int.Parse(ddlHorarios.SelectedValue);
 
-                if(idHorario > 0)
+                if (idHorario > 0)
                 {
-                    horarioAtencionDTO horarioObtenido= this.horarioAtencionBO.ObtenerPorID(idHorario);
+                    horarioAtencionDTO horarioObtenido = this.horarioAtencionBO.ObtenerPorID(idHorario);
                     lblDiaSemana.Text = horarioObtenido.diaSemana.ToString();
-                    lblHoraInicio.Text = horarioObtenido.horaInicio.ToString();
-                    lblHoraFin.Text = horarioObtenido.horaFin.ToString();
+                    lblHoraInicio.Text = horarioObtenido.horaInicioStr;
+                    lblHoraFin.Text = horarioObtenido.horaFinStr;
                     lblFeriado.Text = horarioObtenido.esFeriado ? "Sí" : "No";
                     string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
                     this.MostrarModal(hdnModoModal.Value, titulo);
@@ -247,7 +381,7 @@ namespace SoftResWA.Views.Sedes
                 {
                     sede.idSede = idSede;
                     sede.idSedeSpecified = true;
-                    bool exito = this.SedeBO.Eliminar(sede)>0;
+                    bool exito = this.SedeBO.Eliminar(sede) > 0;
                     MostrarResultado(exito, "Sede", "eliminar");
                     if (exito) btnBuscar_Click(sender, e);
                 }

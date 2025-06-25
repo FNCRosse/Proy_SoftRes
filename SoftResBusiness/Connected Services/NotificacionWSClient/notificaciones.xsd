@@ -82,16 +82,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="listar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:notificacionParametros" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:notificacionDTO" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="eliminar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:notificacionDTO" />
@@ -110,6 +100,16 @@
   <xs:complexType name="obtenerPorIdResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:notificacionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:notificacionParametros" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:notificacionDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="modificar">

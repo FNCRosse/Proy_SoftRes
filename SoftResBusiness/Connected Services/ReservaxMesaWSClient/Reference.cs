@@ -2003,6 +2003,18 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     public interface ReservaxMesa {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/InterruptedExceptio" +
+            "n", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ReservaxMesaWSClient.listarResponse listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/InterruptedExcept" +
@@ -2025,18 +2037,42 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaxMesaWSClient.eliminarRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarRequest {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/InterruptedExceptio" +
-            "n", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ReservaxMesaWSClient.listarResponse listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        public listarRequest() {
+        }
+        
+        public listarRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="listarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class listarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return;
+        
+        public listarResponse() {
+        }
+        
+        public listarResponse(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2111,42 +2147,6 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public listarRequest() {
-        }
-        
-        public listarRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return;
-        
-        public listarResponse() {
-        }
-        
-        public listarResponse(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ReservaxMesaChannel : SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa, System.ServiceModel.IClientChannel {
     }
@@ -2172,6 +2172,29 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         
         public ReservaxMesaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.ReservaxMesaWSClient.listarResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
+            return base.Channel.listar(request);
+        }
+        
+        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] listar(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.ReservaxMesaWSClient.listarResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
+            return base.Channel.listarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2218,29 +2241,6 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
             SoftResBusiness.ReservaxMesaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.eliminarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).eliminarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ReservaxMesaWSClient.listarResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
-            return base.Channel.listar(request);
-        }
-        
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] listar(int arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.ReservaxMesaWSClient.listarResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
-            return base.Channel.listarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(int arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listarAsync(inValue);
         }
     }
 }

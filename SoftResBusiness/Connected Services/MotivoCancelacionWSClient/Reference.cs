@@ -152,6 +152,32 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.listarResponse> listarAsync(SoftResBusiness.MotivoCancelacionWSClient.listarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorId/Fault/IOExcept" +
+            "ion", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorId/Fault/Interrup" +
+            "tedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/IOException" +
+            "", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/Interrupted" +
+            "Exception", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/InterruptedE" +
@@ -174,32 +200,6 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/insertarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.insertarResponse> insertarAsync(SoftResBusiness.MotivoCancelacionWSClient.insertarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/IOException" +
-            "", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/Interrupted" +
-            "Exception", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorId/Fault/IOExcept" +
-            "ion", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorId/Fault/Interrup" +
-            "tedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -226,6 +226,78 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         }
         
         public listarResponse(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public obtenerPorIdRequest() {
+        }
+        
+        public obtenerPorIdRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO @return;
+        
+        public obtenerPorIdResponse() {
+        }
+        
+        public obtenerPorIdResponse(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0;
+        
+        public modificarRequest() {
+        }
+        
+        public modificarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public modificarResponse() {
+        }
+        
+        public modificarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -302,78 +374,6 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0;
-        
-        public modificarRequest() {
-        }
-        
-        public modificarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public modificarResponse() {
-        }
-        
-        public modificarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public obtenerPorIdRequest() {
-        }
-        
-        public obtenerPorIdRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO @return;
-        
-        public obtenerPorIdResponse() {
-        }
-        
-        public obtenerPorIdResponse(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface MotivoCancelacionChannel : SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion, System.ServiceModel.IClientChannel {
     }
@@ -423,6 +423,52 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.obtenerPorId(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorId(request);
+        }
+        
+        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO obtenerPorId(int arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).obtenerPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.obtenerPorIdAsync(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).obtenerPorIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
+            return base.Channel.modificar(request);
+        }
+        
+        public int modificar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.MotivoCancelacionWSClient.modificarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
+            return base.Channel.modificarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.eliminar(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request) {
             return base.Channel.eliminar(request);
         }
@@ -466,52 +512,6 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
             SoftResBusiness.MotivoCancelacionWSClient.insertarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.insertarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).insertarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
-            return base.Channel.modificar(request);
-        }
-        
-        public int modificar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.MotivoCancelacionWSClient.modificarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
-            return base.Channel.modificarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.obtenerPorId(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorId(request);
-        }
-        
-        public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO obtenerPorId(int arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).obtenerPorId(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.obtenerPorIdAsync(SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorIdAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.obtenerPorIdRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).obtenerPorIdAsync(inValue);
         }
     }
 }

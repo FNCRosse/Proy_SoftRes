@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SoftResBusiness;
+using SoftResBusiness.ComentarioWSClient;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,6 +14,24 @@ namespace SoftResWA.Views.Cliente.Comentarios
 {
     public partial class Comentarios_Listado : System.Web.UI.Page
     {
+        private ComentarioBO comentarioBO;
+        private BindingList<comentariosDTO> listaComentarios;
+
+        public ComentarioBO ComentarioBO { get => comentarioBO; set => comentarioBO = value; }
+        public BindingList<comentariosDTO> ListaComentarios { get => listaComentarios; set => listaComentarios = value; }
+
+        public Comentarios_Listado()
+        {
+            this.comentarioBO = new ComentarioBO();
+            comentarioParametros cParametros = new comentarioParametros();
+            cParametros.idLocalSpecified = false;
+            cParametros.puntuacionSpecified = false;
+            cParametros.idReservaSpecified = false;
+            cParametros.estadoSpecified = true;
+            cParametros.estado = true;
+            this.listaComentarios = this.comentarioBO.Listar(cParametros);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,18 +50,7 @@ namespace SoftResWA.Views.Cliente.Comentarios
         }
         private void CargarComentariosDemo()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("USUARIO_CREACION");
-            dt.Columns.Add("FECHA_CREACION");
-            dt.Columns.Add("MENSAJE");
-            dt.Columns.Add("PUNTUACION", typeof(int));
-
-            dt.Rows.Add("CarmenLopez", DateTime.Now.AddDays(-1), "¡La comida fue espectacular! Volveré pronto.", 5);
-            dt.Rows.Add("Carlos94", DateTime.Now.AddDays(-2), "El ambiente fue acogedor, pero el servicio algo lento.", 3);
-            dt.Rows.Add("SofiaChung", DateTime.Now.AddDays(-5), "Los fideos estaban perfectos. Excelente atención.", 4);
-            dt.Rows.Add("JorgeTen", DateTime.Now.AddDays(-7), "Esperaba más variedad en el menú.", 2);
-
-            rptComentarios.DataSource = dt;
+            rptComentarios.DataSource = ListaComentarios;
             rptComentarios.DataBind();
         }
         protected void btnAgregarComentario_Click(object sender, EventArgs e)

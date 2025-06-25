@@ -12,12 +12,6 @@
         </div>
 
         <div class="card shadow-sm border-0 rounded-4 p-4 bg-light">
-            <div class="mb-3">
-                <label for="ddlReserva" class="form-label fw-bold">Selecciona tu Reserva</label>
-                <asp:DropDownList ID="ddlReserva" runat="server" CssClass="form-select" AppendDataBoundItems="true">
-                    <asp:ListItem Text="Seleccionar..." Value="" />
-                </asp:DropDownList>
-            </div>
 
             <div class="mb-3">
                 <label for="txtMensaje" class="form-label fw-bold">Tu Comentario</label>

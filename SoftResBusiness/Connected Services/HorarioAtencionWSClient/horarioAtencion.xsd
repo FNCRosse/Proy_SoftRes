@@ -20,7 +20,9 @@
       <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="horaFin" type="tns:localTime" />
+      <xs:element minOccurs="0" name="horaFinStr" type="xs:string" />
       <xs:element minOccurs="0" name="horaInicio" type="tns:localTime" />
+      <xs:element minOccurs="0" name="horaInicioStr" type="xs:string" />
       <xs:element minOccurs="0" name="idHorario" type="xs:int" />
       <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
       <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />

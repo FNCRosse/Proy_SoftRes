@@ -1879,6 +1879,30 @@ namespace SoftResBusiness.ComentarioWSClient {
     public interface Comentario {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Comentario/modificar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Comentario/modificar/Fault/InterruptedExcepti" +
+            "on", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ComentarioWSClient.modificarResponse modificar(SoftResBusiness.ComentarioWSClient.modificarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.ComentarioWSClient.modificarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorId/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorId/Fault/InterruptedExce" +
+            "ption", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/insertarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Comentario/insertar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Comentario/insertar/Fault/InterruptedExceptio" +
@@ -1912,30 +1936,78 @@ namespace SoftResBusiness.ComentarioWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/eliminarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ComentarioWSClient.eliminarRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarRequest {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorId/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorId/Fault/InterruptedExce" +
-            "ption", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.ComentarioWSClient.comentariosDTO arg0;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/obtenerPorIdResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request);
+        public modificarRequest() {
+        }
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Comentario/modificar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ComentarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Comentario/modificar/Fault/InterruptedExcepti" +
-            "on", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ComentarioWSClient.modificarResponse modificar(SoftResBusiness.ComentarioWSClient.modificarRequest request);
+        public modificarRequest(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarResponse {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Comentario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Comentario/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.ComentarioWSClient.modificarRequest request);
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public modificarResponse() {
+        }
+        
+        public modificarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        public obtenerPorIdRequest() {
+        }
+        
+        public obtenerPorIdRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerPorIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.ComentarioWSClient.comentariosDTO @return;
+        
+        public obtenerPorIdResponse() {
+        }
+        
+        public obtenerPorIdResponse(SoftResBusiness.ComentarioWSClient.comentariosDTO @return) {
+            this.@return = @return;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1998,9 +2070,7 @@ namespace SoftResBusiness.ComentarioWSClient {
         
         private bool puntuacionFieldSpecified;
         
-        private int numDocClienteField;
-        
-        private bool numDocClienteFieldSpecified;
+        private string numDocClienteField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -2100,25 +2170,13 @@ namespace SoftResBusiness.ComentarioWSClient {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public int numDocCliente {
+        public string numDocCliente {
             get {
                 return this.numDocClienteField;
             }
             set {
                 this.numDocClienteField = value;
                 this.RaisePropertyChanged("numDocCliente");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool numDocClienteSpecified {
-            get {
-                return this.numDocClienteFieldSpecified;
-            }
-            set {
-                this.numDocClienteFieldSpecified = value;
-                this.RaisePropertyChanged("numDocClienteSpecified");
             }
         }
         
@@ -2204,78 +2262,6 @@ namespace SoftResBusiness.ComentarioWSClient {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorId", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public obtenerPorIdRequest() {
-        }
-        
-        public obtenerPorIdRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerPorIdResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class obtenerPorIdResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ComentarioWSClient.comentariosDTO @return;
-        
-        public obtenerPorIdResponse() {
-        }
-        
-        public obtenerPorIdResponse(SoftResBusiness.ComentarioWSClient.comentariosDTO @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ComentarioWSClient.comentariosDTO arg0;
-        
-        public modificarRequest() {
-        }
-        
-        public modificarRequest(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public modificarResponse() {
-        }
-        
-        public modificarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ComentarioChannel : SoftResBusiness.ComentarioWSClient.Comentario, System.ServiceModel.IClientChannel {
     }
@@ -2301,6 +2287,52 @@ namespace SoftResBusiness.ComentarioWSClient {
         
         public ComentarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.ComentarioWSClient.modificarResponse SoftResBusiness.ComentarioWSClient.Comentario.modificar(SoftResBusiness.ComentarioWSClient.modificarRequest request) {
+            return base.Channel.modificar(request);
+        }
+        
+        public int modificar(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
+            SoftResBusiness.ComentarioWSClient.modificarRequest inValue = new SoftResBusiness.ComentarioWSClient.modificarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.ComentarioWSClient.modificarResponse retVal = ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).modificar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> SoftResBusiness.ComentarioWSClient.Comentario.modificarAsync(SoftResBusiness.ComentarioWSClient.modificarRequest request) {
+            return base.Channel.modificarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
+            SoftResBusiness.ComentarioWSClient.modificarRequest inValue = new SoftResBusiness.ComentarioWSClient.modificarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).modificarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse SoftResBusiness.ComentarioWSClient.Comentario.obtenerPorId(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorId(request);
+        }
+        
+        public SoftResBusiness.ComentarioWSClient.comentariosDTO obtenerPorId(int arg0) {
+            SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).obtenerPorId(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> SoftResBusiness.ComentarioWSClient.Comentario.obtenerPorIdAsync(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request) {
+            return base.Channel.obtenerPorIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
+            SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).obtenerPorIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2370,52 +2402,6 @@ namespace SoftResBusiness.ComentarioWSClient {
             SoftResBusiness.ComentarioWSClient.eliminarRequest inValue = new SoftResBusiness.ComentarioWSClient.eliminarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).eliminarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse SoftResBusiness.ComentarioWSClient.Comentario.obtenerPorId(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorId(request);
-        }
-        
-        public SoftResBusiness.ComentarioWSClient.comentariosDTO obtenerPorId(int arg0) {
-            SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).obtenerPorId(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> SoftResBusiness.ComentarioWSClient.Comentario.obtenerPorIdAsync(SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest request) {
-            return base.Channel.obtenerPorIdAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
-            SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.ComentarioWSClient.obtenerPorIdRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).obtenerPorIdAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ComentarioWSClient.modificarResponse SoftResBusiness.ComentarioWSClient.Comentario.modificar(SoftResBusiness.ComentarioWSClient.modificarRequest request) {
-            return base.Channel.modificar(request);
-        }
-        
-        public int modificar(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
-            SoftResBusiness.ComentarioWSClient.modificarRequest inValue = new SoftResBusiness.ComentarioWSClient.modificarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.ComentarioWSClient.modificarResponse retVal = ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).modificar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> SoftResBusiness.ComentarioWSClient.Comentario.modificarAsync(SoftResBusiness.ComentarioWSClient.modificarRequest request) {
-            return base.Channel.modificarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.ComentarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.ComentarioWSClient.comentariosDTO arg0) {
-            SoftResBusiness.ComentarioWSClient.modificarRequest inValue = new SoftResBusiness.ComentarioWSClient.modificarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.ComentarioWSClient.Comentario)(this)).modificarAsync(inValue);
         }
     }
 }
