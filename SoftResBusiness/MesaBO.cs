@@ -11,38 +11,42 @@ namespace SoftResBusiness
 {
     public class MesaBO
     {
-        private MesaClient mesaClienteWA;
+        private MesaClient mesaClienteSOAP;
 
         public MesaBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/mesas");
-            var binding = new BasicHttpBinding();
-            this.mesaClienteWA = new MesaClient(binding, endpoint);
+            // Usa la configuración definida en web.config (name="MesaPort")
+            this.mesaClienteSOAP = new MesaClient();
         }
 
         public int Insertar(mesaDTO mesa)
         {
-            return this.mesaClienteWA.insertar(mesa);
+            return this.mesaClienteSOAP.insertar(mesa);
         }
+
         public mesaDTO ObtenerPorID(int mesaID)
         {
-            return this.mesaClienteWA.obtenerPorId(mesaID);
+            return this.mesaClienteSOAP.obtenerPorId(mesaID);
         }
+
         public int Modificar(mesaDTO mesa)
         {
-            return this.mesaClienteWA.modificar(mesa);
+            return this.mesaClienteSOAP.modificar(mesa);
         }
 
         public int Eliminar(mesaDTO mesa)
         {
-            return this.mesaClienteWA.eliminar(mesa);
+            return this.mesaClienteSOAP.eliminar(mesa);
         }
 
         public BindingList<mesaDTO> Listar(mesaParametros parametros)
         {
-            mesaDTO[] lista = this.mesaClienteWA.listar(parametros);
+            var lista = this.mesaClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<mesaDTO>();   // lista vacía si el servicio devuelve null
+
             return new BindingList<mesaDTO>(lista);
         }
-
     }
 }

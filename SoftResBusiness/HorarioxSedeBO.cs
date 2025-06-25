@@ -11,28 +11,31 @@ namespace SoftResBusiness
 {
     public class HorarioxSedeBO
     {
-        private HorarioxSedeClient hxsClienteWA;
+        private HorarioxSedeClient hxsClienteSOAP;
 
         public HorarioxSedeBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/horarioxsede");
-            var binding = new BasicHttpBinding();
-            this.hxsClienteWA = new HorarioxSedeClient(binding, endpoint);
+            // Usa la configuración del web.config (name="HorarioxSedePort")
+            this.hxsClienteSOAP = new HorarioxSedeClient();
         }
 
         public int Insertar(horariosxSedesDTO horario)
         {
-            return this.hxsClienteWA.insertar(horario);
+            return this.hxsClienteSOAP.insertar(horario);
         }
 
         public int Eliminar(horariosxSedesDTO horario)
         {
-            return this.hxsClienteWA.eliminar(horario);
+            return this.hxsClienteSOAP.eliminar(horario);
         }
 
         public BindingList<horariosxSedesDTO> Listar(int idSede)
         {
-            horariosxSedesDTO[] lista = this.hxsClienteWA.listar(idSede);
+            var lista = this.hxsClienteSOAP.listar(idSede);
+
+            if (lista == null)
+                return new BindingList<horariosxSedesDTO>(); // retorna lista vacía sin error
+
             return new BindingList<horariosxSedesDTO>(lista);
         }
     }

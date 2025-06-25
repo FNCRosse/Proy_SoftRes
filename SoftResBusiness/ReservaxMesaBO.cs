@@ -11,29 +11,33 @@ namespace SoftResBusiness
 {
     public class ReservaxMesaBO
     {
-        private ReservaxMesaClient rxmClienteWA;
+        private ReservaxMesaClient rxmClienteSOAP;
 
         public ReservaxMesaBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/reservaxmesa");
-            var binding = new BasicHttpBinding();
-            this.rxmClienteWA = new ReservaxMesaClient(binding, endpoint);
+            // Usa la configuración definida en el web.config (name="ReservaxMesaPort")
+            this.rxmClienteSOAP = new ReservaxMesaClient();
         }
 
         public int Insertar(reservaxMesasDTO rxm)
         {
-            return this.rxmClienteWA.insertar(rxm);
+            return this.rxmClienteSOAP.insertar(rxm);
         }
 
         public int Eliminar(reservaxMesasDTO rxm)
         {
-            return this.rxmClienteWA.eliminar(rxm);
+            return this.rxmClienteSOAP.eliminar(rxm);
         }
 
         public BindingList<reservaxMesasDTO> Listar(int idReserva)
         {
-            reservaxMesasDTO[] lista = this.rxmClienteWA.listar(idReserva);
+            var lista = this.rxmClienteSOAP.listar(idReserva);
+
+            if (lista == null)
+                return new BindingList<reservaxMesasDTO>(); // lista vacía sin error
+
             return new BindingList<reservaxMesasDTO>(lista);
         }
     }
+
 }

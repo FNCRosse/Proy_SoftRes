@@ -11,37 +11,43 @@ namespace SoftResBusiness
 {
     public class HorarioAtencionBO
     {
-        private HorarioAtencionClient horarioClienteWA;
+        private HorarioAtencionClient horarioClienteSOAP;
 
         public HorarioAtencionBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/horarioAtencion");
-            var binding = new BasicHttpBinding();
-            this.horarioClienteWA = new HorarioAtencionClient(binding, endpoint);
+            // Usa la configuración del web.config (name="HorarioAtencionPort")
+            this.horarioClienteSOAP = new HorarioAtencionClient();
         }
 
         public int Insertar(horarioAtencionDTO horario)
         {
-            return this.horarioClienteWA.insertar(horario);
+            return this.horarioClienteSOAP.insertar(horario);
         }
+
         public horarioAtencionDTO ObtenerPorID(int horarioID)
         {
-            return this.horarioClienteWA.obtenerPorId(horarioID);
+            return this.horarioClienteSOAP.obtenerPorId(horarioID);
         }
+
         public int Modificar(horarioAtencionDTO horario)
         {
-            return this.horarioClienteWA.modificar(horario);
+            return this.horarioClienteSOAP.modificar(horario);
         }
 
         public int Eliminar(horarioAtencionDTO horario)
         {
-            return this.horarioClienteWA.eliminar(horario);
+            return this.horarioClienteSOAP.eliminar(horario);
         }
 
         public BindingList<horarioAtencionDTO> Listar(horarioParametros parametros)
         {
-            horarioAtencionDTO[] lista = this.horarioClienteWA.listar(parametros);
+            var lista = this.horarioClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<horarioAtencionDTO>(); // retorna lista vacía sin error
+
             return new BindingList<horarioAtencionDTO>(lista);
         }
     }
+
 }

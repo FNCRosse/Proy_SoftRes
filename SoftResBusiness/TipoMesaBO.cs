@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class TipoMesaBO
     {
-        private TipoMesaClient tMesaClienteWA;
+        private TipoMesaClient tMesaClienteSOAP;
 
         public TipoMesaBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/tipoMesa");
-            var binding = new BasicHttpBinding();
-            this.tMesaClienteWA = new TipoMesaClient(binding, endpoint);
+            // Usa la configuración declarada en web.config (name="TipoMesaPort")
+            this.tMesaClienteSOAP = new TipoMesaClient();
         }
 
-        public int Insertar(tipoMesaDTO sede)
+        public int Insertar(tipoMesaDTO tmesa)
         {
-            return this.tMesaClienteWA.insertar(sede);
-        }
-        public tipoMesaDTO ObtenerPorID(int sedeID)
-        {
-            return this.tMesaClienteWA.obtenerPorId(sedeID);
-        }
-        public int Modificar(tipoMesaDTO sede)
-        {
-            return this.tMesaClienteWA.modificar(sede);
+            return this.tMesaClienteSOAP.insertar(tmesa);
         }
 
-        public int Eliminar(tipoMesaDTO sede)
+        public tipoMesaDTO ObtenerPorID(int tmesaID)
         {
-            return this.tMesaClienteWA.eliminar(sede);
+            return this.tMesaClienteSOAP.obtenerPorId(tmesaID);
+        }
+
+        public int Modificar(tipoMesaDTO tmesa)
+        {
+            return this.tMesaClienteSOAP.modificar(tmesa);
+        }
+
+        public int Eliminar(tipoMesaDTO tmesa)
+        {
+            return this.tMesaClienteSOAP.eliminar(tmesa);
         }
 
         public BindingList<tipoMesaDTO> Listar()
         {
-            tipoMesaDTO[] lista = this.tMesaClienteWA.listar();
+            var lista = this.tMesaClienteSOAP.listar();
+
+            if (lista == null)
+                return new BindingList<tipoMesaDTO>();   // lista vacía si el servicio devuelve null
+
             return new BindingList<tipoMesaDTO>(lista);
         }
     }

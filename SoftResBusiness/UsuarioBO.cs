@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class UsuarioBO
     {
-        private UsuarioClient usuarioClienteWA;
+        private UsuarioClient usuarioClienteSOAP;
 
         public UsuarioBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/usuarios");
-            var binding = new BasicHttpBinding();
-            this.usuarioClienteWA = new UsuarioClient(binding, endpoint);
+            // Usa la configuración declarada en web/app.config (name="UsuarioPort")
+            this.usuarioClienteSOAP = new UsuarioClient();
         }
 
         public int Insertar(usuariosDTO usuario)
         {
-            return this.usuarioClienteWA.insertar(usuario);
+            return this.usuarioClienteSOAP.insertar(usuario);
         }
+
         public usuariosDTO ObtenerPorID(int usuarioID)
         {
-            return this.usuarioClienteWA.obtenerPorId(usuarioID);
+            return this.usuarioClienteSOAP.obtenerPorId(usuarioID);
         }
+
         public int Modificar(usuariosDTO usuario)
         {
-            return this.usuarioClienteWA.modificar(usuario);
+            return this.usuarioClienteSOAP.modificar(usuario);
         }
 
         public int Eliminar(usuariosDTO usuario)
         {
-            return this.usuarioClienteWA.eliminar(usuario);
+            return this.usuarioClienteSOAP.eliminar(usuario);
         }
 
         public BindingList<usuariosDTO> Listar(usuariosParametros parametros)
         {
-            usuariosDTO[] lista = this.usuarioClienteWA.listar(parametros);
+            var lista = this.usuarioClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<usuariosDTO>();   // lista vacía si el servicio devuelve null
+
             return new BindingList<usuariosDTO>(lista);
         }
     }

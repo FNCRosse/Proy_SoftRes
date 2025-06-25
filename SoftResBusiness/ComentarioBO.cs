@@ -12,39 +12,43 @@ namespace SoftResBusiness
 {
     public class ComentarioBO
     {
-        private ComentarioClient  comentClienteWA;
+        private ComentarioClient comentarioClienteSOAP;
 
         public ComentarioBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/comentarios");
-            var binding = new BasicHttpBinding();
-            this.comentClienteWA = new ComentarioClient(binding, endpoint);
+            // Usa la configuración del web.config (name="ComentarioPort")
+            this.comentarioClienteSOAP = new ComentarioClient();
         }
 
         public int Insertar(comentariosDTO coment)
         {
-            return this.comentClienteWA.insertar(coment);
+            return this.comentarioClienteSOAP.insertar(coment);
         }
+
         public comentariosDTO ObtenerPorID(int comentID)
         {
-            return this.comentClienteWA.obtenerPorId(comentID);
+            return this.comentarioClienteSOAP.obtenerPorId(comentID);
         }
+
         public int Modificar(comentariosDTO coment)
         {
-            return this.comentClienteWA.modificar(coment);
+            return this.comentarioClienteSOAP.modificar(coment);
         }
 
         public int Eliminar(comentariosDTO coment)
         {
-            return this.comentClienteWA.eliminar(coment);
+            return this.comentarioClienteSOAP.eliminar(coment);
         }
 
         public BindingList<comentariosDTO> Listar(comentarioParametros parametros)
         {
-            comentariosDTO[] lista = this.comentClienteWA.listar(parametros);
+            var lista = this.comentarioClienteSOAP.listar(parametros);
+
             if (lista == null)
-                return new BindingList<comentariosDTO>();
+                return new BindingList<comentariosDTO>(); // retorna lista vacía sin error
+
             return new BindingList<comentariosDTO>(lista);
         }
     }
+
 }

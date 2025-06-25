@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/tipoMesa?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listar">
-    <part name="parameters" element="tns:listar" />
+  <message name="modificar">
+    <part name="parameters" element="tns:modificar" />
   </message>
-  <message name="listarResponse">
-    <part name="parameters" element="tns:listarResponse" />
+  <message name="modificarResponse">
+    <part name="parameters" element="tns:modificarResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -23,17 +23,17 @@
   <message name="insertarResponse">
     <part name="parameters" element="tns:insertarResponse" />
   </message>
+  <message name="listar">
+    <part name="parameters" element="tns:listar" />
+  </message>
+  <message name="listarResponse">
+    <part name="parameters" element="tns:listarResponse" />
+  </message>
   <message name="eliminar">
     <part name="parameters" element="tns:eliminar" />
   </message>
   <message name="eliminarResponse">
     <part name="parameters" element="tns:eliminarResponse" />
-  </message>
-  <message name="modificar">
-    <part name="parameters" element="tns:modificar" />
-  </message>
-  <message name="modificarResponse">
-    <part name="parameters" element="tns:modificarResponse" />
   </message>
   <message name="obtenerPorId">
     <part name="parameters" element="tns:obtenerPorId" />
@@ -42,11 +42,11 @@
     <part name="parameters" element="tns:obtenerPorIdResponse" />
   </message>
   <portType name="TipoMesa">
-    <operation name="listar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listarRequest" message="tns:listar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listarResponse" message="tns:listarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="modificar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest" message="tns:modificar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse" message="tns:modificarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="insertar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/insertarRequest" message="tns:insertar" />
@@ -54,17 +54,17 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="listar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listarRequest" message="tns:listar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listarResponse" message="tns:listarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="eliminar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarRequest" message="tns:eliminar" />
       <output wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarResponse" message="tns:eliminarResponse" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="modificar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest" message="tns:modificar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse" message="tns:modificarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="obtenerPorId">
       <input wsam:Action="http://services.softres.pucp.edu.pe/TipoMesa/obtenerPorIdRequest" message="tns:obtenerPorId" />
@@ -75,7 +75,7 @@
   </portType>
   <binding name="TipoMesaPortBinding" type="tns:TipoMesa">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="listar">
+    <operation name="modificar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -105,7 +105,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="eliminar">
+    <operation name="listar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -120,7 +120,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="modificar">
+    <operation name="eliminar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

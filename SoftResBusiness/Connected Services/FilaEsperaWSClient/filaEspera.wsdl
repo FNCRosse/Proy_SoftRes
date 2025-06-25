@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/filaEspera?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="listar">
-    <part name="parameters" element="tns:listar" />
+  <message name="eliminar">
+    <part name="parameters" element="tns:eliminar" />
   </message>
-  <message name="listarResponse">
-    <part name="parameters" element="tns:listarResponse" />
+  <message name="eliminarResponse">
+    <part name="parameters" element="tns:eliminarResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,17 +17,17 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
+  <message name="listar">
+    <part name="parameters" element="tns:listar" />
+  </message>
+  <message name="listarResponse">
+    <part name="parameters" element="tns:listarResponse" />
+  </message>
   <message name="insertar">
     <part name="parameters" element="tns:insertar" />
   </message>
   <message name="insertarResponse">
     <part name="parameters" element="tns:insertarResponse" />
-  </message>
-  <message name="eliminar">
-    <part name="parameters" element="tns:eliminar" />
-  </message>
-  <message name="eliminarResponse">
-    <part name="parameters" element="tns:eliminarResponse" />
   </message>
   <message name="modificar">
     <part name="parameters" element="tns:modificar" />
@@ -42,6 +42,12 @@
     <part name="parameters" element="tns:obtenerPorIdResponse" />
   </message>
   <portType name="FilaEspera">
+    <operation name="eliminar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest" message="tns:eliminar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse" message="tns:eliminarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
     <operation name="listar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest" message="tns:listar" />
       <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse" message="tns:listarResponse" />
@@ -53,12 +59,6 @@
       <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse" message="tns:insertarResponse" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest" message="tns:eliminar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse" message="tns:eliminarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="modificar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest" message="tns:modificar" />
@@ -75,6 +75,21 @@
   </portType>
   <binding name="FilaEsperaPortBinding" type="tns:FilaEspera">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="eliminar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
     <operation name="listar">
       <soap:operation soapAction="" />
       <input>
@@ -91,21 +106,6 @@
       </fault>
     </operation>
     <operation name="insertar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

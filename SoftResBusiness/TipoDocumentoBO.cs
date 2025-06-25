@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class TipoDocumentoBO
     {
-        private TipoDocumentoClient tDocClienteWA;
+        private TipoDocumentoClient tDocClienteSOAP;
 
         public TipoDocumentoBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/tipoDocumento");
-            var binding = new BasicHttpBinding();
-            this.tDocClienteWA = new TipoDocumentoClient(binding, endpoint);
+            // Usa la configuración declarada en web.config (name="TipoDocumentoPort")
+            this.tDocClienteSOAP = new TipoDocumentoClient();
         }
 
         public int Insertar(tipoDocumentoDTO tdoc)
         {
-            return this.tDocClienteWA.insertar(tdoc);
+            return this.tDocClienteSOAP.insertar(tdoc);
         }
+
         public tipoDocumentoDTO ObtenerPorID(int tdocID)
         {
-            return this.tDocClienteWA.obtenerPorId(tdocID);
+            return this.tDocClienteSOAP.obtenerPorId(tdocID);
         }
+
         public int Modificar(tipoDocumentoDTO tdoc)
         {
-            return this.tDocClienteWA.modificar(tdoc);
+            return this.tDocClienteSOAP.modificar(tdoc);
         }
 
         public int Eliminar(tipoDocumentoDTO tdoc)
         {
-            return this.tDocClienteWA.eliminar(tdoc);
+            return this.tDocClienteSOAP.eliminar(tdoc);
         }
 
         public BindingList<tipoDocumentoDTO> Listar()
         {
-            tipoDocumentoDTO[] lista = this.tDocClienteWA.listar();
+            var lista = this.tDocClienteSOAP.listar();
+
+            if (lista == null)
+                return new BindingList<tipoDocumentoDTO>();   // lista vacía sin error
+
             return new BindingList<tipoDocumentoDTO>(lista);
         }
     }
