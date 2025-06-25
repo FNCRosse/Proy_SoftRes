@@ -122,16 +122,21 @@ namespace SoftResWA.Views.Horarios
                 horario = new horarioAtencionDTO();
             horario.diaSemana = (diaSemana)Enum.Parse(typeof(diaSemana), ddlDiaSemana.SelectedValue);
             horario.diaSemanaSpecified = true;
-            horario.horaInicioStr = txtHoraInicio.Text.Trim();
-            horario.horaFinStr = txtHoraFin.Text.Trim();
+            TimeSpan ts = TimeSpan.Parse(txtHoraInicio.Text.Trim()); 
+            horario.horaInicioStr = ts.ToString(@"hh\:mm\:ss");
+            TimeSpan tsFin = TimeSpan.Parse(txtHoraFin.Text.Trim());
+            horario.horaFinStr = tsFin.ToString(@"hh\:mm\:ss");
             horario.esFeriado = rbFeriadoSi.Checked;
             horario.esFeriadoSpecified = true;
             horario.estado = true;
             horario.estadoSpecified = true;
             return horario;
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+            dgvHorario.RowDataBound += dgv_RowDataBound;
             if (!IsPostBack)
             {
                 var listaAdaptada = this.ConfigurarListado(ListadoHorarios);
