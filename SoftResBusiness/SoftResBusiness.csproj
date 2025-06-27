@@ -445,6 +445,9 @@
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.listarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.loginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.modificarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

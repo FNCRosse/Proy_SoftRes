@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class FilaEsperaBO
     {
-        private FilaEsperaClient filaEsperaClienteWA;
+        private FilaEsperaClient filaEsperaClienteSOAP;
 
         public FilaEsperaBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/filaEspera");
-            var binding = new BasicHttpBinding();
-            this.filaEsperaClienteWA = new FilaEsperaClient(binding, endpoint);
+            // Usa la configuración del web.config (name="FilaEsperaPort")
+            this.filaEsperaClienteSOAP = new FilaEsperaClient();
         }
 
         public int Insertar(filaEsperaDTO filaespera)
         {
-            return this.filaEsperaClienteWA.insertar(filaespera);
+            return this.filaEsperaClienteSOAP.insertar(filaespera);
         }
+
         public filaEsperaDTO ObtenerPorID(int filaesperaID)
         {
-            return this.filaEsperaClienteWA.obtenerPorId(filaesperaID);
+            return this.filaEsperaClienteSOAP.obtenerPorId(filaesperaID);
         }
+
         public int Modificar(filaEsperaDTO filaespera)
         {
-            return this.filaEsperaClienteWA.modificar(filaespera);
+            return this.filaEsperaClienteSOAP.modificar(filaespera);
         }
 
         public int Eliminar(filaEsperaDTO filaespera)
         {
-            return this.filaEsperaClienteWA.eliminar(filaespera);
+            return this.filaEsperaClienteSOAP.eliminar(filaespera);
         }
 
         public BindingList<filaEsperaDTO> Listar(filaEsperaParametros parametros)
         {
-            filaEsperaDTO[] lista = this.filaEsperaClienteWA.listar(parametros);
+            var lista = this.filaEsperaClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<filaEsperaDTO>(); // retorna lista vacía sin error
+
             return new BindingList<filaEsperaDTO>(lista);
         }
     }

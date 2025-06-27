@@ -17,12 +17,6 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="modificar">
-    <part name="parameters" element="tns:modificar" />
-  </message>
-  <message name="modificarResponse">
-    <part name="parameters" element="tns:modificarResponse" />
-  </message>
   <message name="insertar">
     <part name="parameters" element="tns:insertar" />
   </message>
@@ -41,18 +35,18 @@
   <message name="listarResponse">
     <part name="parameters" element="tns:listarResponse" />
   </message>
+  <message name="modificar">
+    <part name="parameters" element="tns:modificar" />
+  </message>
+  <message name="modificarResponse">
+    <part name="parameters" element="tns:modificarResponse" />
+  </message>
   <portType name="Notificacion">
     <operation name="eliminar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest" message="tns:eliminar" />
       <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarResponse" message="tns:eliminarResponse" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="modificar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificarRequest" message="tns:modificar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificarResponse" message="tns:modificarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="insertar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/insertarRequest" message="tns:insertar" />
@@ -72,25 +66,16 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="modificar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificarRequest" message="tns:modificar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificarResponse" message="tns:modificarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Notificacion/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
   </portType>
   <binding name="NotificacionPortBinding" type="tns:Notificacion">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="eliminar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="modificar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -136,6 +121,21 @@
       </fault>
     </operation>
     <operation name="listar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="modificar">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

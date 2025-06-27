@@ -11,37 +11,43 @@ namespace SoftResBusiness
 {
     public class ReservaBO
     {
-        private ReservaClient reservaClienteWA;
+        private ReservaClient reservaClienteSOAP;
 
         public ReservaBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/reservas");
-            var binding = new BasicHttpBinding();
-            this.reservaClienteWA = new ReservaClient(binding, endpoint);
+            // Usa la configuración definida en web.config (name="ReservaPort")
+            this.reservaClienteSOAP = new ReservaClient();
         }
 
         public int Insertar(reservaDTO reserva)
         {
-            return this.reservaClienteWA.insertar(reserva);
+            return this.reservaClienteSOAP.insertar(reserva);
         }
+
         public reservaDTO ObtenerPorID(int reservaID)
         {
-            return this.reservaClienteWA.obtenerPorId(reservaID);
+            return this.reservaClienteSOAP.obtenerPorId(reservaID);
         }
+
         public int Modificar(reservaDTO reserva)
         {
-            return this.reservaClienteWA.modificar(reserva);
+            return this.reservaClienteSOAP.modificar(reserva);
         }
 
         public int Eliminar(reservaDTO reserva)
         {
-            return this.reservaClienteWA.eliminar(reserva);
+            return this.reservaClienteSOAP.eliminar(reserva);
         }
 
         public BindingList<reservaDTO> Listar(reservaParametros parametros)
         {
-            reservaDTO[] lista = this.reservaClienteWA.listar(parametros);
+            var lista = this.reservaClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<reservaDTO>();   // devuelve lista vacía si el servicio retorna null
+
             return new BindingList<reservaDTO>(lista);
         }
     }
+
 }

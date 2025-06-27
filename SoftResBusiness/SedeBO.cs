@@ -11,37 +11,43 @@ namespace SoftResBusiness
 {
     public class SedeBO
     {
-        private SedeClient sedesClienteWA;
+        private SedeClient sedeClienteSOAP;
 
         public SedeBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/sedes");
-            var binding = new BasicHttpBinding();
-            this.sedesClienteWA = new SedeClient(binding, endpoint);
+            // Usa la configuración del web.config (name="SedePort")
+            this.sedeClienteSOAP = new SedeClient();
         }
 
         public int Insertar(sedeDTO sede)
         {
-            return this.sedesClienteWA.insertar(sede);
+            return this.sedeClienteSOAP.insertar(sede);
         }
+
         public sedeDTO ObtenerPorID(int sedeID)
         {
-            return this.sedesClienteWA.obtenerPorId(sedeID);
+            return this.sedeClienteSOAP.obtenerPorId(sedeID);
         }
+
         public int Modificar(sedeDTO sede)
         {
-            return this.sedesClienteWA.modificar(sede);
+            return this.sedeClienteSOAP.modificar(sede);
         }
 
         public int Eliminar(sedeDTO sede)
         {
-            return this.sedesClienteWA.eliminar(sede);
+            return this.sedeClienteSOAP.eliminar(sede);
         }
 
         public BindingList<sedeDTO> Listar(sedeParametros parametros)
         {
-            sedeDTO[] lista = this.sedesClienteWA.listar(parametros);
+            var lista = this.sedeClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<sedeDTO>(); // retorna una lista vacía sin error
+
             return new BindingList<sedeDTO>(lista);
         }
     }
+
 }

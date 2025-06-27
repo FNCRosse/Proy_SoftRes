@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class RolBO
     {
-        private RolClient rolClienteWA;
+        private RolClient rolClienteSOAP;
 
         public RolBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/rol");
-            var binding = new BasicHttpBinding();
-            this.rolClienteWA = new RolClient(binding, endpoint);
+            // Usa la configuración declarada en web.config (name="RolPort")
+            this.rolClienteSOAP = new RolClient();
         }
 
         public int Insertar(rolDTO rol)
         {
-            return this.rolClienteWA.insertar(rol);
+            return this.rolClienteSOAP.insertar(rol);
         }
+
         public rolDTO ObtenerPorID(int rolID)
         {
-            return this.rolClienteWA.obtenerPorId(rolID);
+            return this.rolClienteSOAP.obtenerPorId(rolID);
         }
+
         public int Modificar(rolDTO rol)
         {
-            return this.rolClienteWA.modificar(rol);
+            return this.rolClienteSOAP.modificar(rol);
         }
 
         public int Eliminar(rolDTO rol)
         {
-            return this.rolClienteWA.eliminar(rol);
+            return this.rolClienteSOAP.eliminar(rol);
         }
 
         public BindingList<rolDTO> Listar()
         {
-            rolDTO[] lista = this.rolClienteWA.listar();
+            var lista = this.rolClienteSOAP.listar();
+
+            if (lista == null)
+                return new BindingList<rolDTO>();   // retorna lista vacía sin error
+
             return new BindingList<rolDTO>(lista);
         }
     }

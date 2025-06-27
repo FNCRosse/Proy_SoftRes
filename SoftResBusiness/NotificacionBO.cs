@@ -11,37 +11,43 @@ namespace SoftResBusiness
 {
     public class NotificacionBO
     {
-        private NotificacionClient notificacionClienteWA;
+        private NotificacionClient notificacionClienteSOAP;
 
         public NotificacionBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/notificaciones");
-            var binding = new BasicHttpBinding();
-            this.notificacionClienteWA = new NotificacionClient(binding, endpoint);
+            // Usa la configuración definida en el web.config (name="NotificacionPort")
+            this.notificacionClienteSOAP = new NotificacionClient();
         }
 
         public int Insertar(notificacionDTO notificacion)
         {
-            return this.notificacionClienteWA.insertar(notificacion);
+            return this.notificacionClienteSOAP.insertar(notificacion);
         }
+
         public notificacionDTO ObtenerPorID(int notificacionID)
         {
-            return this.notificacionClienteWA.obtenerPorId(notificacionID);
+            return this.notificacionClienteSOAP.obtenerPorId(notificacionID);
         }
+
         public int Modificar(notificacionDTO notificacion)
         {
-            return this.notificacionClienteWA.modificar(notificacion);
+            return this.notificacionClienteSOAP.modificar(notificacion);
         }
 
         public int Eliminar(notificacionDTO notificacion)
         {
-            return this.notificacionClienteWA.eliminar(notificacion);
+            return this.notificacionClienteSOAP.eliminar(notificacion);
         }
 
         public BindingList<notificacionDTO> Listar(notificacionParametros parametros)
         {
-            notificacionDTO[] lista = this.notificacionClienteWA.listar(parametros);
+            var lista = this.notificacionClienteSOAP.listar(parametros);
+
+            if (lista == null)
+                return new BindingList<notificacionDTO>();  // lista vacía sin error
+
             return new BindingList<notificacionDTO>(lista);
         }
     }
+
 }

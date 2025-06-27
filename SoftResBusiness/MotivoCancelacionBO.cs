@@ -11,36 +11,41 @@ namespace SoftResBusiness
 {
     public class MotivoCancelacionBO
     {
-        private MotivoCancelacionClient mCancelacionClienteWA;
+        private MotivoCancelacionClient motivoCancelacionClienteSOAP;
 
         public MotivoCancelacionBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/motivoCancelacion");
-            var binding = new BasicHttpBinding();
-            this.mCancelacionClienteWA = new MotivoCancelacionClient(binding, endpoint);
+            // Usa la configuración del web.config (name="MotivoCancelacionPort")
+            this.motivoCancelacionClienteSOAP = new MotivoCancelacionClient();
         }
 
         public int Insertar(motivosCancelacionDTO mCancelacion)
         {
-            return this.mCancelacionClienteWA.insertar(mCancelacion);
+            return this.motivoCancelacionClienteSOAP.insertar(mCancelacion);
         }
+
         public motivosCancelacionDTO ObtenerPorID(int mCancelacionID)
         {
-            return this.mCancelacionClienteWA.obtenerPorId(mCancelacionID);
+            return this.motivoCancelacionClienteSOAP.obtenerPorId(mCancelacionID);
         }
+
         public int Modificar(motivosCancelacionDTO mCancelacion)
         {
-            return this.mCancelacionClienteWA.modificar(mCancelacion);
+            return this.motivoCancelacionClienteSOAP.modificar(mCancelacion);
         }
 
         public int Eliminar(motivosCancelacionDTO mCancelacion)
         {
-            return this.mCancelacionClienteWA.eliminar(mCancelacion);
+            return this.motivoCancelacionClienteSOAP.eliminar(mCancelacion);
         }
 
         public BindingList<motivosCancelacionDTO> Listar()
         {
-            motivosCancelacionDTO[] lista = this.mCancelacionClienteWA.listar();
+            var lista = this.motivoCancelacionClienteSOAP.listar();
+
+            if (lista == null)
+                return new BindingList<motivosCancelacionDTO>(); // lista vacía sin error
+
             return new BindingList<motivosCancelacionDTO>(lista);
         }
     }

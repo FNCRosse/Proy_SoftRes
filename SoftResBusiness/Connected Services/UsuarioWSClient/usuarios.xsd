@@ -8,6 +8,8 @@
   <xs:element name="insertarResponse" type="tns:insertarResponse" />
   <xs:element name="listar" type="tns:listar" />
   <xs:element name="listarResponse" type="tns:listarResponse" />
+  <xs:element name="login" type="tns:login" />
+  <xs:element name="loginResponse" type="tns:loginResponse" />
   <xs:element name="modificar" type="tns:modificar" />
   <xs:element name="modificarResponse" type="tns:modificarResponse" />
   <xs:element name="obtenerPorId" type="tns:obtenerPorId" />
@@ -73,16 +75,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="modificar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="modificarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="obtenerPorId">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
@@ -93,6 +85,16 @@
       <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="modificar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="eliminar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
@@ -101,6 +103,22 @@
   <xs:complexType name="eliminarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:credencialesDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="credencialesDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrasenha" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listar">

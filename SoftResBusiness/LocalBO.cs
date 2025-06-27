@@ -11,40 +11,41 @@ namespace SoftResBusiness
 {
     public class LocalBO
     {
-        private LocalClient LocalClienteWA;
+        private LocalClient localClienteSOAP;
 
         public LocalBO()
         {
-            var endpoint = new EndpointAddress("http://localhost:8080/SoftResWSCliente/locales");
-            var binding = new BasicHttpBinding();
-            this.LocalClienteWA = new LocalClient(binding, endpoint);
+            // Usa la configuración del web.config (name="LocalPort")
+            this.localClienteSOAP = new LocalClient();
         }
 
         public int Insertar(localDTO local)
         {
-            return this.LocalClienteWA.insertar(local);
+            return this.localClienteSOAP.insertar(local);
         }
+
         public localDTO ObtenerPorID(int localID)
         {
-            return this.LocalClienteWA.obtenerPorId(localID);
+            return this.localClienteSOAP.obtenerPorId(localID);
         }
+
         public int Modificar(localDTO local)
         {
-            return this.LocalClienteWA.modificar(local);
+            return this.localClienteSOAP.modificar(local);
         }
 
         public int Eliminar(localDTO local)
         {
-            return this.LocalClienteWA.eliminar(local);
+            return this.localClienteSOAP.eliminar(local);
         }
 
         public BindingList<localDTO> Listar(localParametros parametros)
         {
 
-            localDTO[] lista = this.LocalClienteWA.listar(parametros);
+            localDTO[] lista = this.localClienteSOAP.listar(parametros);
 
             if (lista == null)
-                return new BindingList<localDTO>(); 
+                return new BindingList<localDTO>(); // retorna una lista vacía sin error
 
             return new BindingList<localDTO>(lista);
         }

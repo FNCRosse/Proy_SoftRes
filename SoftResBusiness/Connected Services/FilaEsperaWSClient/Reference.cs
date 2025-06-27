@@ -647,6 +647,138 @@ namespace SoftResBusiness.FilaEsperaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string messageField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+                this.RaisePropertyChanged("message");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="FilaEsperaWSClient.FilaEspera")]
+    public interface FilaEspera {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedExceptio" +
+            "n", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.FilaEsperaWSClient.eliminarResponse eliminar(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.FilaEsperaWSClient.listarResponse listar(SoftResBusiness.FilaEsperaWSClient.listarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.listarResponse> listarAsync(SoftResBusiness.FilaEsperaWSClient.listarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/InterruptedExceptio" +
+            "n", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.FilaEsperaWSClient.insertarResponse insertar(SoftResBusiness.FilaEsperaWSClient.insertarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.insertarResponse> insertarAsync(SoftResBusiness.FilaEsperaWSClient.insertarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/InterruptedExcepti" +
+            "on", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.FilaEsperaWSClient.modificarResponse modificar(SoftResBusiness.FilaEsperaWSClient.modificarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.modificarResponse> modificarAsync(SoftResBusiness.FilaEsperaWSClient.modificarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/InterruptedExce" +
+            "ption", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.FilaEsperaWSClient.obtenerPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.FilaEsperaWSClient.obtenerPorIdRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0;
+        
+        public eliminarRequest() {
+        }
+        
+        public eliminarRequest(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public eliminarResponse() {
+        }
+        
+        public eliminarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
     public partial class filaEsperaParametros : object, System.ComponentModel.INotifyPropertyChanged {
         
         private estadoFilaEspera estadoField;
@@ -743,102 +875,6 @@ namespace SoftResBusiness.FilaEsperaWSClient {
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string messageField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="FilaEsperaWSClient.FilaEspera")]
-    public interface FilaEspera {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.FilaEsperaWSClient.listarResponse listar(SoftResBusiness.FilaEsperaWSClient.listarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.listarResponse> listarAsync(SoftResBusiness.FilaEsperaWSClient.listarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/InterruptedExceptio" +
-            "n", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.FilaEsperaWSClient.insertarResponse insertar(SoftResBusiness.FilaEsperaWSClient.insertarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.insertarResponse> insertarAsync(SoftResBusiness.FilaEsperaWSClient.insertarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedExceptio" +
-            "n", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.FilaEsperaWSClient.eliminarResponse eliminar(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/InterruptedExcepti" +
-            "on", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.FilaEsperaWSClient.modificarResponse modificar(SoftResBusiness.FilaEsperaWSClient.modificarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.modificarResponse> modificarAsync(SoftResBusiness.FilaEsperaWSClient.modificarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.FilaEsperaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/InterruptedExce" +
-            "ption", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.FilaEsperaWSClient.obtenerPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.FilaEsperaWSClient.obtenerPorIdRequest request);
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -907,42 +943,6 @@ namespace SoftResBusiness.FilaEsperaWSClient {
         }
         
         public insertarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0;
-        
-        public eliminarRequest() {
-        }
-        
-        public eliminarRequest(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public eliminarResponse() {
-        }
-        
-        public eliminarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -1047,6 +1047,29 @@ namespace SoftResBusiness.FilaEsperaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.FilaEsperaWSClient.eliminarResponse SoftResBusiness.FilaEsperaWSClient.FilaEspera.eliminar(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
+        }
+        
+        public int eliminar(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
+            SoftResBusiness.FilaEsperaWSClient.eliminarRequest inValue = new SoftResBusiness.FilaEsperaWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.FilaEsperaWSClient.eliminarResponse retVal = ((SoftResBusiness.FilaEsperaWSClient.FilaEspera)(this)).eliminar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> SoftResBusiness.FilaEsperaWSClient.FilaEspera.eliminarAsync(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
+            SoftResBusiness.FilaEsperaWSClient.eliminarRequest inValue = new SoftResBusiness.FilaEsperaWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.FilaEsperaWSClient.FilaEspera)(this)).eliminarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SoftResBusiness.FilaEsperaWSClient.listarResponse SoftResBusiness.FilaEsperaWSClient.FilaEspera.listar(SoftResBusiness.FilaEsperaWSClient.listarRequest request) {
             return base.Channel.listar(request);
         }
@@ -1090,29 +1113,6 @@ namespace SoftResBusiness.FilaEsperaWSClient {
             SoftResBusiness.FilaEsperaWSClient.insertarRequest inValue = new SoftResBusiness.FilaEsperaWSClient.insertarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.FilaEsperaWSClient.FilaEspera)(this)).insertarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.FilaEsperaWSClient.eliminarResponse SoftResBusiness.FilaEsperaWSClient.FilaEspera.eliminar(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
-        }
-        
-        public int eliminar(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
-            SoftResBusiness.FilaEsperaWSClient.eliminarRequest inValue = new SoftResBusiness.FilaEsperaWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.FilaEsperaWSClient.eliminarResponse retVal = ((SoftResBusiness.FilaEsperaWSClient.FilaEspera)(this)).eliminar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> SoftResBusiness.FilaEsperaWSClient.FilaEspera.eliminarAsync(SoftResBusiness.FilaEsperaWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.FilaEsperaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO arg0) {
-            SoftResBusiness.FilaEsperaWSClient.eliminarRequest inValue = new SoftResBusiness.FilaEsperaWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.FilaEsperaWSClient.FilaEspera)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
