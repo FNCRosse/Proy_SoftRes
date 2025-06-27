@@ -49,10 +49,12 @@
   </xs:complexType>
   <xs:complexType name="usuariosParametros">
     <xs:sequence>
+      <xs:element minOccurs="0" name="esCliente" type="xs:boolean" />
       <xs:element minOccurs="0" name="estado" type="xs:boolean" />
       <xs:element minOccurs="0" name="idTipoDocumento" type="xs:int" />
       <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="nombreCompleto" type="xs:string" />
+      <xs:element minOccurs="0" name="numDocumento" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="insertar">
@@ -75,16 +77,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="obtenerPorId">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIdResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="modificar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
@@ -93,6 +85,16 @@
   <xs:complexType name="modificarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminar">
