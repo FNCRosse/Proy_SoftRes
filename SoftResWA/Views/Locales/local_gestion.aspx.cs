@@ -24,6 +24,7 @@ namespace SoftResWA.Views.Locales
         public SedeBO SedeBO { get => sedeBO; set => sedeBO = value; }
         public BindingList<SoftResBusiness.SedeWSClient.sedeDTO> ListaOpSedes { get => listaOpSedes; set => listaOpSedes = value; }
 
+        //CONSTRUCTOR
         public LocalGestion()
         {
             this.localBO = new LocalBO();
@@ -40,6 +41,7 @@ namespace SoftResWA.Views.Locales
             this.listaOpSedes = this.sedeBO.Listar(parametrosSede);
         }
 
+        //CONFIGURACION VISUAL DE LISTADOS
         protected List<object> ConfigurarListado(BindingList<localDTO> lista)
         {
             var listaAdaptada = lista.Select(l => new
@@ -59,6 +61,8 @@ namespace SoftResWA.Views.Locales
             }).ToList<Object>();
             return listaAdaptada;
         }
+
+        //FUNCIONES GENERALES
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
             ddl.DataSource = dataSource;
@@ -79,21 +83,6 @@ namespace SoftResWA.Views.Locales
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
         }
-        private localDTO ConstruirLocalDTO(localDTO local)
-        {
-            if (local == null)
-                local = new SoftResBusiness.LocalWSClient.localDTO();
-            var sede = new SoftResBusiness.LocalWSClient.sedeDTO();
-            sede.idSede = int.Parse(ddlSedeOp.SelectedValue);
-            sede.idSedeSpecified = true;
-            local.sede = sede;
-            local.nombre = txtNombreLocal.Text;
-            local.direccion = txtDireccionLocal.Text;
-            local.telefono = txtTelefonoLocal.Text;
-            local.estado = true;
-            local.estadoSpecified = true;
-            return local;
-        }
         private void MostrarResultado(bool exito, string entidad, string modo)
         {
             string accion = (modo == "modificar") ? "modificado" :
@@ -108,9 +97,9 @@ namespace SoftResWA.Views.Locales
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} se completó correctamente.', '{tipo}');", true);
         }
-        //Esta funcion es para que se oculte los botones de modificar y cancelar cuando la entidad esta inactiva
         protected void dgvLocal_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            //Esta funcion es para que se oculte los botones de modificar y cancelar cuando la entidad esta inactiva
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var dataItem = e.Row.DataItem;
@@ -137,7 +126,25 @@ namespace SoftResWA.Views.Locales
                 }
             }
         }
-
+        
+        //FUNCIONES PARA LOCAL
+        private localDTO ConstruirLocalDTO(localDTO local)
+        {
+            if (local == null)
+                local = new SoftResBusiness.LocalWSClient.localDTO();
+            var sede = new SoftResBusiness.LocalWSClient.sedeDTO();
+            sede.idSede = int.Parse(ddlSedeOp.SelectedValue);
+            sede.idSedeSpecified = true;
+            local.sede = sede;
+            local.nombre = txtNombreLocal.Text;
+            local.direccion = txtDireccionLocal.Text;
+            local.telefono = txtTelefonoLocal.Text;
+            local.estado = true;
+            local.estadoSpecified = true;
+            return local;
+        }
+       
+        //PAGE_LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
@@ -155,6 +162,8 @@ namespace SoftResWA.Views.Locales
                 this.CargarDropDownList(ddlSedeOp, ListaOpSedes, "nombre", "idSede", "Seleccione Sede");
             }
         }
+
+        //BOTONES
         protected void btnGuardarLocal_Click(object sender, EventArgs e)
         {
             string modo = hdnModoModal.Value;

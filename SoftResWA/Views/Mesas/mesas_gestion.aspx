@@ -9,7 +9,7 @@
             <i class="fas fa-chair me-2"></i>Mantenimiento de Mesas
         </h1>
     </div>
-    
+
     <!-- Filtros para búsqueda -->
     <div class="container-fluid mb-4 ps-4">
         <div class="row gx-3">
@@ -18,7 +18,7 @@
                 <label for="txtNumeroMesaFiltro" class="form-label">Número de mesa</label>
                 <asp:TextBox ID="txtNumeroMesaFiltro" runat="server" CssClass="form-control" placeholder="Ej. M-101" />
             </div>
-            <!-- Tipo de Mesa -->
+            <!-- Ubicacion de Mesa -->
             <div class="col-auto">
                 <label for="ddlTipoMesaFiltro" class="form-label">Tipo de Mesa</label>
                 <asp:DropDownList ID="ddlTipoMesaFiltro" runat="server" CssClass="form-select">
@@ -38,16 +38,15 @@
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-danger me-2" 
-                    OnClick="btnBuscar_Click">
-                    <i class="fas fa-search me-1"></i>
-                </asp:Button>
-                <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" 
-                    CssClass="btn shadow-sm"
-                    style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;"
-                    OnClick="btnNuevo_Click">
-                    <i class="fas fa-plus me-2"></i>
-                </asp:Button>
+                <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2"
+                    Text="Buscar"
+                    CausesValidation="false"
+                    OnClick="btnBuscar_Click" />
+                <asp:Button ID="btnNuevo" runat="server" CssClass="btn shadow-sm"
+                    Text="Nuevo"
+                    CausesValidation="false"
+                    OnClick="btnNuevo_Click"
+                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
             </div>
         </div>
     </div>
@@ -57,30 +56,29 @@
         <asp:GridView ID="dgvMesas" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
+                <asp:TemplateField HeaderText="Opciones">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            Text="M"
+                            CommandArgument='<%# Eval("idMesa") %>'
+                            OnCommand="btnModificar_Command" />
+
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm btn-danger"
+                            Text="C" />
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField HeaderText="ID" DataField="idMesa" />
                 <asp:BoundField HeaderText="Número Mesa" DataField="numeroMesa" />
                 <asp:BoundField HeaderText="Capacidad" DataField="capacidad" />
                 <asp:BoundField HeaderText="Estado" DataField="estado" />
                 <asp:BoundField HeaderText="Pos X" DataField="x" />
                 <asp:BoundField HeaderText="Pos Y" DataField="y" />
-                <asp:BoundField HeaderText="Tipo Mesa" DataField="tipoMesa" />
-                <asp:BoundField HeaderText="Local" DataField="local" />
-                <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" DataFormatString="{0:dd/MM/yyyy}" />
+                <asp:BoundField HeaderText="Tipo Mesa" DataField="ubicacionMesa" />
+                <asp:BoundField HeaderText="Local" DataField="local_nombre" />
+                <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" />
                 <asp:BoundField HeaderText="Usuario Creación" DataField="usuarioCreacion" />
-                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" DataFormatString="{0:dd/MM/yyyy}" />
+                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" />
                 <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
-                <asp:TemplateField HeaderText="Acciones">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="btnModificar" runat="server" CssClass="btn btn-warning btn-sm me-1"
-                            CommandName="Modificar" CommandArgument='<%# Eval("idMesa") %>' 
-                            OnCommand="btnModificar_Command">
-                            <i class="fas fa-edit"></i>
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-danger btn-sm">
-                            <i class="fas fa-trash"></i>
-                        </asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </div>
@@ -89,7 +87,7 @@
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <asp:HiddenField ID="hdnIdMesa" runat="server" />
     <asp:HiddenField ID="hdnIdEliminar" runat="server" />
-    <asp:Button ID="btnEliminarMesa" runat="server" style="display:none;" OnClick="btnEliminarMesa_Click" />
+    <asp:Button ID="btnEliminarMesa" runat="server" Style="display: none;" OnClick="btnEliminar_Click" />
 
     <!-- Modal Registrar/Modificar Mesa -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
@@ -112,8 +110,8 @@
                             <div class="mb-2">
                                 <label for="txtNumeroMesa" class="form-label">Número de mesa <span class="text-danger">*</span></label>
                                 <asp:TextBox ID="txtNumeroMesa" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvNumeroMesa" runat="server" 
-                                    ControlToValidate="txtNumeroMesa" ErrorMessage="Número de mesa es requerido" 
+                                <asp:RequiredFieldValidator ID="rfvNumeroMesa" runat="server"
+                                    ControlToValidate="txtNumeroMesa" ErrorMessage="Número de mesa es requerido"
                                     CssClass="text-danger" Display="Dynamic" />
                             </div>
 
@@ -121,15 +119,23 @@
                                 <div class="col-md-6">
                                     <label for="txtPosX" class="form-label">Posición X <span class="text-danger">*</span></label>
                                     <asp:TextBox ID="txtPosX" runat="server" CssClass="form-control" TextMode="Number" />
-                                    <asp:RequiredFieldValidator ID="rfvPosX" runat="server" 
-                                        ControlToValidate="txtPosX" ErrorMessage="Posición X es requerida" 
+                                    <asp:RequiredFieldValidator ID="rfvPosX" runat="server"
+                                        ControlToValidate="txtPosX" ErrorMessage="Posición X es requerida"
+                                        CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosX" runat="server"
+                                        ControlToValidate="txtPosX" MinimumValue="0" MaximumValue="999999"
+                                        Type="Double" ErrorMessage="El X no puede ser negativo"
                                         CssClass="text-danger" Display="Dynamic" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtPosY" class="form-label">Posición Y <span class="text-danger">*</span></label>
                                     <asp:TextBox ID="txtPosY" runat="server" CssClass="form-control" TextMode="Number" />
-                                    <asp:RequiredFieldValidator ID="rfvPosY" runat="server" 
-                                        ControlToValidate="txtPosY" ErrorMessage="Posición Y es requerida" 
+                                    <asp:RequiredFieldValidator ID="rfvPosY" runat="server"
+                                        ControlToValidate="txtPosY" ErrorMessage="Posición Y es requerida"
+                                        CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosY" runat="server"
+                                        ControlToValidate="txtPosY" MinimumValue="0" MaximumValue="999999"
+                                        Type="Double" ErrorMessage="El Y no puede ser negativo"
                                         CssClass="text-danger" Display="Dynamic" />
                                 </div>
                             </div>
@@ -137,8 +143,8 @@
                             <div class="mb-2">
                                 <label for="txtCapacidad" class="form-label">Capacidad <span class="text-danger">*</span></label>
                                 <asp:TextBox ID="txtCapacidad" runat="server" CssClass="form-control" TextMode="Number" />
-                                <asp:RequiredFieldValidator ID="rfvCapacidad" runat="server" 
-                                    ControlToValidate="txtCapacidad" ErrorMessage="Capacidad es requerida" 
+                                <asp:RequiredFieldValidator ID="rfvCapacidad" runat="server"
+                                    ControlToValidate="txtCapacidad" ErrorMessage="Capacidad es requerida"
                                     CssClass="text-danger" Display="Dynamic" />
                             </div>
 
@@ -146,8 +152,8 @@
                                 <label for="ddlEstadoMesa" class="form-label">Estado <span class="text-danger">*</span></label>
                                 <asp:DropDownList ID="ddlEstadoMesa" runat="server" CssClass="form-select">
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="rfvEstado" runat="server" 
-                                    ControlToValidate="ddlEstadoMesa" ErrorMessage="Estado es requerido" 
+                                <asp:RequiredFieldValidator ID="rfvEstado" runat="server"
+                                    ControlToValidate="ddlEstadoMesa" ErrorMessage="Estado es requerido"
                                     CssClass="text-danger" Display="Dynamic" InitialValue="" />
                             </div>
                         </div>
@@ -161,8 +167,8 @@
                                     <label for="ddlTipoMesa" class="form-label">Tipo de Mesa <span class="text-danger">*</span></label>
                                     <asp:DropDownList ID="ddlTipoMesa" runat="server" CssClass="form-select">
                                     </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rfvTipoMesa" runat="server" 
-                                        ControlToValidate="ddlTipoMesa" ErrorMessage="Tipo de mesa es requerido" 
+                                    <asp:RequiredFieldValidator ID="rfvTipoMesa" runat="server"
+                                        ControlToValidate="ddlTipoMesa" ErrorMessage="Tipo de mesa es requerido"
                                         CssClass="text-danger" Display="Dynamic" InitialValue="" />
                                 </div>
                             </div>
@@ -174,8 +180,8 @@
                                     <label for="ddlLocal" class="form-label">Local <span class="text-danger">*</span></label>
                                     <asp:DropDownList ID="ddlLocal" runat="server" CssClass="form-select">
                                     </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rfvLocal" runat="server" 
-                                        ControlToValidate="ddlLocal" ErrorMessage="Local es requerido" 
+                                    <asp:RequiredFieldValidator ID="rfvLocal" runat="server"
+                                        ControlToValidate="ddlLocal" ErrorMessage="Local es requerido"
                                         CssClass="text-danger" Display="Dynamic" InitialValue="" />
                                 </div>
                             </div>
@@ -185,32 +191,10 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnGuardarMesa" runat="server" Text="Guardar" 
+                    <asp:Button ID="btnGuardarMesa" runat="server" Text="Guardar"
                         CssClass="btn btn-warning fw-bold text-dark" OnClick="btnGuardarMesa_Click" />
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script>
-        function confirmarEliminacion(id, hdnId, btnEliminar) {
-            Swal.fire({
-                title: '¿Está seguro?',
-                text: "¡No podrá revertir esta acción!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(hdnId).value = id;
-                    document.getElementById(btnEliminar).click();
-                }
-            });
-            return false;
-        }
-    </script>
 </asp:Content>

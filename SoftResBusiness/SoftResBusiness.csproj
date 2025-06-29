@@ -436,7 +436,13 @@
     <None Include="Connected Services\TipoMesaWSClient\tipoMesa.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.eliminarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.existeDocResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.insertarResponse.datasource">
