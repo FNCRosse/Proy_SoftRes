@@ -13,6 +13,7 @@ using System.ComponentModel;
 using SoftResBusiness.SedeWSClient;
 using SoftResBusiness.HorarioAtencionWSClient;
 using SoftResBusiness.HorarioxSedeWSClient;
+using SoftResBusiness.UsuarioWSClient;
 using sedeDTO = SoftResBusiness.SedeWSClient.sedeDTO;
 using horarioAtencionDTO = SoftResBusiness.HorarioAtencionWSClient.horarioAtencionDTO;
 
@@ -33,6 +34,17 @@ namespace SoftResWA.Views.Sedes
         public BindingList<horarioAtencionDTO> ListadoHorarios { get => listadoHorarios; set => listadoHorarios = value; }
         public BindingList<horarioAtencionDTO> ListarHorarioxSede { get => listarHorarioxSede; set => listarHorarioxSede = value; }
         public BindingList<sedeDTO> ListadoSedes { get => listadoSedes; set => listadoSedes = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
 
         //CONSTRUCTOR
         public SedeGestion()
@@ -300,6 +312,11 @@ namespace SoftResWA.Views.Sedes
         }
         protected void btnGuardarSede_Click(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                MostrarResultado(false, "Horario", "guardar");
+                return;
+            }
             string modo = hdnModoModal.Value;
             bool exito = false;
             if (modo == "registrar")
@@ -309,7 +326,7 @@ namespace SoftResWA.Views.Sedes
                 sede.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 sede.fechaCreacionSpecified = true;
                 sede.fechaModificacionSpecified = false;
-                sede.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                sede.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 int idSede = this.sedeBO.Insertar(sede);
                 if (idSede > 0)
@@ -329,7 +346,7 @@ namespace SoftResWA.Views.Sedes
 
                 sede.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 sede.fechaModificacionSpecified = true;
-                sede.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                sede.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.sedeBO.Modificar(sede) > 0;
                 if (exito)

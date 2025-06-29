@@ -52,6 +52,12 @@ namespace SoftResBusiness
 
             return new BindingList<usuariosDTO>(lista);
         }
+        public usuariosDTO login (credencialesDTO credenciales)
+        {
+            usuariosDTO usuario = this.usuarioClienteSOAP.login(credenciales);
+            if(usuario == null) return null;
+            return usuario;
+        }
         public bool ValidarDocumentoUnico(string numDocumento)
         {
             return this.usuarioClienteSOAP.existeDoc(numDocumento);

@@ -49,47 +49,19 @@ namespace SoftResBusiness.UsuarioWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class tipoDocumentoDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private int idTipoDocumentoField;
-        
-        private bool idTipoDocumentoFieldSpecified;
-        
-        private string nombreField;
+        private string messageField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int idTipoDocumento {
+        public string message {
             get {
-                return this.idTipoDocumentoField;
+                return this.messageField;
             }
             set {
-                this.idTipoDocumentoField = value;
-                this.RaisePropertyChanged("idTipoDocumento");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idTipoDocumentoSpecified {
-            get {
-                return this.idTipoDocumentoFieldSpecified;
-            }
-            set {
-                this.idTipoDocumentoFieldSpecified = value;
-                this.RaisePropertyChanged("idTipoDocumentoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
+                this.messageField = value;
+                this.RaisePropertyChanged("message");
             }
         }
         
@@ -103,23 +75,164 @@ namespace SoftResBusiness.UsuarioWSClient {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="UsuarioWSClient.Usuario")]
+    public interface Usuario {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/existeDocRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/existeDocResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.existeDocResponse existeDoc(SoftResBusiness.UsuarioWSClient.existeDocRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/existeDocRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/existeDocResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> existeDocAsync(SoftResBusiness.UsuarioWSClient.existeDocRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/listarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.listarResponse listar(SoftResBusiness.UsuarioWSClient.listarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/listarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.listarResponse> listarAsync(SoftResBusiness.UsuarioWSClient.listarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/InterruptedEx" +
+            "ception", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse cambiarcontrasena(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/modificar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/modificar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.modificarResponse modificar(SoftResBusiness.UsuarioWSClient.modificarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.UsuarioWSClient.modificarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/loginRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/loginResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.loginResponse login(SoftResBusiness.UsuarioWSClient.loginRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/loginRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/loginResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.loginResponse> loginAsync(SoftResBusiness.UsuarioWSClient.loginRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/insertarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.insertarResponse insertar(SoftResBusiness.UsuarioWSClient.insertarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/insertarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.insertarResponse> insertarAsync(SoftResBusiness.UsuarioWSClient.insertarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.eliminarResponse eliminar(SoftResBusiness.UsuarioWSClient.eliminarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.UsuarioWSClient.eliminarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/InterruptedExcepti" +
+            "on", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.UsuarioWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="existeDoc", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class existeDocRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        public existeDocRequest() {
+        }
+        
+        public existeDocRequest(string arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="existeDocResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class existeDocResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool @return;
+        
+        public existeDocResponse() {
+        }
+        
+        public existeDocResponse(bool @return) {
+            this.@return = @return;
+        }
+    }
+    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class rolDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class usuariosParametros : object, System.ComponentModel.INotifyPropertyChanged {
         
         private bool esClienteField;
         
         private bool esClienteFieldSpecified;
         
-        private int idRolField;
+        private bool estadoField;
         
-        private bool idRolFieldSpecified;
+        private bool estadoFieldSpecified;
         
-        private string nombreField;
+        private int idTipoDocumentoField;
+        
+        private bool idTipoDocumentoFieldSpecified;
+        
+        private int idTipoUsuarioField;
+        
+        private bool idTipoUsuarioFieldSpecified;
+        
+        private string nombreCompletoField;
+        
+        private string numDocumentoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -147,37 +260,97 @@ namespace SoftResBusiness.UsuarioWSClient {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idRol {
+        public bool estado {
             get {
-                return this.idRolField;
+                return this.estadoField;
             }
             set {
-                this.idRolField = value;
-                this.RaisePropertyChanged("idRol");
+                this.estadoField = value;
+                this.RaisePropertyChanged("estado");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idRolSpecified {
+        public bool estadoSpecified {
             get {
-                return this.idRolFieldSpecified;
+                return this.estadoFieldSpecified;
             }
             set {
-                this.idRolFieldSpecified = value;
-                this.RaisePropertyChanged("idRolSpecified");
+                this.estadoFieldSpecified = value;
+                this.RaisePropertyChanged("estadoSpecified");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string nombre {
+        public int idTipoDocumento {
             get {
-                return this.nombreField;
+                return this.idTipoDocumentoField;
             }
             set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
+                this.idTipoDocumentoField = value;
+                this.RaisePropertyChanged("idTipoDocumento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idTipoDocumentoSpecified {
+            get {
+                return this.idTipoDocumentoFieldSpecified;
+            }
+            set {
+                this.idTipoDocumentoFieldSpecified = value;
+                this.RaisePropertyChanged("idTipoDocumentoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public int idTipoUsuario {
+            get {
+                return this.idTipoUsuarioField;
+            }
+            set {
+                this.idTipoUsuarioField = value;
+                this.RaisePropertyChanged("idTipoUsuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idTipoUsuarioSpecified {
+            get {
+                return this.idTipoUsuarioFieldSpecified;
+            }
+            set {
+                this.idTipoUsuarioFieldSpecified = value;
+                this.RaisePropertyChanged("idTipoUsuarioSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string nombreCompleto {
+            get {
+                return this.nombreCompletoField;
+            }
+            set {
+                this.nombreCompletoField = value;
+                this.RaisePropertyChanged("nombreCompleto");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string numDocumento {
+            get {
+                return this.numDocumentoField;
+            }
+            set {
+                this.numDocumentoField = value;
+                this.RaisePropertyChanged("numDocumento");
             }
         }
         
@@ -537,190 +710,17 @@ namespace SoftResBusiness.UsuarioWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string messageField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="UsuarioWSClient.Usuario")]
-    public interface Usuario {
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/InterruptedEx" +
-            "ception", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse cambiarcontrasena(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.listarResponse listar(SoftResBusiness.UsuarioWSClient.listarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.listarResponse> listarAsync(SoftResBusiness.UsuarioWSClient.listarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/modificar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/modificar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.modificarResponse modificar(SoftResBusiness.UsuarioWSClient.modificarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.modificarResponse> modificarAsync(SoftResBusiness.UsuarioWSClient.modificarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/loginRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/loginResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.loginResponse login(SoftResBusiness.UsuarioWSClient.loginRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/loginRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/loginResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.loginResponse> loginAsync(SoftResBusiness.UsuarioWSClient.loginRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/insertarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.insertarResponse insertar(SoftResBusiness.UsuarioWSClient.insertarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/insertarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.insertarResponse> insertarAsync(SoftResBusiness.UsuarioWSClient.insertarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.eliminarResponse eliminar(SoftResBusiness.UsuarioWSClient.eliminarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.UsuarioWSClient.eliminarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/InterruptedExcepti" +
-            "on", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.obtenerPorIdResponse obtenerPorId(SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.obtenerPorIdResponse> obtenerPorIdAsync(SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/existeDocRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/existeDocResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.UsuarioWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/InterruptedException", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.UsuarioWSClient.existeDocResponse existeDoc(SoftResBusiness.UsuarioWSClient.existeDocRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Usuario/existeDocRequest", ReplyAction="http://services.softres.pucp.edu.pe/Usuario/existeDocResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> existeDocAsync(SoftResBusiness.UsuarioWSClient.existeDocRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="cambiarcontrasena", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class cambiarcontrasenaRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.UsuarioWSClient.usuariosDTO arg0;
-        
-        public cambiarcontrasenaRequest() {
-        }
-        
-        public cambiarcontrasenaRequest(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="cambiarcontrasenaResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class cambiarcontrasenaResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public cambiarcontrasenaResponse() {
-        }
-        
-        public cambiarcontrasenaResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class usuariosParametros : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class rolDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
         private bool esClienteField;
         
         private bool esClienteFieldSpecified;
         
-        private bool estadoField;
+        private int idRolField;
         
-        private bool estadoFieldSpecified;
+        private bool idRolFieldSpecified;
         
-        private int idTipoDocumentoField;
-        
-        private bool idTipoDocumentoFieldSpecified;
-        
-        private int idTipoUsuarioField;
-        
-        private bool idTipoUsuarioFieldSpecified;
-        
-        private string nombreCompletoField;
-        
-        private string numDocumentoField;
+        private string nombreField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -748,30 +748,66 @@ namespace SoftResBusiness.UsuarioWSClient {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public bool estado {
+        public int idRol {
             get {
-                return this.estadoField;
+                return this.idRolField;
             }
             set {
-                this.estadoField = value;
-                this.RaisePropertyChanged("estado");
+                this.idRolField = value;
+                this.RaisePropertyChanged("idRol");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool estadoSpecified {
+        public bool idRolSpecified {
             get {
-                return this.estadoFieldSpecified;
+                return this.idRolFieldSpecified;
             }
             set {
-                this.estadoFieldSpecified = value;
-                this.RaisePropertyChanged("estadoSpecified");
+                this.idRolFieldSpecified = value;
+                this.RaisePropertyChanged("idRolSpecified");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public partial class tipoDocumentoDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idTipoDocumentoField;
+        
+        private bool idTipoDocumentoFieldSpecified;
+        
+        private string nombreField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public int idTipoDocumento {
             get {
                 return this.idTipoDocumentoField;
@@ -795,50 +831,14 @@ namespace SoftResBusiness.UsuarioWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public int idTipoUsuario {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string nombre {
             get {
-                return this.idTipoUsuarioField;
+                return this.nombreField;
             }
             set {
-                this.idTipoUsuarioField = value;
-                this.RaisePropertyChanged("idTipoUsuario");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idTipoUsuarioSpecified {
-            get {
-                return this.idTipoUsuarioFieldSpecified;
-            }
-            set {
-                this.idTipoUsuarioFieldSpecified = value;
-                this.RaisePropertyChanged("idTipoUsuarioSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string nombreCompleto {
-            get {
-                return this.nombreCompletoField;
-            }
-            set {
-                this.nombreCompletoField = value;
-                this.RaisePropertyChanged("nombreCompleto");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string numDocumento {
-            get {
-                return this.numDocumentoField;
-            }
-            set {
-                this.numDocumentoField = value;
-                this.RaisePropertyChanged("numDocumento");
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
             }
         }
         
@@ -884,6 +884,42 @@ namespace SoftResBusiness.UsuarioWSClient {
         }
         
         public listarResponse(SoftResBusiness.UsuarioWSClient.usuariosDTO[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cambiarcontrasena", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class cambiarcontrasenaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.UsuarioWSClient.usuariosDTO arg0;
+        
+        public cambiarcontrasenaRequest() {
+        }
+        
+        public cambiarcontrasenaRequest(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cambiarcontrasenaResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class cambiarcontrasenaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public cambiarcontrasenaResponse() {
+        }
+        
+        public cambiarcontrasenaResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -1114,42 +1150,6 @@ namespace SoftResBusiness.UsuarioWSClient {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="existeDoc", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class existeDocRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        public existeDocRequest() {
-        }
-        
-        public existeDocRequest(string arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="existeDocResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class existeDocResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool @return;
-        
-        public existeDocResponse() {
-        }
-        
-        public existeDocResponse(bool @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface UsuarioChannel : SoftResBusiness.UsuarioWSClient.Usuario, System.ServiceModel.IClientChannel {
     }
@@ -1178,26 +1178,26 @@ namespace SoftResBusiness.UsuarioWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse SoftResBusiness.UsuarioWSClient.Usuario.cambiarcontrasena(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request) {
-            return base.Channel.cambiarcontrasena(request);
+        SoftResBusiness.UsuarioWSClient.existeDocResponse SoftResBusiness.UsuarioWSClient.Usuario.existeDoc(SoftResBusiness.UsuarioWSClient.existeDocRequest request) {
+            return base.Channel.existeDoc(request);
         }
         
-        public int cambiarcontrasena(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
-            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest inValue = new SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest();
+        public bool existeDoc(string arg0) {
+            SoftResBusiness.UsuarioWSClient.existeDocRequest inValue = new SoftResBusiness.UsuarioWSClient.existeDocRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse retVal = ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).cambiarcontrasena(inValue);
+            SoftResBusiness.UsuarioWSClient.existeDocResponse retVal = ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).existeDoc(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> SoftResBusiness.UsuarioWSClient.Usuario.cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request) {
-            return base.Channel.cambiarcontrasenaAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> SoftResBusiness.UsuarioWSClient.Usuario.existeDocAsync(SoftResBusiness.UsuarioWSClient.existeDocRequest request) {
+            return base.Channel.existeDocAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
-            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest inValue = new SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> existeDocAsync(string arg0) {
+            SoftResBusiness.UsuarioWSClient.existeDocRequest inValue = new SoftResBusiness.UsuarioWSClient.existeDocRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).cambiarcontrasenaAsync(inValue);
+            return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).existeDocAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1221,6 +1221,29 @@ namespace SoftResBusiness.UsuarioWSClient {
             SoftResBusiness.UsuarioWSClient.listarRequest inValue = new SoftResBusiness.UsuarioWSClient.listarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).listarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse SoftResBusiness.UsuarioWSClient.Usuario.cambiarcontrasena(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request) {
+            return base.Channel.cambiarcontrasena(request);
+        }
+        
+        public int cambiarcontrasena(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
+            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest inValue = new SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse retVal = ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).cambiarcontrasena(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> SoftResBusiness.UsuarioWSClient.Usuario.cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest request) {
+            return base.Channel.cambiarcontrasenaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.cambiarcontrasenaResponse> cambiarcontrasenaAsync(SoftResBusiness.UsuarioWSClient.usuariosDTO arg0) {
+            SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest inValue = new SoftResBusiness.UsuarioWSClient.cambiarcontrasenaRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).cambiarcontrasenaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1336,29 +1359,6 @@ namespace SoftResBusiness.UsuarioWSClient {
             SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.UsuarioWSClient.obtenerPorIdRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).obtenerPorIdAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.UsuarioWSClient.existeDocResponse SoftResBusiness.UsuarioWSClient.Usuario.existeDoc(SoftResBusiness.UsuarioWSClient.existeDocRequest request) {
-            return base.Channel.existeDoc(request);
-        }
-        
-        public bool existeDoc(string arg0) {
-            SoftResBusiness.UsuarioWSClient.existeDocRequest inValue = new SoftResBusiness.UsuarioWSClient.existeDocRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.UsuarioWSClient.existeDocResponse retVal = ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).existeDoc(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> SoftResBusiness.UsuarioWSClient.Usuario.existeDocAsync(SoftResBusiness.UsuarioWSClient.existeDocRequest request) {
-            return base.Channel.existeDocAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.UsuarioWSClient.existeDocResponse> existeDocAsync(string arg0) {
-            SoftResBusiness.UsuarioWSClient.existeDocRequest inValue = new SoftResBusiness.UsuarioWSClient.existeDocRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.UsuarioWSClient.Usuario)(this)).existeDocAsync(inValue);
         }
     }
 }

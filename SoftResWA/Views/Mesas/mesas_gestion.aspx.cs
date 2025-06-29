@@ -1,6 +1,7 @@
 ﻿using SoftResBusiness;
 using SoftResBusiness.LocalWSClient;
 using SoftResBusiness.MesaWSClient;
+using SoftResBusiness.UsuarioWSClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,17 @@ namespace SoftResWA.Views.Mesas
         public TipoMesaBO TipoMesaBO { get => tipoMesaBO; set => tipoMesaBO = value; }
         public LocalBO LocalBO { get => localBO; set => localBO = value; }
         public BindingList<mesaDTO> ListadoMesas { get => listadoMesas; set => listadoMesas = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
 
         //CONSTRUCTOR
         public mesas_gestion()
@@ -215,6 +227,11 @@ namespace SoftResWA.Views.Mesas
         //BOTONES
         protected void btnGuardarMesa_Click(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                MostrarResultado(false, "Horario", "guardar");
+                return;
+            }
             string modo = hdnModoModal.Value;
             bool exito = false;
             try
@@ -226,7 +243,7 @@ namespace SoftResWA.Views.Mesas
                     mesa.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     mesa.fechaCreacionSpecified = true;
                     mesa.fechaModificacionSpecified = false;
-                    mesa.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                    mesa.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                     exito = this.mesaBO.Insertar(mesa) > 0;
                 }
@@ -241,7 +258,7 @@ namespace SoftResWA.Views.Mesas
 
                     mesa.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     mesa.fechaModificacionSpecified = true;
-                    mesa.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                    mesa.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                     exito = this.mesaBO.Modificar(mesa) > 0;
                 }

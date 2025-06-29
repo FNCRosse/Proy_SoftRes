@@ -80,7 +80,6 @@
     </div>
     <!-- Modales -->
     <!-- Modal Registrar Local -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:HiddenField ID="hdnIdLocal" runat="server" />
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <div class="modal fade" id="modalRegistrarLocal" tabindex="-1" aria-labelledby="modalRegistrarLocalLabel" aria-hidden="true">

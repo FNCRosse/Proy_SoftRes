@@ -1,6 +1,7 @@
 ﻿using SoftResBusiness;
 using SoftResBusiness.LocalWSClient;
 using SoftResBusiness.SedeWSClient;
+using SoftResBusiness.UsuarioWSClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,17 @@ namespace SoftResWA.Views.Locales
         public BindingList<localDTO> ListadoLocal { get => listadoLocal; set => listadoLocal = value; }
         public SedeBO SedeBO { get => sedeBO; set => sedeBO = value; }
         public BindingList<SoftResBusiness.SedeWSClient.sedeDTO> ListaOpSedes { get => listaOpSedes; set => listaOpSedes = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
 
         //CONSTRUCTOR
         public LocalGestion()
@@ -145,7 +157,7 @@ namespace SoftResWA.Views.Locales
         }
        
         //PAGE_LOAD
-        protected void Page_Load(object sender, EventArgs e)
+            protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             dgvLocal.RowDataBound += dgvLocal_RowDataBound;
@@ -166,6 +178,11 @@ namespace SoftResWA.Views.Locales
         //BOTONES
         protected void btnGuardarLocal_Click(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                MostrarResultado(false, "Horario", "guardar");
+                return;
+            }
             string modo = hdnModoModal.Value;
             bool exito = false;
             if (modo == "registrar")
@@ -175,7 +192,7 @@ namespace SoftResWA.Views.Locales
                 local.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 local.fechaCreacionSpecified = true;
                 local.fechaModificacionSpecified = false;
-                local.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                local.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.localBO.Insertar(local) > 0;
             }
@@ -190,7 +207,7 @@ namespace SoftResWA.Views.Locales
 
                 local.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 local.fechaModificacionSpecified = true;
-                local.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                local.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.localBO.Modificar(local) > 0;
             }

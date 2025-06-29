@@ -1,6 +1,7 @@
 ﻿using SoftResBusiness;
 using SoftResBusiness.HorarioAtencionWSClient;
 using SoftResBusiness.LocalWSClient;
+using SoftResBusiness.UsuarioWSClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,17 @@ namespace SoftResWA.Views.Horarios
 
         public HorarioAtencionBO HorarioAtencionBO { get => horarioAtencionBO; set => horarioAtencionBO = value; }
         public BindingList<horarioAtencionDTO> ListadoHorarios { get => listadoHorarios; set => listadoHorarios = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
 
         //CONSTRUCTOR
         public horario_gestion()
@@ -159,6 +171,11 @@ namespace SoftResWA.Views.Horarios
         //BOTONES
         protected void btnGuardarHorario_Click(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                MostrarResultado(false, "Horario", "guardar");
+                return;
+            }
             string modo = hdnModoModal.Value;
             bool exito = false;
             if (modo == "registrar")
@@ -168,7 +185,7 @@ namespace SoftResWA.Views.Horarios
                 horario.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 horario.fechaCreacionSpecified = true;
                 horario.fechaModificacionSpecified = false;
-                horario.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                horario.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.horarioAtencionBO.Insertar(horario) > 0;
             }
@@ -181,7 +198,7 @@ namespace SoftResWA.Views.Horarios
                 horario.idHorarioSpecified = true;
                 horario.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 horario.fechaModificacionSpecified = true;
-                horario.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                horario.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.horarioAtencionBO.Modificar(horario) > 0;
             }

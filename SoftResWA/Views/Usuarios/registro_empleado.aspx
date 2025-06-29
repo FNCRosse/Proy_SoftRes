@@ -11,7 +11,6 @@
                     <asp:Label ID="lblTitulo" runat="server" Text="Registrar Empleado" /></h4>
             </div>
             <div class="card-body">
-                <asp:ScriptManager ID="ScriptManager1" runat="server" />
                 <div class="row g-3">
 
                     <!-- Nombre completo -->
@@ -125,7 +124,10 @@
 
                     <asp:CheckBox ID="chkCambiarContrasena" runat="server" Text="¿Deseas cambiar tu contraseña?" AutoPostBack="true" OnCheckedChanged="chkCambiarContrasena_CheckedChanged" Visible="false" CssClass="mt-3" />
                     <!-- Botón que abre modal si chk está activo -->
-                    <asp:Button ID="btnAbrirModalCambio" runat="server" Text="Cambiar contraseña por correo" CssClass="btn btn-outline-danger mt-2" OnClientClick="abrirModalCorreo(); return false;" Visible="false" />
+                    <asp:Button ID="btnAbrirModalCambio" runat="server" Text="Cambiar contraseña por correo"
+                        CssClass="btn btn-outline-danger mt-2"
+                        OnClientClick="abrirModalCorreo(); return false;"
+                        Visible="false" />
                     <div class="modal fade" id="modalCorreoCambio" tabindex="-1" aria-labelledby="modalCorreoCambioLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -134,8 +136,13 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Se enviará un enlace a tu correo registrado para cambiar tu contraseña.</p>
-                                    <asp:TextBox ID="txtCorreoModal" runat="server" CssClass="form-control" placeholder="Escribe tu correo" />
+                                    <p>Se enviará un enlace de recuperación a la siguiente dirección de correo electrónico:</p>
+                                    <div class="text-center my-3">
+                                        <strong>
+                                            <asp:Label ID="lblCorreoConfirmacion" runat="server" Text="[Correo del Empleado]"></asp:Label>
+                                        </strong>
+                                    </div>
+                                    <p>¿Deseas continuar?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <asp:Button ID="btnEnviarCorreoCambio" runat="server" CssClass="btn btn-danger" Text="Enviar" OnClick="btnEnviarCorreoCambio_Click" />
@@ -160,6 +167,12 @@
     </div>
     <script type="text/javascript">
         function abrirModalCorreo() {
+            var correoEmpleado = document.getElementById('<%= txtEmail.ClientID %>').value;
+            if (correoEmpleado === '') {
+                Swal.fire('Atención', 'El campo de correo no puede estar vacío.', 'warning');
+                return;
+            }
+            document.getElementById('<%= lblCorreoConfirmacion.ClientID %>').innerText = correoEmpleado;
             var modal = new bootstrap.Modal(document.getElementById('modalCorreoCambio'));
             modal.show();
         }

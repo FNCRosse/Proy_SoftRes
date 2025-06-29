@@ -260,7 +260,6 @@
     <Content Include="Views\Locales\local_gestion.aspx" />
     <Content Include="Views\Login\CambiarContrasena.aspx" />
     <Content Include="Views\Login\Login.aspx" />
-    <Content Include="Views\Login\RecuperarContraseña.aspx" />
     <Content Include="Views\Mesas\mesas_gestion.aspx" />
     <Content Include="Views\Reportes\reporte_cliente.aspx" />
     <Content Include="Views\Reportes\reporte_reservas.aspx" />
@@ -292,6 +291,7 @@
       <DependentUpon>SoftResCliente.Master</DependentUpon>
     </Compile>
     <Compile Include="Util\Protector.cs" />
+    <Compile Include="Util\ServicioCorreo.cs" />
     <Compile Include="Views\Cliente\Comentarios\Comentarios_Listado.aspx.cs">
       <DependentUpon>Comentarios_Listado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -389,13 +389,6 @@
     </Compile>
     <Compile Include="Views\Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Login\RecuperarContraseña.aspx.cs">
-      <DependentUpon>RecuperarContraseña.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Login\RecuperarContraseña.aspx.designer.cs">
-      <DependentUpon>RecuperarContraseña.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Mesas\mesas_gestion.aspx.cs">
       <DependentUpon>mesas_gestion.aspx</DependentUpon>

@@ -137,16 +137,6 @@
       <xs:element minOccurs="0" name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="cambiarcontrasena">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="cambiarcontrasenaResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="listar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:usuariosParametros" />
@@ -155,6 +145,16 @@
   <xs:complexType name="listarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarcontrasena">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarcontrasenaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

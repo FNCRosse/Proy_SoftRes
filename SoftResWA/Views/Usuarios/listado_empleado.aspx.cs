@@ -38,7 +38,7 @@ namespace SoftResWA.Views.Usuarios
             parametros.idTipoUsuarioSpecified = false;
             parametros.nombreCompleto = null;
             parametros.numDocumento = null;
-            this.listadoUsuarios = this.UsuarioBO.Listar(parametros);
+            this.listadoUsuarios = this.UsuarioBO.Listar(parametros); 
         }
 
         //CONFIGURACION VISUAL DE LISTADO

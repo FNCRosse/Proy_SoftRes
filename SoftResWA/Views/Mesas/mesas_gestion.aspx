@@ -90,7 +90,6 @@
     <asp:Button ID="btnEliminarMesa" runat="server" Style="display: none;" OnClick="btnEliminar_Click" />
 
     <!-- Modal Registrar/Modificar Mesa -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="modal fade" id="modalRegistrarMesa" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarMesaLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">

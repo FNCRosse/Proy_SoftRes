@@ -71,7 +71,6 @@
     </div>
     <!-- Modales -->
     <!-- Modal Registrar Sede -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:HiddenField ID="hdnIdSede" runat="server" />
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <!-- Modal Registrar Sede -->

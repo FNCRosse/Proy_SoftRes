@@ -19,6 +19,7 @@ using sib_api_v3_sdk.Api;
 using sib_api_v3_sdk.Client;
 using sib_api_v3_sdk.Model;
 using SoftResWA.Util;
+using static SoftResWA.Util.ServicioCorreo;
 
 namespace SoftResWA.Views.Usuarios
 {
@@ -89,78 +90,21 @@ namespace SoftResWA.Views.Usuarios
         {
             btnAbrirModalCambio.Visible = chkCambiarContrasena.Checked;
         }
-        public async Task<bool> EnviarCorreoBrevo(string correoDestino, string nombreUsuario, string urlCambio)
-        {
-            var apiKey = ConfigurationManager.AppSettings["BrevoApiKey"];
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                System.Diagnostics.Debug.WriteLine("Error: La API Key de Brevo no está configurada en Web.config.");
-                return false;
-            }
-
-            using (var cliente = new HttpClient())
-            {
-                cliente.DefaultRequestHeaders.Add("api-key", apiKey);
-                cliente.DefaultRequestHeaders.Add("Accept", "application/json");
-
-                var contenido = new
-                {
-                    sender = new { name = "🍜 Restaurante Shifui Kay", email = "wosclb@gmail.com" },
-                    to = new[] { new { email = correoDestino, name = nombreUsuario } },
-                    subject = "🔐 ¡Recupera tu acceso a Shifui Kay!",
-                    htmlContent = $@"
-                <div style='font-family: Arial, sans-serif; background-color: #fff3cd; padding: 20px; border-radius: 10px; color: #250505;'>
-                    <h2 style='color: #bc1f1f;'>Hola {nombreUsuario} 👋</h2>
-                    <p>Recibimos una solicitud para cambiar tu contraseña. Si fuiste tú, haz clic en el siguiente botón:</p>
-                    <p style='text-align: center; margin: 20px 0;'>
-                        <a href='{urlCambio}' style='background-color: #bc1f1f; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 8px;'>🔐 Cambiar Contraseña</a>
-                    </p>
-                    <p>Si no realizaste esta solicitud, puedes ignorar este correo. 💌</p>
-                    <p style='margin-top: 30px;'>Gracias,<br><strong>Equipo de Shifui Kay</strong> 🍲</p>
-                </div>"
-                };
-
-                var json = JsonConvert.SerializeObject(contenido);
-                var contenidoHttp = new StringContent(json, Encoding.UTF8, "application/json");
-
-                try
-                {
-                    var respuesta = await cliente.PostAsync("https://api.brevo.com/v3/smtp/email", contenidoHttp);
-                    string cuerpoRespuesta = await respuesta.Content.ReadAsStringAsync();
-
-                    System.Diagnostics.Debug.WriteLine($"Respuesta de Brevo - Status: {(int)respuesta.StatusCode}, Body: {cuerpoRespuesta}");
-
-                    if (!respuesta.IsSuccessStatusCode)
-                    {
-                        // Si falla, muestra el error real de la API para facilitar el debug.
-                        ScriptManager.RegisterStartupScript(HttpContext.Current.Handler as Page, typeof(Page), "debugError",
-                            $"Swal.fire('Error desde API', 'Status: {(int)respuesta.StatusCode} <br/> Respuesta: {cuerpoRespuesta.Replace("'", "\\'")}', 'error');", true);
-                    }
-
-                    return respuesta.IsSuccessStatusCode;
-                }
-                catch (Exception ex)
-                {
-                    // Captura errores de red o de conexión.
-                    System.Diagnostics.Debug.WriteLine("Excepción al conectar con Brevo: " + ex.Message);
-                    ScriptManager.RegisterStartupScript(HttpContext.Current.Handler as Page, typeof(Page), "exceptionError",
-                        $"Swal.fire('Error de Conexión', 'No se pudo contactar al servidor de correos. Error: {ex.Message.Replace("'", "\\'")}', 'error');", true);
-                    return false;
-                }
-            }
-        }
-
-        // 1. El método del evento de clic ahora es un 'void' normal.
+        
         protected void btnEnviarCorreoCambio_Click(object sender, EventArgs e)
         {
-            // 2. Le decimos a la página que ejecute una tarea asíncrona y que espere a que termine.
             RegisterAsyncTask(new PageAsyncTask(EnviarCorreoYMostrarAlerta));
         }
 
-        // 3. Creamos un nuevo método 'async Task' que contiene toda la lógica.
         private async System.Threading.Tasks.Task EnviarCorreoYMostrarAlerta()
         {
-            string correo = txtCorreoModal.Text.Trim();
+            string correo = txtEmail.Text.Trim();
+            if (string.IsNullOrEmpty(correo))
+            {
+                string script = "Swal.fire('Error', 'El campo de correo electrónico del empleado debe estar lleno para enviar un enlace de recuperación.', 'error');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoVacioError", script, true);
+                return; // Detener si no hay correo
+            }
             string nombre = txtNombreCompleto.Text.Trim();
             if (string.IsNullOrEmpty(nombre))
             {
@@ -174,9 +118,9 @@ namespace SoftResWA.Views.Usuarios
             //string rutaRelativa = ResolveUrl("~/Views/Login/CambiarContrasena.aspx");
             //string linkCambio = $"{baseUrl}{rutaRelativa}?token={token}";
             string linkCambio = $"http://localhost:52960/Views/Login/CambiarContrasena.aspx?token={tokenCifrado}"; // Para probar en el local
-            bool enviado = await EnviarCorreoBrevo(correo, nombre, linkCambio);
+            RespuestaEnvioCorreo enviado = await ServicioCorreo.EnviarCorreoRecuperacion(correo, nombre, linkCambio);
 
-            if (enviado)
+            if (enviado.Exito)
             {
                 string script = $"Swal.fire('¡Correo Enviado!', 'Se ha enviado un enlace de recuperación a {correo.Replace("'", "\\'")}', 'success');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "correoExito", script, true);
@@ -185,6 +129,7 @@ namespace SoftResWA.Views.Usuarios
             {
                 // También es buena idea manejar el caso de error
                 string script = "Swal.fire('Error', 'No se pudo enviar el correo. Por favor, inténtalo de nuevo.', 'error');";
+                System.Diagnostics.Debug.WriteLine($"Error al enviar correo de recuperación: {enviado.MensajeError}");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "correoError", script, true);
             }
         }
