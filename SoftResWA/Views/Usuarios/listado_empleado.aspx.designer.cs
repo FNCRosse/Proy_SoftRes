@@ -69,13 +69,13 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control lnkNuevoEmpleado.
+        /// Control btnNuevoEmp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkNuevoEmpleado;
+        protected global::System.Web.UI.WebControls.Button btnNuevoEmp;
 
         /// <summary>
         /// Control dgvEmpleados.
@@ -85,15 +85,6 @@ namespace SoftResWA.Views.Usuarios
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvEmpleados;
-
-        /// <summary>
-        /// Control hdnModoModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnModoModal;
 
         /// <summary>
         /// Control hdnIdEliminar.
@@ -112,14 +103,5 @@ namespace SoftResWA.Views.Usuarios
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEliminarUsuario;
-
-        /// <summary>
-        /// Control ScriptManager1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
     }
 }

@@ -40,25 +40,26 @@ namespace SoftResWA.Views.Usuarios
                 CargarTiposDocumento();
                 
                 // Verificar si es modificación
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["id"] != null && int.TryParse(Request.QueryString["id"], out idUsuario))
                 {
-                    if (int.TryParse(Request.QueryString["id"], out idUsuario))
-                    {
-                        esModificacion = true;
-                        ViewState["IdUsuario"] = idUsuario;
-                        ViewState["EsModificacion"] = true;
-                        CargarDatosCliente(idUsuario);
-                        btnGuardar.Text = "Modificar";
-                        lblTitulo.Text = "Modificar Cliente";
-                    }
+                    esModificacion = true;
+                    ViewState["IdUsuario"] = idUsuario;
+                    ViewState["EsModificacion"] = true;
+                    CargarDatosCliente(idUsuario);
+                    btnGuardar.Text = "Modificar";
+                    lblTitulo.Text = "Modificar Cliente";
+                    divContrasenas.Visible = false;
+                    chkCambiarContrasena.Visible = true;
+                    btnAbrirModalCambio.Visible = false;
                 }
                 else
                 {
                     ViewState["EsModificacion"] = false;
                     lblTitulo.Text = "Registrar Cliente";
-                    // Para clientes nuevos, establecer valores por defecto
                     txtCantReservas.Text = "0";
-                    chkEstado.Checked = true;
+                    divContrasenas.Visible = true;
+                    chkCambiarContrasena.Visible = false;
+                    btnAbrirModalCambio.Visible = false;
                 }
             }
             else
@@ -70,6 +71,18 @@ namespace SoftResWA.Views.Usuarios
                 }
             }
         }
+        protected void chkCambiarContrasena_CheckedChanged(object sender, EventArgs e)
+        {
+            btnAbrirModalCambio.Visible = chkCambiarContrasena.Checked;
+        }
+        protected void btnEnviarCorreoCambio_Click(object sender, EventArgs e)
+        {
+            string correo = txtCorreoModal.Text.Trim();
+            // Aquí simulas el envío. Puedes integrar SMTP o API real.
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "correoEnviado",
+                $"Swal.fire('Correo enviado', 'Se ha enviado un enlace a {correo}', 'success');", true);
+        }
+
 
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
@@ -121,9 +134,7 @@ namespace SoftResWA.Views.Usuarios
                     txtTelefono.Text = usuario.telefono;
                     txtCantReservas.Text = usuario.cantidadReservacion.ToString();
                     txtContrasena.Text = usuario.contrasenha;
-                    chkEstado.Checked = usuario.estado;
-                    
-                    ddlTipoDocumento.SelectedValue = usuario.numeroDocumento.ToString();
+                    ddlTipoDocumento.SelectedValue = usuario.tipoDocumento.idTipoDocumento.ToString();
                 }
             }
             catch (Exception ex)
@@ -140,20 +151,15 @@ namespace SoftResWA.Views.Usuarios
 
             usuario.nombreComp = txtNombreCompleto.Text.Trim();
             usuario.numeroDocumento = txtNumeroDocumento.Text.Trim();
+            usuario.tipoDocumento = new SoftResBusiness.UsuarioWSClient.tipoDocumentoDTO();
+            usuario.tipoDocumento.idTipoDocumento = int.Parse(ddlTipoDocumento.SelectedValue);
+            usuario.tipoDocumento.idTipoDocumentoSpecified = true;
             usuario.email = txtEmail.Text.Trim();
             usuario.telefono = txtTelefono.Text.Trim();
-            usuario.contrasenha = txtContrasena.Text.Trim();
             usuario.cantidadReservacion = int.Parse(txtCantReservas.Text.Trim());
             usuario.cantidadReservacionSpecified = true;
-            usuario.estado = chkEstado.Checked;
             usuario.estadoSpecified = true;
-            usuario.idUsuario = int.Parse(ddlTipoDocumento.SelectedValue);
-            usuario.idUsuarioSpecified = true;
-
-            // Obtener el rol de cliente automáticamente
-            int rolClienteId = ObtenerRolCliente();
-            
-
+            usuario.estado = true;
             // Los clientes no tienen sueldo ni fecha de contratación
             usuario.sueldoSpecified = false;
             usuario.fechaContratacionSpecified = false;
@@ -172,7 +178,6 @@ namespace SoftResWA.Views.Usuarios
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} correctamente.', '{tipo}');", true);
         }
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -187,7 +192,6 @@ namespace SoftResWA.Views.Usuarios
                     usuario = ConstruirDTO(usuario);
                     usuario.idUsuario = idUsuario;
                     usuario.idUsuarioSpecified = true;
-
                     usuario.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaModificacionSpecified = true;
                     usuario.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
@@ -197,8 +201,20 @@ namespace SoftResWA.Views.Usuarios
                 else
                 {
                     // Registrar nuevo cliente
+                    string numeroDoc = txtNumeroDocumento.Text.Trim();
+                    if (this.usuarioBO.ValidarDocumentoUnico(numeroDoc))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "docExistente",
+                            "Swal.fire('Duplicado', 'Ya existe un cliente registrado con este número de documento.', 'warning');", true);
+                        return;
+                    }
                     usuariosDTO usuario = new usuariosDTO();
                     usuario = ConstruirDTO(usuario);
+                    int rolClienteId = ObtenerRolCliente();
+                    usuario.rol = new SoftResBusiness.UsuarioWSClient.rolDTO();
+                    usuario.rol.idRol = rolClienteId;
+                    usuario.rol.idRolSpecified = true;
+                    usuario.contrasenha = txtContrasena.Text.Trim();
                     usuario.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaCreacionSpecified = true;
                     usuario.fechaModificacionSpecified = false;

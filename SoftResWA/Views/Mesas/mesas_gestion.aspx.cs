@@ -1,4 +1,5 @@
 ﻿using SoftResBusiness;
+using SoftResBusiness.LocalWSClient;
 using SoftResBusiness.MesaWSClient;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using mesaDTO = SoftResBusiness.MesaWSClient.mesaDTO;
 
 namespace SoftResWA.Views.Mesas
 {
@@ -22,6 +24,7 @@ namespace SoftResWA.Views.Mesas
         public LocalBO LocalBO { get => localBO; set => localBO = value; }
         public BindingList<mesaDTO> ListadoMesas { get => listadoMesas; set => listadoMesas = value; }
 
+        //CONSTRUCTOR
         public mesas_gestion()
         {
             this.mesaBO = new MesaBO();
@@ -31,9 +34,11 @@ namespace SoftResWA.Views.Mesas
             parametros.estadoSpecified = false;
             parametros.idLocalSpecified = false;
             parametros.idTipoMesaSpecified = false;
+            parametros.nombre = null;
             this.listadoMesas = this.MesaBO.Listar(parametros);
         }
 
+        //CONFIGURACION VISUAL DE LISTADOS
         protected List<object> ConfigurarListado(BindingList<mesaDTO> lista)
         {
             var listaAdaptada = lista.Select(m => new
@@ -44,113 +49,18 @@ namespace SoftResWA.Views.Mesas
                 m.estado,
                 m.x,
                 m.y,
-                tipoMesa = m.tipoMesa != null ? m.tipoMesa.nombre : "No especificado",
-                local = m.local != null ? m.local.nombre : "No especificado",
+                ubicacionMesa = m.tipoMesa?.nombre?? "No especificado",
+                local_nombre = m.local?.nombre?? "No especificado",
                 m.fechaCreacion,
                 m.usuarioCreacion,
                 fechaModificacion = m.fechaModificacionSpecified ? m.fechaModificacion : (DateTime?)null,
                 m.usuarioModificacion,
-                estadoBool = true // Asumimos que todas las mesas mostradas están activas
+                estadoBool = true
             }).ToList<Object>();
             return listaAdaptada;
         }
 
-        private string ObtenerNombreTipoMesa(int tipoMesaId)
-        {
-            try
-            {
-                SoftResBusiness.TipoMesaWSClient.tipoMesaDTO tipoMesa = this.tipoMesaBO.ObtenerPorID(tipoMesaId);
-                return tipoMesa?.nombre ?? "No encontrado";
-            }
-            catch
-            {
-                return "Error al cargar";
-            }
-        }
-
-        private string ObtenerNombreLocal(int localId)
-        {
-            try
-            {
-                SoftResBusiness.LocalWSClient.localDTO local = this.localBO.ObtenerPorID(localId);
-                return local?.nombre ?? "No encontrado";
-            }
-            catch
-            {
-                return "Error al cargar";
-            }
-        }
-
-        private void MostrarModal(string modo, string titulo)
-        {
-            hdnModoModal.Value = modo;
-
-            string script = "setTimeout(function() {" +
-                            $"document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-chair me-2 text-danger\\\"></i>{titulo}';" +
-                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarMesa'));" +
-                            "modal.show();" +
-                            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
-        }
-
-        private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
-        {
-            ddl.DataSource = dataSource;
-            ddl.DataTextField = textField;
-            ddl.DataValueField = valueField;
-            ddl.DataBind();
-            ddl.Items.Insert(0, new ListItem(textoDefault, ""));
-        }
-
-        private void CargarEstadosMesa()
-        {
-            var estadosMesa = new List<object>
-            {
-                new { nombre = "DISPONIBLE", id = "DISPONIBLE" },
-                new { nombre = "EN_USO", id = "EN_USO" },
-                new { nombre = "RESERVADA", id = "RESERVADA" },
-                new { nombre = "EN_MANTENIMIENTO", id = "EN_MANTENIMIENTO" },
-                new { nombre = "DESECHADA", id = "DESECHADA" }
-            };
-
-            this.CargarDropDownList(ddlEstadoMesa, estadosMesa, "nombre", "id", "Seleccionar...");
-            this.CargarDropDownList(ddlEstadoFiltro, estadosMesa, "nombre", "id", "Todos");
-        }
-
-        private void CargarTiposMesa()
-        {
-            try
-            {
-                var tiposMesa = this.tipoMesaBO.Listar();
-                this.CargarDropDownList(ddlTipoMesa, tiposMesa, "nombre", "idTipoMesa", "Seleccionar...");
-                this.CargarDropDownList(ddlTipoMesaFiltro, tiposMesa, "nombre", "idTipoMesa", "Todos");
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorTiposMesa",
-                    $"Swal.fire('Error', 'No se pudieron cargar los tipos de mesa: {ex.Message}', 'error');", true);
-            }
-        }
-
-        private void CargarLocales()
-        {
-            try
-            {
-                SoftResBusiness.LocalWSClient.localParametros parametros = new SoftResBusiness.LocalWSClient.localParametros();
-                parametros.estadoSpecified = true;
-                parametros.estado = true;
-                var locales = this.localBO.Listar(parametros);
-                this.CargarDropDownList(ddlLocal, locales, "nombre", "idLocal", "Seleccionar...");
-                this.CargarDropDownList(ddlLocalFiltro, locales, "nombre", "idLocal", "Todos");
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorLocales",
-                    $"Swal.fire('Error', 'No se pudieron cargar los locales: {ex.Message}', 'error');", true);
-            }
-        }
-
+        //FUNCIONES GENERALES
         private void MostrarResultado(bool exito, string entidad, string modo)
         {
             string accion = (modo == "modificar") ? "modificada" :
@@ -165,7 +75,6 @@ namespace SoftResWA.Views.Mesas
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} correctamente.', '{tipo}');", true);
         }
-
         protected void dgv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -194,7 +103,71 @@ namespace SoftResWA.Views.Mesas
                 }
             }
         }
+        private void MostrarModal(string modo, string titulo)
+        {
+            hdnModoModal.Value = modo;
 
+            string script = "setTimeout(function() {" +
+                            $"document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-chair me-2 text-danger\\\"></i>{titulo}';" +
+                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarMesa'));" +
+                            "modal.show();" +
+                            "}, 200);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
+        }
+        private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
+        {
+            ddl.DataSource = dataSource;
+            ddl.DataTextField = textField;
+            ddl.DataValueField = valueField;
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem(textoDefault, ""));
+        }
+
+        //FUNCIONES DE MESA
+        private void CargarEstadosMesa()
+        {
+            var estadosMesa = Enum.GetNames(typeof(SoftResBusiness.MesaWSClient.estadoMesa))
+                .Select(d => new { nombre = d, id = d })
+                .ToList();
+
+            this.CargarDropDownList(ddlEstadoMesa, estadosMesa, "nombre", "id", "Seleccionar...");
+            this.CargarDropDownList(ddlEstadoFiltro, estadosMesa, "nombre", "id", "Todos");
+        }
+        private void CargarTiposMesa()
+        {
+            try
+            {
+                
+                var tiposMesa = this.tipoMesaBO.Listar();
+                this.CargarDropDownList(ddlTipoMesa, tiposMesa, "nombre", "idTipoMesa", "Seleccionar...");
+                this.CargarDropDownList(ddlTipoMesaFiltro, tiposMesa, "nombre", "idTipoMesa", "Todos");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorTiposMesa",
+                    $"Swal.fire('Error', 'No se pudieron cargar los tipos de mesa: {ex.Message}', 'error');", true);
+            }
+        }
+        private void CargarLocales()
+        {
+            try
+            {
+                SoftResBusiness.LocalWSClient.localParametros parametros = new SoftResBusiness.LocalWSClient.localParametros();
+                parametros.estadoSpecified = true;
+                parametros.estado = true;
+                parametros.idSedeSpecified = false;
+                parametros.nombre = null;
+                var locales = this.localBO.Listar(parametros);
+                this.CargarDropDownList(ddlLocal, locales, "nombre", "idLocal", "Seleccionar...");
+                this.CargarDropDownList(ddlLocalFiltro, locales, "nombre", "idLocal", "Todos");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorLocales",
+                    $"Swal.fire('Error', 'No se pudieron cargar los locales: {ex.Message}', 'error');", true);
+            }
+        }
         private mesaDTO ConstruirDTO(mesaDTO mesa)
         {
             if (mesa == null)
@@ -216,13 +189,14 @@ namespace SoftResWA.Views.Mesas
             mesa.tipoMesa.idTipoMesaSpecified = true;
             
             // Configurar local
-            mesa.local = new localDTO();
+            mesa.local = new SoftResBusiness.MesaWSClient.localDTO();
             mesa.local.idLocal = int.Parse(ddlLocal.SelectedValue);
             mesa.local.idLocalSpecified = true;
 
             return mesa;
         }
 
+        //PAGE_LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
@@ -230,7 +204,6 @@ namespace SoftResWA.Views.Mesas
             if (!IsPostBack)
             {
                 var listaAdaptada = this.ConfigurarListado(ListadoMesas);
-
                 dgvMesas.DataSource = listaAdaptada;
                 dgvMesas.DataBind();
                 CargarEstadosMesa();
@@ -239,11 +212,11 @@ namespace SoftResWA.Views.Mesas
             }
         }
 
+        //BOTONES
         protected void btnGuardarMesa_Click(object sender, EventArgs e)
         {
             string modo = hdnModoModal.Value;
             bool exito = false;
-
             try
             {
                 if (modo == "registrar")
@@ -281,7 +254,6 @@ namespace SoftResWA.Views.Mesas
                     $"Swal.fire('Error', 'Error al procesar la mesa: {ex.Message}', 'error');", true);
             }
         }
-
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             // Limpia campos
@@ -296,7 +268,6 @@ namespace SoftResWA.Views.Mesas
             // Cambia título a "Registrar"
             this.MostrarModal("registrar", "Registrar Mesa");
         }
-
         protected void btnModificar_Command(object sender, CommandEventArgs e)
         {
             int id = int.Parse(e.CommandArgument.ToString());
@@ -325,8 +296,7 @@ namespace SoftResWA.Views.Mesas
                 }
             }
         }
-
-        protected void btnEliminarMesa_Click(object sender, EventArgs e)
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
             int id = int.Parse(hdnIdEliminar.Value);
             if (id > 0)
@@ -350,7 +320,6 @@ namespace SoftResWA.Views.Mesas
                 }
             }
         }
-
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try

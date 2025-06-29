@@ -9,7 +9,7 @@
             <i class="fas fa-users me-2"></i>Mantenimiento de Empleados
         </h1>
     </div>
-    
+
     <!-- Filtros para búsqueda -->
     <div class="container-fluid mb-4 ps-4">
         <div class="row gx-3">
@@ -39,20 +39,19 @@
             <div class="col-auto">
                 <label for="ddlEstadoFiltro" class="form-label">Estado</label>
                 <asp:DropDownList ID="ddlEstadoFiltro" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="-- Todos --" Value="" Selected="True" />
+                    <asp:ListItem Text="Activo" Value="1" />
+                    <asp:ListItem Text="Inactivo" Value="0" />
                 </asp:DropDownList>
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-danger me-2" 
-                    OnClick="btnBuscar_Click">
-                    <i class="fas fa-search me-1"></i>
-                </asp:Button>
-                <asp:HyperLink ID="lnkNuevoEmpleado" runat="server"
-                    NavigateUrl="~/Views/Usuarios/registro_empleado.aspx"
-                    CssClass="btn"
-                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;">
-                    <i class="fas fa-plus me-1"></i>Nuevo
-                </asp:HyperLink>
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-danger me-2"
+                    OnClick="btnBuscar_Click"></asp:Button>
+                <asp:Button ID="btnNuevoEmp" runat="server" Text="Nuevo Empleado"
+                    CssClass="btn shadow-sm"
+                    OnClientClick="window.location.href='registro_empleado.aspx'; return false;"
+                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
             </div>
         </div>
     </div>
@@ -62,61 +61,38 @@
         <asp:GridView ID="dgvEmpleados" runat="server" AllowPaging="false" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
-                <asp:BoundField HeaderText="ID" DataField="idUsuario" />
-                <asp:BoundField HeaderText="Nombre Completo" DataField="nombreComp" />
-                <asp:BoundField HeaderText="Tipo Documento" DataField="tipoDocumento" />
-                <asp:BoundField HeaderText="Número Documento" DataField="numeroDocumento" />
-                <asp:BoundField HeaderText="Rol" DataField="rol" />
-                <asp:BoundField HeaderText="Email" DataField="email" />
-                <asp:BoundField HeaderText="Teléfono" DataField="telefono" />
-                <asp:BoundField HeaderText="Sueldo" DataField="sueldo" DataFormatString="{0:C}" />
-                <asp:BoundField HeaderText="Reservas" DataField="cantidadReservacion" />
-                <asp:BoundField HeaderText="Fecha Contratación" DataField="fechaContratacion" DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:BoundField HeaderText="Usuario Creación" DataField="usuarioCreacion" />
-                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" DataFormatString="{0:dd/MM/yyyy}" />
-                <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
-                <asp:BoundField HeaderText="Estado" DataField="estadoTexto" />
-                <asp:TemplateField HeaderText="Acciones">
+                <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="100px">
                     <ItemTemplate>
-                        <asp:HyperLink ID="lnkModificar" runat="server" CssClass="btn btn-warning btn-sm me-1"
-                            NavigateUrl='<%# "~/Views/Usuarios/registro_empleado.aspx?id=" + Eval("idUsuario") %>'>
-                            <i class="fas fa-edit"></i>
+                        <asp:HyperLink ID="lnkModificar" runat="server" CssClass="btn btn-sm btn-primary"
+                            NavigateUrl='<%# "~/Views/Usuarios/registro_empleado.aspx?id=" + Eval("idUsuario") %>'
+                            Text="M"
+                            ToolTip="Modificar">
                         </asp:HyperLink>
-                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-danger btn-sm">
-                            <i class="fas fa-trash"></i>
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm btn-danger"
+                            ToolTip="Eliminar"
+                            Text="C">
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField HeaderText="ID" DataField="idUsuario" />
+                <asp:BoundField DataField="tipoEmp" HeaderText="Rol" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="Nombre Completo" DataField="nombreComp" />
+                <asp:BoundField HeaderText="Tipo Doc." DataField="tipoDocumento" />
+                <asp:BoundField HeaderText="Número Documento" DataField="numeroDocumento" />
+                <asp:BoundField HeaderText="Email" DataField="email" />
+                <asp:BoundField HeaderText="Teléfono" DataField="telefono" />
+                <asp:BoundField HeaderText="Sueldo" DataField="sueldo" DataFormatString="{0:C}" />
+                <asp:BoundField HeaderText="Fecha Contratación" DataField="fechaContratacion" />
+                <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" />
+                <asp:BoundField HeaderText="Usuario Creación" DataField="usuarioCreacion" />
+                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" />
+                <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
+                <asp:BoundField HeaderText="Estado" DataField="estadoTexto" />
             </Columns>
         </asp:GridView>
     </div>
 
     <!-- Controles ocultos -->
-    <asp:HiddenField ID="hdnModoModal" runat="server" />
     <asp:HiddenField ID="hdnIdEliminar" runat="server" />
-    <asp:Button ID="btnEliminarUsuario" runat="server" style="display:none;" OnClick="btnEliminarUsuario_Click" />
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
-
-    <!-- Scripts -->
-    <script>
-        function confirmarEliminacion(id, hdnId, btnEliminar) {
-            Swal.fire({
-                title: '¿Está seguro?',
-                text: "¡No podrá revertir esta acción!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(hdnId).value = id;
-                    document.getElementById(btnEliminar).click();
-                }
-            });
-            return false;
-        }
-    </script>
+    <asp:Button ID="btnEliminarUsuario" runat="server" Style="display: none;" OnClick="btnEliminarUsuario_Click" />
 </asp:Content>
