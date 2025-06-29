@@ -115,7 +115,7 @@ namespace SoftResWA.Views.Usuarios
             }
         }
 
-        //FUNIONES DE USUARIO
+        //FUNIONES DE USUARIO-CLIENTE
         private void CargarTiposDocumento()
         {
             try

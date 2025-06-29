@@ -9,6 +9,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using sib_api_v3_sdk.Api;
+using sib_api_v3_sdk.Client;
+using sib_api_v3_sdk.Model;
+using SoftResWA.Util;
 
 namespace SoftResWA.Views.Usuarios
 {
@@ -34,13 +44,13 @@ namespace SoftResWA.Views.Usuarios
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            
+
             if (!IsPostBack)
             {
                 txtSueldo.Attributes["min"] = "1";
                 CargarRoles();
                 CargarTiposDocumento();
-                
+
                 // Verificar si es modificación
                 if (Request.QueryString["id"] != null)
                 {
@@ -51,13 +61,19 @@ namespace SoftResWA.Views.Usuarios
                         ViewState["EsModificacion"] = true;
                         CargarDatosUsuario(idUsuario);
                         btnGuardar.Text = "Modificar";
-                        //lblTitulo.Text = "Modificar Empleado";
+                        lblTitulo.Text = "Modificar Empleado";
+                        divContrasenas.Visible = false;
+                        chkCambiarContrasena.Visible = true;
+                        btnAbrirModalCambio.Visible = false;
                     }
                 }
                 else
                 {
                     ViewState["EsModificacion"] = false;
-                    //lblTitulo.Text = "Registrar Empleado";
+                    lblTitulo.Text = "Registrar Empleado";
+                    divContrasenas.Visible = true;
+                    chkCambiarContrasena.Visible = false;
+                    btnAbrirModalCambio.Visible = false;
                 }
             }
             else
@@ -67,6 +83,110 @@ namespace SoftResWA.Views.Usuarios
                 {
                     idUsuario = ViewState["IdUsuario"] != null ? (int)ViewState["IdUsuario"] : 0;
                 }
+            }
+        }
+        protected void chkCambiarContrasena_CheckedChanged(object sender, EventArgs e)
+        {
+            btnAbrirModalCambio.Visible = chkCambiarContrasena.Checked;
+        }
+        public async Task<bool> EnviarCorreoBrevo(string correoDestino, string nombreUsuario, string urlCambio)
+        {
+            var apiKey = ConfigurationManager.AppSettings["BrevoApiKey"];
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                System.Diagnostics.Debug.WriteLine("Error: La API Key de Brevo no está configurada en Web.config.");
+                return false;
+            }
+
+            using (var cliente = new HttpClient())
+            {
+                cliente.DefaultRequestHeaders.Add("api-key", apiKey);
+                cliente.DefaultRequestHeaders.Add("Accept", "application/json");
+
+                var contenido = new
+                {
+                    sender = new { name = "🍜 Restaurante Shifui Kay", email = "wosclb@gmail.com" },
+                    to = new[] { new { email = correoDestino, name = nombreUsuario } },
+                    subject = "🔐 ¡Recupera tu acceso a Shifui Kay!",
+                    htmlContent = $@"
+                <div style='font-family: Arial, sans-serif; background-color: #fff3cd; padding: 20px; border-radius: 10px; color: #250505;'>
+                    <h2 style='color: #bc1f1f;'>Hola {nombreUsuario} 👋</h2>
+                    <p>Recibimos una solicitud para cambiar tu contraseña. Si fuiste tú, haz clic en el siguiente botón:</p>
+                    <p style='text-align: center; margin: 20px 0;'>
+                        <a href='{urlCambio}' style='background-color: #bc1f1f; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 8px;'>🔐 Cambiar Contraseña</a>
+                    </p>
+                    <p>Si no realizaste esta solicitud, puedes ignorar este correo. 💌</p>
+                    <p style='margin-top: 30px;'>Gracias,<br><strong>Equipo de Shifui Kay</strong> 🍲</p>
+                </div>"
+                };
+
+                var json = JsonConvert.SerializeObject(contenido);
+                var contenidoHttp = new StringContent(json, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var respuesta = await cliente.PostAsync("https://api.brevo.com/v3/smtp/email", contenidoHttp);
+                    string cuerpoRespuesta = await respuesta.Content.ReadAsStringAsync();
+
+                    System.Diagnostics.Debug.WriteLine($"Respuesta de Brevo - Status: {(int)respuesta.StatusCode}, Body: {cuerpoRespuesta}");
+
+                    if (!respuesta.IsSuccessStatusCode)
+                    {
+                        // Si falla, muestra el error real de la API para facilitar el debug.
+                        ScriptManager.RegisterStartupScript(HttpContext.Current.Handler as Page, typeof(Page), "debugError",
+                            $"Swal.fire('Error desde API', 'Status: {(int)respuesta.StatusCode} <br/> Respuesta: {cuerpoRespuesta.Replace("'", "\\'")}', 'error');", true);
+                    }
+
+                    return respuesta.IsSuccessStatusCode;
+                }
+                catch (Exception ex)
+                {
+                    // Captura errores de red o de conexión.
+                    System.Diagnostics.Debug.WriteLine("Excepción al conectar con Brevo: " + ex.Message);
+                    ScriptManager.RegisterStartupScript(HttpContext.Current.Handler as Page, typeof(Page), "exceptionError",
+                        $"Swal.fire('Error de Conexión', 'No se pudo contactar al servidor de correos. Error: {ex.Message.Replace("'", "\\'")}', 'error');", true);
+                    return false;
+                }
+            }
+        }
+
+        // 1. El método del evento de clic ahora es un 'void' normal.
+        protected void btnEnviarCorreoCambio_Click(object sender, EventArgs e)
+        {
+            // 2. Le decimos a la página que ejecute una tarea asíncrona y que espere a que termine.
+            RegisterAsyncTask(new PageAsyncTask(EnviarCorreoYMostrarAlerta));
+        }
+
+        // 3. Creamos un nuevo método 'async Task' que contiene toda la lógica.
+        private async System.Threading.Tasks.Task EnviarCorreoYMostrarAlerta()
+        {
+            string correo = txtCorreoModal.Text.Trim();
+            string nombre = txtNombreCompleto.Text.Trim();
+            if (string.IsNullOrEmpty(nombre))
+            {
+                nombre = correo.Split('@')[0];
+            }
+            string dataParaCifrar = $"{correo}|{DateTime.UtcNow.Ticks}";
+            string tokenCifrado = Protector.Cifrar(dataParaCifrar);
+            //Esto para el desplegado
+            //var request = HttpContext.Current.Request;
+            //string baseUrl = $"{request.Url.Scheme}://{request.Url.Authority}";
+            //string rutaRelativa = ResolveUrl("~/Views/Login/CambiarContrasena.aspx");
+            //string linkCambio = $"{baseUrl}{rutaRelativa}?token={token}";
+            string linkCambio = $"http://localhost:52960/Views/Login/CambiarContrasena.aspx?token={tokenCifrado}"; // Para probar en el local
+
+            bool enviado = await EnviarCorreoBrevo(correo, nombre, linkCambio);
+
+            if (enviado)
+            {
+                string script = $"Swal.fire('¡Correo Enviado!', 'Se ha enviado un enlace de recuperación a {correo.Replace("'", "\\'")}', 'success');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoExito", script, true);
+            }
+            else
+            {
+                // También es buena idea manejar el caso de error
+                string script = "Swal.fire('Error', 'No se pudo enviar el correo. Por favor, inténtalo de nuevo.', 'error');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoError", script, true);
             }
         }
 
@@ -92,7 +212,6 @@ namespace SoftResWA.Views.Usuarios
                     $"Swal.fire('Error', 'No se pudieron cargar los roles: {ex.Message}', 'error');", true);
             }
         }
-
         private void CargarTiposDocumento()
         {
             try
@@ -106,7 +225,6 @@ namespace SoftResWA.Views.Usuarios
                     $"Swal.fire('Error', 'No se pudieron cargar los tipos de documento: {ex.Message}', 'error');", true);
             }
         }
-
         private void CargarDatosUsuario(int id)
         {
             try
@@ -119,17 +237,14 @@ namespace SoftResWA.Views.Usuarios
                     txtEmail.Text = usuario.email;
                     txtTelefono.Text = usuario.telefono;
                     txtSueldo.Text = usuario.sueldo.ToString("F2");
-                    txtCantReservas.Text = usuario.cantidadReservacion.ToString();
                     txtContrasena.Text = usuario.contrasenha;
-                    chkEstado.Checked = usuario.estado;
-                    
                     if (usuario.fechaContratacionSpecified)
                     {
                         txtFechaContratacion.Text = usuario.fechaContratacion.ToString("dd-MM-yyyy");
                     }
-                    
-                    ddlTipoDocumento.SelectedValue = usuario.tipoDocumento.ToString();
-                    ddlRol.SelectedValue = usuario.rol.ToString();
+
+                    ddlTipoDocumento.SelectedValue = usuario.tipoDocumento.idTipoDocumento.ToString();
+                    ddlRol.SelectedValue = usuario.rol.idRol.ToString();
                 }
             }
             catch (Exception ex)
@@ -148,18 +263,18 @@ namespace SoftResWA.Views.Usuarios
             usuario.numeroDocumento = txtNumeroDocumento.Text.Trim();
             usuario.email = txtEmail.Text.Trim();
             usuario.telefono = txtTelefono.Text.Trim();
-            usuario.contrasenha = txtContrasena.Text.Trim();
-            //usuario.sueldo = decimal.Parse(txtSueldo.Text.Trim());
+            usuario.sueldo = double.Parse(txtSueldo.Text.Trim());
             usuario.sueldoSpecified = true;
-            usuario.cantidadReservacion = int.Parse(txtCantReservas.Text.Trim());
+            usuario.cantidadReservacion = 0;
             usuario.cantidadReservacionSpecified = true;
-            usuario.estado = chkEstado.Checked;
+            usuario.estado = true;
             usuario.estadoSpecified = true;
-            //usuario.tipoDocumento = int.Parse(ddlTipoDocumento.SelectedValue);
-            //usuario.tipoDocIdSpecified = true;
-            usuario.idUsuario = int.Parse(ddlRol.SelectedValue);
-            usuario.idUsuarioSpecified = true;
-
+            usuario.tipoDocumento = new SoftResBusiness.UsuarioWSClient.tipoDocumentoDTO();
+            usuario.tipoDocumento.idTipoDocumento = int.Parse(ddlTipoDocumento.SelectedValue);
+            usuario.tipoDocumento.idTipoDocumentoSpecified = true;
+            usuario.rol = new SoftResBusiness.UsuarioWSClient.rolDTO();
+            usuario.rol.idRol = int.Parse(ddlRol.SelectedValue);
+            usuario.rol.idRolSpecified = true;
             if (!string.IsNullOrEmpty(txtFechaContratacion.Text))
             {
                 if (DateTime.TryParseExact(txtFechaContratacion.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime fechaContratacion))
@@ -198,7 +313,6 @@ namespace SoftResWA.Views.Usuarios
                     usuario = ConstruirDTO(usuario);
                     usuario.idUsuario = idUsuario;
                     usuario.idUsuarioSpecified = true;
-
                     usuario.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaModificacionSpecified = true;
                     usuario.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
@@ -208,11 +322,19 @@ namespace SoftResWA.Views.Usuarios
                 else
                 {
                     // Registrar nuevo usuario
+                    string numeroDoc = txtNumeroDocumento.Text.Trim();
+                    if (this.usuarioBO.ValidarDocumentoUnico(numeroDoc))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "docExistente",
+                            "Swal.fire('Duplicado', 'Ya existe un cliente registrado con este número de documento.', 'warning');", true);
+                        return;
+                    }
                     usuariosDTO usuario = new usuariosDTO();
                     usuario = ConstruirDTO(usuario);
                     usuario.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaCreacionSpecified = true;
                     usuario.fechaModificacionSpecified = false;
+                    usuario.contrasenha = txtContrasena.Text.Trim();
                     usuario.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
 
                     exito = this.usuarioBO.Insertar(usuario) > 0;

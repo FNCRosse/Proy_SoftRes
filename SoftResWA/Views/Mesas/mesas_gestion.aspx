@@ -21,13 +21,13 @@
             <!-- Ubicacion de Mesa -->
             <div class="col-auto">
                 <label for="ddlTipoMesaFiltro" class="form-label">Tipo de Mesa</label>
-                <asp:DropDownList ID="ddlTipoMesaFiltro" runat="server" CssClass="form-select" >
+                <asp:DropDownList ID="ddlTipoMesaFiltro" runat="server" CssClass="form-select">
                 </asp:DropDownList>
             </div>
             <!-- Local -->
             <div class="col-auto">
                 <label for="ddlLocalFiltro" class="form-label">Local</label>
-                <asp:DropDownList ID="ddlLocalFiltro" runat="server" CssClass="form-select" >
+                <asp:DropDownList ID="ddlLocalFiltro" runat="server" CssClass="form-select">
                 </asp:DropDownList>
             </div>
             <!-- Estado -->
@@ -77,7 +77,7 @@
                 <asp:BoundField HeaderText="Local" DataField="local_nombre" />
                 <asp:BoundField HeaderText="Fecha Creación" DataField="fechaCreacion" />
                 <asp:BoundField HeaderText="Usuario Creación" DataField="usuarioCreacion" />
-                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion"/>
+                <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" />
                 <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
             </Columns>
         </asp:GridView>
@@ -122,12 +122,20 @@
                                     <asp:RequiredFieldValidator ID="rfvPosX" runat="server"
                                         ControlToValidate="txtPosX" ErrorMessage="Posición X es requerida"
                                         CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosX" runat="server"
+                                        ControlToValidate="txtPosX" MinimumValue="0" MaximumValue="999999"
+                                        Type="Double" ErrorMessage="El X no puede ser negativo"
+                                        CssClass="text-danger" Display="Dynamic" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtPosY" class="form-label">Posición Y <span class="text-danger">*</span></label>
                                     <asp:TextBox ID="txtPosY" runat="server" CssClass="form-control" TextMode="Number" />
                                     <asp:RequiredFieldValidator ID="rfvPosY" runat="server"
                                         ControlToValidate="txtPosY" ErrorMessage="Posición Y es requerida"
+                                        CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosY" runat="server"
+                                        ControlToValidate="txtPosY" MinimumValue="0" MaximumValue="999999"
+                                        Type="Double" ErrorMessage="El Y no puede ser negativo"
                                         CssClass="text-danger" Display="Dynamic" />
                                 </div>
                             </div>

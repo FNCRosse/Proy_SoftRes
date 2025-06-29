@@ -2,8 +2,12 @@
 <xs:schema xmlns:tns="http://services.softres.pucp.edu.pe/" targetNamespace="http://services.softres.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="IOException" type="tns:IOException" />
   <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="cambiarcontrasena" type="tns:cambiarcontrasena" />
+  <xs:element name="cambiarcontrasenaResponse" type="tns:cambiarcontrasenaResponse" />
   <xs:element name="eliminar" type="tns:eliminar" />
   <xs:element name="eliminarResponse" type="tns:eliminarResponse" />
+  <xs:element name="existeDoc" type="tns:existeDoc" />
+  <xs:element name="existeDocResponse" type="tns:existeDocResponse" />
   <xs:element name="insertar" type="tns:insertar" />
   <xs:element name="insertarResponse" type="tns:insertarResponse" />
   <xs:element name="listar" type="tns:listar" />
@@ -97,16 +101,6 @@
       <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="eliminar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="eliminarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="login">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:credencialesDTO" />
@@ -121,6 +115,36 @@
   <xs:complexType name="loginResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eliminarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="existeDoc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="existeDocResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarcontrasena">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarcontrasenaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listar">

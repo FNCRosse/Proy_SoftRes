@@ -159,6 +159,15 @@ namespace SoftResWA.Views.Mesas
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPosX;
 
         /// <summary>
+        /// Control rvPosX.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPosX;
+
+        /// <summary>
         /// Control txtPosY.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,15 @@ namespace SoftResWA.Views.Mesas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPosY;
+
+        /// <summary>
+        /// Control rvPosY.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPosY;
 
         /// <summary>
         /// Control txtCapacidad.

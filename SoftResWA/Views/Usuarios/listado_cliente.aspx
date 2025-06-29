@@ -57,7 +57,7 @@
             GridLines="None" AutoGenerateColumns="False" AllowPaging="False">
             <HeaderStyle CssClass="table-dark" />
             <Columns>
-                <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="150px">
+                <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="100px">
                     <ItemTemplate>
                         <asp:HyperLink ID="lnkModificar" runat="server"
                             CssClass="btn btn-sm btn-primary"

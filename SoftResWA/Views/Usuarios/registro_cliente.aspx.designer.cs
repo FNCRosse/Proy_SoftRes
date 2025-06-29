@@ -132,6 +132,24 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTelefono;
 
         /// <summary>
+        /// Control txtCantReservas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantReservas;
+
+        /// <summary>
+        /// Control divContrasenas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divContrasenas;
+
+        /// <summary>
         /// Control txtContrasena.
         /// </summary>
         /// <remarks>
@@ -177,22 +195,40 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.CompareValidator cvPassword;
 
         /// <summary>
-        /// Control txtCantReservas.
+        /// Control chkCambiarContrasena.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantReservas;
+        protected global::System.Web.UI.WebControls.CheckBox chkCambiarContrasena;
 
         /// <summary>
-        /// Control chkEstado.
+        /// Control btnAbrirModalCambio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkEstado;
+        protected global::System.Web.UI.WebControls.Button btnAbrirModalCambio;
+
+        /// <summary>
+        /// Control txtCorreoModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCorreoModal;
+
+        /// <summary>
+        /// Control btnEnviarCorreoCambio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnviarCorreoCambio;
 
         /// <summary>
         /// Control btnCancelar.
