@@ -174,7 +174,6 @@ namespace SoftResWA.Views.Usuarios
             //string rutaRelativa = ResolveUrl("~/Views/Login/CambiarContrasena.aspx");
             //string linkCambio = $"{baseUrl}{rutaRelativa}?token={token}";
             string linkCambio = $"http://localhost:52960/Views/Login/CambiarContrasena.aspx?token={tokenCifrado}"; // Para probar en el local
-
             bool enviado = await EnviarCorreoBrevo(correo, nombre, linkCambio);
 
             if (enviado)
