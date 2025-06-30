@@ -79,5 +79,10 @@
             </Columns>
         </asp:GridView>
     </div>
+
+    <!-- Controles ocultos -->
+    <asp:HiddenField ID="hdnIdEliminar" runat="server" />
+    <asp:Button ID="btnEliminarReserva" runat="server" Style="display: none;" OnClick="btnEliminar_Click" />
+
     <script src="../../Scripts/MyScripts.js"></script>
 </asp:Content>
