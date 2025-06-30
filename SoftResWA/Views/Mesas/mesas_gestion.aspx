@@ -53,7 +53,7 @@
 
     <!-- Tabla -->
     <div class="row">
-        <asp:GridView ID="dgvMesas" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+        <asp:GridView ID="dgvMesas" runat="server" AllowPaging="True" PageSize="15" AutoGenerateColumns="false"
             CssClass="table table-hover table-responsive table-striped">
             <Columns>
                 <asp:TemplateField HeaderText="Opciones">
@@ -80,6 +80,9 @@
                 <asp:BoundField HeaderText="Fecha Modificación" DataField="fechaModificacion" />
                 <asp:BoundField HeaderText="Usuario Modificación" DataField="usuarioModificacion" />
             </Columns>
+            <EmptyDataTemplate>
+                <div class="alert alert-info text-center mt-3">No se encontraron Mesas que coincidan con los filtros.</div>
+            </EmptyDataTemplate>
         </asp:GridView>
     </div>
 

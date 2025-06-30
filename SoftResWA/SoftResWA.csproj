@@ -256,6 +256,7 @@
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Scripts\sb-admin-2.min.js" />
+    <Content Include="Views\Home\Notificaciones_gestion.aspx" />
     <Content Include="Views\Horarios\horario_gestion.aspx" />
     <Content Include="Views\Locales\local_gestion.aspx" />
     <Content Include="Views\Login\CambiarContrasena.aspx" />
@@ -361,6 +362,13 @@
     </Compile>
     <Compile Include="Views\Home\home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Notificaciones_gestion.aspx.cs">
+      <DependentUpon>Notificaciones_gestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Home\Notificaciones_gestion.aspx.designer.cs">
+      <DependentUpon>Notificaciones_gestion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Horarios\horario_gestion.aspx.cs">
       <DependentUpon>horario_gestion.aspx</DependentUpon>

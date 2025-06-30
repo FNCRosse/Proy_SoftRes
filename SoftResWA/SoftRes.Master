@@ -82,6 +82,12 @@
                             <i class="fa-solid fa-table me-2"></i>Mesas
                         </a>
                     </li>
+                    <!--Notificacion-->
+                    <li class="nav-item submenu mb-2">
+                        <a href="/Views/Home/Notificaciones_gestion.aspx" class="nav-link text-white d-flex align-items-center">
+                            <i class="fa-solid fa-bell me-2"></i>Notificaciones
+                        </a>
+                    </li>
                     <!--Comentarios-->
                     <li class="nav-item submenu mb-2">
                         <a href="/Views/Comentarios/comentario_listado.aspx" class="nav-link text-white d-flex align-items-center">
@@ -120,45 +126,47 @@
 
                         <div class="d-flex align-items-center">
                             <!-- Icono de notificaciones -->
-                            <div class="nav-item dropdown no-arrow mx-2">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw text-white"></i>
-                                    <!-- Contador de notificaciones dinámico -->
-                                    <asp:Label ID="lblContadorNotificaciones" runat="server"
-                                        CssClass="badge bg-danger badge-counter" Visible="false"></asp:Label>
-                                </a>
-                                <!-- El menú desplegable dinámico -->
-                                <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">Centro de Alertas</h6>
+                            <asp:UpdatePanel ID="updNotificaciones" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="nav-item dropdown no-arrow mx-2">
 
-                                    <!-- REPEATER PARA MOSTRAR LA LISTA DE NOTIFICACIONES -->
-                                    <asp:Repeater ID="rptNotificaciones" runat="server">
-                                        <ItemTemplate>
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                                <div class="me-3">
-                                                    <div class="icon-circle bg-primary">
-                                                        <!-- Puedes cambiar el icono basado en el tipo de notificación si quieres -->
-                                                        <i class="fas fa-file-alt text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <span class="fw-bold"><%# Eval("mensaje") %></span>
-                                                </div>
-                                            </a>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
+                                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                            onclick="marcarNotificacionesLeidas();"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-bell fa-fw text-white"></i>
 
-                                    <!-- Mensaje si no hay notificaciones -->
-                                    <asp:Panel ID="pnlNoNotificaciones" runat="server" Visible="false" CssClass="dropdown-item text-center small text-gray-500">
-                                        No tienes notificaciones nuevas.
-                                    </asp:Panel>
+                                            <asp:Label ID="lblContadorNotificaciones" runat="server"
+                                                CssClass="badge bg-danger badge-counter" Visible="false"></asp:Label>
+                                        </a>
 
-                                    <!-- Enlace para ver todas -->
-                                    <a class="dropdown-item text-center small text-gray-500" href="/Views/Notificaciones/Listado.aspx">Ver todas las Alertas</a>
-                                </div>
-                            </div>
+                                        <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
+                                            aria-labelledby="alertsDropdown">
+                                            <h6 class="dropdown-header">Centro de Alertas</h6>
+
+                                            <asp:Repeater ID="rptNotificaciones" runat="server">
+                                                <ItemTemplate>
+                                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        <div class="me-3">
+                                                            <div class="icon-circle bg-primary">
+                                                                <i class="fas fa-file-alt text-white"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span class="fw-bold"><%# Eval("mensaje") %></span>
+                                                        </div>
+                                                    </a>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+
+                                            <asp:Panel ID="pnlNoNotificaciones" runat="server" Visible="false" CssClass="dropdown-item text-center small text-gray-500">
+                                                No tienes notificaciones nuevas.
+                                            </asp:Panel>
+
+                                            <a class="dropdown-item text-center small text-gray-500" href="/Views/Home/Notificaciones_gestion.aspx">Ver todas las Alertas</a>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
 
                             <!-- Usuario -->
                             <div class="dropdown ps-2">
@@ -167,8 +175,6 @@
                                     <img src="/Image/undraw_profile.svg" class="rounded-circle" width="32" height="32">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2 text-gray-400"></i>Perfil</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cogs me-2 text-gray-400"></i>Cambiar Contraseña</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -213,7 +219,7 @@
         <script src="/Scripts/MyScripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="/Scripts/demo/chart-area-demo.js"></script>
-<script src="/Scripts/demo/chart-pie-demo.js"></script>
+        <script src="/Scripts/demo/chart-pie-demo.js"></script>
     </form>
 </body>
 </html>

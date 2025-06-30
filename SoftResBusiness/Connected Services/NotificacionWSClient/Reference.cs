@@ -1069,11 +1069,16 @@ namespace SoftResBusiness.NotificacionWSClient {
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int arg0;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg1;
+        
         public obtenerPorIdRequest() {
         }
         
-        public obtenerPorIdRequest(int arg0) {
+        public obtenerPorIdRequest(int arg0, int arg1) {
             this.arg0 = arg0;
+            this.arg1 = arg1;
         }
     }
     
@@ -1232,9 +1237,10 @@ namespace SoftResBusiness.NotificacionWSClient {
             return base.Channel.obtenerPorId(request);
         }
         
-        public SoftResBusiness.NotificacionWSClient.notificacionDTO obtenerPorId(int arg0) {
+        public SoftResBusiness.NotificacionWSClient.notificacionDTO obtenerPorId(int arg0, int arg1) {
             SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest();
             inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
             SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).obtenerPorId(inValue);
             return retVal.@return;
         }
@@ -1244,9 +1250,10 @@ namespace SoftResBusiness.NotificacionWSClient {
             return base.Channel.obtenerPorIdAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
+        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0, int arg1) {
             SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest();
             inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
             return ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).obtenerPorIdAsync(inValue);
         }
         

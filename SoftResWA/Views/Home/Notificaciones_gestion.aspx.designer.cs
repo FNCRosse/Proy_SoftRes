@@ -7,110 +7,83 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SoftResWA
+namespace SoftResWA.Views.Home
 {
 
 
-    public partial class SoftResCliente
+    public partial class Notificaciones_gestion
     {
 
         /// <summary>
-        /// Control cphTitulo.
+        /// Control ddlTipoNotificacionFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphTitulo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoNotificacionFiltro;
 
         /// <summary>
-        /// Control form1.
+        /// Control ddlEstadoFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoFiltro;
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control ddlLeidaFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLeidaFiltro;
 
         /// <summary>
-        /// Control menuReservas.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuReservas;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control notificaciones.
+        /// Control gvNotificaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificaciones;
+        protected global::System.Web.UI.WebControls.GridView gvNotificaciones;
 
         /// <summary>
-        /// Control updNotificacionesCliente.
+        /// Control hdnIdMesa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updNotificacionesCliente;
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdMesa;
 
         /// <summary>
-        /// Control lblContadorNotificaciones.
+        /// Control hdnIdEliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContadorNotificaciones;
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdEliminar;
 
         /// <summary>
-        /// Control rptNotificaciones.
+        /// Control btnEliminarNotificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptNotificaciones;
-
-        /// <summary>
-        /// Control pnlNoNotificaciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNoNotificaciones;
-
-        /// <summary>
-        /// Control login.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl login;
-
-        /// <summary>
-        /// Control ContentPlaceHolder1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button btnEliminarNotificacion;
     }
 }

@@ -18,6 +18,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- Header de la pagina -->
         <header class="custom-header border-bottom">
             <nav class="navbar navbar-expand-md navbar-light container">
@@ -44,28 +45,53 @@
                         <li class="nav-item">
                             <a class="nav-link text-danger fw-medium" href="/Views/Cliente/Comentarios/Comentarios_Listado.aspx">Comentarios</a>
                         </li>
-                        <li class="nav-item">
+                        <li id="menuReservas" runat="server" class="nav-item">
                             <a class="nav-link text-danger fw-medium" href="/Views/Cliente/Reservas/MisReservas.aspx">Mis Reservas</a>
                         </li>
                         <!-- Ícono de notificaciones -->
-                        <li class="nav-item dropdown position-relative">
-                            <a class="nav-link" href="#" id="notificacionesDropdown" role="button">
-                                <i class="fas fa-bell fa-lg" style="color: #BC1F1F;"></i>
-                                <span id="notiBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3
-                                </span>
-                            </a>
+                        <li id="notificaciones" runat="server" class="nav-item dropdown position-relative">
+                            <asp:UpdatePanel ID="updNotificacionesCliente" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <a class="nav-link" href="#" id="notificacionesDropdown" role="button"
+                                        onclick="marcarNotificacionesLeidasCliente();"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-bell fa-lg" style="color: #BC1F1F;"></i>
 
-                            <div id="notificacionesMenu" class="dropdown-notificaciones shadow rounded-4">
-                                <div class="px-3 py-2 border-bottom fw-bold">Notificaciones</div>
-                                <ul class="list-unstyled m-0 p-0" id="notificacionesLista">
-                                    <li class="px-3 py-2 border-bottom">🎉 Tu reserva ha sido confirmada</li>
-                                    <li class="px-3 py-2 border-bottom">📅 Tienes una reserva mañana</li>
-                                    <li class="px-3 py-2">🆕 Nueva promoción disponible</li>
-                                </ul>
-                            </div>
+                                        <asp:Label ID="lblContadorNotificaciones" runat="server"
+                                            CssClass="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                            Visible="false"></asp:Label>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-anim shadow rounded-4" aria-labelledby="notificacionesDropdown">
+                                        <h6 class="dropdown-header">Notificaciones</h6>
+
+                                        <asp:Repeater ID="rptNotificaciones" runat="server">
+                                            <ItemTemplate>
+                                                <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                                    <div class="me-3">
+                                                        <div class="icon-circle bg-primary">
+                                                            <i class="fas fa-file-alt text-white"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fw-normal"><%# Eval("mensaje") %></span>
+                                                    </div>
+                                                </a>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+
+                                        <asp:Panel ID="pnlNoNotificaciones" runat="server" Visible="false" CssClass="dropdown-item text-center small text-muted py-3">
+                                            No tienes notificaciones nuevas.
+                                        </asp:Panel>
+
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-center small text-primary" href="/Views/Cliente/Notificaciones_Listado.aspx">Ver todas</a>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </li>
 
-                        <li class="nav-item">
+                        <li id="login" runat="server" class="nav-item">
                             <a class="nav-link text-danger fw-medium" href="/Views/Cliente/Home/Login_Home.aspx">
                                 <i class="fas fa-lock me-1"></i>Login
                             </a>

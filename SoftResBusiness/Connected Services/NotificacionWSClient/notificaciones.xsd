@@ -106,6 +106,7 @@
   <xs:complexType name="obtenerPorId">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
+      <xs:element minOccurs="0" name="arg1" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerPorIdResponse">

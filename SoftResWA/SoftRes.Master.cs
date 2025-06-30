@@ -98,7 +98,8 @@ namespace SoftResWA
 
                     // Enlazar los datos al Repeater
                     // Solo las 5 más recientes para el desplegable, por ejemplo
-                    rptNotificaciones.DataSource = notificaciones.Take(5).ToList();
+                    var notificacionesAMostrar = notificaciones.Take(5).ToList();
+                    rptNotificaciones.DataSource = notificacionesAMostrar;
                     rptNotificaciones.DataBind();
                 }
                 else
