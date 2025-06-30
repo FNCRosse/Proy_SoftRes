@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/usuarios?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="obtenerPorId">
-    <part name="parameters" element="tns:obtenerPorId" />
+  <message name="existeDoc">
+    <part name="parameters" element="tns:existeDoc" />
   </message>
-  <message name="obtenerPorIdResponse">
-    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  <message name="existeDocResponse">
+    <part name="parameters" element="tns:existeDocResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,23 +17,17 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="eliminar">
-    <part name="parameters" element="tns:eliminar" />
-  </message>
-  <message name="eliminarResponse">
-    <part name="parameters" element="tns:eliminarResponse" />
-  </message>
   <message name="listar">
     <part name="parameters" element="tns:listar" />
   </message>
   <message name="listarResponse">
     <part name="parameters" element="tns:listarResponse" />
   </message>
-  <message name="insertar">
-    <part name="parameters" element="tns:insertar" />
+  <message name="cambiarcontrasena">
+    <part name="parameters" element="tns:cambiarcontrasena" />
   </message>
-  <message name="insertarResponse">
-    <part name="parameters" element="tns:insertarResponse" />
+  <message name="cambiarcontrasenaResponse">
+    <part name="parameters" element="tns:cambiarcontrasenaResponse" />
   </message>
   <message name="modificar">
     <part name="parameters" element="tns:modificar" />
@@ -47,18 +41,30 @@
   <message name="loginResponse">
     <part name="parameters" element="tns:loginResponse" />
   </message>
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
+  </message>
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
+  </message>
+  <message name="eliminar">
+    <part name="parameters" element="tns:eliminar" />
+  </message>
+  <message name="eliminarResponse">
+    <part name="parameters" element="tns:eliminarResponse" />
+  </message>
+  <message name="obtenerPorId">
+    <part name="parameters" element="tns:obtenerPorId" />
+  </message>
+  <message name="obtenerPorIdResponse">
+    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  </message>
   <portType name="Usuario">
-    <operation name="obtenerPorId">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest" message="tns:obtenerPorId" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest" message="tns:eliminar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse" message="tns:eliminarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="existeDoc">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/existeDocRequest" message="tns:existeDoc" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/existeDocResponse" message="tns:existeDocResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/existeDoc/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="listar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/listarRequest" message="tns:listar" />
@@ -66,11 +72,11 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="insertar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest" message="tns:insertar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertarResponse" message="tns:insertarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="cambiarcontrasena">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaRequest" message="tns:cambiarcontrasena" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasenaResponse" message="tns:cambiarcontrasenaResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/cambiarcontrasena/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
     <operation name="modificar">
       <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/modificarRequest" message="tns:modificar" />
@@ -84,25 +90,28 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/login/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="insertar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertarResponse" message="tns:insertarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="eliminar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminarRequest" message="tns:eliminar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminarResponse" message="tns:eliminarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerPorId">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdRequest" message="tns:obtenerPorId" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/Usuario/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
   </portType>
   <binding name="UsuarioPortBinding" type="tns:Usuario">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="obtenerPorId">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminar">
+    <operation name="existeDoc">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -132,7 +141,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="insertar">
+    <operation name="cambiarcontrasena">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -163,6 +172,51 @@
       </fault>
     </operation>
     <operation name="login">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="insertar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerPorId">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

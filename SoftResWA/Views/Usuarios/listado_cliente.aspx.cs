@@ -24,6 +24,7 @@ namespace SoftResWA.Views.Usuarios
         public TipoDocumentoBO TipoDocumentoBO { get => tipoDocumentoBO; set => tipoDocumentoBO = value; }
         public BindingList<usuariosDTO> ListadoClientes { get => listadoClientes; set => listadoClientes = value; }
 
+        //CONSTRUCTOR
         public listado_cliente()
         {
             this.usuarioBO = new UsuarioBO();
@@ -34,80 +35,39 @@ namespace SoftResWA.Views.Usuarios
             usuariosParametros parametros = new usuariosParametros();
             parametros.estadoSpecified = false;
             parametros.idTipoDocumentoSpecified = false;
-
-            // Obtener ID del rol cliente
-            try
-            {
-                var roles = this.rolBO.Listar();
-                var rolCliente = roles.FirstOrDefault(r => r.esCliente);
-                if (rolCliente != null)
-                {
-                    parametros.idTipoUsuarioSpecified = true;
-                    parametros.idTipoUsuario = rolCliente.idRol;
-                }
-                else
-                {
-                    parametros.idTipoUsuarioSpecified = false;
-                }
-            }
-            catch
-            {
-                parametros.idTipoUsuarioSpecified = false;
-            }
+            parametros.esClienteSpecified = true;
+            parametros.esCliente = true;
+            parametros.idTipoUsuarioSpecified = false;
+            parametros.nombreCompleto = null;
+            parametros.numDocumento = null;
 
             this.listadoClientes = this.UsuarioBO.Listar(parametros);
         }
 
+        //CONFIGURACION VISUAL DE LISTADO
         protected List<object> ConfigurarListado(BindingList<usuariosDTO> lista)
         {
             var listaAdaptada = lista.Select(u => new
             {
                 u.idUsuario,
+                tipoCliente = u.rol?.nombre?? "No especificado",
                 u.nombreComp,
-                u.idUsuarioSpecified,
+                tipoDocumento = u.tipoDocumento?.nombre ?? "No especificado",
+                u.numeroDocumento,
                 u.email,
                 u.telefono,
                 u.cantidadReservacion,
-                tipoDocumento = Convert.ToInt32(u.numeroDocumento) > 0 ? ObtenerNombreTipoDocumento(Convert.ToInt32(u.numeroDocumento)) : "No especificado",
-                rol = (Convert.ToInt32(u.rol)) > 0 ? ObtenerNombreRol(Convert.ToInt32(u.rol)) : "No especificado",
                 u.fechaCreacion,
                 u.usuarioCreacion,
                 fechaModificacion = u.fechaModificacionSpecified ? u.fechaModificacion : (DateTime?)null,
                 u.usuarioModificacion,
-                u.estado,
                 estadoTexto = u.estado ? "Activo" : "Inactivo",
                 estadoBool = u.estado
             }).ToList<Object>();
             return listaAdaptada;
         }
 
-        private string ObtenerNombreTipoDocumento(int tipoDocId)
-        {
-            try
-            {
-                SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO tipoDoc = this.tipoDocumentoBO.ObtenerPorID(tipoDocId);
-                return tipoDoc?.nombre ?? "No encontrado";
-            }
-            catch
-            {
-                return "Error al cargar";
-            }
-        }
-
-        private string ObtenerNombreRol(int rolId)
-        {
-            try
-            {
-                // Correct the namespace to use the appropriate rolDTO type
-                SoftResBusiness.RolWSClient.rolDTO rol = this.rolBO.ObtenerPorID(rolId);
-                return rol?.nombre ?? "No encontrado";
-            }
-            catch
-            {
-                return "Error al cargar";
-            }
-        }
-
+        //FUNCIONES GENERALES
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
             ddl.DataSource = dataSource;
@@ -116,18 +76,46 @@ namespace SoftResWA.Views.Usuarios
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem(textoDefault, ""));
         }
-
-        private void CargarEstadosUsuario()
+        private void MostrarResultado(bool exito, string entidad, string modo)
         {
-            var estadosUsuario = new List<object>
-                {
-                    new { nombre = "Activo", id = "1" },
-                    new { nombre = "Inactivo", id = "0" }
-                };
+            string accion = (modo == "eliminar") ? "eliminado" : "procesado";
+            string accionNo = (modo == "eliminar") ? "eliminar" : "procesar";
 
-            this.CargarDropDownList(ddlEstadoFiltro, estadosUsuario, "nombre", "id", "Todos");
+            string baseMensaje = exito ? $"El {entidad} fue {accion}" : $"No se pudo {accionNo} el {entidad}";
+            string tipo = exito ? "success" : "warning";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
+                $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} correctamente.', '{tipo}');", true);
+        }
+        protected void dgv_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var dataItem = e.Row.DataItem;
+
+                // Obtener estado vía reflexión
+                bool estado = false;
+                var prop = dataItem.GetType().GetProperty("estadoBool");
+                if (prop != null)
+                {
+                    estado = (bool)prop.GetValue(dataItem);
+                }
+
+                int idUsuario = (int)dataItem.GetType().GetProperty("idUsuario")?.GetValue(dataItem);
+
+                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
+                HyperLink lnkModificar = (HyperLink)e.Row.FindControl("lnkModificar");
+
+                btnEliminar.Visible = estado;
+                lnkModificar.Visible = estado;
+                if (estado)
+                {
+                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idUsuario}, '{hdnIdEliminar.ClientID}', '{btnEliminarCliente.ClientID}');";
+                }
+            }
         }
 
+        //FUNIONES DE USUARIO-CLIENTE
         private void CargarTiposDocumento()
         {
             try
@@ -141,46 +129,23 @@ namespace SoftResWA.Views.Usuarios
                     $"Swal.fire('Error', 'No se pudieron cargar los tipos de documento: {ex.Message}', 'error');", true);
             }
         }
-
-        private void MostrarResultado(bool exito, string entidad, string modo)
+        private void CargarTiposCliente()
         {
-            string accion = (modo == "eliminar") ? "eliminado" : "procesado";
-            string accionNo = (modo == "eliminar") ? "eliminar" : "procesar";
-
-            string baseMensaje = exito ? $"El {entidad} fue {accion}" : $"No se pudo {accionNo} el {entidad}";
-            string tipo = exito ? "success" : "warning";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
-                $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} correctamente.', '{tipo}');", true);
-        }
-
-        protected void dgv_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-                var dataItem = e.Row.DataItem;
+                var roles = this.rolBO.Listar();
+                var rolesCliente = roles.Where(r => r.esCliente == true).ToList();
 
-                // Obtener estado vía reflexión
-                bool estado = true; // Por defecto activo
-                var prop = dataItem.GetType().GetProperty("estadoBool");
-                if (prop != null)
-                {
-                    estado = (bool)prop.GetValue(dataItem);
-                }
-
-                int idUsuario = (int)dataItem.GetType().GetProperty("idUsuario")?.GetValue(dataItem);
-
-                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
-
-                btnEliminar.Visible = estado;
-
-                if (estado)
-                {
-                    btnEliminar.OnClientClick = $"return confirmarEliminacion({idUsuario}, '{hdnIdEliminar.ClientID}', '{btnEliminarCliente.ClientID}');";
-                }
+                this.CargarDropDownList(ddlTipoClienteFiltro, rolesCliente, "nombre", "idRol", "Todos");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorTiposDoc",
+                    $"Swal.fire('Error', 'No se pudieron cargar los tipos de documento: {ex.Message}', 'error');", true);
             }
         }
 
+        //PAGE_LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
@@ -188,14 +153,14 @@ namespace SoftResWA.Views.Usuarios
             if (!IsPostBack)
             {
                 var listaAdaptada = this.ConfigurarListado(ListadoClientes);
-
                 dgvClientes.DataSource = listaAdaptada;
                 dgvClientes.DataBind();
-                CargarEstadosUsuario();
                 CargarTiposDocumento();
+                CargarTiposCliente();
             }
         }
 
+        //BOTONES   
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
@@ -203,31 +168,16 @@ namespace SoftResWA.Views.Usuarios
                 usuariosParametros parametros = new usuariosParametros();
 
                 parametros.nombreCompleto = txtNombreCompFiltro.Text.Trim();
-                parametros.idTipoDocumento = Convert.ToInt32(txtNumeroDocFiltro.Text.Trim());
-
+                parametros.numDocumento = txtNumeroDocFiltro.Text.Trim();
+                parametros.idTipoDocumento = !string.IsNullOrEmpty(ddlTipoDocumentoFiltro.SelectedValue) ? int.Parse(ddlTipoDocumentoFiltro.SelectedValue) : 0;
+                parametros.idTipoDocumentoSpecified = !string.IsNullOrEmpty(ddlTipoDocumentoFiltro.SelectedValue);
+                parametros.idTipoUsuario = !string.IsNullOrEmpty(ddlTipoClienteFiltro.SelectedValue) ? int.Parse(ddlTipoClienteFiltro.SelectedValue) : 0;
+                parametros.idTipoUsuarioSpecified = !string.IsNullOrEmpty(ddlTipoClienteFiltro.SelectedValue);
                 parametros.estadoSpecified = !string.IsNullOrEmpty(ddlEstadoFiltro.SelectedValue);
+                parametros.esCliente = true;
+                parametros.esClienteSpecified = true;
                 if (parametros.estadoSpecified)
                     parametros.estado = ddlEstadoFiltro.SelectedValue == "1";
-
-                parametros.idTipoDocumentoSpecified = !string.IsNullOrEmpty(ddlTipoDocumentoFiltro.SelectedValue);
-                if (parametros.idTipoDocumentoSpecified)
-                    parametros.idTipoDocumento = int.Parse(ddlTipoDocumentoFiltro.SelectedValue);
-
-                // Filtrar solo clientes
-                try
-                {
-                    var roles = this.rolBO.Listar();
-                    var rolCliente = roles.FirstOrDefault(r => r.esCliente);
-                    if (rolCliente != null)
-                    {
-                        parametros.idTipoUsuarioSpecified = true;
-                        parametros.idTipoUsuario = rolCliente.idRol;
-                    }
-                }
-                catch
-                {
-                    parametros.idTipoUsuarioSpecified = false;
-                }
 
                 var lista = this.usuarioBO.Listar(parametros);
                 var listaAdaptada = this.ConfigurarListado(lista);

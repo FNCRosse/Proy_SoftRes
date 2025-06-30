@@ -7,48 +7,21 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SoftResWA.Views.Usuarios
+namespace SoftResWA.Views.Home
 {
 
 
-    public partial class listado_cliente
+    public partial class Notificaciones_gestion
     {
 
         /// <summary>
-        /// Control txtNombreCompFiltro.
+        /// Control ddlTipoNotificacionFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreCompFiltro;
-
-        /// <summary>
-        /// Control txtNumeroDocFiltro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumeroDocFiltro;
-
-        /// <summary>
-        /// Control ddlTipoDocumentoFiltro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumentoFiltro;
-
-        /// <summary>
-        /// Control ddlTipoClienteFiltro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoClienteFiltro;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoNotificacionFiltro;
 
         /// <summary>
         /// Control ddlEstadoFiltro.
@@ -60,6 +33,15 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoFiltro;
 
         /// <summary>
+        /// Control ddlLeidaFiltro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLeidaFiltro;
+
+        /// <summary>
         /// Control btnBuscar.
         /// </summary>
         /// <remarks>
@@ -69,22 +51,22 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control btnNuevoCliente.
+        /// Control gvNotificaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuevoCliente;
+        protected global::System.Web.UI.WebControls.GridView gvNotificaciones;
 
         /// <summary>
-        /// Control dgvClientes.
+        /// Control hdnIdMesa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvClientes;
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdMesa;
 
         /// <summary>
         /// Control hdnIdEliminar.
@@ -96,12 +78,12 @@ namespace SoftResWA.Views.Usuarios
         protected global::System.Web.UI.WebControls.HiddenField hdnIdEliminar;
 
         /// <summary>
-        /// Control btnEliminarCliente.
+        /// Control btnEliminarNotificacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarCliente;
+        protected global::System.Web.UI.WebControls.Button btnEliminarNotificacion;
     }
 }

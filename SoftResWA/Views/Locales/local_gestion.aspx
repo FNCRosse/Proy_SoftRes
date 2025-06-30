@@ -38,7 +38,7 @@
                 <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2"
                     Text="Buscar"
                     OnClick="btnBuscar_Click" />
-                <asp:Button ID="btnNuevoSede" runat="server" CssClass="btn shadow-sm"
+                <asp:Button ID="btnNuevo" runat="server" CssClass="btn shadow-sm"
                     Text="Nuevo"
                     OnClick="btnNuevo_Click"
                     Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
@@ -80,7 +80,6 @@
     </div>
     <!-- Modales -->
     <!-- Modal Registrar Local -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:HiddenField ID="hdnIdLocal" runat="server" />
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <div class="modal fade" id="modalRegistrarLocal" tabindex="-1" aria-labelledby="modalRegistrarLocalLabel" aria-hidden="true">

@@ -114,15 +114,6 @@ namespace SoftResWA.Views.Mesas
         protected global::System.Web.UI.WebControls.Button btnEliminarMesa;
 
         /// <summary>
-        /// Control ScriptManager1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
         /// Control txtNumeroMesa.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace SoftResWA.Views.Mesas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumeroMesa;
+
+        /// <summary>
+        /// Control rfvNumeroMesa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroMesa;
 
         /// <summary>
         /// Control txtPosX.
@@ -141,6 +141,24 @@ namespace SoftResWA.Views.Mesas
         protected global::System.Web.UI.WebControls.TextBox txtPosX;
 
         /// <summary>
+        /// Control rfvPosX.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPosX;
+
+        /// <summary>
+        /// Control rvPosX.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPosX;
+
+        /// <summary>
         /// Control txtPosY.
         /// </summary>
         /// <remarks>
@@ -148,6 +166,24 @@ namespace SoftResWA.Views.Mesas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPosY;
+
+        /// <summary>
+        /// Control rfvPosY.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPosY;
+
+        /// <summary>
+        /// Control rvPosY.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPosY;
 
         /// <summary>
         /// Control txtCapacidad.
@@ -159,6 +195,15 @@ namespace SoftResWA.Views.Mesas
         protected global::System.Web.UI.WebControls.TextBox txtCapacidad;
 
         /// <summary>
+        /// Control rfvCapacidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCapacidad;
+
+        /// <summary>
         /// Control ddlEstadoMesa.
         /// </summary>
         /// <remarks>
@@ -166,6 +211,15 @@ namespace SoftResWA.Views.Mesas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoMesa;
+
+        /// <summary>
+        /// Control rfvEstado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEstado;
 
         /// <summary>
         /// Control ddlTipoMesa.
@@ -177,6 +231,15 @@ namespace SoftResWA.Views.Mesas
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoMesa;
 
         /// <summary>
+        /// Control rfvTipoMesa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTipoMesa;
+
+        /// <summary>
         /// Control ddlLocal.
         /// </summary>
         /// <remarks>
@@ -184,6 +247,15 @@ namespace SoftResWA.Views.Mesas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLocal;
+
+        /// <summary>
+        /// Control rfvLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocal;
 
         /// <summary>
         /// Control btnGuardarMesa.

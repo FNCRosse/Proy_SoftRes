@@ -1,6 +1,7 @@
 ﻿using SoftResBusiness;
 using SoftResBusiness.HorarioAtencionWSClient;
 using SoftResBusiness.LocalWSClient;
+using SoftResBusiness.UsuarioWSClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,19 @@ namespace SoftResWA.Views.Horarios
 
         public HorarioAtencionBO HorarioAtencionBO { get => horarioAtencionBO; set => horarioAtencionBO = value; }
         public BindingList<horarioAtencionDTO> ListadoHorarios { get => listadoHorarios; set => listadoHorarios = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
+
+        //CONSTRUCTOR
         public horario_gestion()
         {
             this.horarioAtencionBO = new HorarioAtencionBO();
@@ -27,6 +41,8 @@ namespace SoftResWA.Views.Horarios
             parametros.estadoSpecified = false;
             this.listadoHorarios = this.HorarioAtencionBO.Listar(parametros);
         }
+
+        //CONFIGURACION VISUAL DE LISTADO
         protected List<object> ConfigurarListado(BindingList<horarioAtencionDTO> lista)
         {
             var listaAdaptada = lista.Select(l => new
@@ -45,6 +61,8 @@ namespace SoftResWA.Views.Horarios
             }).ToList<Object>();
             return listaAdaptada;
         }
+
+        //FUNCIONES GENERALES
         private void MostrarModal(string modo, string titulo)
         {
             hdnModoModal.Value = modo;
@@ -64,15 +82,6 @@ namespace SoftResWA.Views.Horarios
             ddl.DataValueField = valueField;
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem(textoDefault, ""));
-        }
-        private void CargarDiasSemana()
-        {
-            var diasSemana = Enum.GetNames(typeof(SoftResBusiness.HorarioAtencionWSClient.diaSemana))
-                .Select(d => new { nombre = d, id = d }) 
-                .ToList();
-
-            this.CargarDropDownList(ddlDiaSemana, diasSemana, "nombre", "id", "Seleccionar...");
-            this.CargarDropDownList(ddlDia, diasSemana, "nombre", "id", "Seleccionar...");
         }
         private void MostrarResultado(bool exito, string entidad, string modo)
         {
@@ -116,6 +125,17 @@ namespace SoftResWA.Views.Horarios
                 }
             }
         }
+
+        //FUNCIONES PARA HORARIO
+        private void CargarDiasSemana()
+        {
+            var diasSemana = Enum.GetNames(typeof(SoftResBusiness.HorarioAtencionWSClient.diaSemana))
+                .Select(d => new { nombre = d, id = d }) 
+                .ToList();
+
+            this.CargarDropDownList(ddlDiaSemana, diasSemana, "nombre", "id", "Seleccionar...");
+            this.CargarDropDownList(ddlDia, diasSemana, "nombre", "id", "Seleccionar...");
+        }
         private horarioAtencionDTO ConstruirDTO(horarioAtencionDTO horario)
         {
             if (horario == null)
@@ -133,6 +153,7 @@ namespace SoftResWA.Views.Horarios
             return horario;
         }
 
+        //PAGE_LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
@@ -147,8 +168,14 @@ namespace SoftResWA.Views.Horarios
             }
         }
 
+        //BOTONES
         protected void btnGuardarHorario_Click(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                MostrarResultado(false, "Horario", "guardar");
+                return;
+            }
             string modo = hdnModoModal.Value;
             bool exito = false;
             if (modo == "registrar")
@@ -158,7 +185,7 @@ namespace SoftResWA.Views.Horarios
                 horario.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 horario.fechaCreacionSpecified = true;
                 horario.fechaModificacionSpecified = false;
-                horario.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                horario.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.horarioAtencionBO.Insertar(horario) > 0;
             }
@@ -166,14 +193,12 @@ namespace SoftResWA.Views.Horarios
             {
                 int id = int.Parse(hdnIdHorario.Value);
                 horarioAtencionDTO horario = this.horarioAtencionBO.ObtenerPorID(id);
-
                 horario = ConstruirDTO(horario); // actualiza campos pero mantiene ID, creación, etc.
                 horario.idHorario = id;
                 horario.idHorarioSpecified = true;
-
                 horario.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 horario.fechaModificacionSpecified = true;
-                horario.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                horario.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                 exito = this.horarioAtencionBO.Modificar(horario) > 0;
             }

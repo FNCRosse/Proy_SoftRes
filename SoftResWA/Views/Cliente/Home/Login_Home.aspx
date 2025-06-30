@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftResCliente.Master" AutoEventWireup="true" CodeBehind="Login_Home.aspx.cs" Inherits="SoftResWA.Views.Cliente.Home.Login_Home" %>
+﻿<%@ Page Title="" Language="C#" Async="true" MasterPageFile="~/SoftResCliente.Master" AutoEventWireup="true" CodeBehind="Login_Home.aspx.cs" Inherits="SoftResWA.Views.Cliente.Home.Login_Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Login
@@ -35,6 +35,7 @@
         </div>
     </section>
 
+
     <!-- Modal Login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -46,14 +47,14 @@
                     <h3 class="modal-title text-danger fw-bold">Iniciar Sesión</h3>
                     <p class="mb-3">Por favor, Ingrese la siguiente información</p>
 
-                    <input type="email" class="form-control mb-3" placeholder="Correo electrónico" />
+                    <asp:TextBox ID="txtLoginEmail" runat="server" CssClass="form-control mb-3" placeholder="Correo electrónico" TextMode="Email" />
 
                     <div class="position-relative mb-3">
-                        <input type="password" class="form-control" id="loginPass" placeholder="Contraseña" />
+                        <asp:TextBox ID="txtLoginPassword" runat="server" CssClass="form-control" placeholder="Contraseña" TextMode="Password" />
                         <i class="fas fa-eye toggle-password" onclick="togglePassword('loginPass', this)"></i>
                     </div>
-
-                    <button class="btn btn-danger w-100 mb-2 fw-bold">Iniciar sesión</button>
+                     <asp:Label ID="lblLoginError" runat="server" CssClass="text-danger small d-block text-center mb-2" Visible="false"/>
+                    <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="btn btn-danger w-100 mb-2 fw-bold" OnClick="btnLogin_Click" />
                     <a href="#" class="text-primary small d-block text-center mt-1" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -129,17 +130,28 @@
                     <h4 class="text-danger fw-bold mb-3">¿Olvidaste tu contraseña?</h4>
                     <p class="text-muted mb-3">No te preocupes, ingresa tu correo electrónico y te enviaremos un enlace para restablecerla.</p>
 
-                    <input type="email" class="form-control mb-3" placeholder="Tu correo electrónico" />
+                    <asp:TextBox ID="txtRecuperarEmail" runat="server" CssClass="form-control mb-3" placeholder="Tu correo electrónico" TextMode="Email"></asp:TextBox>
 
-                    <button class="btn btn-warning w-100 fw-bold" style="color: #000;">
-                        Enviar enlace de recuperación
-                    </button>
-
+                    <asp:Button ID="btnEnviarRecuperacion" runat="server" Text="Enviar enlace de recuperación" CssClass="btn btn-warning w-100 fw-bold" Style="color: #000;" OnClick="btnEnviarRecuperacion_Click" />
+                    
                     <p class="small text-muted mt-3">Revisa también tu bandeja de spam o promociones.</p>
                 </div>
             </div>
         </div>
     </div>
-
+    <script type="text/javascript">
+        function togglePassword(fieldId, icon) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                field.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+    </script>
 </asp:Content>
 
