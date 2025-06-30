@@ -35,6 +35,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,6 +85,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ReporteClienteWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ReporteReservaWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ReservaWSClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,6 +137,8 @@
     <Compile Include="MesaBO.cs" />
     <Compile Include="MotivoCancelacionBO.cs" />
     <Compile Include="NotificacionBO.cs" />
+    <Compile Include="ReporteClienteBO.cs" />
+    <Compile Include="ReporteReservaBO.cs" />
     <Compile Include="ReservaBO.cs" />
     <Compile Include="ReservaxMesaBO.cs" />
     <Compile Include="RolBO.cs" />
@@ -310,6 +323,20 @@
     <None Include="Connected Services\NotificacionWSClient\SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ReporteClienteWSClient\reporteCliente.wsdl" />
+    <None Include="Connected Services\ReporteClienteWSClient\reporteCliente.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReporteClienteWSClient\SoftResBusiness.ReporteClienteWSClient.reporteClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReporteReservaWSClient\reporteReserva.wsdl" />
+    <None Include="Connected Services\ReporteReservaWSClient\reporteReserva.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReporteReservaWSClient\SoftResBusiness.ReporteReservaWSClient.reporteReservaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ReservaWSClient\reservas.wsdl" />
     <None Include="Connected Services\ReservaWSClient\reservas.xsd">
       <SubType>Designer</SubType>
@@ -477,6 +504,8 @@
     <WCFMetadataStorage Include="Connected Services\MesaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\MotivoCancelacionWSClient\" />
     <WCFMetadataStorage Include="Connected Services\NotificacionWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\ReporteClienteWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\ReporteReservaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\ReservaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\ReservaxMesaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\RolWSClient\" />
@@ -661,6 +690,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RolWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteClienteWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteClienteWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteClienteWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteReservaWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteReservaWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReporteReservaWSClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
