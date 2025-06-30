@@ -266,6 +266,7 @@
     <Content Include="Views\Reportes\reporte_reservas.aspx" />
     <Content Include="Views\Reservas\registrar_reserva_comun.aspx" />
     <Content Include="Views\Reservas\registrar_reserva_evento.aspx" />
+    <Content Include="Views\Reservas\ReporteReservas.aspx" />
     <Content Include="Views\Reservas\reserva_gestion.aspx" />
     <Content Include="Views\Sedes\sede_gestion.aspx" />
     <Content Include="Views\Usuarios\listado_cliente.aspx" />
@@ -432,6 +433,13 @@
     </Compile>
     <Compile Include="Views\Reservas\registrar_reserva_evento.aspx.designer.cs">
       <DependentUpon>registrar_reserva_evento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservas\ReporteReservas.aspx.cs">
+      <DependentUpon>ReporteReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reservas\ReporteReservas.aspx.designer.cs">
+      <DependentUpon>ReporteReservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reservas\reserva_gestion.aspx.cs">
       <DependentUpon>reserva_gestion.aspx</DependentUpon>
