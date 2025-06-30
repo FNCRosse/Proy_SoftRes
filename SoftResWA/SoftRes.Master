@@ -68,10 +68,8 @@
                         <i class="fa-solid fa-user me-2"></i>Usuarios
                     </a>
                     <ul class="nav flex-column subitems ps-4">
-                        <li><a class="nav-link text-white" href="/Views/Usuarios/registro_cliente.aspx">Registrar Cliente</a></li>
-                        <li><a class="nav-link text-white" href="/Views/Usuarios/registro_empleado.aspx">Registrar Empleado</a></li>
-                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_cliente.aspx">Listar Clientes</a></li>
-                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_empleado.aspx">Listar Empleado</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_cliente.aspx">Clientes</a></li>
+                        <li><a class="nav-link text-white" href="/Views/Usuarios/listado_empleado.aspx">Empleados</a></li>
                     </ul>
                 </li>
 

@@ -11,7 +11,7 @@
                     <h4><i class="fas fa-users me-2 text-danger"></i>Listado de Clientes</h4>
                     <asp:Button ID="btnNuevoCliente" runat="server" Text="Nuevo Cliente"
                         CssClass="btn btn-danger px-4" 
-                        OnClientClick="window.location.href='registro_cliente.aspx'; return false;" />
+                        OnClick="btnNuevoCliente_Click" />
                 </div>
             </div>
             <div class="card-body">
@@ -19,20 +19,16 @@
                 
                 <!-- Filtros de búsqueda -->
                 <div class="row g-3 mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="txtNombreCompFiltro" class="form-label">Nombre Completo</label>
                         <asp:TextBox ID="txtNombreCompFiltro" runat="server" CssClass="form-control" placeholder="Buscar por nombre..." />
                     </div>
-                    <div class="col-md-3">
-                        <label for="txtNumeroDocFiltro" class="form-label">Número de Documento</label>
-                        <asp:TextBox ID="txtNumeroDocFiltro" runat="server" CssClass="form-control" placeholder="Buscar por documento..." />
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="ddlTipoDocumentoFiltro" class="form-label">Tipo de Documento</label>
                         <asp:DropDownList ID="ddlTipoDocumentoFiltro" runat="server" CssClass="form-select">
                         </asp:DropDownList>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="ddlEstadoFiltro" class="form-label">Estado</label>
                         <asp:DropDownList ID="ddlEstadoFiltro" runat="server" CssClass="form-select">
                         </asp:DropDownList>
@@ -52,22 +48,23 @@
                         <Columns>
                             <asp:BoundField DataField="idUsuario" HeaderText="ID" ItemStyle-Width="60px" />
                             <asp:BoundField DataField="nombreComp" HeaderText="Nombre Completo" ItemStyle-Width="200px" />
-                            <asp:BoundField DataField="tipoDocumento" HeaderText="Tipo Doc." ItemStyle-Width="100px" />
-                            <asp:BoundField DataField="numeroDoc" HeaderText="Nº Documento" ItemStyle-Width="120px" />
+                            <asp:BoundField DataField="tipoDocumentoNombre" HeaderText="Tipo Doc." ItemStyle-Width="100px" />
+                            <asp:BoundField DataField="numeroDocumento" HeaderText="Nº Documento" ItemStyle-Width="120px" />
                             <asp:BoundField DataField="email" HeaderText="Email" ItemStyle-Width="200px" />
                             <asp:BoundField DataField="telefono" HeaderText="Teléfono" ItemStyle-Width="120px" />
-                            <asp:BoundField DataField="cantReservas" HeaderText="Reservas" ItemStyle-Width="80px" />
+                            <asp:BoundField DataField="cantidadReservacion" HeaderText="Reservas" ItemStyle-Width="80px" />
                             <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Creación" ItemStyle-Width="120px" DataFormatString="{0:dd/MM/yyyy}" />
                             <asp:BoundField DataField="estadoTexto" HeaderText="Estado" ItemStyle-Width="80px" />
                             
                             <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="150px">
                                 <ItemTemplate>
-                                    <asp:HyperLink ID="lnkModificar" runat="server" 
+                                    <asp:LinkButton ID="lnkModificar" runat="server" 
                                         CssClass="btn btn-outline-warning btn-sm me-1" 
-                                        NavigateUrl='<%# "registro_cliente.aspx?id=" + Eval("idUsuario") %>'
+                                        CommandArgument='<%# Eval("idUsuario") %>'
+                                        OnCommand="btnModificarCliente_Command"
                                         ToolTip="Modificar">
                                         <i class="fas fa-edit"></i>
-                                    </asp:HyperLink>
+                                    </asp:LinkButton>
                                     <asp:LinkButton ID="btnEliminar" runat="server" 
                                         CssClass="btn btn-outline-danger btn-sm" 
                                         ToolTip="Eliminar">
@@ -92,6 +89,120 @@
     <!-- Hidden fields para eliminar -->
     <asp:HiddenField ID="hdnIdEliminar" runat="server" />
     <asp:Button ID="btnEliminarCliente" runat="server" style="display:none;" OnClick="btnEliminarCliente_Click" />
+
+    <!-- Hidden fields para modal -->
+    <asp:HiddenField ID="hdnModoModal" runat="server" />
+    <asp:HiddenField ID="hdnIdCliente" runat="server" />
+
+    <!-- Modal para Registrar/Modificar Cliente -->
+    <div class="modal fade" id="modalRegistrarCliente" tabindex="-1" aria-labelledby="tituloModalCliente" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-warning">
+                <div class="modal-header bg-warning-subtle">
+                    <h5 class="modal-title fw-bold" id="tituloModalCliente">
+                        <i class="fas fa-user-plus me-2 text-danger"></i>Registrar Cliente
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <!-- Nombre completo -->
+                        <div class="col-md-6">
+                            <label for="txtNombreCompleto" class="form-label">Nombre Completo <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtNombreCompleto" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvNombre" runat="server" 
+                                ControlToValidate="txtNombreCompleto" ErrorMessage="Nombre completo es requerido" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Tipo de documento -->
+                        <div class="col-md-6">
+                            <label for="ddlTipoDocumentoModal" class="form-label">Tipo de Documento <span class="text-danger">*</span></label>
+                            <asp:DropDownList ID="ddlTipoDocumentoModal" runat="server" CssClass="form-select">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="rfvTipoDocModal" runat="server" 
+                                ControlToValidate="ddlTipoDocumentoModal" ErrorMessage="Tipo de documento es requerido" 
+                                CssClass="text-danger" Display="Dynamic" InitialValue="" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Número de documento -->
+                        <div class="col-md-6">
+                            <label for="txtNumeroDocumento" class="form-label">Número de Documento <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtNumeroDocumento" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvNumeroDoc" runat="server" 
+                                ControlToValidate="txtNumeroDocumento" ErrorMessage="Número de documento es requerido" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <label for="txtEmailModal" class="form-label">Email <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtEmailModal" runat="server" CssClass="form-control" TextMode="Email" />
+                            <asp:RequiredFieldValidator ID="rfvEmailModal" runat="server" 
+                                ControlToValidate="txtEmailModal" ErrorMessage="Email es requerido" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                            <asp:RegularExpressionValidator ID="revEmailModal" runat="server" 
+                                ControlToValidate="txtEmailModal" ErrorMessage="Formato de email inválido"
+                                ValidationExpression="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div class="col-md-6">
+                            <label for="txtTelefonoModal" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtTelefonoModal" runat="server" CssClass="form-control" />
+                            <asp:RequiredFieldValidator ID="rfvTelefonoModal" runat="server" 
+                                ControlToValidate="txtTelefonoModal" ErrorMessage="Teléfono es requerido" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="col-md-6">
+                            <label for="txtContrasenaModal" class="form-label">Contraseña <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtContrasenaModal" runat="server" CssClass="form-control" TextMode="Password" />
+                            <asp:RequiredFieldValidator ID="rfvContrasenaModal" runat="server" 
+                                ControlToValidate="txtContrasenaModal" ErrorMessage="Contraseña es requerida" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Confirmar contraseña -->
+                        <div class="col-md-6">
+                            <label for="txtConfirmPasswordModal" class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
+                            <asp:TextBox ID="txtConfirmPasswordModal" runat="server" CssClass="form-control" TextMode="Password" />
+                            <asp:RequiredFieldValidator ID="rfvConfirmPasswordModal" runat="server" 
+                                ControlToValidate="txtConfirmPasswordModal" ErrorMessage="Confirmación de contraseña es requerida" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                            <asp:CompareValidator ID="cvPasswordModal" runat="server" 
+                                ControlToValidate="txtConfirmPasswordModal" ControlToCompare="txtContrasenaModal"
+                                ErrorMessage="Las contraseñas no coinciden" 
+                                CssClass="text-danger" Display="Dynamic" ValidationGroup="ClienteValidation" />
+                        </div>
+
+                        <!-- Cantidad de reservas -->
+                        <div class="col-md-6">
+                            <label for="txtCantReservasModal" class="form-label">Cantidad de Reservas</label>
+                            <asp:TextBox ID="txtCantReservasModal" runat="server" CssClass="form-control" TextMode="Number" Text="0" ReadOnly="true" />
+                            <small class="form-text text-muted">Este campo se actualiza automáticamente</small>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="col-md-6">
+                            <div class="form-check mt-4">
+                                <asp:CheckBox ID="chkEstadoModal" runat="server" CssClass="form-check-input" Checked="true" />
+                                <label class="form-check-label" for="chkEstadoModal">
+                                    Cliente Activo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnGuardarCliente" runat="server" Text="Guardar" CssClass="btn btn-danger fw-bold" 
+                        OnClick="btnGuardarCliente_Click" ValidationGroup="ClienteValidation" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript para confirmación de eliminación -->
     <script type="text/javascript">

@@ -38,16 +38,16 @@
             </div>
             <!-- Botones -->
             <div class="col-auto d-flex align-items-end">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-danger me-2" 
+                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-danger me-2" 
                     OnClick="btnBuscar_Click">
-                    <i class="fas fa-search me-1"></i>
-                </asp:Button>
-                <asp:Button ID="btnNuevo" runat="server" Text="Nuevo" 
+                    <i class="fas fa-search me-1"></i>Buscar
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnNuevo" runat="server" 
                     CssClass="btn shadow-sm"
                     style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;"
                     OnClick="btnNuevo_Click">
-                    <i class="fas fa-plus me-2"></i>
-                </asp:Button>
+                    <i class="fas fa-plus me-2"></i>Nuevo
+                </asp:LinkButton>
             </div>
         </div>
     </div>
@@ -76,7 +76,8 @@
                             OnCommand="btnModificar_Command">
                             <i class="fas fa-edit"></i>
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-danger btn-sm">
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-danger btn-sm"
+                            CommandArgument='<%# Eval("idMesa") %>'>
                             <i class="fas fa-trash"></i>
                         </asp:LinkButton>
                     </ItemTemplate>
@@ -111,7 +112,7 @@
 
                             <div class="mb-2">
                                 <label for="txtNumeroMesa" class="form-label">Número de mesa <span class="text-danger">*</span></label>
-                                <asp:TextBox ID="txtNumeroMesa" runat="server" CssClass="form-control" />
+                                <asp:TextBox ID="txtNumeroMesa" runat="server" CssClass="form-control" placeholder="Ej. M-101" />
                                 <asp:RequiredFieldValidator ID="rfvNumeroMesa" runat="server" 
                                     ControlToValidate="txtNumeroMesa" ErrorMessage="Número de mesa es requerido" 
                                     CssClass="text-danger" Display="Dynamic" />
@@ -124,6 +125,9 @@
                                     <asp:RequiredFieldValidator ID="rfvPosX" runat="server" 
                                         ControlToValidate="txtPosX" ErrorMessage="Posición X es requerida" 
                                         CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosX" runat="server" 
+                                        ControlToValidate="txtPosX" ErrorMessage="Posición X debe ser un número válido" 
+                                        CssClass="text-danger" Display="Dynamic" Type="Integer" MinimumValue="0" MaximumValue="9999" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtPosY" class="form-label">Posición Y <span class="text-danger">*</span></label>
@@ -131,6 +135,9 @@
                                     <asp:RequiredFieldValidator ID="rfvPosY" runat="server" 
                                         ControlToValidate="txtPosY" ErrorMessage="Posición Y es requerida" 
                                         CssClass="text-danger" Display="Dynamic" />
+                                    <asp:RangeValidator ID="rvPosY" runat="server" 
+                                        ControlToValidate="txtPosY" ErrorMessage="Posición Y debe ser un número válido" 
+                                        CssClass="text-danger" Display="Dynamic" Type="Integer" MinimumValue="0" MaximumValue="9999" />
                                 </div>
                             </div>
 
@@ -140,6 +147,9 @@
                                 <asp:RequiredFieldValidator ID="rfvCapacidad" runat="server" 
                                     ControlToValidate="txtCapacidad" ErrorMessage="Capacidad es requerida" 
                                     CssClass="text-danger" Display="Dynamic" />
+                                <asp:RangeValidator ID="rvCapacidad" runat="server" 
+                                    ControlToValidate="txtCapacidad" ErrorMessage="Capacidad debe ser entre 1 y 20" 
+                                    CssClass="text-danger" Display="Dynamic" Type="Integer" MinimumValue="1" MaximumValue="20" />
                             </div>
 
                             <div class="mb-2">

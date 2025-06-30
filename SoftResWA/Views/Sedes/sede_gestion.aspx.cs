@@ -150,6 +150,51 @@ namespace SoftResWA.Views.Sedes
             sede.estadoSpecified = true;
             return sede;
         }
+
+        private void CargarHorariosExistentes(int idSede)
+        {
+            // Obtener las relaciones horario-sede
+            var relacionesHorarioSede = this.horarioxSedeBO.Listar(idSede);
+            
+            // Lista para almacenar los horarios completos
+            List<horarioAtencionDTO> horariosCompletos = new List<horarioAtencionDTO>();
+            
+            // Para cada relación, obtener el horario completo
+            foreach (var relacion in relacionesHorarioSede)
+            {
+                horarioAtencionDTO horarioCompleto = this.horarioAtencionBO.ObtenerPorID(relacion.idHorario);
+                if (horarioCompleto != null)
+                {
+                    horariosCompletos.Add(horarioCompleto);
+                }
+            }
+            
+            // Actualizar la lista de horarios seleccionados
+            HorariosSeleccionados = horariosCompletos;
+            
+            // Actualizar la vista del GridView
+            ActualizarVistaHorarios();
+        }
+
+        private void ActualizarVistaHorarios()
+        {
+            var listaVisual = new List<object>();
+            foreach (var h in HorariosSeleccionados)
+            {
+                listaVisual.Add(new
+                {
+                    idHorario = h.idHorario,
+                    diaSemana = h.diaSemana != null ? h.diaSemana.ToString() : "",
+                    horaInicio = h.horaInicioStr,
+                    horaFin = h.horaFinStr,
+                    feriadoTexto = h.esFeriado != null && h.esFeriado ? "Sí" : "No"
+                });
+            }
+
+            gvDetalleHorario.DataSource = listaVisual;
+            gvDetalleHorario.DataBind();
+        }
+
         public List<horarioAtencionDTO> HorariosSeleccionados
         {
             get
@@ -206,21 +251,9 @@ namespace SoftResWA.Views.Sedes
                             lista.Add(horarioObtenido);
                             HorariosSeleccionados = lista;
                         }
-                        var listaVisual = new List<object>();
-                        foreach (var h in lista)
-                        {
-                            listaVisual.Add(new
-                            {
-                                idHorario = h.idHorario,
-                                diaSemana = h.diaSemana != null ? h.diaSemana.ToString() : "",
-                                horaInicio = h.horaInicioStr,
-                                horaFin = h.horaFinStr,
-                                feriadoTexto = h.esFeriado != null && h.esFeriado ? "Sí" : "No"
-                            });
-                        }
-
-                        gvDetalleHorario.DataSource = listaVisual;
-                        gvDetalleHorario.DataBind();
+                        
+                        // Actualizar la vista del GridView
+                        ActualizarVistaHorarios();
                         string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
                         this.MostrarModal(hdnModoModal.Value, titulo);
                     }
@@ -241,21 +274,9 @@ namespace SoftResWA.Views.Sedes
             }
 
             HorariosSeleccionados = lista;
-            var listaVisual = new List<object>();
-            foreach (var h in lista)
-            {
-                listaVisual.Add(new
-                {
-                    idHorario = h.idHorario,
-                    diaSemana = h.diaSemana != null ? h.diaSemana.ToString() : "",
-                    horaInicio = h.horaInicioStr,
-                    horaFin = h.horaFinStr,
-                    feriadoTexto = h.esFeriado != null && h.esFeriado ? "Sí" : "No"
-                });
-            }
-
-            gvDetalleHorario.DataSource = listaVisual;
-            gvDetalleHorario.DataBind();
+            
+            // Actualizar la vista del GridView
+            ActualizarVistaHorarios();
             string titulo = hdnModoModal.Value == "modificar" ? "Modificar Sede" : "Registrar Sede";
             this.MostrarModal(hdnModoModal.Value, titulo);
         }
@@ -294,7 +315,13 @@ namespace SoftResWA.Views.Sedes
             }
             else if (modo == "modificar")
             {
-                int id = int.Parse(hdnIdSede.Value);
+                // Validar que hdnIdSede.Value no esté vacío y sea un número válido
+                if (string.IsNullOrEmpty(hdnIdSede.Value) || !int.TryParse(hdnIdSede.Value, out int id))
+                {
+                    MostrarResultado(false, "Sede", modo);
+                    return;
+                }
+                
                 sedeDTO sede = this.sedeBO.ObtenerPorID(id);
 
                 sede = ConstruirSedeDTO(sede); // actualiza campos pero mantiene ID, creación, etc.
@@ -306,6 +333,28 @@ namespace SoftResWA.Views.Sedes
                 sede.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
 
                 exito = this.sedeBO.Modificar(sede) > 0;
+                
+                // Si la modificación de la sede fue exitosa, actualizar los horarios
+                if (exito)
+                {
+                    // Eliminar las relaciones horario-sede existentes
+                    var relacionesExistentes = this.horarioxSedeBO.Listar(id);
+                    foreach (var relacion in relacionesExistentes)
+                    {
+                        this.horarioxSedeBO.Eliminar(relacion);
+                    }
+                    
+                    // Insertar las nuevas relaciones horario-sede
+                    foreach (var horario in HorariosSeleccionados)
+                    {
+                        horariosxSedesDTO nuevaRelacion = new horariosxSedesDTO();
+                        nuevaRelacion.idHorario = horario.idHorario;
+                        nuevaRelacion.idHorarioSpecified = true;
+                        nuevaRelacion.idSedeSpecified = true;
+                        nuevaRelacion.idSede = id;
+                        this.horarioxSedeBO.Insertar(nuevaRelacion);
+                    }
+                }
             }
             MostrarResultado(exito, "Sede", modo);
             if (exito)
@@ -351,6 +400,13 @@ namespace SoftResWA.Views.Sedes
             txtNombreSede.Text = "";
             txtDistritoSede.Text = "";
             hdnIdSede.Value = "";
+            
+            // Limpiar lista de horarios seleccionados
+            HorariosSeleccionados = new List<horarioAtencionDTO>();
+            
+            // Limpiar tabla de detalle de horarios
+            gvDetalleHorario.DataSource = null;
+            gvDetalleHorario.DataBind();
 
             // Cambia título a "Registrar"
             this.MostrarModal("registrar", "Registrar Sede");
@@ -364,9 +420,15 @@ namespace SoftResWA.Views.Sedes
                 sedeDTO sede = this.SedeBO.ObtenerPorID(idSede);
                 if (sede != null)
                 {
+                    // Establecer el ID de la sede en el campo oculto
+                    hdnIdSede.Value = idSede.ToString();
+                    
                     txtNombreSede.Text = sede.nombre;
                     txtDistritoSede.Text = sede.distrito;
-                    //Aqui falta lo de traer el listados de horario x sede
+                    
+                    // Cargar los horarios actuales de la sede
+                    CargarHorariosExistentes(idSede);
+                    
                     this.MostrarModal("modificar", "Modificar Sede");
                 }
             }

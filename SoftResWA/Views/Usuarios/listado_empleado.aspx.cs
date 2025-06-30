@@ -47,8 +47,8 @@ namespace SoftResWA.Views.Usuarios
                 u.telefono,
                 u.sueldo,
                 u.cantidadReservacion,
-                tipoDocumento = u.tipoDocumento != null ? u.tipoDocumento.nombre : "No especificado",
-                rol = u.rol != null ? u.rol.nombre : "No especificado",
+                tipoDocumentoNombre = u.tipoDocumento != null ? u.tipoDocumento.nombre : "No especificado",
+                rolNombre = u.rol != null ? u.rol.nombre : "No especificado",
                 fechaContratacion = u.fechaContratacionSpecified ? u.fechaContratacion : (DateTime?)null,
                 u.fechaCreacion,
                 u.usuarioCreacion,
@@ -87,18 +87,7 @@ namespace SoftResWA.Views.Usuarios
             }
         }
 
-        private void MostrarModal(string modo, string titulo)
-        {
-            hdnModoModal.Value = modo;
 
-            string script = "setTimeout(function() {" +
-                            $"document.getElementById('tituloModal').innerHTML = '<i class=\\\"fas fa-user me-2 text-danger\\\"></i>{titulo}';" +
-                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarUsuario'));" +
-                            "modal.show();" +
-                            "}, 200);";
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModal_{modo}", script, true);
-        }
 
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
@@ -179,10 +168,10 @@ namespace SoftResWA.Views.Usuarios
 
                 int idUsuario = (int)dataItem.GetType().GetProperty("idUsuario")?.GetValue(dataItem);
 
-                LinkButton btnModificar = (LinkButton)e.Row.FindControl("btnModificar");
+                LinkButton lnkModificar = (LinkButton)e.Row.FindControl("lnkModificar");
                 LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
 
-                btnModificar.Visible = estado;
+                lnkModificar.Visible = estado;
                 btnEliminar.Visible = estado;
 
                 if (estado)
@@ -205,6 +194,8 @@ namespace SoftResWA.Views.Usuarios
                 CargarEstadosUsuario();
                 CargarRoles();
                 CargarTiposDocumento();
+                CargarRolesModal();
+                CargarTiposDocumentoEmpleadoModal();
             }
         }
 
@@ -262,6 +253,219 @@ namespace SoftResWA.Views.Usuarios
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "errorEliminar",
                         $"Swal.fire('Error', 'Error al eliminar el usuario: {ex.Message}', 'error');", true);
                 }
+            }
+        }
+
+        private void CargarRolesModal()
+        {
+            try
+            {
+                var roles = this.rolBO.Listar().Where(r => !r.esCliente).ToList(); // Solo roles no cliente para empleados
+                this.CargarDropDownList(ddlRolModal, roles, "nombre", "idRol", "-- Seleccione --");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorRolesModal",
+                    $"Swal.fire('Error', 'No se pudieron cargar los roles: {ex.Message}', 'error');", true);
+            }
+        }
+
+        private void CargarTiposDocumentoEmpleadoModal()
+        {
+            try
+            {
+                var tiposDoc = this.tipoDocumentoBO.Listar();
+                this.CargarDropDownList(ddlTipoDocumentoEmpleadoModal, tiposDoc, "nombre", "idTipoDocumento", "-- Seleccione --");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorTiposDocEmpleadoModal",
+                    $"Swal.fire('Error', 'No se pudieron cargar los tipos de documento: {ex.Message}', 'error');", true);
+            }
+        }
+
+        private void MostrarModalEmpleado(string modo, string titulo)
+        {
+            hdnModoModal.Value = modo;
+
+            string script = "setTimeout(function() {" +
+                            $"document.getElementById('tituloModalEmpleado').innerHTML = '<i class=\\\"fas fa-user me-2 text-danger\\\"></i>{titulo}';" +
+                            "var modal = new bootstrap.Modal(document.getElementById('modalRegistrarEmpleado'));" +
+                            "modal.show();" +
+                            "}, 200);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), $"mostrarModalEmpleado_{modo}", script, true);
+        }
+
+        private usuariosDTO ConstruirEmpleadoDTO(usuariosDTO empleado)
+        {
+            if (empleado == null)
+                empleado = new usuariosDTO();
+
+            empleado.nombreComp = txtNombreCompletoEmpleado.Text.Trim();
+            empleado.numeroDocumento = txtNumeroDocumentoEmpleado.Text.Trim();
+            empleado.email = txtEmailEmpleadoModal.Text.Trim();
+            empleado.telefono = txtTelefonoEmpleadoModal.Text.Trim();
+            empleado.contrasenha = txtContrasenaEmpleadoModal.Text.Trim();
+            empleado.sueldo = double.Parse(txtSueldoModal.Text);
+            empleado.sueldoSpecified = true;
+            empleado.cantidadReservacion = int.Parse(txtCantReservasEmpleadoModal.Text);
+
+            // Fecha de contratación
+            if (DateTime.TryParse(txtFechaContratacionModal.Text, out DateTime fechaContratacion))
+            {
+                empleado.fechaContratacion = DateTime.SpecifyKind(fechaContratacion, DateTimeKind.Unspecified);
+                empleado.fechaContratacionSpecified = true;
+            }
+
+            // Rol
+            if (!string.IsNullOrEmpty(ddlRolModal.SelectedValue))
+            {
+                int idRol = int.Parse(ddlRolModal.SelectedValue);
+                var rol = this.rolBO.ObtenerPorID(idRol);
+                if (rol != null)
+                {
+                    empleado.rol = new SoftResBusiness.UsuarioWSClient.rolDTO
+                    {
+                        idRol = rol.idRol,
+                        nombre = rol.nombre,
+                        esCliente = rol.esCliente
+                    };
+                }
+            }
+
+            // Tipo de documento
+            if (!string.IsNullOrEmpty(ddlTipoDocumentoEmpleadoModal.SelectedValue))
+            {
+                int idTipoDoc = int.Parse(ddlTipoDocumentoEmpleadoModal.SelectedValue);
+                var tipoDoc = this.tipoDocumentoBO.ObtenerPorID(idTipoDoc);
+                if (tipoDoc != null)
+                {
+                    empleado.tipoDocumento = new SoftResBusiness.UsuarioWSClient.tipoDocumentoDTO
+                    {
+                        idTipoDocumento = tipoDoc.idTipoDocumento,
+                        nombre = tipoDoc.nombre
+                    };
+                }
+            }
+
+            empleado.estado = chkEstadoEmpleadoModal.Checked;
+            empleado.estadoSpecified = true;
+
+            return empleado;
+        }
+
+        private void LimpiarCamposModalEmpleado()
+        {
+            txtNombreCompletoEmpleado.Text = "";
+            txtNumeroDocumentoEmpleado.Text = "";
+            txtEmailEmpleadoModal.Text = "";
+            txtTelefonoEmpleadoModal.Text = "";
+            txtContrasenaEmpleadoModal.Text = "";
+            txtConfirmPasswordEmpleadoModal.Text = "";
+            txtSueldoModal.Text = "";
+            txtCantReservasEmpleadoModal.Text = "0";
+            txtFechaContratacionModal.Text = "";
+            ddlRolModal.SelectedIndex = 0;
+            ddlTipoDocumentoEmpleadoModal.SelectedIndex = 0;
+            chkEstadoEmpleadoModal.Checked = true;
+            hdnIdEmpleado.Value = "";
+        }
+
+        protected void btnNuevoEmpleado_Click(object sender, EventArgs e)
+        {
+            LimpiarCamposModalEmpleado();
+            CargarRolesModal();
+            CargarTiposDocumentoEmpleadoModal();
+            MostrarModalEmpleado("registrar", "Registrar Empleado");
+        }
+
+        protected void btnModificarEmpleado_Command(object sender, CommandEventArgs e)
+        {
+            int idEmpleado = int.Parse(e.CommandArgument.ToString());
+            if (idEmpleado > 0)
+            {
+                usuariosDTO empleado = this.usuarioBO.ObtenerPorID(idEmpleado);
+                if (empleado != null)
+                {
+                    hdnIdEmpleado.Value = idEmpleado.ToString();
+                    
+                    txtNombreCompletoEmpleado.Text = empleado.nombreComp;
+                    txtNumeroDocumentoEmpleado.Text = empleado.numeroDocumento;
+                    txtEmailEmpleadoModal.Text = empleado.email;
+                    txtTelefonoEmpleadoModal.Text = empleado.telefono;
+                    txtSueldoModal.Text = empleado.sueldo.ToString();
+                    txtCantReservasEmpleadoModal.Text = empleado.cantidadReservacion.ToString();
+                    chkEstadoEmpleadoModal.Checked = empleado.estado;
+
+                    if (empleado.fechaContratacionSpecified)
+                    {
+                        txtFechaContratacionModal.Text = empleado.fechaContratacion.ToString("yyyy-MM-dd");
+                    }
+
+                    if (empleado.rol != null)
+                    {
+                        ddlRolModal.SelectedValue = empleado.rol.idRol.ToString();
+                    }
+
+                    if (empleado.tipoDocumento != null)
+                    {
+                        ddlTipoDocumentoEmpleadoModal.SelectedValue = empleado.tipoDocumento.idTipoDocumento.ToString();
+                    }
+
+                    // Limpiar campos de contraseña en modo modificar
+                    txtContrasenaEmpleadoModal.Text = "";
+                    txtConfirmPasswordEmpleadoModal.Text = "";
+                    
+                    CargarRolesModal();
+                    CargarTiposDocumentoEmpleadoModal();
+                    MostrarModalEmpleado("modificar", "Modificar Empleado");
+                }
+            }
+        }
+
+        protected void btnGuardarEmpleado_Click(object sender, EventArgs e)
+        {
+            string modo = hdnModoModal.Value;
+            bool exito = false;
+
+            if (modo == "registrar")
+            {
+                usuariosDTO empleado = new usuariosDTO();
+                empleado = ConstruirEmpleadoDTO(empleado);
+                empleado.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                empleado.fechaCreacionSpecified = true;
+                empleado.fechaModificacionSpecified = false;
+                empleado.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+
+                int idEmpleado = this.usuarioBO.Insertar(empleado);
+                if (idEmpleado > 0) exito = true;
+            }
+            else if (modo == "modificar")
+            {
+                if (string.IsNullOrEmpty(hdnIdEmpleado.Value) || !int.TryParse(hdnIdEmpleado.Value, out int id))
+                {
+                    MostrarResultado(false, "Empleado", modo);
+                    return;
+                }
+
+                usuariosDTO empleado = this.usuarioBO.ObtenerPorID(id);
+                empleado = ConstruirEmpleadoDTO(empleado);
+                empleado.idUsuario = id;
+                empleado.idUsuarioSpecified = true;
+
+                empleado.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                empleado.fechaModificacionSpecified = true;
+                empleado.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+
+                exito = this.usuarioBO.Modificar(empleado) > 0;
+            }
+
+            MostrarResultado(exito, "Empleado", modo);
+            if (exito)
+            {
+                btnBuscar_Click(sender, e);
+                LimpiarCamposModalEmpleado();
             }
         }
     }

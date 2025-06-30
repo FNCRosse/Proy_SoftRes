@@ -41,16 +41,16 @@ namespace SoftResWA.Views.Mesas
                 m.idMesa,
                 m.numeroMesa,
                 m.capacidad,
-                m.estado,
+                estado = m.estado.ToString().Replace("_", " "),
                 m.x,
                 m.y,
                 tipoMesa = m.tipoMesa != null ? m.tipoMesa.nombre : "No especificado",
                 local = m.local != null ? m.local.nombre : "No especificado",
-                m.fechaCreacion,
+                fechaCreacion = m.fechaCreacionSpecified ? m.fechaCreacion : (DateTime?)null,
                 m.usuarioCreacion,
                 fechaModificacion = m.fechaModificacionSpecified ? m.fechaModificacion : (DateTime?)null,
                 m.usuarioModificacion,
-                estadoBool = true // Asumimos que todas las mesas mostradas están activas
+                estadoBool = m.estado != estadoMesa.DESECHADA // Las mesas desechadas no se pueden modificar/eliminar
             }).ToList<Object>();
             return listaAdaptada;
         }
@@ -108,9 +108,9 @@ namespace SoftResWA.Views.Mesas
             var estadosMesa = new List<object>
             {
                 new { nombre = "DISPONIBLE", id = "DISPONIBLE" },
-                new { nombre = "EN_USO", id = "EN_USO" },
+                new { nombre = "EN USO", id = "EN_USO" },
                 new { nombre = "RESERVADA", id = "RESERVADA" },
-                new { nombre = "EN_MANTENIMIENTO", id = "EN_MANTENIMIENTO" },
+                new { nombre = "EN MANTENIMIENTO", id = "EN_MANTENIMIENTO" },
                 new { nombre = "DESECHADA", id = "DESECHADA" }
             };
 
@@ -200,14 +200,36 @@ namespace SoftResWA.Views.Mesas
             if (mesa == null)
                 mesa = new mesaDTO();
 
+            // Validar campos requeridos
+            if (string.IsNullOrWhiteSpace(txtNumeroMesa.Text))
+                throw new ArgumentException("El número de mesa es requerido");
+
+            if (string.IsNullOrWhiteSpace(txtCapacidad.Text) || !int.TryParse(txtCapacidad.Text, out int capacidad) || capacidad < 1)
+                throw new ArgumentException("La capacidad debe ser un número mayor a 0");
+
+            if (string.IsNullOrWhiteSpace(txtPosX.Text) || !int.TryParse(txtPosX.Text, out int posX))
+                throw new ArgumentException("La posición X debe ser un número válido");
+
+            if (string.IsNullOrWhiteSpace(txtPosY.Text) || !int.TryParse(txtPosY.Text, out int posY))
+                throw new ArgumentException("La posición Y debe ser un número válido");
+
+            if (string.IsNullOrWhiteSpace(ddlEstadoMesa.SelectedValue))
+                throw new ArgumentException("El estado es requerido");
+
+            if (string.IsNullOrWhiteSpace(ddlTipoMesa.SelectedValue))
+                throw new ArgumentException("El tipo de mesa es requerido");
+
+            if (string.IsNullOrWhiteSpace(ddlLocal.SelectedValue))
+                throw new ArgumentException("El local es requerido");
+
             mesa.numeroMesa = txtNumeroMesa.Text.Trim();
-            mesa.capacidad = int.Parse(txtCapacidad.Text.Trim());
+            mesa.capacidad = capacidad;
             mesa.capacidadSpecified = true;
             mesa.estado = (estadoMesa)Enum.Parse(typeof(estadoMesa), ddlEstadoMesa.SelectedValue);
             mesa.estadoSpecified = true;
-            mesa.x = int.Parse(txtPosX.Text.Trim());
+            mesa.x = posX;
             mesa.xSpecified = true;
-            mesa.y = int.Parse(txtPosY.Text.Trim());
+            mesa.y = posY;
             mesa.ySpecified = true;
             
             // Configurar tipo de mesa
@@ -223,14 +245,38 @@ namespace SoftResWA.Views.Mesas
             return mesa;
         }
 
+        private bool ValidarMesaUnica(string numeroMesa, int? idMesaExcluir = null)
+        {
+            try
+            {
+                mesaParametros parametros = new mesaParametros();
+                parametros.nombre = numeroMesa;
+                var mesasExistentes = this.mesaBO.Listar(parametros);
+                
+                if (idMesaExcluir.HasValue)
+                {
+                    // Excluir la mesa actual en caso de modificación
+                    mesasExistentes = new BindingList<mesaDTO>(
+                        mesasExistentes.Where(m => m.idMesa != idMesaExcluir.Value).ToList()
+                    );
+                }
+                
+                return mesasExistentes.Count == 0;
+            }
+            catch
+            {
+                return true; // Si hay error, permitir continuar
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             dgvMesas.RowDataBound += dgv_RowDataBound;
+            
             if (!IsPostBack)
             {
                 var listaAdaptada = this.ConfigurarListado(ListadoMesas);
-
                 dgvMesas.DataSource = listaAdaptada;
                 dgvMesas.DataBind();
                 CargarEstadosMesa();
@@ -241,6 +287,8 @@ namespace SoftResWA.Views.Mesas
 
         protected void btnGuardarMesa_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
+
             string modo = hdnModoModal.Value;
             bool exito = false;
 
@@ -248,32 +296,66 @@ namespace SoftResWA.Views.Mesas
             {
                 if (modo == "registrar")
                 {
+                    // Validar que el número de mesa sea único
+                    if (!ValidarMesaUnica(txtNumeroMesa.Text.Trim()))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "errorDuplicado",
+                            "Swal.fire('Error', 'Ya existe una mesa con este número', 'error');", true);
+                        return;
+                    }
+
                     mesaDTO mesa = new mesaDTO();
                     mesa = ConstruirDTO(mesa);
                     mesa.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     mesa.fechaCreacionSpecified = true;
                     mesa.fechaModificacionSpecified = false;
-                    mesa.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                    mesa.usuarioCreacion = Session["usuario"]?.ToString() ?? "admin";
 
                     exito = this.mesaBO.Insertar(mesa) > 0;
                 }
                 else if (modo == "modificar")
                 {
                     int id = int.Parse(hdnIdMesa.Value);
-                    mesaDTO mesa = this.mesaBO.ObtenerPorID(id);
+                    
+                    // Validar que el número de mesa sea único (excluyendo la mesa actual)
+                    if (!ValidarMesaUnica(txtNumeroMesa.Text.Trim(), id))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "errorDuplicado",
+                            "Swal.fire('Error', 'Ya existe otra mesa con este número', 'error');", true);
+                        return;
+                    }
 
-                    mesa = ConstruirDTO(mesa); // actualiza campos pero mantiene ID, creación, etc.
+                    mesaDTO mesa = this.mesaBO.ObtenerPorID(id);
+                    if (mesa == null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "errorNoEncontrada",
+                            "Swal.fire('Error', 'No se encontró la mesa a modificar', 'error');", true);
+                        return;
+                    }
+
+                    mesa = ConstruirDTO(mesa);
                     mesa.idMesa = id;
                     mesa.idMesaSpecified = true;
-
                     mesa.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     mesa.fechaModificacionSpecified = true;
-                    mesa.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                    mesa.usuarioModificacion = Session["usuario"]?.ToString() ?? "admin";
 
                     exito = this.mesaBO.Modificar(mesa) > 0;
                 }
+                
                 MostrarResultado(exito, "Mesa", modo);
-                if (exito) btnBuscar_Click(sender, e);
+                if (exito) 
+                {
+                    btnBuscar_Click(sender, e);
+                    // Cerrar modal con JavaScript
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "cerrarModal",
+                        "setTimeout(function() { bootstrap.Modal.getInstance(document.getElementById('modalRegistrarMesa')).hide(); }, 1500);", true);
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorValidacion",
+                    $"Swal.fire('Error de Validación', '{ex.Message}', 'warning');", true);
             }
             catch (Exception ex)
             {
@@ -284,7 +366,7 @@ namespace SoftResWA.Views.Mesas
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            // Limpia campos
+            // Limpiar campos
             txtNumeroMesa.Text = "";
             txtCapacidad.Text = "";
             txtPosX.Text = "";
@@ -292,8 +374,9 @@ namespace SoftResWA.Views.Mesas
             ddlEstadoMesa.SelectedIndex = 0;
             ddlTipoMesa.SelectedIndex = 0;
             ddlLocal.SelectedIndex = 0;
+            hdnIdMesa.Value = "";
 
-            // Cambia título a "Registrar"
+            // Cambiar título a "Registrar"
             this.MostrarModal("registrar", "Registrar Mesa");
         }
 
@@ -313,9 +396,19 @@ namespace SoftResWA.Views.Mesas
                         txtPosX.Text = mesa.x.ToString();
                         txtPosY.Text = mesa.y.ToString();
                         ddlEstadoMesa.SelectedValue = mesa.estado.ToString();
-                        ddlTipoMesa.SelectedValue = mesa.tipoMesa?.idTipoMesa.ToString();
-                        ddlLocal.SelectedValue = mesa.local?.idLocal.ToString();
+                        
+                        if (mesa.tipoMesa != null)
+                            ddlTipoMesa.SelectedValue = mesa.tipoMesa.idTipoMesa.ToString();
+                        
+                        if (mesa.local != null)
+                            ddlLocal.SelectedValue = mesa.local.idLocal.ToString();
+                        
                         this.MostrarModal("modificar", "Modificar Mesa");
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "errorNoEncontrada",
+                            "Swal.fire('Error', 'No se encontró la mesa', 'error');", true);
                     }
                 }
                 catch (Exception ex)
@@ -342,6 +435,11 @@ namespace SoftResWA.Views.Mesas
                         MostrarResultado(exito, "Mesa", "eliminar");
                         if (exito) btnBuscar_Click(sender, e);
                     }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "errorNoEncontrada",
+                            "Swal.fire('Error', 'No se encontró la mesa a eliminar', 'error');", true);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -357,16 +455,21 @@ namespace SoftResWA.Views.Mesas
             {
                 mesaParametros parametros = new mesaParametros();
                 
-                parametros.nombre = txtNumeroMesaFiltro.Text.Trim();
+                // Filtro por número de mesa
+                if (!string.IsNullOrWhiteSpace(txtNumeroMesaFiltro.Text))
+                    parametros.nombre = txtNumeroMesaFiltro.Text.Trim();
                 
+                // Filtro por estado
                 parametros.estadoSpecified = !string.IsNullOrEmpty(ddlEstadoFiltro.SelectedValue);
                 if (parametros.estadoSpecified)
                     parametros.estado = (estadoMesa)Enum.Parse(typeof(estadoMesa), ddlEstadoFiltro.SelectedValue);
 
+                // Filtro por tipo de mesa
                 parametros.idTipoMesaSpecified = !string.IsNullOrEmpty(ddlTipoMesaFiltro.SelectedValue);
                 if (parametros.idTipoMesaSpecified)
                     parametros.idTipoMesa = int.Parse(ddlTipoMesaFiltro.SelectedValue);
 
+                // Filtro por local
                 parametros.idLocalSpecified = !string.IsNullOrEmpty(ddlLocalFiltro.SelectedValue);
                 if (parametros.idLocalSpecified)
                     parametros.idLocal = int.Parse(ddlLocalFiltro.SelectedValue);
@@ -375,6 +478,13 @@ namespace SoftResWA.Views.Mesas
                 var listaAdaptada = this.ConfigurarListado(lista);
                 dgvMesas.DataSource = listaAdaptada;
                 dgvMesas.DataBind();
+
+                // Mostrar mensaje si no hay resultados
+                if (lista.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "sinResultados",
+                        "Swal.fire('Sin resultados', 'No se encontraron mesas con los criterios de búsqueda especificados', 'info');", true);
+                }
             }
             catch (Exception ex)
             {
