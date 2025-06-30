@@ -26,23 +26,40 @@ namespace SoftResWA
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string currentPagePath = Request.Path.ToLower();
+            var paginasPublicas = new List<string>
             {
-                // Por defecto, asumimos que es un empleado y ocultamos lo de administrador
+                "/Views/Cliente/Home/Home_Cliente.aspx",
+                "/Views/Cliente/Home/Login_Home.aspx",
+                "/Views/Cliente/Locales/Locales_cliente.aspx",
+                "/Views/Cliente/Comentarios/Comentarios_Listado.aspx",
+                "/Views/Cliente/Reservas/Reg_Resev_Comun.aspx",
+                "/Views/Cliente/Reservas/Reg_Resev_Evento.aspx"
+            };
+            if (Session["UsuarioLogueado"] == null)
+            {
                 menuReservas.Visible = false;
                 notificaciones.Visible = false;
                 login.Visible = true;
 
-                // Si el rol es administrador, mostramos todo
-                if (Session["UsuarioLogueado"] != null )
+                if (!paginasPublicas.Contains(currentPagePath))
+                {
+                    Response.Redirect("~/Views/Cliente/Home/Login_Home.aspx");
+                }
+            }
+            else
+            {
+                menuReservas.Visible = true;
+                notificaciones.Visible = true;
+                login.Visible = false;
+
+                if (!IsPostBack)
                 {
                     UsuarioSession = (usuariosDTO)Session["UsuarioLogueado"];
-                    string rol = UsuarioSession.rol.nombre.ToLower();
-                    menuReservas.Visible = true;
-                    notificaciones.Visible = true;
-                    login.Visible = false;
+                    // Aquí puedes poner el nombre del usuario si tienes un Label para ello
+                    // lblNombreUsuarioCliente.Text = UsuarioSession.nombreComp; 
+                    CargarNotificaciones();
                 }
-                CargarNotificaciones();
             }
         }
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)
@@ -56,7 +73,7 @@ namespace SoftResWA
                 Response.Cookies.Add(cookie);
             }
 
-            Response.Redirect("~/Views/Login/Login.aspx");
+            Response.Redirect("~/Views/Cliente/Home/Home_Cliente.aspx");
         }
         private void CargarNotificaciones()
         {
