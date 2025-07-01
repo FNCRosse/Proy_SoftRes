@@ -1,53 +1,320 @@
-﻿using System;
+﻿using SoftResBusiness;
+using SoftResBusiness.LocalWSClient;
+using SoftResBusiness.ReservaWSClient;
+using SoftResBusiness.UsuarioWSClient;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using usuariosDTO = SoftResBusiness.UsuarioWSClient.usuariosDTO;
 
 namespace SoftResWA.Views.Cliente.Reservas
 {
     public partial class MisReservas : System.Web.UI.Page
     {
+        private ReservaBO reservaBO;
+        private LocalBO localBO;
+        private MotivoCancelacionBO motivoCancelacionBO;
+        public usuariosDTO UsuarioActual => Session["UsuarioLogueado"] as usuariosDTO;
+        public MisReservas()
+        {
+            reservaBO = new ReservaBO();
+            localBO = new LocalBO();
+            motivoCancelacionBO = new MotivoCancelacionBO();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (UsuarioActual == null)
+            {
+                Response.Redirect("~/Views/Cliente/Home/Login_Home.aspx");
+                return;
+            }
             if (!IsPostBack)
-                CargarReservasDemo();
+            {
+                CargarFiltros();
+                BindGrid();
+            }
         }
-        private void CargarReservasDemo()
+        private void CargarFiltros()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ReservaID");
-            dt.Columns.Add("Fecha", typeof(DateTime));
-            dt.Columns.Add("Hora");
-            dt.Columns.Add("Local");
-            dt.Columns.Add("Estado");
-            dt.Columns.Add("Personas");
-            dt.Columns.Add("Mesas");
-            dt.Columns.Add("Ubicacion");
-            dt.Columns.Add("TipoReserva");
-            dt.Columns.Add("NombreEvento");
-            dt.Columns.Add("DescripcionEvento");
-            dt.Columns.Add("Observaciones");
+            try
+            {
+                // Cargar Locales
+                localParametros lParametros = new localParametros();
+                lParametros.estadoSpecified = true;
+                lParametros.estado = true;
+                ddlLocal.DataSource = localBO.Listar(lParametros);
+                ddlLocal.DataTextField = "nombre";
+                ddlLocal.DataValueField = "idLocal";
+                ddlLocal.DataBind();
+                ddlLocal.Items.Insert(0, new ListItem("Todos", ""));
 
-            dt.Rows.Add("1", DateTime.Now, "4:00pm", "San Miguel", "Confirmado", 4, 1, "Ventana", "Normal", "", "", "Ninguna");
-            dt.Rows.Add("2", DateTime.Now, "4:00pm", "San Miguel", "Confirmado", 4, 1, "Ventana", "Evento", "Cumpleaños", "Cumpleaños de mi hijo", "Ninguna");
-            dt.Rows.Add("3", DateTime.Now, "4:00pm", "San Miguel", "Pendiente", 4, 1, "Ventana", "Normal", "", "", "Ninguna");
-            dt.Rows.Add("4", DateTime.Now, "4:00pm", "San Miguel", "Cancelada", 4, 1, "Ventana", "Normal", "", "", "Ninguna");
+                // Cargar Estados
+                ddlEstado.DataSource = Enum.GetValues(typeof(estadoReserva));
+                ddlEstado.DataBind();
+                ddlEstado.Items.Insert(0, new ListItem("Todos", ""));
 
-            rptReservas.DataSource = dt;
-            rptReservas.DataBind();
+                // Cargar Motivos de Cancelación para el modal
+                ddlMotivoCancelacion.DataSource = motivoCancelacionBO.Listar();
+                ddlMotivoCancelacion.DataTextField = "descripcion";
+                ddlMotivoCancelacion.DataValueField = "idMotivo";
+                ddlMotivoCancelacion.DataBind();
+                ddlMotivoCancelacion.Items.Insert(0, new ListItem("Selecciona un motivo...", "0"));
+            }
+            catch (Exception ex) { MostrarAlerta("Error", "No se pudieron cargar los filtros.", "error"); }
+        }
+        private void BindGrid()
+        {
+            try
+            {
+                var parametros = new reservaParametros();
+                parametros.dniCliente = UsuarioActual.numeroDocumento;
+
+                if (!string.IsNullOrEmpty(txtFechaDesde.Text)) { parametros.fechaInicio = DateTime.Parse(txtFechaDesde.Text); parametros.fechaInicioSpecified = true; }
+                if (!string.IsNullOrEmpty(txtFechaHasta.Text)) { parametros.fechaFin = DateTime.Parse(txtFechaHasta.Text); parametros.fechaFinSpecified = true; }
+                if (!string.IsNullOrEmpty(ddlLocal.SelectedValue)) { parametros.idLocal = int.Parse(ddlLocal.SelectedValue); parametros.idLocalSpecified = true; }
+                if (!string.IsNullOrEmpty(ddlEstado.SelectedValue)) { parametros.estado = (estadoReserva)Enum.Parse(typeof(estadoReserva), ddlEstado.SelectedValue); parametros.estadoSpecified = true; }
+
+                BindingList<reservaDTO> reservas = reservaBO.Listar(parametros);
+                rptReservas.DataSource = reservas.OrderByDescending(r => r.fecha_Hora).ToList();
+                rptReservas.DataBind();
+            }
+            catch (Exception ex) { MostrarAlerta("Error", "No se pudieron cargar tus reservas.", "error"); }
         }
 
-        public string GetBotonPorEstado(string estado)
+        #region Lógica de UI y Eventos
+        protected void btnBuscar_Click(object sender, EventArgs e) => BindGrid();
+        protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if (estado == "Confirmado")
-                return "<button class='btn btn-danger rounded-pill px-4'>Editar</button>";
-            else if (estado == "Pendiente")
-                return "<button class='btn btn-warning rounded-pill px-4 text-white'>Confirmar</button>";
+            txtFechaDesde.Text = "";
+            txtFechaHasta.Text = "";
+            ddlLocal.SelectedIndex = 0;
+            ddlEstado.SelectedIndex = 0;
+            BindGrid();
+        }
+        protected void rptReservas_ItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            int idReserva;
+            if (!int.TryParse(e.CommandArgument.ToString(), out idReserva)) return;
+
+            // Obtenemos una referencia al botón que fue clickeado
+            Control botonClickeado = e.CommandSource as Control;
+            reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
+            if (reserva == null) return;
+            if (!PuedeModificarCancelar(reserva.fecha_Hora))
+            {
+                MostrarAlerta("Acción no permitida", "No puedes modificar o cancelar una reserva con menos de una hora de anticipación.", "warning");
+                return; // Detenemos la ejecución
+            }
+            switch (e.CommandName)
+            {
+                case "Editar":
+                    // Obtenemos los datos frescos de la reserva para poblar el modal
+                    reservaDTO reservaEditar = reservaBO.ObtenerPorID(idReserva);
+                    if (reservaEditar == null) return;
+
+                    hdnReservaIdEditar.Value = idReserva.ToString();
+                    btnCancelarEnModal.CommandArgument = idReserva.ToString();
+                    txtPersonasModal.Text = reservaEditar.cantidad_personas.ToString();
+                    txtMesasModal.Text = reservaEditar.numeroMesas.ToString();
+                    txtObservacionesModal.Text = reservaEditar.observaciones;
+
+                    if (reservaEditar.tipoReserva == tipoReserva.EVENTO)
+                    {
+                        // Si es un evento, muestra el panel y llena los campos
+                        pnlCamposEvento.Visible = true;
+                        txtNombreEventoModal.Text = reservaEditar.nombreEvento;
+                        txtDescripcionEventoModal.Text = reservaEditar.descripcionEvento;
+                    }
+                    else
+                    {
+                        // Si no es un evento, asegúrate de que el panel esté oculto
+                        pnlCamposEvento.Visible = false;
+                        txtNombreEventoModal.Text = ""; // Limpiar por si acaso
+                        txtDescripcionEventoModal.Text = "";
+                    }
+
+                    // Forzamos la actualización del panel del modal
+                    updModalEditar.Update();
+
+                    // Registramos el script para abrir el modal
+                    ScriptManager.RegisterStartupScript(botonClickeado, botonClickeado.GetType(), "abrirModalEditar", "abrirModal('modalEditarReserva');", true);
+                    break;
+
+                case "Confirmar":
+                    reservaDTO reservaConfirmar = reservaBO.ObtenerPorID(idReserva);
+                    if (reservaConfirmar == null) return;
+
+                    reservaConfirmar.estado = estadoReserva.CONFIRMADA;
+                    reservaConfirmar.estadoSpecified = true;
+                    reservaConfirmar.usuarioModificacion = UsuarioActual.nombreComp;
+                    reservaConfirmar.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                    reservaConfirmar.fechaModificacionSpecified = true;
+                    reservaConfirmar.filaEspera = null;
+
+                    if (reservaBO.Modificar(reservaConfirmar) > 0)
+                    {
+                        MostrarAlerta("¡Éxito!", "Tu reserva ha sido confirmada.", "success");
+                    }
+                    BindGrid();
+                    break;
+
+                case "AbrirCancelar":
+                    hdnReservaIdCancelar.Value = idReserva.ToString();
+                    btnConfirmarCancelacion.CommandArgument = idReserva.ToString();
+                    // Registramos el script para abrir el modal
+                    ScriptManager.RegisterStartupScript(botonClickeado, botonClickeado.GetType(), "abrirModalCancelar", "abrirModal('modalCancelarReserva');", true);
+                    break;
+            }
+        }
+
+        protected void btnAccionReserva_Command(object sender, CommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "Guardar":
+                    GuardarCambiosReserva();
+                    break;
+                case "ConfirmarCancelar":
+                    if (!string.IsNullOrEmpty(e.CommandArgument?.ToString()))
+                    {
+                        int idReserva = int.Parse(e.CommandArgument.ToString());
+                        CancelarReserva(idReserva); // Llama a una versión sobrecargada del método
+                    }
+                    break;
+                case "AbrirCancelarDesdeModal":
+                    // Toma el ID del CommandArgument del botón
+                    hdnReservaIdCancelar.Value = e.CommandArgument.ToString();
+                    btnConfirmarCancelacion.CommandArgument = e.CommandArgument.ToString();
+                    ScriptManager.RegisterStartupScript(this, GetType(), "abrirModalCancelar", "abrirModal('modalCancelarReserva');", true);
+                    break;
+            }
+        }
+
+        private void GuardarCambiosReserva()
+        {
+            int idReserva = int.Parse(hdnReservaIdEditar.Value);
+            reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
+            if (!PuedeModificarCancelar(reserva.fecha_Hora))
+            {
+                MostrarAlerta("Acción no permitida", "El tiempo para modificar esta reserva ha expirado.", "error");
+                return;
+            }
+            reserva.idReserva = idReserva;
+            reserva.idReservaSpecified = true;
+            reserva.cantidad_personas = int.Parse(txtPersonasModal.Text);
+            reserva.numeroMesas = int.Parse(txtMesasModal.Text);
+            reserva.observaciones = txtObservacionesModal.Text;
+            if (reserva.tipoReserva == tipoReserva.EVENTO)
+            {
+                reserva.nombreEvento = txtNombreEventoModal.Text.Trim();
+                reserva.descripcionEvento = txtDescripcionEventoModal.Text.Trim();
+            }
+            reserva.usuarioModificacion = UsuarioActual.nombreComp;
+            reserva.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+            reserva.fechaModificacionSpecified = true;
+            reserva.filaEspera = null;
+
+            if (reservaBO.Modificar(reserva) > 0)
+            {
+                MostrarAlerta("¡Éxito!", "Tu reserva ha sido modificada correctamente.", "success");
+                // Aquí podrías añadir la lógica para enviar el correo de notificación.
+            }
             else
-                return "";
+            {
+                MostrarAlerta("Error", "No se pudo modificar la reserva.", "error");
+            }
+            BindGrid();
         }
+
+        // Ahora el método recibe el ID como parámetro
+        private void CancelarReserva(int idReserva)
+        {
+            Page.Validate("CancelarGroup");
+            if (!Page.IsValid) return;
+            try
+            {
+                reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
+                if (reserva == null)
+                {
+                    MostrarAlerta("Error", "No se encontró la reserva para cancelar.", "error");
+                    return;
+                }
+                if (!PuedeModificarCancelar(reserva.fecha_Hora))
+                {
+                    MostrarAlerta("Acción no permitida", "El tiempo para cancelar esta reserva ha expirado.", "error");
+                    return;
+                }
+                reserva.estado = estadoReserva.CANCELADA;
+                reserva.estadoSpecified = true;
+                reserva.motivoCancelacion = new motivosCancelacionDTO();
+                reserva.motivoCancelacion.idMotivoSpecified = true;
+                reserva.motivoCancelacion.idMotivo = int.Parse(ddlMotivoCancelacion.SelectedValue);
+
+                if (reservaBO.Eliminar(reserva) > 0)
+                {
+                    MostrarAlerta("Reserva Cancelada", "Tu reserva ha sido cancelada exitosamente.", "info");
+                }
+                else
+                {
+                    MostrarAlerta("Error", "No se pudo cancelar la reserva.", "error");
+                }
+                BindGrid(); // Refrescar la tabla
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error Inesperado", $"Ocurrió un error al cancelar: {ex.Message}", "error");
+            }
+        }
+
+        #endregion
+
+        #region Funciones Auxiliares para la Vista
+
+        public bool PuedeModificarCancelar(object fechaReservaObj)
+        {
+            // Si el objeto de fecha es nulo, consideramos que no se puede modificar.
+            if (fechaReservaObj == null || fechaReservaObj == DBNull.Value)
+            {
+                return false;
+            }
+
+            DateTime fechaReserva = (DateTime)fechaReservaObj;
+            // Si la fecha ya pasó, no se puede modificar.
+            if (fechaReserva < DateTime.Now)
+            {
+                return false;
+            }
+
+            // Si faltan más de 1 hora para la reserva, se puede modificar.
+            return (fechaReserva - DateTime.Now).TotalHours > 1;
+        }
+
+        public string GetEstadoCssClass(object estadoObj)
+        {
+            estadoReserva estado = (estadoReserva)estadoObj;
+            switch (estado)
+            {
+                case estadoReserva.CONFIRMADA: return "badge bg-success";
+                case estadoReserva.PENDIENTE: return "badge bg-warning text-dark";
+                case estadoReserva.CANCELADA: return "badge bg-danger";
+                default: return "badge bg-secondary";
+            }
+        }
+
+
+
+        private void MostrarAlerta(string titulo, string mensaje, string tipo)
+        {
+            string script = $"Swal.fire('{titulo}', '{Server.HtmlEncode(mensaje)}', '{tipo}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), $"alerta_{Guid.NewGuid()}", script, true);
+        }
+
+        #endregion
     }
 }

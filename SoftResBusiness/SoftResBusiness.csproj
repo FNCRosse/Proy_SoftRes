@@ -445,6 +445,9 @@
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.existeDocResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.existeEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UsuarioWSClient\SoftResBusiness.UsuarioWSClient.insertarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

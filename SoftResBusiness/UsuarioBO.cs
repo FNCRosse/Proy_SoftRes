@@ -62,5 +62,9 @@ namespace SoftResBusiness
         {
             return this.usuarioClienteSOAP.existeDoc(numDocumento);
         }
+        public bool ValidarEmailUnico(string email)
+        {
+            return this.usuarioClienteSOAP.existeEmail(email);
+        }
     }
 }

@@ -103,31 +103,31 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 /*Autentificacion de google */
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAyXwIHz65o0VK2BIP0hKuVKFmnr6d64Sw",
-    authDomain: "proyect-softres-e4cf7.firebaseapp.com",
-    projectId: "proyect-softres-e4cf7",
-    storageBucket: "proyect-softres-e4cf7.firebasestorage.app",
-    messagingSenderId: "254654882272",
-    appId: "1:254654882272:web:6ed1a81b9d8797b54f0b85",
-    measurementId: "G-P8SM887XYK"
-};
+//const firebaseConfig = {
+//    apiKey: "AIzaSyAyXwIHz65o0VK2BIP0hKuVKFmnr6d64Sw",
+//    authDomain: "proyect-softres-e4cf7.firebaseapp.com",
+//    projectId: "proyect-softres-e4cf7",
+//    storageBucket: "proyect-softres-e4cf7.firebasestorage.app",
+//    messagingSenderId: "254654882272",
+//    appId: "1:254654882272:web:6ed1a81b9d8797b54f0b85",
+//    measurementId: "G-P8SM887XYK"
+//};
 
-firebase.initializeApp(firebaseConfig);
+//firebase.initializeApp(firebaseConfig);
 
-function loginConGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-            const user = result.user;
-            alert("Bienvenido, " + user.displayName);
-            window.location.href = "/Views/Cliente/Home/Home_Cliente.aspx";
-        })
-        .catch((error) => {
-            console.error("Error con Google:", error);
-            alert("Ocurrió un error al iniciar sesión.");
-        });
-}
+//function loginConGoogle() {
+//    const provider = new firebase.auth.GoogleAuthProvider();
+//    firebase.auth().signInWithPopup(provider)
+//        .then((result) => {
+//            const user = result.user;
+//            alert("Bienvenido, " + user.displayName);
+//            window.location.href = "/Views/Cliente/Home/Home_Cliente.aspx";
+//        })
+//        .catch((error) => {
+//            console.error("Error con Google:", error);
+//            alert("Ocurrió un error al iniciar sesión.");
+//        });
+//}
 /*Modal de inicio de session y registro */
 function togglePassword(inputId, icon) {
     const input = document.getElementById(inputId);

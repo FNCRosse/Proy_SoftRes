@@ -3,6 +3,7 @@ using SoftResBusiness.UsuarioWSClient;
 using SoftResWA.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,16 +15,111 @@ namespace SoftResWA.Views.Cliente.Home
     public partial class Login_Home : System.Web.UI.Page
     {
         private UsuarioBO usuarioBO;
+        private TipoDocumentoBO tipoDocumentoBO;
 
         public Login_Home()
         {
             this.usuarioBO = new UsuarioBO();
+            this.tipoDocumentoBO = new TipoDocumentoBO();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UsuarioLogueado"] != null)
             {
                 Response.Redirect("~/Views/Cliente/Home_Cliente.aspx"); // Ajusta esta ruta a la página principal del cliente logueado
+            }
+            if (!IsPostBack)
+            {
+                CargarTiposDocumento();
+            }
+        }
+        private void CargarTiposDocumento()
+        {
+            try
+            {
+                BindingList<SoftResBusiness.TipoDocumentoWSClient.tipoDocumentoDTO> tipos = this.tipoDocumentoBO.Listar();
+                ddlRegTipoDoc.DataSource = tipos;
+                ddlRegTipoDoc.DataTextField = "nombre";
+                ddlRegTipoDoc.DataValueField = "idTipoDocumento";
+                ddlRegTipoDoc.DataBind();
+                ddlRegTipoDoc.Items.Insert(0, new ListItem("Seleccione tipo de documento", ""));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar tipos de documento: " + ex.Message);
+                ddlRegTipoDoc.Items.Insert(0, new ListItem("Error al cargar", "0"));
+            }
+        }
+        protected void btnCrearCuenta_Click(object sender, EventArgs e)
+        {
+            Page.Validate("RegistroGroup");
+            if (!Page.IsValid || !chkTerminos.Checked)
+            {
+                if (!chkTerminos.Checked)
+                {
+                    cvTerminos.IsValid = false;
+                }
+                return;
+            }
+
+            try
+            {
+                if (usuarioBO.ValidarDocumentoUnico(txtRegNumDoc.Text.Trim()))
+                {
+                    MostrarAlerta("Error de Registro", "El número de documento ya está registrado.", "error");
+                    return;
+                }
+                if (usuarioBO.ValidarEmailUnico(txtRegEmail.Text.Trim()))
+                {
+                    MostrarAlerta("Error de Registro", "El email ya está registrado.", "error");
+                    return;
+                }
+
+                var nuevoUsuario = new usuariosDTO();
+                nuevoUsuario.nombreComp = txtRegNombre.Text.Trim();
+                nuevoUsuario.email = txtRegEmail.Text.Trim();
+                nuevoUsuario.numeroDocumento = txtRegNumDoc.Text.Trim();
+                nuevoUsuario.telefono = txtRegNumDoc.Text.Trim();
+                nuevoUsuario.contrasenha = txtRegPassword.Text.Trim();
+                nuevoUsuario.rol = new SoftResBusiness.UsuarioWSClient.rolDTO();
+                nuevoUsuario.rol.idRolSpecified = true;
+                nuevoUsuario.rol.idRol = 3;
+                nuevoUsuario.tipoDocumento = new SoftResBusiness.UsuarioWSClient.tipoDocumentoDTO();
+                nuevoUsuario.tipoDocumento.idTipoDocumento = int.Parse(ddlRegTipoDoc.SelectedValue);
+                nuevoUsuario.tipoDocumento.idTipoDocumentoSpecified = true;
+                nuevoUsuario.estado = true;
+                nuevoUsuario.estadoSpecified = true;
+                nuevoUsuario.fechaCreacion=DateTime.Now;
+                nuevoUsuario.fechaCreacionSpecified = true;
+                nuevoUsuario.usuarioCreacion = txtRegNombre.Text.Trim();
+
+                int resultado = usuarioBO.Insertar(nuevoUsuario);
+
+                if (resultado > 0)
+                {
+                    // Mostrar mensaje de éxito y quizá loguearlo automáticamente
+                    string script = @"Swal.fire({
+                                    title: '¡Registro Exitoso!',
+                                    text: 'Tu cuenta ha sido creada. Ahora puedes iniciar sesión.',
+                                    icon: 'success'
+                                }).then(function() {
+                                    // Cierra el modal de registro y abre el de login
+                                    var modalRegistro = bootstrap.Modal.getInstance(document.getElementById('modalRegistro'));
+                                    if(modalRegistro) modalRegistro.hide();
+                                    var modalLogin = new bootstrap.Modal(document.getElementById('modalLogin'));
+                                    modalLogin.show();
+                                });";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "registroExito", script, true);
+                }
+                else
+                {
+                    MostrarAlerta("Error", "No se pudo crear tu cuenta. Por favor, inténtalo de nuevo.", "error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error Inesperado", "Ocurrió un problema durante el registro.", "error");
+                System.Diagnostics.Debug.WriteLine("Error en registro de cliente: " + ex.Message);
             }
         }
         protected void btnLogin_Click(object sender, EventArgs e)
