@@ -18,7 +18,10 @@ namespace SoftResWA
         usuariosDTO usuarioSession;
 
         public NotificacionBO NotificacionBO { get => notificacionBO; set => notificacionBO = value; }
-        public usuariosDTO UsuarioSession { get => usuarioSession; set => usuarioSession = value; }
+        public usuariosDTO UsuarioActual
+        {
+            get { return Session["UsuarioLogueado"] as usuariosDTO; }
+        }
 
         public SoftResCliente()
         {
@@ -26,97 +29,106 @@ namespace SoftResWA
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            string currentPagePath = Request.Path.ToLower();
-            var paginasPublicas = new List<string>
+            // Lógica de visibilidad basada en la sesión
+            if (UsuarioActual != null)
             {
-                "/Views/Cliente/Home/Home_Cliente.aspx",
-                "/Views/Cliente/Home/Login_Home.aspx",
-                "/Views/Cliente/Locales/Locales_cliente.aspx",
-                "/Views/Cliente/Comentarios/Comentarios_Listado.aspx",
-                "/Views/Cliente/Reservas/Reg_Resev_Comun.aspx",
-                "/Views/Cliente/Reservas/Reg_Resev_Evento.aspx"
-            };
-            if (Session["UsuarioLogueado"] == null)
-            {
-                menuReservas.Visible = false;
-                notificaciones.Visible = false;
-                login.Visible = true;
+                // --- El usuario SÍ está logueado ---
+                pnlLogin.Visible = false; // Oculta el botón "Iniciar Sesión"
+                pnlUsuario.Visible = true; // Muestra el menú de usuario
 
-                if (!paginasPublicas.Contains(currentPagePath))
+                if (!IsPostBack)
                 {
-                    Response.Redirect("~/Views/Cliente/Home/Login_Home.aspx");
+                    // Asignar el nombre del usuario y cargar sus notificaciones
+                    lblNombreUsuarioCliente.Text = UsuarioActual.nombreComp;
+                    CargarNotificaciones();
                 }
             }
             else
             {
-                menuReservas.Visible = true;
-                notificaciones.Visible = true;
-                login.Visible = false;
+                // --- El usuario NO está logueado ---
+                pnlLogin.Visible = true;
+                pnlUsuario.Visible = false;
+                notificaciones.Visible = false;
+                menuReservas.Visible = false;
+            }
 
-                if (!IsPostBack)
-                {
-                    UsuarioSession = (usuariosDTO)Session["UsuarioLogueado"];
-                    // Aquí puedes poner el nombre del usuario si tienes un Label para ello
-                    // lblNombreUsuarioCliente.Text = UsuarioSession.nombreComp; 
-                    CargarNotificaciones();
-                }
+            // Lógica de protección de páginas para evitar bucles de redirección
+            ProtegerPaginas();
+        }
+        private void ProtegerPaginas()
+        {
+            string currentPagePath = Request.Path.ToLower();
+            var paginasPrivadas = new List<string>
+            {
+                "/views/cliente/reservas/misreservas.aspx",
+                "/views/cliente/perfil/miperfil.aspx"
+                // Añade aquí cualquier otra página que requiera estrictamente login
+            };
+
+            // Si el usuario no está logueado y está intentando acceder a una página privada
+            if (UsuarioActual == null && paginasPrivadas.Contains(currentPagePath))
+            {
+                // Lo redirigimos al login
+                Response.Redirect("~/Views/Cliente/Home/Login_Home.aspx");
             }
         }
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)
         {
-            // 1. Destruir la sesión del usuario.
+            // Destruye la sesión del usuario
             Session.Abandon();
+
+            // Opcional: Borra la cookie de "Recordarme" si la usas
             if (Request.Cookies["Recuerdame"] != null)
             {
-                HttpCookie cookie = new HttpCookie("Recuerdame");
-                cookie.Expires = DateTime.Now.AddDays(-1);
+                HttpCookie cookie = new HttpCookie("Recuerdame") { Expires = DateTime.Now.AddDays(-1) };
                 Response.Cookies.Add(cookie);
             }
 
+            // Redirige a la página principal del cliente, que es pública
             Response.Redirect("~/Views/Cliente/Home/Home_Cliente.aspx");
         }
         private void CargarNotificaciones()
         {
+            // El resto de tu lógica es correcta, solo asegúrate de que use la propiedad UsuarioActual
             try
             {
-                // 2. Crear los parámetros de búsqueda.
-                //    Queremos las notificaciones del usuario actual y que no estén leídas.
-                notificacionParametros parametros = new notificacionParametros();
-                parametros.idUsuario = UsuarioSession.idUsuario;
-                parametros.idUsuarioSpecified = true;
-                parametros.estado = estadoNotificacion.ENVIADO; // Asumiendo que tu DTO tiene un campo para filtrar por leídas
-                parametros.estadoSpecified = true;
-                parametros.esLeida = false;
-                parametros.esLeidaSpecified = true;
+                notificacionParametros parametros = new notificacionParametros
+                {
+                    idUsuario = UsuarioActual.idUsuario, // Usando la propiedad segura
+                    idUsuarioSpecified = true,
+                    esLeida = false,
+                    esLeidaSpecified = true
+                    // He eliminado el filtro por estado 'ENVIADO' para que sea más simple,
+                    // puedes volver a añadirlo si es un requisito.
+                };
+
                 BindingList<notificacionDTO> notificaciones = this.notificacionBO.Listar(parametros);
 
-                // 4. Procesar los resultados
-                if (notificaciones != null && notificaciones.Count > 0)
+                if (notificaciones != null && notificaciones.Any())
                 {
                     pnlNoNotificaciones.Visible = false;
                     lblContadorNotificaciones.Visible = true;
                     lblContadorNotificaciones.Text = notificaciones.Count.ToString();
 
-                    // Enlazar los datos al Repeater
-                    // Solo las 5 más recientes para el desplegable, por ejemplo
                     var notificacionesAMostrar = notificaciones.Take(5).ToList();
+                    ViewState["NotificacionesMostradasIDs"] = notificacionesAMostrar.Select(n => n.idNotificacion).ToList();
+
                     rptNotificaciones.DataSource = notificacionesAMostrar;
                     rptNotificaciones.DataBind();
                 }
                 else
                 {
-                    // No hay notificaciones no leídas
                     lblContadorNotificaciones.Visible = false;
                     pnlNoNotificaciones.Visible = true;
-                    rptNotificaciones.DataSource = null; // Limpiar datos previos
+                    rptNotificaciones.DataSource = null;
                     rptNotificaciones.DataBind();
+                    ViewState["NotificacionesMostradasIDs"] = null;
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error al cargar notificaciones: " + ex.Message);
                 lblContadorNotificaciones.Visible = false;
-                pnlNoNotificaciones.Visible = true;
             }
         }
     }

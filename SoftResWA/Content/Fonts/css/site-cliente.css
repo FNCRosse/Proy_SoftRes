@@ -519,5 +519,28 @@ body {
         opacity: 1;
     }
 }
+/*Para Sede y Locales*/
+.btn-sede {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 50px; /* Bordes redondeados */
+}
 
+    .btn-sede:hover {
+        background-color: #e2e6ea;
+        border-color: #dae0e5;
+    }
+
+    /* Estilo para el botón de la sede activa */
+    .btn-sede.active {
+        background-color: #BC1F1F; /* Color rojo de tu tema */
+        color: #fff;
+        border-color: #BC1F1F;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 

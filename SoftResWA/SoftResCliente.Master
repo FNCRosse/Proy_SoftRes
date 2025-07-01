@@ -84,18 +84,42 @@
                                             No tienes notificaciones nuevas.
                                         </asp:Panel>
 
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-center small text-primary" href="/Views/Cliente/Notificaciones_Listado.aspx">Ver todas</a>
+<%--                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-center small text-primary" href="/Views/Cliente/Notificaciones_Listado.aspx">Ver todas</a>--%>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </li>
 
-                        <li id="login" runat="server" class="nav-item">
+                        <asp:Panel ID="pnlLogin" runat="server" CssClass="nav-item">
                             <a class="nav-link text-danger fw-medium" href="/Views/Cliente/Home/Login_Home.aspx">
-                                <i class="fas fa-lock me-1"></i>Login
+                                <i class="fas fa-lock me-1"></i>Iniciar Sesión
                             </a>
-                        </li>
+                        </asp:Panel>
+
+                        <!-- Panel para cuando el usuario SÍ está logueado -->
+                        <asp:Panel ID="pnlUsuario" runat="server" CssClass="nav-item dropdown" Visible="false">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownUsuario" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle fa-lg me-2" style="color: #BC1F1F;"></i>
+                                <asp:Label ID="lblNombreUsuarioCliente" runat="server" Text="Usuario" CssClass="text-danger fw-medium"></asp:Label>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-anim shadow rounded-4" aria-labelledby="navbarDropdownUsuario">
+                                <%--<li>
+                                    <a class="dropdown-item" href="/Views/Cliente/Perfil/MiPerfil.aspx">
+                                        <i class="fas fa-user-edit me-2 text-muted"></i>Mi Perfil
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>--%>
+                                <li>
+                                    <!-- Este LinkButton disparará el evento en el servidor -->
+                                    <asp:LinkButton ID="lnkCerrarSesion" runat="server" CssClass="dropdown-item" OnClick="lnkCerrarSesion_Click">
+                                         <i class="fas fa-sign-out-alt me-2 text-muted"></i>Cerrar Sesión
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </asp:Panel>
 
                         <!-- Dropdown -->
                         <li class="nav-item dropdown">
