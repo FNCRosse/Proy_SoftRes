@@ -33,6 +33,10 @@ namespace SoftResBusiness
         {
             return this.usuarioClienteSOAP.modificar(usuario);
         }
+        public int CambiarContraseña(usuariosDTO usuario)
+        {
+            return this.usuarioClienteSOAP.cambiarcontrasena(usuario);
+        }
 
         public int Eliminar(usuariosDTO usuario)
         {
@@ -47,6 +51,20 @@ namespace SoftResBusiness
                 return new BindingList<usuariosDTO>();   // lista vacía si el servicio devuelve null
 
             return new BindingList<usuariosDTO>(lista);
+        }
+        public usuariosDTO login (credencialesDTO credenciales)
+        {
+            usuariosDTO usuario = this.usuarioClienteSOAP.login(credenciales);
+            if(usuario == null) return null;
+            return usuario;
+        }
+        public bool ValidarDocumentoUnico(string numDocumento)
+        {
+            return this.usuarioClienteSOAP.existeDoc(numDocumento);
+        }
+        public bool ValidarEmailUnico(string email)
+        {
+            return this.usuarioClienteSOAP.existeEmail(email);
         }
     }
 }

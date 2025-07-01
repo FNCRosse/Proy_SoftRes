@@ -7,92 +7,74 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SoftResWA.Views.Usuarios
+namespace SoftResWA.Views.Login
 {
 
 
-    public partial class listado_empleado
+    public partial class CambiarContrasena
     {
 
         /// <summary>
-        /// Control txtNombreCompFiltro.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreCompFiltro;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control ddlTipoDocumentoFiltro.
+        /// Control txtNuevaContrasena.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumentoFiltro;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevaContrasena;
 
         /// <summary>
-        /// Control ddlRolFiltro.
+        /// Control rfvNueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRolFiltro;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNueva;
 
         /// <summary>
-        /// Control ddlEstadoFiltro.
+        /// Control txtConfirmarContrasena.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoFiltro;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmarContrasena;
 
         /// <summary>
-        /// Control btnBuscar.
+        /// Control rfvConfirmar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBuscar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConfirmar;
 
         /// <summary>
-        /// Control btnNuevoEmp.
+        /// Control cvContrasenas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuevoEmp;
+        protected global::System.Web.UI.WebControls.CompareValidator cvContrasenas;
 
         /// <summary>
-        /// Control dgvEmpleados.
+        /// Control btnCambiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvEmpleados;
-
-        /// <summary>
-        /// Control hdnIdEmpleado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnIdEliminar;
-
-        /// <summary>
-        /// Control btnEliminarUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarUsuario;
+        protected global::System.Web.UI.WebControls.Button btnCambiar;
     }
 }

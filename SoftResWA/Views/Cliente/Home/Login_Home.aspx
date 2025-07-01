@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftResCliente.Master" AutoEventWireup="true" CodeBehind="Login_Home.aspx.cs" Inherits="SoftResWA.Views.Cliente.Home.Login_Home" %>
+﻿<%@ Page Title="" Language="C#" Async="true" MasterPageFile="~/SoftResCliente.Master" AutoEventWireup="true" CodeBehind="Login_Home.aspx.cs" Inherits="SoftResWA.Views.Cliente.Home.Login_Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Login
@@ -35,6 +35,7 @@
         </div>
     </section>
 
+
     <!-- Modal Login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -46,14 +47,14 @@
                     <h3 class="modal-title text-danger fw-bold">Iniciar Sesión</h3>
                     <p class="mb-3">Por favor, Ingrese la siguiente información</p>
 
-                    <input type="email" class="form-control mb-3" placeholder="Correo electrónico" />
+                    <asp:TextBox ID="txtLoginEmail" runat="server" CssClass="form-control mb-3" placeholder="Correo electrónico" TextMode="Email" />
 
                     <div class="position-relative mb-3">
-                        <input type="password" class="form-control" id="loginPass" placeholder="Contraseña" />
+                        <asp:TextBox ID="txtLoginPassword" runat="server" CssClass="form-control" placeholder="Contraseña" TextMode="Password" />
                         <i class="fas fa-eye toggle-password" onclick="togglePassword('loginPass', this)"></i>
                     </div>
-
-                    <button class="btn btn-danger w-100 mb-2 fw-bold">Iniciar sesión</button>
+                    <asp:Label ID="lblLoginError" runat="server" CssClass="text-danger small d-block text-center mb-2" Visible="false" />
+                    <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="btn btn-danger w-100 mb-2 fw-bold" OnClick="btnLogin_Click" />
                     <a href="#" class="text-primary small d-block text-center mt-1" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -62,6 +63,9 @@
     </div>
 
     <!-- Modal Registro -->
+    <!-- ==================================== -->
+    <!-- ==        MODAL REGISTRO          == -->
+    <!-- ==================================== -->
     <div class="modal fade" id="modalRegistro" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content login-modal">
@@ -72,48 +76,62 @@
                     <h3 class="modal-title text-danger fw-bold">Registrarme</h3>
                     <p class="mb-3">Por favor, Ingrese la siguiente información</p>
 
-                    <input type="text" class="form-control mb-2" placeholder="Nombre Completo" />
-                    <input type="email" class="form-control mb-2" placeholder="Correo electrónico" />
+                    <asp:TextBox ID="txtRegNombre" runat="server" CssClass="form-control mb-2" placeholder="Nombre Completo" />
+                    <asp:RequiredFieldValidator ID="rfvRegNombre" runat="server" ControlToValidate="txtRegNombre"
+                        ErrorMessage="El nombre es requerido." CssClass="text-danger small d-block mb-1" Display="Dynamic" ValidationGroup="RegistroGroup" />
+
+                    <asp:TextBox ID="txtRegEmail" runat="server" CssClass="form-control mb-2" placeholder="Correo electrónico" TextMode="Email" />
+                    <asp:RequiredFieldValidator ID="rfvRegEmail" runat="server" ControlToValidate="txtRegEmail"
+                        ErrorMessage="El correo es requerido." CssClass="text-danger small d-block mb-1" Display="Dynamic" ValidationGroup="RegistroGroup" />
+                    <asp:RegularExpressionValidator ID="revRegEmail" runat="server" ControlToValidate="txtRegEmail"
+                        ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
+                        ErrorMessage="Formato de correo inválido." CssClass="text-danger small d-block mb-1" Display="Dynamic" ValidationGroup="RegistroGroup" />
 
                     <div class="row g-2 mb-2">
                         <div class="col">
-                            <select class="form-select">
-                                <option selected disabled>Seleccione tipo de documento</option>
-                                <option>DNI</option>
-                                <option>CE</option>
-                                <option>Pasaporte</option>
-                            </select>
+                            <asp:DropDownList ID="ddlRegTipoDoc" runat="server" CssClass="form-select" />
+                            <asp:RequiredFieldValidator ID="rfvRegTipoDoc" runat="server" ControlToValidate="ddlRegTipoDoc"
+                                ErrorMessage="Seleccione un tipo de documento." CssClass="text-danger small d-block" Display="Dynamic" InitialValue="0" ValidationGroup="RegistroGroup" />
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Documento" />
+                            <asp:TextBox ID="txtRegNumDoc" runat="server" CssClass="form-control" placeholder="Documento" />
+                            <asp:RequiredFieldValidator ID="rfvRegNumDoc" runat="server" ControlToValidate="txtRegNumDoc"
+                                ErrorMessage="El documento es requerido." CssClass="text-danger small d-block" Display="Dynamic" ValidationGroup="RegistroGroup" />
                         </div>
                     </div>
 
                     <div class="row g-2 mb-2">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Teléfono" />
+                            <asp:TextBox ID="txtRegTelefono" runat="server" CssClass="form-control" placeholder="Teléfono" />
+                            <asp:RequiredFieldValidator ID="rfvRegTelefono" runat="server" ControlToValidate="txtRegTelefono"
+                                ErrorMessage="El teléfono es requerido." CssClass="text-danger small d-block" Display="Dynamic" ValidationGroup="RegistroGroup" />
                         </div>
                         <div class="col position-relative">
-                            <input type="password" class="form-control" id="registerPass" placeholder="Contraseña" />
-                            <i class="fas fa-eye toggle-password" onclick="togglePassword('registerPass', this)"></i>
+                            <asp:TextBox ID="txtRegPassword" runat="server" CssClass="form-control" placeholder="Contraseña" TextMode="Password" />
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('<%= txtRegPassword.ClientID %>', this)"></i>
+                            <asp:RequiredFieldValidator ID="rfvRegPassword" runat="server" ControlToValidate="txtRegPassword"
+                                ErrorMessage="La contraseña es requerida." CssClass="text-danger small d-block" Display="Dynamic" ValidationGroup="RegistroGroup" />
                         </div>
                     </div>
 
                     <div class="form-check mb-1">
-                        <input class="form-check-input" type="checkbox" id="terminos1" />
-                        <label class="form-check-label small fw-semibold" for="terminos1">
+                        <asp:CheckBox ID="chkTerminos" runat="server" CssClass="form-check-input" />
+                        <label class="form-check-label small fw-semibold" for="<%= chkTerminos.ClientID %>">
                             He leído y acepto los <span class="fst-italic">Términos y Condiciones y Políticas de Privacidad</span>
                         </label>
+                        <asp:CustomValidator ID="cvTerminos" runat="server" ErrorMessage="Debes aceptar los términos y condiciones."
+                            ClientValidationFunction="validarTerminos" CssClass="text-danger small d-block" Display="Dynamic" ValidationGroup="RegistroGroup" />
                     </div>
 
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="promos" />
-                        <label class="form-check-label small fst-italic" for="promos">
+                        <asp:CheckBox ID="chkPromos" runat="server" CssClass="form-check-input" />
+                        <label class="form-check-label small fst-italic" for="<%= chkPromos.ClientID %>">
                             Acepto el envío de Ofertas, Promociones y otros fines adicionales
                         </label>
                     </div>
 
-                    <button class="btn btn-danger w-100 fw-bold">Crear</button>
+                    <asp:Button ID="btnCrearCuenta" runat="server" Text="Crear" CssClass="btn btn-danger w-100 fw-bold"
+                        OnClick="btnCrearCuenta_Click" ValidationGroup="RegistroGroup" />
                 </div>
             </div>
         </div>
@@ -129,17 +147,39 @@
                     <h4 class="text-danger fw-bold mb-3">¿Olvidaste tu contraseña?</h4>
                     <p class="text-muted mb-3">No te preocupes, ingresa tu correo electrónico y te enviaremos un enlace para restablecerla.</p>
 
-                    <input type="email" class="form-control mb-3" placeholder="Tu correo electrónico" />
+                    <asp:TextBox ID="txtRecuperarEmail" runat="server" CssClass="form-control mb-3" placeholder="Tu correo electrónico" TextMode="Email"></asp:TextBox>
 
-                    <button class="btn btn-warning w-100 fw-bold" style="color: #000;">
-                        Enviar enlace de recuperación
-                    </button>
+                    <asp:Button ID="btnEnviarRecuperacion" runat="server" Text="Enviar enlace de recuperación" CssClass="btn btn-warning w-100 fw-bold" Style="color: #000;" OnClick="btnEnviarRecuperacion_Click" />
 
                     <p class="small text-muted mt-3">Revisa también tu bandeja de spam o promociones.</p>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function togglePassword(fieldId, icon) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                field.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function togglePassword(fieldId, icon) {
+            // ... tu función existente
+        }
 
+        // NUEVA FUNCIÓN para validar el checkbox de términos
+        function validarTerminos(source, args) {
+            var chk = document.getElementById('<%= chkTerminos.ClientID %>');
+            args.IsValid = chk.checked;
+        }
+    </script>
 </asp:Content>
 

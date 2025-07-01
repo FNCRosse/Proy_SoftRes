@@ -82,7 +82,6 @@
     </div>
     <!-- Modales -->
     <!-- Modal para Registrar Horario -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:HiddenField ID="hdnIdHorario" runat="server" />
     <asp:HiddenField ID="hdnModoModal" runat="server" />
     <div class="modal fade" id="modalRegistrarHorario" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarHorarioLabel" aria-hidden="true">

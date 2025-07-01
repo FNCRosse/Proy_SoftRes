@@ -24,9 +24,9 @@ namespace SoftResBusiness
             return this.notificacionClienteSOAP.insertar(notificacion);
         }
 
-        public notificacionDTO ObtenerPorID(int notificacionID)
+        public notificacionDTO ObtenerPorID(int notificacionID, int usuarioID)
         {
-            return this.notificacionClienteSOAP.obtenerPorId(notificacionID);
+            return this.notificacionClienteSOAP.obtenerPorId(notificacionID, usuarioID);
         }
 
         public int Modificar(notificacionDTO notificacion)

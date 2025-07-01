@@ -74,7 +74,7 @@ namespace SoftResWA.Views.Reservas
                 parametros.fechaInicioSpecified = false;
                 parametros.fechaFinSpecified = false;
                 parametros.idLocalSpecified = false;
-                
+
                 var reservas = this.reservaBO.Listar(parametros);
                 if (reservas != null)
                 {
@@ -85,7 +85,7 @@ namespace SoftResWA.Views.Reservas
                 SoftResBusiness.LocalWSClient.localParametros lParametros = new SoftResBusiness.LocalWSClient.localParametros();
                 lParametros.estadoSpecified = true;
                 lParametros.estado = true;
-                
+
                 var locales = this.localBO.Listar(lParametros);
                 if (locales != null)
                 {
@@ -159,23 +159,23 @@ namespace SoftResWA.Views.Reservas
             var listaAdaptada = lista.Select(rm => new
             {
                 ReservaID = rm.reserva?.idReservaSpecified == true ? rm.reserva.idReserva : 0,
-                TipoReserva = rm.reserva?.tipoReservaSpecified == true ? 
+                TipoReserva = rm.reserva?.tipoReservaSpecified == true ?
                     (rm.reserva.tipoReserva == SoftResBusiness.ReservaxMesaWSClient.tipoReserva.COMUN ? "Común" : "Evento") : "No especificado",
-                FechaReserva = rm.reserva?.fecha_HoraSpecified == true ? 
+                FechaReserva = rm.reserva?.fecha_HoraSpecified == true ?
                     rm.reserva.fecha_Hora.ToString("dd/MM/yyyy HH:mm") : "No especificado",
                 Cliente = rm.reserva?.usuario?.nombreComp ?? "No especificado",
                 Local = rm.reserva?.local?.nombre ?? "No especificado",
                 EstadoReserva = rm.reserva?.estadoSpecified == true ? rm.reserva.estado.ToString() : "No especificado",
-                
+
                 MesaID = rm.mesa?.idMesaSpecified == true ? rm.mesa.idMesa : 0,
                 NumeroMesa = rm.mesa?.numeroMesa ?? "No especificado",
                 CapacidadMesa = rm.mesa?.capacidadSpecified == true ? rm.mesa.capacidad : 0,
                 TipoMesa = rm.mesa?.tipoMesa?.nombre ?? "No especificado",
                 EstadoMesa = rm.mesa?.estadoSpecified == true ? rm.mesa.estado.ToString() : "No especificado",
                 UbicacionMesa = $"({(rm.mesa?.xSpecified == true ? rm.mesa.x : 0)}, {(rm.mesa?.ySpecified == true ? rm.mesa.y : 0)})",
-                
+
                 // Para acciones
-                PuedeEliminar = rm.reserva?.estadoSpecified == true && 
+                PuedeEliminar = rm.reserva?.estadoSpecified == true &&
                     (rm.reserva.estado == SoftResBusiness.ReservaxMesaWSClient.estadoReserva.PENDIENTE || rm.reserva.estado == SoftResBusiness.ReservaxMesaWSClient.estadoReserva.CONFIRMADA)
             }).ToList<Object>();
             return listaAdaptada;
@@ -188,7 +188,7 @@ namespace SoftResWA.Views.Reservas
                 // Si no se especifica idReserva, cargar todas las asignaciones usando -1
                 int reservaId = idReserva ?? -1;
                 var reservaxMesas = this.reservaxMesaBO.Listar(reservaId);
-                
+
                 if (reservaxMesas != null)
                 {
                     this.listadoReservaxMesas = reservaxMesas;
@@ -201,10 +201,10 @@ namespace SoftResWA.Views.Reservas
             catch (Exception ex)
             {
                 this.listadoReservaxMesas = new BindingList<reservaxMesasDTO>();
-                
+
                 // Crear datos demo para pruebas
                 var reservaxMesasDemo = new BindingList<reservaxMesasDTO>();
-                
+
                 // Simular algunas asignaciones
                 for (int i = 1; i <= 3; i++)
                 {
@@ -241,9 +241,9 @@ namespace SoftResWA.Views.Reservas
                     };
                     reservaxMesasDemo.Add(reservaxMesa);
                 }
-                
+
                 this.listadoReservaxMesas = reservaxMesasDemo;
-                
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "errorReservaxMesas",
                     $@"console.log('Error cargando ReservaxMesas: {ex.Message}');
                        console.log('Usando datos demo para pruebas');", true);
@@ -288,7 +288,7 @@ namespace SoftResWA.Views.Reservas
         protected void Page_Load(object sender, EventArgs e)
         {
             gvReservas.RowDataBound += gv_RowDataBound;
-            
+
             // Cargar datos siempre para mantener la información actualizada
             CargarDatos();
             CargarGridView();
@@ -303,7 +303,7 @@ namespace SoftResWA.Views.Reservas
                 var listaAdaptada = this.ConfigurarListado(this.listadoReservas);
                 gvReservas.DataSource = listaAdaptada;
                 gvReservas.DataBind();
-                
+
                 // Mostrar mensaje si no hay reservas
                 if (listaAdaptada == null || listaAdaptada.Count == 0)
                 {
@@ -347,7 +347,7 @@ namespace SoftResWA.Views.Reservas
                     {
                         // Crear botones dinámicamente
                         e.Row.Cells[0].Text = "";
-                        
+
                         if (idReserva.HasValue && estado.HasValue)
                         {
                             // Botón Modificar (solo para reservas pendientes o confirmadas)
@@ -387,7 +387,7 @@ namespace SoftResWA.Views.Reservas
             {
                 Button btn = (Button)sender;
                 int idReserva = int.Parse(btn.CommandArgument);
-                
+
                 // Redirigir a página de modificación
                 Response.Redirect($"modificar_reserva.aspx?id={idReserva}");
             }
@@ -471,10 +471,10 @@ namespace SoftResWA.Views.Reservas
                 }
 
                 var lista = this.reservaBO.Listar(parametros);
-                
+
                 // Actualizar la lista principal con los resultados filtrados
                 this.listadoReservas = lista ?? new BindingList<SoftResBusiness.ReservaWSClient.reservaDTO>();
-                
+
                 var listaAdaptada = this.ConfigurarListado(this.listadoReservas);
                 gvReservas.DataSource = listaAdaptada;
                 gvReservas.DataBind();
@@ -504,7 +504,7 @@ namespace SoftResWA.Views.Reservas
             {
                 string idReservaStr = Request.Form["hdnIdReservaCancelar"];
                 string idMotivoStr = Request.Form["hdnIdMotivoCancelacion"];
-                
+
                 if (!string.IsNullOrEmpty(idReservaStr) && !string.IsNullOrEmpty(idMotivoStr))
                 {
                     int idReserva = int.Parse(idReservaStr);
@@ -515,14 +515,14 @@ namespace SoftResWA.Views.Reservas
                     {
                         reserva.estado = SoftResBusiness.ReservaWSClient.estadoReserva.CANCELADA;
                         reserva.estadoSpecified = true;
-                        
+
                         SoftResBusiness.ReservaWSClient.motivosCancelacionDTO motivo = new SoftResBusiness.ReservaWSClient.motivosCancelacionDTO();
                         motivo.idMotivo = idMotivo;
                         motivo.idMotivoSpecified = true;
                         reserva.motivoCancelacion = motivo;
 
                         int resultado = this.reservaBO.Eliminar(reserva);
-                        
+
                         if (resultado > 0)
                         {
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "exitoCancelacion",
@@ -551,7 +551,7 @@ namespace SoftResWA.Views.Reservas
             {
                 Button btn = (Button)sender;
                 string[] args = btn.CommandArgument.Split('|');
-                
+
                 if (args.Length != 2 || !int.TryParse(args[0], out int idReserva) || !int.TryParse(args[1], out int idMesa))
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "errorArgumentos",
@@ -580,7 +580,7 @@ namespace SoftResWA.Views.Reservas
 
                 // Ejecutar eliminación
                 int resultado = this.reservaxMesaBO.Eliminar(asignacionAEliminar);
-                
+
                 if (resultado > 0)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "exitoEliminacion",

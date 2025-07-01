@@ -9,6 +9,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SoftResWA.Util;
+using static SoftResWA.Util.ServicioCorreo;
 
 namespace SoftResWA.Views.Usuarios
 {
@@ -23,7 +25,17 @@ namespace SoftResWA.Views.Usuarios
         public UsuarioBO UsuarioBO { get => usuarioBO; set => usuarioBO = value; }
         public RolBO RolBO { get => rolBO; set => rolBO = value; }
         public TipoDocumentoBO TipoDocumentoBO { get => tipoDocumentoBO; set => tipoDocumentoBO = value; }
-
+        public usuariosDTO UsuarioActual
+        {
+            get
+            {
+                if (Session["UsuarioLogueado"] != null)
+                {
+                    return (usuariosDTO)Session["UsuarioLogueado"];
+                }
+                return null;
+            }
+        }
         public registro_cliente()
         {
             this.usuarioBO = new UsuarioBO();
@@ -40,25 +52,26 @@ namespace SoftResWA.Views.Usuarios
                 CargarTiposDocumento();
                 
                 // Verificar si es modificación
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["id"] != null && int.TryParse(Request.QueryString["id"], out idUsuario))
                 {
-                    if (int.TryParse(Request.QueryString["id"], out idUsuario))
-                    {
-                        esModificacion = true;
-                        ViewState["IdUsuario"] = idUsuario;
-                        ViewState["EsModificacion"] = true;
-                        CargarDatosCliente(idUsuario);
-                        btnGuardar.Text = "Modificar";
-                        lblTitulo.Text = "Modificar Cliente";
-                    }
+                    esModificacion = true;
+                    ViewState["IdUsuario"] = idUsuario;
+                    ViewState["EsModificacion"] = true;
+                    CargarDatosCliente(idUsuario);
+                    btnGuardar.Text = "Modificar";
+                    lblTitulo.Text = "Modificar Cliente";
+                    divContrasenas.Visible = false;
+                    chkCambiarContrasena.Visible = true;
+                    btnAbrirModalCambio.Visible = false;
                 }
                 else
                 {
                     ViewState["EsModificacion"] = false;
                     lblTitulo.Text = "Registrar Cliente";
-                    // Para clientes nuevos, establecer valores por defecto
                     txtCantReservas.Text = "0";
-                    chkEstado.Checked = true;
+                    divContrasenas.Visible = true;
+                    chkCambiarContrasena.Visible = false;
+                    btnAbrirModalCambio.Visible = false;
                 }
             }
             else
@@ -70,6 +83,53 @@ namespace SoftResWA.Views.Usuarios
                 }
             }
         }
+        protected void chkCambiarContrasena_CheckedChanged(object sender, EventArgs e)
+        {
+            btnAbrirModalCambio.Visible = chkCambiarContrasena.Checked;
+        }
+        protected void btnEnviarCorreoCambio_Click(object sender, EventArgs e)
+        {
+            RegisterAsyncTask(new PageAsyncTask(EnviarCorreoYMostrarAlerta));
+        }
+
+        private async System.Threading.Tasks.Task EnviarCorreoYMostrarAlerta()
+        {
+            string correo = txtEmail.Text.Trim();
+            if (string.IsNullOrEmpty(correo))
+            {
+                string script = "Swal.fire('Error', 'El campo de correo electrónico del empleado debe estar lleno para enviar un enlace de recuperación.', 'error');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoVacioError", script, true);
+                return; // Detener si no hay correo
+            }
+            string nombre = txtNombreCompleto.Text.Trim();
+            if (string.IsNullOrEmpty(nombre))
+            {
+                nombre = correo.Split('@')[0];
+            }
+            string dataParaCifrar = $"{correo}|{DateTime.UtcNow.Ticks}";
+            string tokenCifrado = Protector.Cifrar(dataParaCifrar);
+            //Esto para el desplegado
+            //var request = HttpContext.Current.Request;
+            //string baseUrl = $"{request.Url.Scheme}://{request.Url.Authority}";
+            //string rutaRelativa = ResolveUrl("~/Views/Login/CambiarContrasena.aspx");
+            //string linkCambio = $"{baseUrl}{rutaRelativa}?token={token}";
+            string linkCambio = $"http://localhost:52960/Views/Login/CambiarContrasena.aspx?token={tokenCifrado}"; // Para probar en el local
+            RespuestaEnvioCorreo enviado = await ServicioCorreo.EnviarCorreoRecuperacion(correo, nombre, linkCambio);
+
+            if (enviado.Exito)
+            {
+                string script = $"Swal.fire('¡Correo Enviado!', 'Se ha enviado un enlace de recuperación a {correo.Replace("'", "\\'")}', 'success');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoExito", script, true);
+            }
+            else
+            {
+                // También es buena idea manejar el caso de error
+                string script = "Swal.fire('Error', 'No se pudo enviar el correo. Por favor, inténtalo de nuevo.', 'error');";
+                System.Diagnostics.Debug.WriteLine($"Error al enviar correo de recuperación: {enviado.MensajeError}");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "correoError", script, true);
+            }
+        }
+
 
         private void CargarDropDownList(DropDownList ddl, object dataSource, string textField, string valueField, string textoDefault)
         {
@@ -121,9 +181,7 @@ namespace SoftResWA.Views.Usuarios
                     txtTelefono.Text = usuario.telefono;
                     txtCantReservas.Text = usuario.cantidadReservacion.ToString();
                     txtContrasena.Text = usuario.contrasenha;
-                    chkEstado.Checked = usuario.estado;
-                    
-                    ddlTipoDocumento.SelectedValue = usuario.numeroDocumento.ToString();
+                    ddlTipoDocumento.SelectedValue = usuario.tipoDocumento.idTipoDocumento.ToString();
                 }
             }
             catch (Exception ex)
@@ -140,20 +198,15 @@ namespace SoftResWA.Views.Usuarios
 
             usuario.nombreComp = txtNombreCompleto.Text.Trim();
             usuario.numeroDocumento = txtNumeroDocumento.Text.Trim();
+            usuario.tipoDocumento = new SoftResBusiness.UsuarioWSClient.tipoDocumentoDTO();
+            usuario.tipoDocumento.idTipoDocumento = int.Parse(ddlTipoDocumento.SelectedValue);
+            usuario.tipoDocumento.idTipoDocumentoSpecified = true;
             usuario.email = txtEmail.Text.Trim();
             usuario.telefono = txtTelefono.Text.Trim();
-            usuario.contrasenha = txtContrasena.Text.Trim();
             usuario.cantidadReservacion = int.Parse(txtCantReservas.Text.Trim());
             usuario.cantidadReservacionSpecified = true;
-            usuario.estado = chkEstado.Checked;
             usuario.estadoSpecified = true;
-            usuario.idUsuario = int.Parse(ddlTipoDocumento.SelectedValue);
-            usuario.idUsuarioSpecified = true;
-
-            // Obtener el rol de cliente automáticamente
-            int rolClienteId = ObtenerRolCliente();
-            
-
+            usuario.estado = true;
             // Los clientes no tienen sueldo ni fecha de contratación
             usuario.sueldoSpecified = false;
             usuario.fechaContratacionSpecified = false;
@@ -172,11 +225,15 @@ namespace SoftResWA.Views.Usuarios
             ScriptManager.RegisterStartupScript(this, this.GetType(), "mensaje",
                 $"Swal.fire('¡{entidad} {(exito ? accion : $"NO {accion}")}!', '{baseMensaje} correctamente.', '{tipo}');", true);
         }
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                if (UsuarioActual == null)
+                {
+                    MostrarResultado(false, "Horario", "guardar");
+                    return;
+                }
                 bool exito = false;
                 string modo = esModificacion ? "modificar" : "registrar";
 
@@ -187,22 +244,33 @@ namespace SoftResWA.Views.Usuarios
                     usuario = ConstruirDTO(usuario);
                     usuario.idUsuario = idUsuario;
                     usuario.idUsuarioSpecified = true;
-
                     usuario.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaModificacionSpecified = true;
-                    usuario.usuarioModificacion = "admin"; // usar Session["usuario"] si aplica
+                    usuario.usuarioModificacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                     exito = this.usuarioBO.Modificar(usuario) > 0;
                 }
                 else
                 {
                     // Registrar nuevo cliente
+                    string numeroDoc = txtNumeroDocumento.Text.Trim();
+                    if (this.usuarioBO.ValidarDocumentoUnico(numeroDoc))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "docExistente",
+                            "Swal.fire('Duplicado', 'Ya existe un cliente registrado con este número de documento.', 'warning');", true);
+                        return;
+                    }
                     usuariosDTO usuario = new usuariosDTO();
                     usuario = ConstruirDTO(usuario);
+                    int rolClienteId = ObtenerRolCliente();
+                    usuario.rol = new SoftResBusiness.UsuarioWSClient.rolDTO();
+                    usuario.rol.idRol = rolClienteId;
+                    usuario.rol.idRolSpecified = true;
+                    usuario.contrasenha = txtContrasena.Text.Trim();
                     usuario.fechaCreacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                     usuario.fechaCreacionSpecified = true;
                     usuario.fechaModificacionSpecified = false;
-                    usuario.usuarioCreacion = "admin"; // usar Session["usuario"] si aplica
+                    usuario.usuarioCreacion = UsuarioActual.nombreComp; // usar Session["usuario"] si aplica
 
                     exito = this.usuarioBO.Insertar(usuario) > 0;
                 }

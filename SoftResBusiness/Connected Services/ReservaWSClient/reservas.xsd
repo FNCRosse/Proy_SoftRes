@@ -144,16 +144,6 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="obtenerPorId">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="obtenerPorIdResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:reservaDTO" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="eliminar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:reservaDTO" />
@@ -162,6 +152,16 @@
   <xs:complexType name="eliminarResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorId">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:reservaDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="modificar">

@@ -19,23 +19,39 @@ namespace SoftResWA.Views.Cliente.Comentarios
 
         public ComentarioBO ComentarioBO { get => comentarioBO; set => comentarioBO = value; }
         public BindingList<comentariosDTO> ListaComentarios { get => listaComentarios; set => listaComentarios = value; }
-
+        public usuariosDTO UsuarioActual
+        {
+            get { return Session["UsuarioLogueado"] as usuariosDTO; }
+        }
         public Comentarios_Listado()
         {
             this.comentarioBO = new ComentarioBO();
-            comentarioParametros cParametros = new comentarioParametros();
-            cParametros.idLocalSpecified = false;
-            cParametros.puntuacionSpecified = false;
-            cParametros.idReservaSpecified = false;
-            cParametros.estadoSpecified = true;
-            cParametros.estado = true;
-            this.listaComentarios = this.comentarioBO.Listar(cParametros);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                CargarComentariosDemo();
+                CargarComentarios();
+        }
+        private void CargarComentarios()
+        {
+            try
+            {
+                comentarioParametros cParametros = new comentarioParametros();
+                cParametros.idLocalSpecified = false;
+                cParametros.puntuacionSpecified = false;
+                cParametros.idReservaSpecified = false;
+                cParametros.estadoSpecified = true;
+                cParametros.estado = true;
+                BindingList<comentariosDTO> comentarios = comentarioBO.Listar(cParametros);
+                rptComentarios.DataSource = comentarios.OrderByDescending(c => c.fechaCreacion).ToList();
+                rptComentarios.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine($"Error al cargar comentarios: {ex.Message}");
+            }
         }
         public string GetStars(int puntuacion)
         {
@@ -48,15 +64,10 @@ namespace SoftResWA.Views.Cliente.Comentarios
             }
             return sb.ToString();
         }
-        private void CargarComentariosDemo()
-        {
-            rptComentarios.DataSource = ListaComentarios;
-            rptComentarios.DataBind();
-        }
+
         protected void btnAgregarComentario_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Views/Cliente/Comentarios/Comentarios_Registrar.aspx");
         }
-
     }
 }

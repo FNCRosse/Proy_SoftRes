@@ -10,7 +10,7 @@
         </h1>
     </div>
     
-
+    <!-- Filtros para búsqueda -->
     <div class="container-fluid mb-4 ps-4">
         <div class="row gx-3">
 
@@ -32,7 +32,7 @@
                 <label for="txtFechaHasta" class="form-label">Fecha Hasta</label>
                 <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="form-control" TextMode="Date" />
             </div>
-
+            <!-- DNI Cliente -->
             <div class="col-auto">
                 <label for="txtDniCliente" class="form-label">DNI Cliente</label>
                 <input type="text" id="txtDniCliente" name="txtDniCliente" class="form-control" placeholder="Ej. 12345678" maxlength="8" />
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-
+    <!-- Navegación por pestañas -->
     <ul class="nav nav-tabs mb-3" id="tabsGestion" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-reservas" data-bs-toggle="tab" data-bs-target="#tabpane-reservas" 
@@ -70,20 +70,19 @@
         </li>
     </ul>
 
-
+    <!-- Contenido de las pestañas -->
     <div class="tab-content" id="tabsGestionContent">
         
-
+        <!-- Pestaña: Gestión de Reservas -->
         <div class="tab-pane fade show active" id="tabpane-reservas" role="tabpanel" aria-labelledby="tab-reservas">
             <div class="row">
                 <div class="col-12">
-            <asp:ScriptManager ID="ScriptManager1" runat="server" />
             <asp:GridView ID="gvReservas" runat="server" CssClass="table table-hover table-striped" 
                 AutoGenerateColumns="False" EmptyDataText="No se encontraron reservas">
                 <Columns>
                     <asp:TemplateField HeaderText="Acciones" HeaderStyle-Width="120px">
                         <ItemTemplate>
-
+                            <!-- Los botones se generan dinámicamente en el code-behind -->
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField HeaderText="ID" DataField="idReserva" HeaderStyle-Width="60px" />
@@ -104,7 +103,7 @@
             </div>
         </div>
 
-
+        <!-- Pestaña: Asignación de Mesas -->
         <div class="tab-pane fade" id="tabpane-asignaciones" role="tabpanel" aria-labelledby="tab-asignaciones">
             <div class="row">
                 <div class="col-12">
@@ -150,12 +149,12 @@
         </div>
     </div>
 
-
+    <!-- Hidden fields para JavaScript -->
     <asp:HiddenField ID="hdnIdReservaCancelar" runat="server" />
     <asp:HiddenField ID="hdnIdMotivoCancelacion" runat="server" />
     <asp:Button ID="btnCancelarReservaHidden" runat="server" Style="display: none;" OnClick="btnCancelarReserva_Click" />
 
-
+    <!-- Modal para cancelar reserva -->
     <div class="modal fade" id="modalCancelarReserva" tabindex="-1" aria-labelledby="modalCancelarReservaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
@@ -198,7 +197,7 @@
         </div>
     </div>
 
-
+    <!-- Modal para seleccionar tipo de reserva -->
     <div class="modal fade" id="modalTipoReserva" tabindex="-1" aria-labelledby="modalTipoReservaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-warning">

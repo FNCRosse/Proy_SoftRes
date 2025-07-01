@@ -761,18 +761,6 @@ namespace SoftResBusiness.NotificacionWSClient {
     public interface Notificacion {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/InterruptedExcept" +
-            "ion", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.NotificacionWSClient.eliminarResponse eliminar(SoftResBusiness.NotificacionWSClient.eliminarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.NotificacionWSClient.eliminarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/insertarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Notificacion/insertar/Fault/InterruptedExcept" +
@@ -819,42 +807,18 @@ namespace SoftResBusiness.NotificacionWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/modificarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.NotificacionWSClient.modificarRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.NotificacionWSClient.notificacionDTO arg0;
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.NotificacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/Notificacion/eliminar/Fault/InterruptedExcept" +
+            "ion", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.NotificacionWSClient.eliminarResponse eliminar(SoftResBusiness.NotificacionWSClient.eliminarRequest request);
         
-        public eliminarRequest() {
-        }
-        
-        public eliminarRequest(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public eliminarResponse() {
-        }
-        
-        public eliminarResponse(int @return) {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/Notificacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/Notificacion/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.NotificacionWSClient.eliminarRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -903,11 +867,16 @@ namespace SoftResBusiness.NotificacionWSClient {
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int arg0;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg1;
+        
         public obtenerPorIdRequest() {
         }
         
-        public obtenerPorIdRequest(int arg0) {
+        public obtenerPorIdRequest(int arg0, int arg1) {
             this.arg0 = arg0;
+            this.arg1 = arg1;
         }
     }
     
@@ -937,6 +906,10 @@ namespace SoftResBusiness.NotificacionWSClient {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
     public partial class notificacionParametros : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private bool esLeidaField;
+        
+        private bool esLeidaFieldSpecified;
+        
         private estadoNotificacion estadoField;
         
         private bool estadoFieldSpecified;
@@ -951,6 +924,30 @@ namespace SoftResBusiness.NotificacionWSClient {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public bool esLeida {
+            get {
+                return this.esLeidaField;
+            }
+            set {
+                this.esLeidaField = value;
+                this.RaisePropertyChanged("esLeida");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool esLeidaSpecified {
+            get {
+                return this.esLeidaFieldSpecified;
+            }
+            set {
+                this.esLeidaFieldSpecified = value;
+                this.RaisePropertyChanged("esLeidaSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public estadoNotificacion estado {
             get {
                 return this.estadoField;
@@ -974,7 +971,7 @@ namespace SoftResBusiness.NotificacionWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public int idUsuario {
             get {
                 return this.idUsuarioField;
@@ -998,7 +995,7 @@ namespace SoftResBusiness.NotificacionWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public tipoNotificacion tipoNotificacion {
             get {
                 return this.tipoNotificacionField;
@@ -1103,6 +1100,42 @@ namespace SoftResBusiness.NotificacionWSClient {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.NotificacionWSClient.notificacionDTO arg0;
+        
+        public eliminarRequest() {
+        }
+        
+        public eliminarRequest(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public eliminarResponse() {
+        }
+        
+        public eliminarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface NotificacionChannel : SoftResBusiness.NotificacionWSClient.Notificacion, System.ServiceModel.IClientChannel {
     }
@@ -1128,29 +1161,6 @@ namespace SoftResBusiness.NotificacionWSClient {
         
         public NotificacionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.NotificacionWSClient.eliminarResponse SoftResBusiness.NotificacionWSClient.Notificacion.eliminar(SoftResBusiness.NotificacionWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
-        }
-        
-        public int eliminar(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
-            SoftResBusiness.NotificacionWSClient.eliminarRequest inValue = new SoftResBusiness.NotificacionWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.NotificacionWSClient.eliminarResponse retVal = ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).eliminar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> SoftResBusiness.NotificacionWSClient.Notificacion.eliminarAsync(SoftResBusiness.NotificacionWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
-            SoftResBusiness.NotificacionWSClient.eliminarRequest inValue = new SoftResBusiness.NotificacionWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1181,9 +1191,10 @@ namespace SoftResBusiness.NotificacionWSClient {
             return base.Channel.obtenerPorId(request);
         }
         
-        public SoftResBusiness.NotificacionWSClient.notificacionDTO obtenerPorId(int arg0) {
+        public SoftResBusiness.NotificacionWSClient.notificacionDTO obtenerPorId(int arg0, int arg1) {
             SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest();
             inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
             SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse retVal = ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).obtenerPorId(inValue);
             return retVal.@return;
         }
@@ -1193,9 +1204,10 @@ namespace SoftResBusiness.NotificacionWSClient {
             return base.Channel.obtenerPorIdAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0) {
+        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.obtenerPorIdResponse> obtenerPorIdAsync(int arg0, int arg1) {
             SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest inValue = new SoftResBusiness.NotificacionWSClient.obtenerPorIdRequest();
             inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
             return ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).obtenerPorIdAsync(inValue);
         }
         
@@ -1243,6 +1255,29 @@ namespace SoftResBusiness.NotificacionWSClient {
             SoftResBusiness.NotificacionWSClient.modificarRequest inValue = new SoftResBusiness.NotificacionWSClient.modificarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).modificarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.NotificacionWSClient.eliminarResponse SoftResBusiness.NotificacionWSClient.Notificacion.eliminar(SoftResBusiness.NotificacionWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
+        }
+        
+        public int eliminar(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
+            SoftResBusiness.NotificacionWSClient.eliminarRequest inValue = new SoftResBusiness.NotificacionWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.NotificacionWSClient.eliminarResponse retVal = ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).eliminar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> SoftResBusiness.NotificacionWSClient.Notificacion.eliminarAsync(SoftResBusiness.NotificacionWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.NotificacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.NotificacionWSClient.notificacionDTO arg0) {
+            SoftResBusiness.NotificacionWSClient.eliminarRequest inValue = new SoftResBusiness.NotificacionWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.NotificacionWSClient.Notificacion)(this)).eliminarAsync(inValue);
         }
     }
 }
