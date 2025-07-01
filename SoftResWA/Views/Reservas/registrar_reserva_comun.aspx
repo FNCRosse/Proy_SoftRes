@@ -4,6 +4,7 @@
     Registrar Reserva Común
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContenido" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="container mt-4">
         <div class="card">
             <div class="card-header bg-warning">
@@ -90,7 +91,7 @@
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-4 d-flex align-items-end">
-                            <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary w-100" />
+                            <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary w-100" OnClick="btnBuscarUsuario_Click" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nombre</label>
