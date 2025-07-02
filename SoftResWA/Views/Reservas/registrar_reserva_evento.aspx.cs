@@ -85,12 +85,12 @@ namespace SoftResWA.Views.Reservas
                 usuarioBO = new UsuarioBO();
                 var parametros = new SoftResBusiness.UsuarioWSClient.usuariosParametros();
                 var usuarios = usuarioBO.Listar(parametros);
-                var usuario = usuarios?.FirstOrDefault(u => u.documento == txtDocumentoUsuario.Text.Trim());
+                var usuario = usuarios?.FirstOrDefault(u => u.numeroDocumento == txtDocumentoUsuario.Text.Trim());
                 
                 if (usuario != null)
                 {
-                    txtNombreUsuario.Text = $"{usuario.nombre} {usuario.apellidoPaterno} {usuario.apellidoMaterno}";
-                    txtTipoCliente.Text = usuario.rol?.descripcion ?? "Cliente";
+                    txtNombreUsuario.Text = usuario.nombreComp ?? "";
+                    txtTipoCliente.Text = usuario.rol?.nombre ?? "Cliente";
                 }
                 else
                 {
@@ -115,30 +115,36 @@ namespace SoftResWA.Views.Reservas
                 {
                     reservaBO = new ReservaBO();
                     
+                    // Combinar fecha y hora
+                    DateTime fechaCompleta = DateTime.Parse(txtFecha.Text).Date.Add(TimeSpan.Parse(txtHora.Text));
+                    
                     var nuevaReserva = new reservaDTO
                     {
-                        fechaReserva = DateTime.Parse(txtFecha.Text),
-                        horaReserva = TimeSpan.Parse(txtHora.Text),
-                        cantPersonas = int.Parse(txtCantidadPersonas.Text),
+                        fecha_Hora = fechaCompleta,
+                        fecha_HoraSpecified = true,
+                        cantidad_personas = int.Parse(txtCantidadPersonas.Text),
+                        cantidad_personasSpecified = true,
                         observaciones = txtObservaciones.Text,
                         tipoReserva = tipoReserva.EVENTO,
-                        estadoReserva = estadoReserva.PENDIENTE,
-                        activo = true,
+                        tipoReservaSpecified = true,
+                        estado = estadoReserva.PENDIENTE,
+                        estadoSpecified = true,
                         fechaCreacion = DateTime.Now,
-                        ubicaMesaPreferida = ddlUbicacionMesa.SelectedValue,
+                        fechaCreacionSpecified = true,
                         nombreEvento = txtNombreEvento.Text.Trim(),
                         descripcionEvento = txtDescripcionEvento.Text.Trim(),
                         local = new SoftResBusiness.ReservaWSClient.localDTO 
                         { 
-                            idLocal = int.Parse(ddlLocal.SelectedValue) 
+                            idLocal = int.Parse(ddlLocal.SelectedValue),
+                            idLocalSpecified = true
                         },
-                        solicitante = new SoftResBusiness.ReservaWSClient.usuarioDTO 
+                        usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO 
                         { 
-                            documento = txtDocumentoUsuario.Text.Trim()
+                            numeroDocumento = txtDocumentoUsuario.Text.Trim()
                         }
                     };
 
-                    int resultado = reservaBO.insertar(nuevaReserva);
+                    int resultado = reservaBO.Insertar(nuevaReserva);
                     
                     if (resultado > 0)
                     {

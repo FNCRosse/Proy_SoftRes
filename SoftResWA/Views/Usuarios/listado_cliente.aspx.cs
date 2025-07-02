@@ -103,13 +103,11 @@ namespace SoftResWA.Views.Usuarios
 
                 int idUsuario = (int)dataItem.GetType().GetProperty("idUsuario")?.GetValue(dataItem);
 
-                LinkButton lnkModificar = (LinkButton)e.Row.FindControl("lnkModificar");
-                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
                 HyperLink lnkModificar = (HyperLink)e.Row.FindControl("lnkModificar");
+                LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
 
                 lnkModificar.Visible = estado;
                 btnEliminar.Visible = estado;
-                lnkModificar.Visible = estado;
                 if (estado)
                 {
                     btnEliminar.OnClientClick = $"return confirmarEliminacion({idUsuario}, '{hdnIdEliminar.ClientID}', '{btnEliminarCliente.ClientID}');";

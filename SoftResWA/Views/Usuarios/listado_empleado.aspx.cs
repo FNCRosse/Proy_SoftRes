@@ -158,8 +158,7 @@ namespace SoftResWA.Views.Usuarios
                 dgvEmpleados.DataBind();
                 CargarRoles();
                 CargarTiposDocumento();
-                CargarRolesModal();
-                CargarTiposDocumentoEmpleadoModal();
+                // TODO: Implementar CargarRolesModal() y CargarTiposDocumentoEmpleadoModal() si son necesarios
             }
         }
         //BOTONES
@@ -169,7 +168,7 @@ namespace SoftResWA.Views.Usuarios
             {
                 usuariosParametros parametros = new usuariosParametros();
                 parametros.nombreCompleto = txtNombreCompFiltro.Text.Trim();
-                parametros.numDocumento = txtNumeroDocFiltro.Text.Trim();
+                parametros.numDocumento = ""; // Sin filtro por documento en empleados
                 parametros.idTipoDocumento = !string.IsNullOrEmpty(ddlTipoDocumentoFiltro.SelectedValue) ? int.Parse(ddlTipoDocumentoFiltro.SelectedValue) : 0;
                 parametros.idTipoDocumentoSpecified = !string.IsNullOrEmpty(ddlTipoDocumentoFiltro.SelectedValue);
                 parametros.idTipoUsuario = !string.IsNullOrEmpty(ddlRolFiltro.SelectedValue) ? int.Parse(ddlRolFiltro.SelectedValue) : 0;

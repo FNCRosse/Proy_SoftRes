@@ -4,8 +4,6 @@
     Mis Reservas
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
-    
     <div class="container py-4">
         <h2 class="text-center fw-bold text-danger mb-4">Mis Reservas</h2>
         <div class="row">

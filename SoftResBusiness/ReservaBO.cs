@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace SoftResBusiness
 {
+    /// <summary>
+    /// Capa de abstracción para operaciones CRUD de reservas
+    /// Mantiene la separación de responsabilidades siguiendo el patrón de LocalBO
+    /// </summary>
     public class ReservaBO
     {
         private ReservaClient reservaClienteSOAP;
@@ -49,5 +53,4 @@ namespace SoftResBusiness
             return new BindingList<reservaDTO>(lista);
         }
     }
-
 }

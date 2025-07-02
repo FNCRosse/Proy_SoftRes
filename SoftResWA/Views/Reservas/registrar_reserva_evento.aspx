@@ -4,7 +4,6 @@
     Registrar reservas evento
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContenido" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="container mt-4">
         <div class="card">
             <div class="card-header bg-warning">

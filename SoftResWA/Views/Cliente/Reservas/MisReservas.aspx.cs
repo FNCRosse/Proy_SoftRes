@@ -7,7 +7,11 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SoftResBusiness;
+using SoftResBusiness.ReservaWSClient;
 using usuariosDTO = SoftResBusiness.UsuarioWSClient.usuariosDTO;
+using reservaDTO = SoftResBusiness.ReservaWSClient.reservaDTO;
+using reservaParametros = SoftResBusiness.ReservaWSClient.reservaParametros;
 
 namespace SoftResWA.Views.Cliente.Reservas
 {
