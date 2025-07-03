@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://services.softres.pucp.edu.pe/" targetNamespace="http://services.softres.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IOException" type="tns:IOException" />
+  <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="obtenerCantidadCancelacionesRecientes" type="tns:obtenerCantidadCancelacionesRecientes" />
+  <xs:element name="obtenerCantidadCancelacionesRecientesResponse" type="tns:obtenerCantidadCancelacionesRecientesResponse" />
+  <xs:element name="obtenerCantidadReservasDiarias" type="tns:obtenerCantidadReservasDiarias" />
+  <xs:element name="obtenerCantidadReservasDiariasResponse" type="tns:obtenerCantidadReservasDiariasResponse" />
+  <xs:element name="obtenerCantidadReservasSemanales" type="tns:obtenerCantidadReservasSemanales" />
+  <xs:element name="obtenerCantidadReservasSemanalesResponse" type="tns:obtenerCantidadReservasSemanalesResponse" />
+  <xs:element name="obtenerPorcentajeOcupacionMesas" type="tns:obtenerPorcentajeOcupacionMesas" />
+  <xs:element name="obtenerPorcentajeOcupacionMesasResponse" type="tns:obtenerPorcentajeOcupacionMesasResponse" />
+  <xs:complexType name="obtenerCantidadCancelacionesRecientes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerCantidadCancelacionesRecientesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPorcentajeOcupacionMesas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerPorcentajeOcupacionMesasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerCantidadReservasSemanales">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerCantidadReservasSemanalesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerCantidadReservasDiarias">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerCantidadReservasDiariasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

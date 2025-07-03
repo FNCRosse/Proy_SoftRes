@@ -49,6 +49,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\DashBoardWSClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\FilaEsperaWSClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +165,22 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ComentarioWSClient\SoftResBusiness.ComentarioWSClient.obtenerPorIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DashBoardWSClient\dashboard.wsdl" />
+    <None Include="Connected Services\DashBoardWSClient\dashboard.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DashBoardWSClient\SoftResBusiness.DashBoardWSClient.obtenerCantidadCancelacionesRecientesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DashBoardWSClient\SoftResBusiness.DashBoardWSClient.obtenerCantidadReservasDiariasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DashBoardWSClient\SoftResBusiness.DashBoardWSClient.obtenerCantidadReservasSemanalesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DashBoardWSClient\SoftResBusiness.DashBoardWSClient.obtenerPorcentajeOcupacionMesasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FilaEsperaWSClient\filaEspera.wsdl" />
@@ -473,6 +494,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ComentarioWSClient\" />
+    <WCFMetadataStorage Include="Connected Services\DashBoardWSClient\" />
     <WCFMetadataStorage Include="Connected Services\FilaEsperaWSClient\" />
     <WCFMetadataStorage Include="Connected Services\HorarioAtencionWSClient\" />
     <WCFMetadataStorage Include="Connected Services\HorarioxSedeWSClient\" />
@@ -664,6 +686,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RolWSClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DashBoardWSClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DashBoardWSClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DashBoardWSClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

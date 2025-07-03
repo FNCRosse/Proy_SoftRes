@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.softres.pucp.edu.pe/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="dashboard" targetNamespace="http://services.softres.pucp.edu.pe/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/dashboard?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
+    </xsd:schema>
+  </types>
+  <message name="obtenerCantidadCancelacionesRecientes">
+    <part name="parameters" element="tns:obtenerCantidadCancelacionesRecientes" />
+  </message>
+  <message name="obtenerCantidadCancelacionesRecientesResponse">
+    <part name="parameters" element="tns:obtenerCantidadCancelacionesRecientesResponse" />
+  </message>
+  <message name="IOException">
+    <part name="fault" element="tns:IOException" />
+  </message>
+  <message name="InterruptedException">
+    <part name="fault" element="tns:InterruptedException" />
+  </message>
+  <message name="obtenerCantidadReservasDiarias">
+    <part name="parameters" element="tns:obtenerCantidadReservasDiarias" />
+  </message>
+  <message name="obtenerCantidadReservasDiariasResponse">
+    <part name="parameters" element="tns:obtenerCantidadReservasDiariasResponse" />
+  </message>
+  <message name="obtenerPorcentajeOcupacionMesas">
+    <part name="parameters" element="tns:obtenerPorcentajeOcupacionMesas" />
+  </message>
+  <message name="obtenerPorcentajeOcupacionMesasResponse">
+    <part name="parameters" element="tns:obtenerPorcentajeOcupacionMesasResponse" />
+  </message>
+  <message name="obtenerCantidadReservasSemanales">
+    <part name="parameters" element="tns:obtenerCantidadReservasSemanales" />
+  </message>
+  <message name="obtenerCantidadReservasSemanalesResponse">
+    <part name="parameters" element="tns:obtenerCantidadReservasSemanalesResponse" />
+  </message>
+  <portType name="DashBoard">
+    <operation name="obtenerCantidadCancelacionesRecientes">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadCancelacionesRecientesRequest" message="tns:obtenerCantidadCancelacionesRecientes" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadCancelacionesRecientesResponse" message="tns:obtenerCantidadCancelacionesRecientesResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadCancelacionesRecientes/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadCancelacionesRecientes/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerCantidadReservasDiarias">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasDiariasRequest" message="tns:obtenerCantidadReservasDiarias" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasDiariasResponse" message="tns:obtenerCantidadReservasDiariasResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasDiarias/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasDiarias/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerPorcentajeOcupacionMesas">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerPorcentajeOcupacionMesasRequest" message="tns:obtenerPorcentajeOcupacionMesas" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerPorcentajeOcupacionMesasResponse" message="tns:obtenerPorcentajeOcupacionMesasResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerPorcentajeOcupacionMesas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerPorcentajeOcupacionMesas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerCantidadReservasSemanales">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasSemanalesRequest" message="tns:obtenerCantidadReservasSemanales" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasSemanalesResponse" message="tns:obtenerCantidadReservasSemanalesResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasSemanales/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/DashBoard/obtenerCantidadReservasSemanales/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+  </portType>
+  <binding name="DashBoardPortBinding" type="tns:DashBoard">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtenerCantidadCancelacionesRecientes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerCantidadReservasDiarias">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerPorcentajeOcupacionMesas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerCantidadReservasSemanales">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="dashboard">
+    <port name="DashBoardPort" binding="tns:DashBoardPortBinding">
+      <soap:address location="http://localhost:8080/SoftResWSCliente/dashboard" />
+    </port>
+  </service>
+</definitions>
