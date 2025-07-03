@@ -1,112 +1,94 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="registrar_reserva_comun.aspx.cs" Inherits="SoftResWA.Views.Reservas.registar_reserva_comun" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SoftRes.Master" AutoEventWireup="true" CodeBehind="registrar_reserva_comun.aspx.cs" Inherits="SoftResWA.Views.Reservas.registrar_reserva_comun" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Registrar Reserva Común
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphContenido" runat="server">
     <div class="container mt-4">
-        <div class="card">
-            <div class="card-header bg-warning">
-                <h5 class="mb-0"><i class="fas fa-calendar-plus me-2"></i>Registrar Reserva Común</h5>
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0"><i class="fas fa-utensils me-2"></i>Registrar Reserva Común</h4>
             </div>
-            <div class="card-body">
-                <div class="row g-3">
-                    <!-- Información General -->
-                    <div class="col-md-6">
-                        <div class="border rounded p-3">
-                            <h6 class="fw-bold mb-3">Información General</h6>
-                            <div class="row g-2">
-                                <div class="col-md-6">
-                                    <label class="form-label">Fecha</label>
-                                    <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Hora</label>
-                                    <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" TextMode="Time" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Cantidad de personas</label>
-                                    <asp:TextBox ID="txtCantidadPersonas" runat="server" CssClass="form-control" TextMode="Number" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Cantidad de mesas</label>
-                                    <asp:TextBox ID="txtCantidadMesas" runat="server" CssClass="form-control" TextMode="Number" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Observaciones</label>
-                                    <asp:TextBox ID="txtObservaciones" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" />
-                                </div>
+            <div class="card-body p-4">
+                <asp:UpdatePanel ID="updFormularioReserva" runat="server">
+                    <ContentTemplate>
+                        <!-- PASO 1: ¿Cuándo y para cuántos? -->
+                        <h5 class="fw-bold text-secondary mb-3">Detalles de la Reserva</h5>
+                        <div class="row g-3 mb-4 p-3 border bg-light rounded-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Local<span class="text-danger">*</span></label>
+                                <asp:DropDownList ID="ddlLocal" runat="server" CssClass="form-select" />
+                                <asp:RequiredFieldValidator ID="rfvLocal" runat="server" ControlToValidate="ddlLocal"
+                                    ErrorMessage="Debe seleccionar un local." CssClass="text-danger small" Display="Dynamic" InitialValue="0" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha<span class="text-danger">*</span></label>
+                                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date" />
+                                <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ControlToValidate="txtFecha"
+                                    ErrorMessage="La fecha es requerida." CssClass="text-danger small" Display="Dynamic" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Hora<span class="text-danger">*</span></label>
+                                <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" TextMode="Time" />
+                                <asp:RequiredFieldValidator ID="rfvHora" runat="server" ControlToValidate="txtHora"
+                                    ErrorMessage="La hora es requerida." CssClass="text-danger small" Display="Dynamic" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Cantidad de Personas<span class="text-danger">*</span></label>
+                                <asp:TextBox ID="txtCantidadPersonas" runat="server" CssClass="form-control" TextMode="Number" min="1" />
+                                <asp:RequiredFieldValidator ID="rfvCantidadPersonas" runat="server" ControlToValidate="txtCantidadPersonas"
+                                    ErrorMessage="La cantidad es requerida." CssClass="text-danger small" Display="Dynamic" />
+                                <asp:RangeValidator ID="rvCantidadPersonas" runat="server" ControlToValidate="txtCantidadPersonas"
+                                    MinimumValue="1" MaximumValue="100" Type="Integer" ErrorMessage="Debe ser entre 1 y 100."
+                                    CssClass="text-danger small" Display="Dynamic" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Tipo de Mesa Preferido<span class="text-danger">*</span></label>
+                                <asp:DropDownList ID="ddlTipoMesa" runat="server" CssClass="form-select" />
+                                <asp:RequiredFieldValidator ID="rfvTipoMesa" runat="server" ControlToValidate="ddlTipoMesa"
+                                    ErrorMessage="Debe seleccionar un tipo de mesa." CssClass="text-danger small" Display="Dynamic" InitialValue="0" />
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Información del Local + Estado -->
-                    <div class="col-md-6">
-                        <div class="border rounded p-3 mb-3">
-                            <h6 class="fw-bold mb-3">Información del Local</h6>
-                            <div class="mb-3">
-                                <asp:DropDownList ID="ddlLocales" runat="server" CssClass="form-select">
-                                    <asp:ListItem Text="Seleccionar Local" Value="" />
-                                    <asp:ListItem Text="San Miguel" Value="1" />
-                                    <asp:ListItem Text="Callao" Value="2" />
-                                </asp:DropDownList>
+                        <!-- PASO 2: ¿Para quién es la reserva? -->
+                        <h5 class="fw-bold text-secondary mb-3">Paso 2: Datos del Cliente</h5>
+                        <div class="row g-3 mb-4 p-3 border bg-light rounded-3">
+                            <div class="col-md-5">
+                                <label class="form-label">DNI del Cliente<span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <asp:TextBox ID="txtDniCliente" runat="server" CssClass="form-control" placeholder="Buscar por DNI..." MaxLength="8" />
+                                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary" OnClick="btnBuscarCliente_Click" CausesValidation="false" />
+                                </div>
+                                <asp:RequiredFieldValidator ID="rfvDniCliente" runat="server" ControlToValidate="txtDniCliente"
+                                    ErrorMessage="El DNI es requerido." CssClass="text-danger small" Display="Dynamic" />
                             </div>
-                            <h6 class="fw-bold mb-3">Ubicación de Mesa Preferida</h6>
-                            <div class="mb-3">
-                                <asp:DropDownList ID="ddlUbicacionMesa" runat="server" CssClass="form-select">
-                                    <asp:ListItem Text="Seleccionar Ubicación" Value="" />
-                                    <asp:ListItem Text="Ventana" Value="Ventana" />
-                                    <asp:ListItem Text="Centro" Value="Centro" />
-                                    <asp:ListItem Text="Esquina" Value="Esquina" />
-                                </asp:DropDownList>
+                            <div class="col-md-7">
+                                <label class="form-label">Nombre del Cliente</label>
+                                <asp:TextBox ID="txtNombreCliente" runat="server" CssClass="form-control" ReadOnly="true" placeholder="El nombre aparecerá aquí..." />
+                                <asp:HiddenField ID="hdnIdCliente" runat="server" />
                             </div>
-                            <h6 class="fw-bold mb-3">Estado de Fila de espera</h6>
-                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
-                                <asp:ListItem Text="Seleccionar Estado" Value="" />
-                                <asp:ListItem Text="Pendiente" Value="Pendiente" />
-                                <asp:ListItem Text="Notificado" Value="Confirmado" />
-                                <asp:ListItem Text="Cancelado" Value="Cancelado" />
-                                <asp:ListItem Text="Vacio" Value="Cancelado" />
-                            </asp:DropDownList>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Información del Usuario -->
-                <div class="border rounded p-3 mt-4">
-                    <h6 class="fw-bold mb-3">Información del Usuario</h6>
-                    <div class="row g-2">
-                        <div class="col-md-4">
-                            <label class="form-label">Documento de identidad</label>
-                            <asp:TextBox ID="txtDocumentoUsuario" runat="server" CssClass="form-control" />
+                        <!-- PASO 3: Detalles Finales y Confirmación -->
+                        <h5 class="fw-bold text-secondary mb-3">Paso 3: Detalles Adicionales</h5>
+                        <div class="row g-3 mb-4 p-3 border bg-light rounded-3">
+                            <div class="col-12">
+                                <label class="form-label">Observaciones (Opcional)</label>
+                                <asp:TextBox ID="txtObservaciones" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" placeholder="Ej: Alguna alergia, preferencia de ubicación, etc." />
+                            </div>
+                            <div class="col-12 text-center">
+                                <asp:Label ID="lblDisponibilidad" runat="server" CssClass="fw-bold" Visible="false"></asp:Label>
+                                <br />
+                                <asp:Button ID="btnVerificarDisponibilidad" runat="server" Text="Verificar Disponibilidad" CssClass="btn btn-warning text-dark mt-2" OnClick="btnVerificarDisponibilidad_Click" />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Tipo de documento</label>
-                            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-select">
-                                <asp:ListItem Text="Seleccionar..." Value="" />
-                                <asp:ListItem Text="DNI" Value="DNI" />
-                                <asp:ListItem Text="Carnet de Extranjería" Value="Carnet" />
-                                <asp:ListItem Text="Pasaporte" Value="Pasaporte" />
-                            </asp:DropDownList>
+                        <!-- Botones de Acción Finales -->
+                        <div class="text-end mt-4">
+                            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-secondary me-2" OnClick="btnCancelar_Click" CausesValidation="false" />
+                            <asp:Button ID="btnGuardarReserva" runat="server" Text="Guardar Reserva" CssClass="btn btn-danger" OnClick="btnGuardarReserva_Click" Enabled="false" />
                         </div>
-                        <div class="col-md-4 d-flex align-items-end">
-                            <asp:Button ID="btnBuscarUsuario" runat="server" Text="Buscar" CssClass="btn btn-outline-secondary w-100" />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nombre</label>
-                            <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" ReadOnly="true" />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Tipo de Cliente</label>
-                            <asp:TextBox ID="txtTipoCliente" runat="server" CssClass="form-control" ReadOnly="true" />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botón Guardar -->
-                <div class="text-end mt-4">
-                    <asp:Button ID="btnGuardarReserva" runat="server" Text="Guardar" CssClass="btn btn-danger px-4" OnClick="btnGuardar_Click" />
-                </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
