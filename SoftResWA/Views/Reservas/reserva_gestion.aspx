@@ -75,10 +75,10 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField HeaderText="ID" DataField="idReserva" HeaderStyle-Width="60px" />
-                        <asp:BoundField HeaderText="Tipo" DataField="tipoReserva" />
                         <asp:BoundField HeaderText="Fecha" DataField="fecha_Hora" DataFormatString="{0:dd/MM/yyyy}" />
                         <asp:BoundField HeaderText="Hora" DataField="fecha_Hora" DataFormatString="{0:HH:mm}" />
                         <asp:BoundField HeaderText="Local" DataField="local.nombre" />
+                        <asp:BoundField HeaderText="Personas" DataField="cantidad_personas" />
                         <asp:BoundField HeaderText="Solicitante" DataField="usuario.nombreComp" />
                         <asp:BoundField HeaderText="Estado" DataField="estado" />
                         <asp:BoundField HeaderText="Observaciones" DataField="observaciones" />
@@ -101,7 +101,7 @@
                         <asp:UpdatePanel ID="upListaEspera" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:GridView ID="gvListaEspera" runat="server" CssClass="table table-striped table-hover"
-                                    AutoGenerateColumns="False" DataKeyNames="idFilaEspera" OnRowCommand="gvListaEspera_RowCommand">
+                                    AutoGenerateColumns="False" DataKeyNames="idFila" OnRowCommand="gvListaEspera_RowCommand">
                                     <Columns>
                                         <asp:BoundField DataField="fecha_Hora" HeaderText="Fecha y Hora" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
                                         <asp:BoundField DataField="local.nombre" HeaderText="Local" />
@@ -110,14 +110,14 @@
                                         <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Solicitud" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
                                         <asp:TemplateField HeaderText="Acciones">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnVerificarDisponibilidad" runat="server" Text="Verificar Disponibilidad" 
+                                                <asp:Button ID="btnCrearReserva" runat="server" Text="Crear Reserva" 
                                                     CssClass="btn btn-sm btn-primary"
-                                                    CommandName="VerificarDisponibilidad" 
-                                                    CommandArgument='<%# Eval("idFilaEspera") %>' />
+                                                    CommandName="CrearReserva" 
+                                                    CommandArgument='<%# Eval("idFila") %>' />
                                                 <asp:Button ID="btnEliminarEspera" runat="server" Text="Eliminar" 
                                                     CssClass="btn btn-sm btn-danger"
                                                     CommandName="EliminarEspera" 
-                                                    CommandArgument='<%# Eval("idFilaEspera") %>'
+                                                    CommandArgument='<%# Eval("idFila") %>'
                                                     OnClientClick="return confirm('¿Está seguro de eliminar este registro de la lista de espera?');" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -136,77 +136,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal de Disponibilidad -->
-    <div class="modal fade" id="modalDisponibilidad" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Verificación de Disponibilidad</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <asp:UpdatePanel ID="upModalDisponibilidad" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="mb-4">
-                                <h6>Detalles de la Solicitud</h6>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p><strong>Cliente:</strong> <asp:Label ID="lblCliente" runat="server" /></p>
-                                        <p><strong>Local:</strong> <asp:Label ID="lblLocal" runat="server" /></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><strong>Fecha y Hora:</strong> <asp:Label ID="lblFechaHora" runat="server" /></p>
-                                        <p><strong>Cantidad de Personas:</strong> <asp:Label ID="lblPersonas" runat="server" /></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <asp:Panel ID="pnlDisponibilidad" runat="server">
-                                <div class="alert alert-success mb-4" id="divMesasDisponibles" runat="server" visible="false">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    <asp:Label ID="lblMesasDisponibles" runat="server" />
-                                </div>
-
-                                <div class="alert alert-warning mb-4" id="divSinDisponibilidad" runat="server" visible="false">
-                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                    No hay mesas disponibles para esta solicitud en este momento.
-                                </div>
-
-                                <asp:Panel ID="pnlMesasDisponibles" runat="server" Visible="false">
-                                    <h6>Mesas Disponibles</h6>
-                                    <asp:GridView ID="gvMesasDisponibles" runat="server" CssClass="table table-sm"
-                                        AutoGenerateColumns="False">
-                                        <Columns>
-                                            <asp:BoundField DataField="numeroMesa" HeaderText="N° Mesa" />
-                                            <asp:BoundField DataField="capacidad" HeaderText="Capacidad" />
-                                            <asp:BoundField DataField="tipoMesa.nombre" HeaderText="Tipo" />
-                                            <asp:TemplateField HeaderText="Seleccionar">
-                                                <ItemTemplate>
-                                                    <asp:CheckBox ID="chkSeleccionarMesa" runat="server" />
-                                                    <asp:HiddenField ID="hfIdMesa" runat="server" Value='<%# Eval("idMesa") %>' />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                    </asp:GridView>
-                                </asp:Panel>
-                            </asp:Panel>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <asp:Button ID="btnCrearReserva" runat="server" Text="Crear Reserva" 
-                        CssClass="btn btn-danger" OnClick="btnCrearReserva_Click" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hidden fields para JavaScript -->
-    <asp:HiddenField ID="hdnIdReservaCancelar" runat="server" />
-    <asp:HiddenField ID="hdnIdMotivoCancelacion" runat="server" />
-    <asp:Button ID="btnCancelarReservaHidden" runat="server" Style="display: none;" OnClick="btnCancelarReserva_Click" />
 
     <!-- Modal para cancelar reserva -->
     <div class="modal fade" id="modalCancelarReserva" tabindex="-1" aria-labelledby="modalCancelarReservaLabel" aria-hidden="true">
@@ -230,7 +159,7 @@
                         <select id="ddlMotivoCancelacion" class="form-select" required>
                             <option value="">Seleccione un motivo...</option>
                             <option value="1">Solicitud del cliente</option>
-                            <option value="2">No disponibilidad de mesa</option>
+                            <option value="2">No disponibilidad</option>
                             <option value="3">Problema operativo</option>
                             <option value="4">Otros</option>
                         </select>
@@ -294,6 +223,11 @@
         </div>
     </div>
 
+    <!-- Hidden fields para JavaScript -->
+    <asp:HiddenField ID="hdnIdReservaCancelar" runat="server" />
+    <asp:HiddenField ID="hdnIdMotivoCancelacion" runat="server" />
+    <asp:Button ID="btnCancelarReservaHidden" runat="server" Style="display: none;" OnClick="btnCancelarReserva_Click" />
+
     <script>
         // Variable global para almacenar el ID de la reserva a cancelar
         let reservaACancelar = null;
@@ -341,7 +275,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const fechaDesde = document.getElementById('<%= txtFechaDesde.ClientID %>');
             const fechaHasta = document.getElementById('<%= txtFechaHasta.ClientID %>');
-            const dniInput = document.getElementById('txtDniCliente');
             
             // Validar que fecha hasta no sea menor que fecha desde
             if (fechaHasta) {
@@ -367,92 +300,12 @@
                 });
             }
             
-            // Validar DNI (solo números, 8 dígitos)
-            if (dniInput) {
-                dniInput.addEventListener('input', function() {
-                    let value = this.value.replace(/\D/g, ''); // Solo números
-                    if (value.length > 8) {
-                        value = value.substring(0, 8);
-                    }
-                    this.value = value;
-                });
-                
-                dniInput.addEventListener('blur', function() {
-                    if (this.value && this.value.length !== 8) {
-                        Swal.fire('Error', 'El DNI debe tener exactamente 8 dígitos', 'warning');
-                        this.focus();
-                    }
-                });
-            }
-            
             // Cambiar evento del botón "Nuevo"
             const btnNuevo = document.getElementById('<%= btnNuevo.ClientID %>');
             if (btnNuevo) {
                 btnNuevo.setAttribute('onclick', 'mostrarTipoReserva(); return false;');
             }
         });
-
-        // Función para limpiar filtros
-        function limpiarFiltros() {
-            document.getElementById('ddlTipRes').value = '';
-            document.getElementById('<%= txtFechaDesde.ClientID %>').value = '';
-            document.getElementById('<%= txtFechaHasta.ClientID %>').value = '';
-            document.getElementById('txtDniCliente').value = '';
-            document.getElementById('<%= ddlLocal.ClientID %>').value = '';
-        }
-
-        // Función para confirmar eliminación de asignación (mejorada con SweetAlert)
-        function confirmarEliminacionAsignacion(idReserva, idMesa) {
-            Swal.fire({
-                title: '¿Eliminar asignación?',
-                text: `¿Está seguro que desea eliminar la asignación de la mesa ${idMesa} de la reserva ${idReserva}?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: '🗑️ Sí, eliminar',
-                cancelButtonText: '❌ Cancelar',
-                focusCancel: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    return true; // Permitir que continúe el postback
-                } else {
-                    return false; // Cancelar el postback
-                }
-            });
-            return false; // Evitar el postback inicial mientras se muestra el modal
-        }
-
-        // Función para mostrar información de una reserva
-        function mostrarInfoReserva(idReserva) {
-            Swal.fire({
-                title: 'Información de la Reserva',
-                text: `Mostrando detalles de la reserva ${idReserva}`,
-                icon: 'info',
-                confirmButtonText: 'Cerrar'
-            });
-        }
-
-        // Función para mostrar estadísticas de asignaciones
-        function mostrarEstadisticas() {
-            const tablaAsignaciones = document.querySelector('#tabpane-asignaciones table tbody');
-            if (tablaAsignaciones) {
-                const filas = tablaAsignaciones.querySelectorAll('tr');
-                const totalAsignaciones = filas.length;
-                
-                Swal.fire({
-                    title: 'Estadísticas de Asignaciones',
-                    html: `
-                        <div class="text-start">
-                            <p><strong>Total de asignaciones:</strong> ${totalAsignaciones}</p>
-                            <p><strong>Estado:</strong> Sistema funcionando correctamente</p>
-                        </div>
-                    `,
-                    icon: 'info',
-                    confirmButtonText: 'Cerrar'
-                });
-            }
-        }
     </script>
 
     <style>
@@ -505,33 +358,6 @@
             background-color: #fff;
             border-color: #dee2e6 #dee2e6 #fff;
             font-weight: 600;
-        }
-
-        /* Mejorar la apariencia de la tabla de asignaciones */
-        #tabpane-asignaciones .table {
-            font-size: 0.85rem;
-        }
-
-        #tabpane-asignaciones .table th {
-            background-color: #343a40;
-            color: white;
-            font-size: 0.8rem;
-            padding: 0.5rem;
-        }
-
-        #tabpane-asignaciones .table td {
-            padding: 0.5rem;
-        }
-
-        /* Resaltar filas importantes */
-        .table-hover tbody tr:hover {
-            background-color: rgba(0, 123, 255, 0.075);
-        }
-
-        /* Botones de acción mejorados */
-        .btn-outline-danger:hover {
-            transform: scale(1.05);
-            transition: transform 0.2s;
         }
 
         /* Alertas personalizadas */

@@ -5,7 +5,6 @@ using SoftResBusiness.MotivoCancelacionWSClient;
 using SoftResBusiness.UsuarioWSClient;
 using SoftResBusiness.MesaWSClient;
 using SoftResBusiness.TipoMesaWSClient;
-using SoftResBusiness.ReservaxMesaWSClient;
 using SoftResBusiness.FilaEsperaWSClient;
 using System;
 using System.Collections.Generic;
@@ -24,13 +23,11 @@ namespace SoftResWA.Views.Reservas
         private UsuarioBO usuarioBO;
         private MesaBO mesaBO;
         private TipoMesaBO tipoMesaBO;
-        private ReservaxMesaBO reservaxMesaBO;
         private FilaEsperaBO filaEsperaBO;
         private BindingList<SoftResBusiness.ReservaWSClient.reservaDTO> listadoReservas;
         private BindingList<SoftResBusiness.LocalWSClient.localDTO> listadoLocales;
         private BindingList<SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO> listadoMotivos;
         private BindingList<SoftResBusiness.TipoMesaWSClient.tipoMesaDTO> listadoTiposMesa;
-        private BindingList<SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO> listadoReservaxMesas;
         private BindingList<SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO> listadoFilaEspera;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,7 +41,6 @@ namespace SoftResWA.Views.Reservas
                 this.usuarioBO = new UsuarioBO();
                 this.mesaBO = new MesaBO();
                 this.tipoMesaBO = new TipoMesaBO();
-                this.reservaxMesaBO = new ReservaxMesaBO();
                 this.filaEsperaBO = new FilaEsperaBO();
 
                 if (!IsPostBack)
@@ -125,12 +121,6 @@ namespace SoftResWA.Views.Reservas
                     this.reservaBO.Listar(reservaParametros).ToList()
                 );
 
-                // Cargar asignaciones de mesas
-                var reservaxMesaParams = new SoftResBusiness.ReservaxMesaWSClient.listarRequest(0);
-                this.listadoReservaxMesas = new BindingList<SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO>(
-                    this.reservaxMesaBO.Listar(reservaxMesaParams.arg0).ToList()
-                );
-
                 // Actualizar controles
                 ActualizarGridViews();
             }
@@ -183,11 +173,20 @@ namespace SoftResWA.Views.Reservas
                 {
                     tipoReserva = SoftResBusiness.ReservaWSClient.tipoReserva.COMUN,
                     tipoReservaSpecified = true,
-                    estado = SoftResBusiness.ReservaWSClient.estadoReserva.CONFIRMADA,
+                    estado = SoftResBusiness.ReservaWSClient.estadoReserva.PENDIENTE,
                     estadoSpecified = true,
                     fechaCreacion = DateTime.Now,
                     fechaCreacionSpecified = true,
                     usuarioCreacion = Session["UsuarioLogueado"] as string,
+                    fecha_Hora = DateTime.Now,
+                    fecha_HoraSpecified = true,
+                    cantidad_personas = 1,
+                    cantidad_personasSpecified = true,
+                    local = new SoftResBusiness.ReservaWSClient.localDTO
+                    {
+                        idLocal = int.Parse(ddlLocal.SelectedValue),
+                        idLocalSpecified = true
+                    },
                     usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO
                     {
                         idUsuario = filaEspera.usuario.idUsuario,
@@ -204,18 +203,19 @@ namespace SoftResWA.Views.Reservas
                     // Eliminar de la lista de espera
                     filaEsperaBO.Eliminar(new SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO { idFila = idFilaEspera, idFilaSpecified = true });
 
-                    // Cerrar modal y actualizar
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "cerrarModal",
-                        "$('#modalDisponibilidad').modal('hide');", true);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "exitoReserva",
-                        "Swal.fire('¡Éxito!', 'Se creó la reserva exitosamente.', 'success');", true);
-
+                    // Actualizar datos y mostrar mensaje de éxito
                     CargarDatos();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "exitoReserva",
+                        "Swal.fire('Éxito', 'Reserva creada correctamente', 'success');", true);
+                }
+                else
+                {
+                    throw new Exception("No se pudo crear la reserva.");
                 }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorCreacion",
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorReserva",
                     $"Swal.fire('Error', 'Error al crear la reserva: {ex.Message}', 'error');", true);
             }
         }
@@ -285,6 +285,24 @@ namespace SoftResWA.Views.Reservas
                         }
                     }
                 }
+            }
+        }
+
+        protected void gvListaEspera_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "CrearReserva")
+                {
+                    int idFilaEspera = Convert.ToInt32(e.CommandArgument);
+                    ViewState["IdFilaEspera"] = idFilaEspera;
+                    btnCrearReserva_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorComando",
+                    $"Swal.fire('Error', 'Error al procesar el comando: {ex.Message}', 'error');", true);
             }
         }
     }
