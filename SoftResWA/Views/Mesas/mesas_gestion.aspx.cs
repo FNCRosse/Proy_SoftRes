@@ -188,12 +188,12 @@ namespace SoftResWA.Views.Mesas
             {
                 var dataItem = e.Row.DataItem;
 
-                // Obtener estadoBool vía reflexión
-                bool estado = true; // Por defecto activo
-                var prop = dataItem.GetType().GetProperty("estadoBool");
+                // Obtener estado vía reflexión
+                estadoMesa estado = estadoMesa.DISPONIBLE; // Valor por defecto
+                var prop = dataItem.GetType().GetProperty("estado");
                 if (prop != null)
                 {
-                    estado = (bool)prop.GetValue(dataItem);
+                    estado = (estadoMesa)prop.GetValue(dataItem);
                 }
 
                 int idMesa = (int)dataItem.GetType().GetProperty("idMesa")?.GetValue(dataItem);
@@ -201,10 +201,12 @@ namespace SoftResWA.Views.Mesas
                 LinkButton btnModificar = (LinkButton)e.Row.FindControl("btnModificar");
                 LinkButton btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
 
-                btnModificar.Visible = estado;
-                btnEliminar.Visible = estado;
+                // Solo permitir modificar/eliminar si la mesa no está en uso o reservada
+                bool puedeModificar = estado != estadoMesa.EN_USO && estado != estadoMesa.RESERVADA;
+                btnModificar.Visible = puedeModificar;
+                btnEliminar.Visible = puedeModificar;
 
-                if (estado)
+                if (puedeModificar)
                 {
                     btnEliminar.OnClientClick = $"return confirmarEliminacion({idMesa}, '{hdnIdEliminar.ClientID}', '{btnEliminarMesa.ClientID}');";
                 }

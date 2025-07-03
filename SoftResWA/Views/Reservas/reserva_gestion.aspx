@@ -3,147 +3,201 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cphTitulo" runat="server">
     Gestión de Reservas
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphContenido" runat="server">
-    <div class="text-start mb-3">
-        <h1 class="h3 text-danger fw-bold mb-0 me-3">
-            <i class="fas fa-calendar-check me-2"></i>Gestión de Reservas
-        </h1>
-    </div>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     
-    <!-- Filtros para búsqueda -->
-    <div class="container-fluid mb-4 ps-4">
-        <div class="row gx-3">
+    <div class="container-fluid py-4">
+        <h2 class="text-center fw-bold text-danger mb-4">Gestión de Reservas</h2>
 
-            <div class="col-auto">
-                <label for="ddlTipRes" class="form-label">Tipo de Reservas</label>
-                <select id="ddlTipRes" name="ddlTipRes" class="form-select">
-                    <option value="">-- Todas --</option>
-                    <option value="1">Común</option>
-                    <option value="0">Evento</option>
-                </select>
+        <!-- Pestañas de navegación -->
+        <ul class="nav nav-tabs mb-4" id="gestionTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="reservas-tab" data-bs-toggle="tab" data-bs-target="#reservas" type="button" role="tab">
+                    <i class="fas fa-calendar-check me-2"></i>Reservas
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="espera-tab" data-bs-toggle="tab" data-bs-target="#espera" type="button" role="tab">
+                    <i class="fas fa-clock me-2"></i>Lista de Espera
+                    <asp:Label ID="lblEsperaCount" runat="server" CssClass="badge bg-danger ms-2">0</asp:Label>
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="gestionTabsContent">
+            <!-- Panel de Reservas -->
+            <div class="tab-pane fade show active" id="reservas" role="tabpanel">
+                <!-- Filtros de Reservas -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="ddlLocal" class="form-label">Local</label>
+                                <asp:DropDownList ID="ddlLocal" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Todos" Value="" />
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txtFechaDesde" class="form-label">Desde</label>
+                                <asp:TextBox ID="txtFechaDesde" runat="server" CssClass="form-control" TextMode="Date" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txtFechaHasta" class="form-label">Hasta</label>
+                                <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="form-control" TextMode="Date" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddlEstado" class="form-label">Estado</label>
+                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
+                                    <asp:ListItem Text="Todos" Value="" />
+                                    <asp:ListItem Text="Pendiente" Value="PENDIENTE" />
+                                    <asp:ListItem Text="Confirmada" Value="CONFIRMADA" />
+                                    <asp:ListItem Text="Cancelada" Value="CANCELADA" />
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="text-end mt-3">
+                            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-danger" OnClick="btnBuscar_Click" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GridView de Reservas -->
+                <asp:GridView ID="gvReservas" runat="server" CssClass="table table-striped table-hover"
+                    AutoGenerateColumns="False" DataKeyNames="idReserva" OnRowDataBound="gv_RowDataBound">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Acciones" HeaderStyle-Width="120px">
+                            <ItemTemplate>
+                                <asp:Button ID="btnEditar" runat="server" Text="Editar" CssClass="btn btn-sm btn-primary" 
+                                    CommandName="Editar" CommandArgument='<%# Eval("idReserva") %>' />
+                                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-sm btn-danger" 
+                                    CommandName="Cancelar" CommandArgument='<%# Eval("idReserva") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField HeaderText="ID" DataField="idReserva" HeaderStyle-Width="60px" />
+                        <asp:BoundField HeaderText="Tipo" DataField="tipoReserva" />
+                        <asp:BoundField HeaderText="Fecha" DataField="fecha_Hora" DataFormatString="{0:dd/MM/yyyy}" />
+                        <asp:BoundField HeaderText="Hora" DataField="fecha_Hora" DataFormatString="{0:HH:mm}" />
+                        <asp:BoundField HeaderText="Local" DataField="local.nombre" />
+                        <asp:BoundField HeaderText="Solicitante" DataField="usuario.nombreComp" />
+                        <asp:BoundField HeaderText="Estado" DataField="estado" />
+                        <asp:BoundField HeaderText="Observaciones" DataField="observaciones" />
+                    </Columns>
+                    <HeaderStyle CssClass="table-dark" />
+                    <EmptyDataTemplate>
+                        <div class="text-center p-4">
+                            <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                            <p class="lead">No hay reservas que mostrar</p>
+                        </div>
+                    </EmptyDataTemplate>
+                </asp:GridView>
             </div>
 
-            <div class="col-md-2">
-                <label for="txtFechaDesde" class="form-label">Fecha Desde</label>
-                <asp:TextBox ID="txtFechaDesde" runat="server" CssClass="form-control" TextMode="Date" />
-            </div>
-
-            <div class="col-md-2">
-                <label for="txtFechaHasta" class="form-label">Fecha Hasta</label>
-                <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="form-control" TextMode="Date" />
-            </div>
-            <!-- DNI Cliente -->
-            <div class="col-auto">
-                <label for="txtDniCliente" class="form-label">DNI Cliente</label>
-                <input type="text" id="txtDniCliente" name="txtDniCliente" class="form-control" placeholder="Ej. 12345678" maxlength="8" />
-            </div>
-
-            <div class="col-auto">
-                <label for="ddlLocal" class="form-label">Local</label>
-                <asp:DropDownList ID="ddlLocal" runat="server" CssClass="form-select">
-                </asp:DropDownList>
-            </div>
-
-            <div class="col-auto d-flex align-items-end">
-                <asp:Button ID="btnBuscar" runat="server" Text="🔍 Buscar" CssClass="btn btn-danger me-2"
-                    OnClick="btnBuscar_Click" />
-                <asp:Button ID="btnNuevo" runat="server" Text="➕ Nueva Reserva" CssClass="btn shadow-sm"
-                    OnClientClick="window.location.href='registrar_reserva_comun.aspx'; return false;"
-                    Style="background-color: #FFF3CD; color: #856404; border: 1px solid #d39e00;" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Navegación por pestañas -->
-    <ul class="nav nav-tabs mb-3" id="tabsGestion" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="tab-reservas" data-bs-toggle="tab" data-bs-target="#tabpane-reservas" 
-                type="button" role="tab" aria-controls="tabpane-reservas" aria-selected="true">
-                <i class="fas fa-calendar-check me-2"></i>📋 Gestión de Reservas
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="tab-asignaciones" data-bs-toggle="tab" data-bs-target="#tabpane-asignaciones" 
-                type="button" role="tab" aria-controls="tabpane-asignaciones" aria-selected="false">
-                <i class="fas fa-table me-2"></i>🪑 Asignación de Mesas
-            </button>
-        </li>
-    </ul>
-
-    <!-- Contenido de las pestañas -->
-    <div class="tab-content" id="tabsGestionContent">
-        
-        <!-- Pestaña: Gestión de Reservas -->
-        <div class="tab-pane fade show active" id="tabpane-reservas" role="tabpanel" aria-labelledby="tab-reservas">
-            <div class="row">
-                <div class="col-12">
-            <asp:GridView ID="gvReservas" runat="server" CssClass="table table-hover table-striped" 
-                AutoGenerateColumns="False" EmptyDataText="No se encontraron reservas">
-                <Columns>
-                    <asp:TemplateField HeaderText="Acciones" HeaderStyle-Width="120px">
-                        <ItemTemplate>
-                            <!-- Los botones se generan dinámicamente en el code-behind -->
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField HeaderText="ID" DataField="idReserva" HeaderStyle-Width="60px" />
-                    <asp:BoundField HeaderText="Tipo" DataField="TipoReserva" />
-                    <asp:BoundField HeaderText="Fecha" DataField="Fecha" />
-                    <asp:BoundField HeaderText="Hora" DataField="Hora" />
-                    <asp:BoundField HeaderText="Local" DataField="Local" />
-                    <asp:BoundField HeaderText="Solicitante" DataField="Solicitante" />
-                    <asp:BoundField HeaderText="Estado" DataField="Estado" />
-                    <asp:BoundField HeaderText="Ubicación Mesa" DataField="UbicacionMesa" />
-                    <asp:BoundField HeaderText="Observaciones" DataField="observaciones" />
-                    <asp:BoundField HeaderText="Motivo Cancelación" DataField="MotivoCancelacion" />
-                </Columns>
-                <HeaderStyle CssClass="table-dark" />
-                <EmptyDataRowStyle CssClass="text-center text-muted" />
-            </asp:GridView>
+            <!-- Panel de Lista de Espera -->
+            <div class="tab-pane fade" id="espera" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Lista de Espera</h5>
+                        <asp:UpdatePanel ID="upListaEspera" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:GridView ID="gvListaEspera" runat="server" CssClass="table table-striped table-hover"
+                                    AutoGenerateColumns="False" DataKeyNames="idFilaEspera" OnRowCommand="gvListaEspera_RowCommand">
+                                    <Columns>
+                                        <asp:BoundField DataField="fecha_Hora" HeaderText="Fecha y Hora" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
+                                        <asp:BoundField DataField="local.nombre" HeaderText="Local" />
+                                        <asp:BoundField DataField="usuario.nombreComp" HeaderText="Cliente" />
+                                        <asp:BoundField DataField="cantidad_personas" HeaderText="Personas" />
+                                        <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha Solicitud" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
+                                        <asp:TemplateField HeaderText="Acciones">
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnVerificarDisponibilidad" runat="server" Text="Verificar Disponibilidad" 
+                                                    CssClass="btn btn-sm btn-primary"
+                                                    CommandName="VerificarDisponibilidad" 
+                                                    CommandArgument='<%# Eval("idFilaEspera") %>' />
+                                                <asp:Button ID="btnEliminarEspera" runat="server" Text="Eliminar" 
+                                                    CssClass="btn btn-sm btn-danger"
+                                                    CommandName="EliminarEspera" 
+                                                    CommandArgument='<%# Eval("idFilaEspera") %>'
+                                                    OnClientClick="return confirm('¿Está seguro de eliminar este registro de la lista de espera?');" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <EmptyDataTemplate>
+                                        <div class="text-center p-4">
+                                            <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                                            <p class="lead">No hay clientes en lista de espera</p>
+                                        </div>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Pestaña: Asignación de Mesas -->
-        <div class="tab-pane fade" id="tabpane-asignaciones" role="tabpanel" aria-labelledby="tab-asignaciones">
-            <div class="row">
-                <div class="col-12">
-                    <div class="alert alert-info mb-3" role="alert">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <strong>Asignación de Mesas:</strong> Aquí puede ver y gestionar qué mesas específicas están asignadas a cada reserva.
-                    </div>
-                    
-                    <asp:GridView ID="gvReservaxMesas" runat="server" CssClass="table table-hover table-striped" 
-                        AutoGenerateColumns="False" EmptyDataText="No se encontraron asignaciones de mesas">
-                        <Columns>
-                                                            <asp:TemplateField HeaderText="Acciones" HeaderStyle-Width="80px">
-                                <ItemTemplate>
-                                    <asp:Button ID="btnEliminarAsignacion" runat="server" 
-                                        Text="🗑️" ToolTip="Eliminar asignación" 
-                                        CssClass="btn btn-sm btn-outline-danger"
-                                        CommandArgument='<%# Eval("ReservaID") + "|" + Eval("MesaID") %>'
-                                        OnClientClick="return confirm('¿Está seguro que desea eliminar esta asignación de mesa?');"
-                                        OnClick="btnEliminarAsignacion_Click"
-                                        Visible='<%# (bool)Eval("PuedeEliminar") %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            
-                            <asp:BoundField HeaderText="Reserva ID" DataField="ReservaID" HeaderStyle-Width="80px" />
-                            <asp:BoundField HeaderText="Tipo" DataField="TipoReserva" HeaderStyle-Width="100px" />
-                            <asp:BoundField HeaderText="Fecha" DataField="FechaReserva" HeaderStyle-Width="140px" />
-                            <asp:BoundField HeaderText="Cliente" DataField="Cliente" HeaderStyle-Width="150px" />
-                            <asp:BoundField HeaderText="Local" DataField="Local" HeaderStyle-Width="120px" />
-                            <asp:BoundField HeaderText="Estado Reserva" DataField="EstadoReserva" HeaderStyle-Width="120px" />
-                            
-                            <asp:BoundField HeaderText="Mesa ID" DataField="MesaID" HeaderStyle-Width="70px" />
-                            <asp:BoundField HeaderText="Núm. Mesa" DataField="NumeroMesa" HeaderStyle-Width="90px" />
-                            <asp:BoundField HeaderText="Capacidad" DataField="CapacidadMesa" HeaderStyle-Width="80px" />
-                            <asp:BoundField HeaderText="Tipo Mesa" DataField="TipoMesa" HeaderStyle-Width="100px" />
-                            <asp:BoundField HeaderText="Estado Mesa" DataField="EstadoMesa" HeaderStyle-Width="100px" />
-                            <asp:BoundField HeaderText="Ubicación" DataField="UbicacionMesa" HeaderStyle-Width="90px" />
-                        </Columns>
-                        <HeaderStyle CssClass="table-dark" />
-                        <EmptyDataRowStyle CssClass="text-center text-muted" />
-                    </asp:GridView>
+    <!-- Modal de Disponibilidad -->
+    <div class="modal fade" id="modalDisponibilidad" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Verificación de Disponibilidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upModalDisponibilidad" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="mb-4">
+                                <h6>Detalles de la Solicitud</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Cliente:</strong> <asp:Label ID="lblCliente" runat="server" /></p>
+                                        <p><strong>Local:</strong> <asp:Label ID="lblLocal" runat="server" /></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Fecha y Hora:</strong> <asp:Label ID="lblFechaHora" runat="server" /></p>
+                                        <p><strong>Cantidad de Personas:</strong> <asp:Label ID="lblPersonas" runat="server" /></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <asp:Panel ID="pnlDisponibilidad" runat="server">
+                                <div class="alert alert-success mb-4" id="divMesasDisponibles" runat="server" visible="false">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <asp:Label ID="lblMesasDisponibles" runat="server" />
+                                </div>
+
+                                <div class="alert alert-warning mb-4" id="divSinDisponibilidad" runat="server" visible="false">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    No hay mesas disponibles para esta solicitud en este momento.
+                                </div>
+
+                                <asp:Panel ID="pnlMesasDisponibles" runat="server" Visible="false">
+                                    <h6>Mesas Disponibles</h6>
+                                    <asp:GridView ID="gvMesasDisponibles" runat="server" CssClass="table table-sm"
+                                        AutoGenerateColumns="False">
+                                        <Columns>
+                                            <asp:BoundField DataField="numeroMesa" HeaderText="N° Mesa" />
+                                            <asp:BoundField DataField="capacidad" HeaderText="Capacidad" />
+                                            <asp:BoundField DataField="tipoMesa.nombre" HeaderText="Tipo" />
+                                            <asp:TemplateField HeaderText="Seleccionar">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chkSeleccionarMesa" runat="server" />
+                                                    <asp:HiddenField ID="hfIdMesa" runat="server" Value='<%# Eval("idMesa") %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </asp:Panel>
+                            </asp:Panel>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <asp:Button ID="btnCrearReserva" runat="server" Text="Crear Reserva" 
+                        CssClass="btn btn-danger" OnClick="btnCrearReserva_Click" />
                 </div>
             </div>
         </div>
@@ -402,6 +456,12 @@
     </script>
 
     <style>
+        .text-success { color: #28a745 !important; }
+        .text-warning { color: #ffc107 !important; }
+        .text-danger { color: #dc3545 !important; }
+        .table td { vertical-align: middle; }
+        .btn-sm { padding: 0.25rem 0.5rem; font-size: 0.875rem; }
+        .btn-sm + .btn-sm { margin-left: 0.5rem; }
         .table th {
             border-top: none;
             font-weight: 600;
@@ -411,11 +471,6 @@
         .table td {
             vertical-align: middle;
             font-size: 0.9rem;
-        }
-        
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
         }
         
         .card:hover {

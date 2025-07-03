@@ -94,5 +94,40 @@ namespace SoftResWA.Views.Cliente.Reservas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUnirseEspera;
+
+        /// <summary>
+        /// Control upDisponibilidad.
+        /// </summary>
+        protected global::System.Web.UI.UpdatePanel upDisponibilidad;
+
+        /// <summary>
+        /// Control pnlDisponibilidad.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlDisponibilidad;
+
+        /// <summary>
+        /// Control lblDisponibilidad.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblDisponibilidad;
+
+        /// <summary>
+        /// Control pnlMesasDisponibles.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlMesasDisponibles;
+
+        /// <summary>
+        /// Control lblMesasDisponibles.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblMesasDisponibles;
+
+        /// <summary>
+        /// Control pnlSinDisponibilidad.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlSinDisponibilidad;
+
+        /// <summary>
+        /// Control lnkUnirseEspera.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton lnkUnirseEspera;
     }
 }

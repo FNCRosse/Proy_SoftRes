@@ -8,12 +8,17 @@ using SoftResBusiness;
 using SoftResBusiness.ReservaWSClient;
 using SoftResBusiness.LocalWSClient;
 using SoftResBusiness.UsuarioWSClient;
+using SoftResBusiness.MesaWSClient;
+using SoftResBusiness.ReservaxMesaWSClient;
+using SoftResBusiness.FilaEsperaWSClient;
 using System.ComponentModel;
 using reservaDTO = SoftResBusiness.ReservaWSClient.reservaDTO;
 using tipoReserva = SoftResBusiness.ReservaWSClient.tipoReserva;
 using estadoReserva = SoftResBusiness.ReservaWSClient.estadoReserva;
 using localDTO = SoftResBusiness.LocalWSClient.localDTO;
 using usuariosDTO = SoftResBusiness.UsuarioWSClient.usuariosDTO;
+using mesaDTO = SoftResBusiness.MesaWSClient.mesaDTO;
+using reservaxMesasDTO = SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO;
 
 namespace SoftResWA.Views.Cliente.Reservas
 {
@@ -21,6 +26,9 @@ namespace SoftResWA.Views.Cliente.Reservas
     {
         private ReservaBO reservaBO;
         private LocalBO localBO;
+        private MesaBO mesaBO;
+        private ReservaxMesaBO reservaxMesaBO;
+        private FilaEsperaBO filaEsperaBO;
 
         // Propiedad para obtener el usuario logueado
         public usuariosDTO UsuarioActual
@@ -41,7 +49,17 @@ namespace SoftResWA.Views.Cliente.Reservas
 
                 CargarLocales();
                 EstablecerFechaMinima();
+                InicializarServicios();
             }
+        }
+
+        private void InicializarServicios()
+        {
+            reservaBO = new ReservaBO();
+            localBO = new LocalBO();
+            mesaBO = new MesaBO();
+            reservaxMesaBO = new ReservaxMesaBO();
+            filaEsperaBO = new FilaEsperaBO();
         }
 
         /// <summary>
@@ -83,6 +101,85 @@ namespace SoftResWA.Views.Cliente.Reservas
         }
 
         /// <summary>
+        /// Verifica la disponibilidad de mesas para la fecha y hora seleccionadas
+        /// </summary>
+        private bool VerificarDisponibilidad(DateTime fechaHora, int cantidadPersonas, int idLocal, out List<mesaDTO> mesasDisponibles)
+        {
+            try
+            {
+                // Obtener todas las mesas del local
+                var parametrosMesa = new SoftResBusiness.MesaWSClient.mesaParametros
+                {
+                    idLocalSpecified = true,
+                    idLocal = idLocal,
+                    estadoSpecified = true,
+                    //estado = true // Solo mesas activas
+                };
+
+                var todasLasMesas = mesaBO.Listar(parametrosMesa);
+                
+                // Obtener reservas existentes para esa fecha/hora
+                var parametrosReserva = new reservaParametros
+                {
+                    fechaInicioSpecified = true,
+                    fechaInicio = fechaHora.Date,
+                    fechaFinSpecified = true,
+                    fechaFin = fechaHora.Date.AddDays(1),
+                    idLocalSpecified = true,
+                    idLocal = idLocal,
+                    estadoSpecified = true,
+                    estado = estadoReserva.CONFIRMADA
+                };
+
+                var reservasExistentes = reservaBO.Listar(parametrosReserva);
+                
+                // Obtener mesas ya reservadas para esa hora
+                var mesasReservadas = new HashSet<int>();
+                foreach (var reserva in reservasExistentes)
+                {
+                    if (ReservasSeSuperponen(reserva.fecha_Hora, fechaHora))
+                    {
+                        var reservaxMesas = reservaxMesaBO.Listar(reserva.idReserva);
+                        foreach (var rm in reservaxMesas)
+                        {
+                            if (rm.mesa != null && rm.mesa.idMesaSpecified)
+                            {
+                                mesasReservadas.Add(rm.mesa.idMesa);
+                            }
+                        }
+                    }
+                }
+
+                // Filtrar mesas disponibles que cumplan con la capacidad
+                mesasDisponibles = todasLasMesas
+                    .Where(m => !mesasReservadas.Contains(m.idMesa) && 
+                               m.capacidadSpecified && 
+                               m.capacidad >= cantidadPersonas)
+                    .ToList();
+
+                return mesasDisponibles.Count > 0;
+            }
+            catch (Exception)
+            {
+                mesasDisponibles = new List<mesaDTO>();
+                return false;
+            }
+        }
+
+        private bool ReservasSeSuperponen(DateTime reservaExistente, DateTime nuevaReserva)
+        {
+            // Consideramos que una reserva dura 2 horas
+            var inicioExistente = reservaExistente;
+            var finExistente = reservaExistente.AddHours(2);
+            var inicioNueva = nuevaReserva;
+            var finNueva = nuevaReserva.AddHours(2);
+
+            return (inicioNueva >= inicioExistente && inicioNueva < finExistente) ||
+                   (finNueva > inicioExistente && finNueva <= finExistente) ||
+                   (inicioNueva <= inicioExistente && finNueva >= finExistente);
+        }
+
+        /// <summary>
         /// Maneja el evento de clic del botón registrar reserva
         /// </summary>
         protected void btnRegistrarReserva_Click(object sender, EventArgs e)
@@ -91,18 +188,28 @@ namespace SoftResWA.Views.Cliente.Reservas
             {
                 try
                 {
-                    reservaBO = new ReservaBO();
-                    
                     // Combinar fecha y hora
                     DateTime fechaCompleta = DateTime.Parse(txtFecha.Text).Date.Add(TimeSpan.Parse(txtHora.Text));
-                    
+                    int cantidadPersonas = int.Parse(ddlCantidadPersonas.SelectedValue);
+                    int idLocal = int.Parse(ddlLocal.SelectedValue);
+
+                    List<mesaDTO> mesasDisponibles;
+                    bool hayDisponibilidad = VerificarDisponibilidad(fechaCompleta, cantidadPersonas, idLocal, out mesasDisponibles);
+
+                    if (!hayDisponibilidad)
+                    {
+                        // No hay mesas disponibles, ofrecer lista de espera
+                        MostrarModalListaEspera();
+                        return;
+                    }
+
                     var nuevaReserva = new reservaDTO
                     {
                         fecha_Hora = fechaCompleta,
                         fecha_HoraSpecified = true,
-                        cantidad_personas = int.Parse(ddlCantidadPersonas.SelectedValue),
+                        cantidad_personas = cantidadPersonas,
                         cantidad_personasSpecified = true,
-                        numeroMesas = int.Parse(ddlCantidadMesas.SelectedValue),
+                        numeroMesas = mesasDisponibles.Count,
                         numeroMesasSpecified = true,
                         observaciones = txtObservaciones.Text.Trim(),
                         tipoReserva = tipoReserva.COMUN,
@@ -114,7 +221,7 @@ namespace SoftResWA.Views.Cliente.Reservas
                         usuarioCreacion = UsuarioActual.nombreComp,
                         local = new SoftResBusiness.ReservaWSClient.localDTO 
                         { 
-                            idLocal = int.Parse(ddlLocal.SelectedValue),
+                            idLocal = idLocal,
                             idLocalSpecified = true
                         },
                         usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO 
@@ -130,22 +237,41 @@ namespace SoftResWA.Views.Cliente.Reservas
                     // Agregar información de ubicación preferida si se seleccionó
                     if (!string.IsNullOrEmpty(ddlUbicacion.SelectedValue))
                     {
-                        if (string.IsNullOrEmpty(nuevaReserva.observaciones))
-                            nuevaReserva.observaciones = "";
-                        nuevaReserva.observaciones += $" Ubicación preferida: {ddlUbicacion.SelectedValue}";
+                        nuevaReserva.observaciones = string.IsNullOrEmpty(nuevaReserva.observaciones) 
+                            ? $"Ubicación preferida: {ddlUbicacion.SelectedValue}"
+                            : nuevaReserva.observaciones + $" | Ubicación preferida: {ddlUbicacion.SelectedValue}";
                     }
 
-                    int resultado = reservaBO.Insertar(nuevaReserva);
+                    int idReserva = reservaBO.Insertar(nuevaReserva);
                     
-                    if (resultado > 0)
+                    if (idReserva > 0)
                     {
+                        // Asignar mesas a la reserva
+                        foreach (var mesa in mesasDisponibles)
+                        {
+                            var reservaxMesa = new reservaxMesasDTO
+                            {
+                                reserva = new SoftResBusiness.ReservaxMesaWSClient.reservaDTO
+                                {
+                                    idReserva = idReserva,
+                                    idReservaSpecified = true
+                                },
+                                mesa = new SoftResBusiness.ReservaxMesaWSClient.mesaDTO
+                                {
+                                    idMesa = mesa.idMesa,
+                                    idMesaSpecified = true
+                                }
+                            };
+                            
+                            reservaxMesaBO.Insertar(reservaxMesa);
+                        }
+
                         MostrarAlerta("¡Éxito!", "Tu reserva común ha sido registrada exitosamente. Te contactaremos para confirmar la disponibilidad.", "success");
                         LimpiarFormulario();
                     }
                     else
                     {
-                        // Si no se pudo registrar, mostrar modal de lista de espera
-                        MostrarModalListaEspera();
+                        MostrarAlerta("Error", "No se pudo registrar la reserva. Por favor, intenta nuevamente.", "error");
                     }
                 }
                 catch (Exception ex)
@@ -278,6 +404,74 @@ namespace SoftResWA.Views.Cliente.Reservas
             ddlCantidadMesas.SelectedIndex = 0;
             ddlUbicacion.SelectedIndex = 0;
             txtObservaciones.Text = "";
+        }
+
+        protected void ddlLocal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VerificarDisponibilidadActual();
+        }
+
+        protected void txtFecha_TextChanged(object sender, EventArgs e)
+        {
+            VerificarDisponibilidadActual();
+        }
+
+        protected void txtHora_TextChanged(object sender, EventArgs e)
+        {
+            VerificarDisponibilidadActual();
+        }
+
+        protected void ddlCantidadPersonas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VerificarDisponibilidadActual();
+        }
+
+        private void VerificarDisponibilidadActual()
+        {
+            // Verificar que todos los campos necesarios estén completos
+            if (string.IsNullOrEmpty(ddlLocal.SelectedValue) ||
+                string.IsNullOrEmpty(txtFecha.Text) ||
+                string.IsNullOrEmpty(txtHora.Text) ||
+                string.IsNullOrEmpty(ddlCantidadPersonas.SelectedValue))
+            {
+                lblDisponibilidad.Text = "Complete todos los campos para verificar la disponibilidad.";
+                pnlMesasDisponibles.Visible = false;
+                pnlSinDisponibilidad.Visible = false;
+                return;
+            }
+
+            try
+            {
+                DateTime fechaHora = DateTime.Parse(txtFecha.Text).Date.Add(TimeSpan.Parse(txtHora.Text));
+                int cantidadPersonas = int.Parse(ddlCantidadPersonas.SelectedValue);
+                int idLocal = int.Parse(ddlLocal.SelectedValue);
+
+                List<mesaDTO> mesasDisponibles;
+                bool hayDisponibilidad = VerificarDisponibilidad(fechaHora, cantidadPersonas, idLocal, out mesasDisponibles);
+
+                if (hayDisponibilidad)
+                {
+                    lblDisponibilidad.Text = "¡Hay disponibilidad para tu reserva!";
+                    lblMesasDisponibles.Text = $"Se encontraron {mesasDisponibles.Count} mesas disponibles que cumplen con tus requisitos.";
+                    pnlMesasDisponibles.Visible = true;
+                    pnlSinDisponibilidad.Visible = false;
+                }
+                else
+                {
+                    lblDisponibilidad.Text = "Lo sentimos, no hay disponibilidad para los criterios seleccionados.";
+                    pnlMesasDisponibles.Visible = false;
+                    pnlSinDisponibilidad.Visible = true;
+                }
+
+                upDisponibilidad.Update();
+            }
+            catch (Exception ex)
+            {
+                lblDisponibilidad.Text = "Error al verificar disponibilidad: " + ex.Message;
+                pnlMesasDisponibles.Visible = false;
+                pnlSinDisponibilidad.Visible = false;
+                upDisponibilidad.Update();
+            }
         }
     }
 }
