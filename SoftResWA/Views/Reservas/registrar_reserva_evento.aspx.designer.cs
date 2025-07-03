@@ -15,6 +15,15 @@ namespace SoftResWA.Views.Reservas
     {
 
         /// <summary>
+        /// Control updFormularioReserva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updFormularioReserva;
+
+        /// <summary>
         /// Control txtNombreEvento.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace SoftResWA.Views.Reservas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreEvento;
+
+        /// <summary>
+        /// Control rfvNombreEvento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombreEvento;
 
         /// <summary>
         /// Control txtDescripcionEvento.
@@ -33,6 +51,24 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionEvento;
 
         /// <summary>
+        /// Control ddlLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocal;
+
+        /// <summary>
+        /// Control rfvLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocal;
+
+        /// <summary>
         /// Control txtFecha.
         /// </summary>
         /// <remarks>
@@ -40,6 +76,15 @@ namespace SoftResWA.Views.Reservas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
+
+        /// <summary>
+        /// Control rfvFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFecha;
 
         /// <summary>
         /// Control txtHora.
@@ -51,6 +96,15 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtHora;
 
         /// <summary>
+        /// Control rfvHora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHora;
+
+        /// <summary>
         /// Control txtCantidadPersonas.
         /// </summary>
         /// <remarks>
@@ -60,13 +114,40 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtCantidadPersonas;
 
         /// <summary>
-        /// Control txtCantidadMesas.
+        /// Control rfvCantidadPersonas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadMesas;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCantidadPersonas;
+
+        /// <summary>
+        /// Control rvCantidadPersonas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvCantidadPersonas;
+
+        /// <summary>
+        /// Control ddlTipoMesa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoMesa;
+
+        /// <summary>
+        /// Control rfvTipoMesa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTipoMesa;
 
         /// <summary>
         /// Control txtObservaciones.
@@ -78,76 +159,76 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
 
         /// <summary>
-        /// Control ddlLocal.
+        /// Control txtDniCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocal;
+        protected global::System.Web.UI.WebControls.TextBox txtDniCliente;
 
         /// <summary>
-        /// Control ddlUbicacionMesa.
+        /// Control btnBuscarCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUbicacionMesa;
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
 
         /// <summary>
-        /// Control ddlEstado.
+        /// Control rfvDniCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDniCliente;
 
         /// <summary>
-        /// Control txtDocumentoUsuario.
+        /// Control txtNombreCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDocumentoUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreCliente;
 
         /// <summary>
-        /// Control ddlTipoDocumento.
+        /// Control hdnIdCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdCliente;
 
         /// <summary>
-        /// Control btnBuscarUsuario.
+        /// Control lblDisponibilidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscarUsuario;
+        protected global::System.Web.UI.WebControls.Label lblDisponibilidad;
 
         /// <summary>
-        /// Control txtNombreUsuario.
+        /// Control btnVerificarDisponibilidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
+        protected global::System.Web.UI.WebControls.Button btnVerificarDisponibilidad;
 
         /// <summary>
-        /// Control txtTipoCliente.
+        /// Control btnCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoCliente;
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
         /// Control btnGuardarReserva.

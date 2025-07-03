@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/filaEspera?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="confirmarDisponibilidad">
-    <part name="parameters" element="tns:confirmarDisponibilidad" />
+  <message name="hayUsuariosEnEspera">
+    <part name="parameters" element="tns:hayUsuariosEnEspera" />
   </message>
-  <message name="confirmarDisponibilidadResponse">
-    <part name="parameters" element="tns:confirmarDisponibilidadResponse" />
+  <message name="hayUsuariosEnEsperaResponse">
+    <part name="parameters" element="tns:hayUsuariosEnEsperaResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,47 +17,11 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="buscarSiguienteCompatible">
-    <part name="parameters" element="tns:buscarSiguienteCompatible" />
+  <message name="contarUsuariosEnEspera">
+    <part name="parameters" element="tns:contarUsuariosEnEspera" />
   </message>
-  <message name="buscarSiguienteCompatibleResponse">
-    <part name="parameters" element="tns:buscarSiguienteCompatibleResponse" />
-  </message>
-  <message name="notificarSiguiente">
-    <part name="parameters" element="tns:notificarSiguiente" />
-  </message>
-  <message name="notificarSiguienteResponse">
-    <part name="parameters" element="tns:notificarSiguienteResponse" />
-  </message>
-  <message name="listar">
-    <part name="parameters" element="tns:listar" />
-  </message>
-  <message name="listarResponse">
-    <part name="parameters" element="tns:listarResponse" />
-  </message>
-  <message name="insertar">
-    <part name="parameters" element="tns:insertar" />
-  </message>
-  <message name="insertarResponse">
-    <part name="parameters" element="tns:insertarResponse" />
-  </message>
-  <message name="eliminar">
-    <part name="parameters" element="tns:eliminar" />
-  </message>
-  <message name="eliminarResponse">
-    <part name="parameters" element="tns:eliminarResponse" />
-  </message>
-  <message name="listarPendientesPorPrioridad">
-    <part name="parameters" element="tns:listarPendientesPorPrioridad" />
-  </message>
-  <message name="listarPendientesPorPrioridadResponse">
-    <part name="parameters" element="tns:listarPendientesPorPrioridadResponse" />
-  </message>
-  <message name="obtenerPorId">
-    <part name="parameters" element="tns:obtenerPorId" />
-  </message>
-  <message name="obtenerPorIdResponse">
-    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  <message name="contarUsuariosEnEsperaResponse">
+    <part name="parameters" element="tns:contarUsuariosEnEsperaResponse" />
   </message>
   <message name="modificar">
     <part name="parameters" element="tns:modificar" />
@@ -65,73 +29,55 @@
   <message name="modificarResponse">
     <part name="parameters" element="tns:modificarResponse" />
   </message>
-  <message name="hayUsuariosEnEspera">
-    <part name="parameters" element="tns:hayUsuariosEnEspera" />
+  <message name="buscarSiguienteCompatible">
+    <part name="parameters" element="tns:buscarSiguienteCompatible" />
   </message>
-  <message name="hayUsuariosEnEsperaResponse">
-    <part name="parameters" element="tns:hayUsuariosEnEsperaResponse" />
+  <message name="buscarSiguienteCompatibleResponse">
+    <part name="parameters" element="tns:buscarSiguienteCompatibleResponse" />
   </message>
-  <message name="contarUsuariosEnEspera">
-    <part name="parameters" element="tns:contarUsuariosEnEspera" />
+  <message name="confirmarDisponibilidad">
+    <part name="parameters" element="tns:confirmarDisponibilidad" />
   </message>
-  <message name="contarUsuariosEnEsperaResponse">
-    <part name="parameters" element="tns:contarUsuariosEnEsperaResponse" />
+  <message name="confirmarDisponibilidadResponse">
+    <part name="parameters" element="tns:confirmarDisponibilidadResponse" />
+  </message>
+  <message name="obtenerPorId">
+    <part name="parameters" element="tns:obtenerPorId" />
+  </message>
+  <message name="obtenerPorIdResponse">
+    <part name="parameters" element="tns:obtenerPorIdResponse" />
+  </message>
+  <message name="listarPendientesPorPrioridad">
+    <part name="parameters" element="tns:listarPendientesPorPrioridad" />
+  </message>
+  <message name="listarPendientesPorPrioridadResponse">
+    <part name="parameters" element="tns:listarPendientesPorPrioridadResponse" />
+  </message>
+  <message name="eliminar">
+    <part name="parameters" element="tns:eliminar" />
+  </message>
+  <message name="eliminarResponse">
+    <part name="parameters" element="tns:eliminarResponse" />
+  </message>
+  <message name="insertar">
+    <part name="parameters" element="tns:insertar" />
+  </message>
+  <message name="insertarResponse">
+    <part name="parameters" element="tns:insertarResponse" />
+  </message>
+  <message name="listar">
+    <part name="parameters" element="tns:listar" />
+  </message>
+  <message name="listarResponse">
+    <part name="parameters" element="tns:listarResponse" />
+  </message>
+  <message name="notificarSiguiente">
+    <part name="parameters" element="tns:notificarSiguiente" />
+  </message>
+  <message name="notificarSiguienteResponse">
+    <part name="parameters" element="tns:notificarSiguienteResponse" />
   </message>
   <portType name="FilaEspera">
-    <operation name="confirmarDisponibilidad">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidadRequest" message="tns:confirmarDisponibilidad" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidadResponse" message="tns:confirmarDisponibilidadResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidad/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidad/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="buscarSiguienteCompatible">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatibleRequest" message="tns:buscarSiguienteCompatible" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatibleResponse" message="tns:buscarSiguienteCompatibleResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatible/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatible/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="notificarSiguiente">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguienteRequest" message="tns:notificarSiguiente" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguienteResponse" message="tns:notificarSiguienteResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguiente/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguiente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="listar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest" message="tns:listar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse" message="tns:listarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="insertar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest" message="tns:insertar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse" message="tns:insertarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="eliminar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest" message="tns:eliminar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse" message="tns:eliminarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="listarPendientesPorPrioridad">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridadRequest" message="tns:listarPendientesPorPrioridad" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridadResponse" message="tns:listarPendientesPorPrioridadResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridad/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridad/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="obtenerPorId">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest" message="tns:obtenerPorId" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
-    <operation name="modificar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest" message="tns:modificar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse" message="tns:modificarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
-    </operation>
     <operation name="hayUsuariosEnEspera">
       <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/hayUsuariosEnEsperaRequest" message="tns:hayUsuariosEnEspera" />
       <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/hayUsuariosEnEsperaResponse" message="tns:hayUsuariosEnEsperaResponse" />
@@ -144,10 +90,64 @@
       <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/contarUsuariosEnEspera/Fault/IOException" name="IOException" message="tns:IOException" />
       <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/contarUsuariosEnEspera/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
+    <operation name="modificar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarRequest" message="tns:modificar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificarResponse" message="tns:modificarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/modificar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="buscarSiguienteCompatible">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatibleRequest" message="tns:buscarSiguienteCompatible" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatibleResponse" message="tns:buscarSiguienteCompatibleResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatible/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/buscarSiguienteCompatible/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="confirmarDisponibilidad">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidadRequest" message="tns:confirmarDisponibilidad" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidadResponse" message="tns:confirmarDisponibilidadResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidad/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/confirmarDisponibilidad/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="obtenerPorId">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdRequest" message="tns:obtenerPorId" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorIdResponse" message="tns:obtenerPorIdResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/obtenerPorId/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="listarPendientesPorPrioridad">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridadRequest" message="tns:listarPendientesPorPrioridad" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridadResponse" message="tns:listarPendientesPorPrioridadResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridad/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarPendientesPorPrioridad/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="eliminar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarRequest" message="tns:eliminar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminarResponse" message="tns:eliminarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="insertar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarRequest" message="tns:insertar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertarResponse" message="tns:insertarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="listar">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarRequest" message="tns:listar" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listarResponse" message="tns:listarResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
+    <operation name="notificarSiguiente">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguienteRequest" message="tns:notificarSiguiente" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguienteResponse" message="tns:notificarSiguienteResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguiente/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/FilaEspera/notificarSiguiente/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    </operation>
   </portType>
   <binding name="FilaEsperaPortBinding" type="tns:FilaEspera">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="confirmarDisponibilidad">
+    <operation name="hayUsuariosEnEspera">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -162,97 +162,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="buscarSiguienteCompatible">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="notificarSiguiente">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="listar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="insertar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="eliminar">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="listarPendientesPorPrioridad">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="IOException">
-        <soap:fault use="literal" name="IOException" namespace="" />
-      </fault>
-      <fault name="InterruptedException">
-        <soap:fault use="literal" name="InterruptedException" namespace="" />
-      </fault>
-    </operation>
-    <operation name="obtenerPorId">
+    <operation name="contarUsuariosEnEspera">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -282,7 +192,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="hayUsuariosEnEspera">
+    <operation name="buscarSiguienteCompatible">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -297,7 +207,97 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="contarUsuariosEnEspera">
+    <operation name="confirmarDisponibilidad">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="obtenerPorId">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listarPendientesPorPrioridad">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="eliminar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="insertar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="listar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="IOException">
+        <soap:fault use="literal" name="IOException" namespace="" />
+      </fault>
+      <fault name="InterruptedException">
+        <soap:fault use="literal" name="InterruptedException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="notificarSiguiente">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

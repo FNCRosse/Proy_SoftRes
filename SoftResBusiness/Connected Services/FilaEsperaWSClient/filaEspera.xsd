@@ -143,6 +143,16 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaParametros" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:filaEsperaDTO" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="notificarSiguiente">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
@@ -154,16 +164,6 @@
   <xs:complexType name="notificarSiguienteResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaParametros" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="listarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="buscarSiguienteCompatible">
@@ -190,16 +190,6 @@
       <xs:element minOccurs="0" name="return" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="modificar">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="modificarResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="hayUsuariosEnEspera">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
@@ -210,14 +200,14 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertar">
+  <xs:complexType name="modificar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="insertarResponse">
+  <xs:complexType name="modificarResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:filaEsperaDTO" />
+      <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="contarUsuariosEnEspera">
@@ -228,6 +218,16 @@
   <xs:complexType name="contarUsuariosEnEsperaResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insertarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="confirmarDisponibilidad">
