@@ -1,11 +1,4 @@
 ﻿using SoftResBusiness;
-using SoftResBusiness.ReservaWSClient;
-using SoftResBusiness.LocalWSClient;
-using SoftResBusiness.MotivoCancelacionWSClient;
-using SoftResBusiness.UsuarioWSClient;
-using SoftResBusiness.MesaWSClient;
-using SoftResBusiness.TipoMesaWSClient;
-using SoftResBusiness.FilaEsperaWSClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,12 +41,12 @@ namespace SoftResWA.Views.Reservas
                     // Cargar datos iniciales
                     CargarLocales();
                     CargarDatos();
+                    CargarListaEspera();
                 }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorCarga",
-                    $"Swal.fire('Error', 'Error al cargar datos iniciales: {ex.Message}', 'error');", true);
+                MostrarError("Error al cargar datos iniciales", ex);
             }
         }
 
@@ -63,24 +56,69 @@ namespace SoftResWA.Views.Reservas
             {
                 // Cargar locales
                 var localParams = new SoftResBusiness.LocalWSClient.localParametros { estado = true };
+                var locales = this.localBO.Listar(localParams);
                 this.listadoLocales = new BindingList<SoftResBusiness.LocalWSClient.localDTO>(
-                    this.localBO.Listar(localParams).ToList()
+                    locales != null ? locales.ToList() : new List<SoftResBusiness.LocalWSClient.localDTO>()
                 );
 
                 // Configurar DropDownList
                 ddlLocal.Items.Clear();
                 ddlLocal.Items.Add(new ListItem("Todos", ""));
-                foreach (var local in this.listadoLocales)
+                foreach (var local in this.listadoLocales.Where(l => l.idLocalSpecified))
                 {
-                    if (local.idLocalSpecified)
-                    {
-                        ddlLocal.Items.Add(new ListItem(local.nombre, local.idLocal.ToString()));
-                    }
+                    ddlLocal.Items.Add(new ListItem(local.nombre, local.idLocal.ToString()));
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al cargar locales: " + ex.Message);
+            }
+        }
+
+        private void CargarListaEspera()
+        {
+            try
+            {
+                // Cargar lista de espera
+                var filaEsperaParams = new SoftResBusiness.FilaEsperaWSClient.filaEsperaParametros
+                {
+                    estado = SoftResBusiness.FilaEsperaWSClient.estadoFilaEspera.PENDIENTE
+                };
+
+                // Aplicar filtro por local si está seleccionado
+                if (!string.IsNullOrEmpty(ddlLocal.SelectedValue))
+                {
+                    filaEsperaParams.idUsuario = int.Parse(ddlLocal.SelectedValue);
+                }
+
+                // Usar el método Listar ya que es el único disponible
+                var filaEspera = this.filaEsperaBO.Listar(filaEsperaParams);
+
+                this.listadoFilaEspera = new BindingList<SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO>(
+                    filaEspera != null ? filaEspera.ToList() : new List<SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO>()
+                );
+
+                // Actualizar contador y grid
+                if (lblEsperaCount != null)
+                {
+                    lblEsperaCount.Text = this.listadoFilaEspera.Count.ToString();
+                }
+
+                if (gvListaEspera != null)
+                {
+                    gvListaEspera.DataSource = this.listadoFilaEspera;
+                    gvListaEspera.DataBind();
+                }
+
+                // Actualizar UpdatePanel
+                if (upListaEspera != null)
+                {
+                    upListaEspera.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al cargar lista de espera: " + ex.Message);
             }
         }
 
@@ -92,34 +130,41 @@ namespace SoftResWA.Views.Reservas
                 var reservaParametros = new SoftResBusiness.ReservaWSClient.reservaParametros();
 
                 // Agregar filtros si están seleccionados
-                if (ddlLocal.SelectedValue != "")
+                if (!string.IsNullOrEmpty(ddlLocal.SelectedValue))
                 {
                     reservaParametros.idLocal = int.Parse(ddlLocal.SelectedValue);
                     reservaParametros.idLocalSpecified = true;
                 }
 
-                if (txtFechaDesde.Text != "")
+                if (!string.IsNullOrEmpty(txtFechaDesde.Text))
                 {
                     reservaParametros.fechaInicio = DateTime.Parse(txtFechaDesde.Text);
                     reservaParametros.fechaInicioSpecified = true;
                 }
 
-                if (txtFechaHasta.Text != "")
+                if (!string.IsNullOrEmpty(txtFechaHasta.Text))
                 {
                     reservaParametros.fechaFin = DateTime.Parse(txtFechaHasta.Text);
                     reservaParametros.fechaFinSpecified = true;
                 }
 
-                if (ddlEstado.SelectedValue != "")
+                if (!string.IsNullOrEmpty(ddlEstado.SelectedValue))
                 {
                     reservaParametros.estado = (SoftResBusiness.ReservaWSClient.estadoReserva)
                         Enum.Parse(typeof(SoftResBusiness.ReservaWSClient.estadoReserva), ddlEstado.SelectedValue);
                     reservaParametros.estadoSpecified = true;
                 }
 
-                this.listadoReservas = new BindingList<SoftResBusiness.ReservaWSClient.reservaDTO>(
-                    this.reservaBO.Listar(reservaParametros).ToList()
-                );
+                // Obtener reservas del servicio
+                var reservas = this.reservaBO.Listar(reservaParametros);
+                if (reservas != null)
+                {
+                    this.listadoReservas = new BindingList<SoftResBusiness.ReservaWSClient.reservaDTO>(reservas.ToList());
+                }
+                else
+                {
+                    this.listadoReservas = new BindingList<SoftResBusiness.ReservaWSClient.reservaDTO>();
+                }
 
                 // Actualizar controles
                 ActualizarGridViews();
@@ -147,76 +192,31 @@ namespace SoftResWA.Views.Reservas
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorBusqueda",
-                    $"Swal.fire('Error', 'Error al buscar reservas: {ex.Message}', 'error');", true);
+                MostrarError("Error al buscar reservas", ex);
             }
         }
 
-        protected void btnCrearReserva_Click(object sender, EventArgs e)
+        protected void ddlLocal_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if (ViewState["IdFilaEspera"] == null)
+                // Recargar ambas listas con el nuevo filtro de local
+                CargarDatos();
+                CargarListaEspera();
+                
+                // Actualizar ambos UpdatePanels
+                if (upReservas != null)
                 {
-                    throw new Exception("No se encontró la información de la lista de espera.");
+                    upReservas.Update();
                 }
-
-                int idFilaEspera = (int)ViewState["IdFilaEspera"];
-                var filaEspera = listadoFilaEspera.FirstOrDefault(f => f.idFila == idFilaEspera);
-                if (filaEspera == null)
+                if (upListaEspera != null)
                 {
-                    throw new Exception("No se encontró el registro en la lista de espera.");
-                }
-
-                // Crear nueva reserva
-                var nuevaReserva = new SoftResBusiness.ReservaWSClient.reservaDTO
-                {
-                    tipoReserva = SoftResBusiness.ReservaWSClient.tipoReserva.COMUN,
-                    tipoReservaSpecified = true,
-                    estado = SoftResBusiness.ReservaWSClient.estadoReserva.PENDIENTE,
-                    estadoSpecified = true,
-                    fechaCreacion = DateTime.Now,
-                    fechaCreacionSpecified = true,
-                    usuarioCreacion = Session["UsuarioLogueado"] as string,
-                    fecha_Hora = DateTime.Now,
-                    fecha_HoraSpecified = true,
-                    cantidad_personas = 1,
-                    cantidad_personasSpecified = true,
-                    local = new SoftResBusiness.ReservaWSClient.localDTO
-                    {
-                        idLocal = int.Parse(ddlLocal.SelectedValue),
-                        idLocalSpecified = true
-                    },
-                    usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO
-                    {
-                        idUsuario = filaEspera.usuario.idUsuario,
-                        idUsuarioSpecified = true,
-                        nombreComp = filaEspera.usuario.nombreComp,
-                        email = filaEspera.usuario.email,
-                        telefono = filaEspera.usuario.telefono
-                    }
-                };
-
-                int idReserva = reservaBO.Insertar(nuevaReserva);
-                if (idReserva > 0)
-                {
-                    // Eliminar de la lista de espera
-                    filaEsperaBO.Eliminar(new SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO { idFila = idFilaEspera, idFilaSpecified = true });
-
-                    // Actualizar datos y mostrar mensaje de éxito
-                    CargarDatos();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "exitoReserva",
-                        "Swal.fire('Éxito', 'Reserva creada correctamente', 'success');", true);
-                }
-                else
-                {
-                    throw new Exception("No se pudo crear la reserva.");
+                    upListaEspera.Update();
                 }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorReserva",
-                    $"Swal.fire('Error', 'Error al crear la reserva: {ex.Message}', 'error');", true);
+                MostrarError("Error al filtrar por local", ex);
             }
         }
 
@@ -224,67 +224,60 @@ namespace SoftResWA.Views.Reservas
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var reserva = (SoftResBusiness.ReservaWSClient.reservaDTO)e.Row.DataItem;
+                // Obtener el objeto de reserva
+                var reserva = e.Row.DataItem as SoftResBusiness.ReservaWSClient.reservaDTO;
                 if (reserva != null)
                 {
-                    // Formatear campos
-                    if (reserva.tipoReservaSpecified)
+                    // Aplicar estilos según el estado
+                    string estado = reserva.estado.ToString();
+                    switch (estado)
                     {
-                        e.Row.Cells[2].Text = reserva.tipoReserva == SoftResBusiness.ReservaWSClient.tipoReserva.COMUN ? "Común" : "Evento";
+                        case "CONFIRMADA":
+                            e.Row.CssClass = "table-success";
+                            break;
+                        case "PENDIENTE":
+                            e.Row.CssClass = "table-warning";
+                            break;
+                        case "CANCELADA":
+                            e.Row.CssClass = "table-danger";
+                            break;
                     }
 
-                    if (reserva.fecha_HoraSpecified)
-                    {
-                        e.Row.Cells[3].Text = reserva.fecha_Hora.ToString("dd/MM/yyyy");
-                        e.Row.Cells[4].Text = reserva.fecha_Hora.ToString("HH:mm");
-                    }
-
-                    if (reserva.local != null)
-                    {
-                        e.Row.Cells[5].Text = reserva.local.nombre ?? "No especificado";
-                    }
-
-                    if (reserva.usuario != null)
-                    {
-                        e.Row.Cells[6].Text = reserva.usuario.nombreComp ?? "No especificado";
-                    }
-
-                    if (reserva.estadoSpecified)
-                    {
-                        e.Row.Cells[7].Text = reserva.estado.ToString();
-                        switch (reserva.estado)
-                        {
-                            case SoftResBusiness.ReservaWSClient.estadoReserva.CONFIRMADA:
-                                e.Row.Cells[7].CssClass = "text-success";
-                                break;
-                            case SoftResBusiness.ReservaWSClient.estadoReserva.PENDIENTE:
-                                e.Row.Cells[7].CssClass = "text-warning";
-                                break;
-                            case SoftResBusiness.ReservaWSClient.estadoReserva.CANCELADA:
-                                e.Row.Cells[7].CssClass = "text-danger";
-                                break;
-                        }
-                    }
-
-                    // Configurar botones
-                    Button btnEditar = (Button)e.Row.FindControl("btnEditar");
-                    Button btnCancelar = (Button)e.Row.FindControl("btnCancelar");
+                    // Manejar visibilidad de botones
+                    Button btnEditar = e.Row.FindControl("btnEditar") as Button;
+                    Button btnCancelar = e.Row.FindControl("btnCancelar") as Button;
 
                     if (btnEditar != null && btnCancelar != null)
                     {
-                        // Solo mostrar botones según el estado
-                        if (reserva.estadoSpecified && reserva.estado == SoftResBusiness.ReservaWSClient.estadoReserva.CONFIRMADA)
-                        {
-                            btnEditar.Visible = true;
-                            btnCancelar.Visible = true;
-                        }
-                        else
-                        {
-                            btnEditar.Visible = false;
-                            btnCancelar.Visible = false;
-                        }
+                        btnEditar.Visible = estado != "CANCELADA";
+                        btnCancelar.Visible = estado != "CANCELADA";
                     }
                 }
+            }
+        }
+
+        protected void gvReservas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                int idReserva = Convert.ToInt32(e.CommandArgument);
+
+                switch (e.CommandName)
+                {
+                    case "EditarReserva":
+                        Response.Redirect($"~/Views/Reservas/registrar_reserva_comun.aspx?id={idReserva}");
+                        break;
+
+                    case "CancelarReserva":
+                        hdnIdReservaCancelar.Value = idReserva.ToString();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "mostrarModal",
+                            "$('#modalCancelarReserva').modal('show');", true);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError("Error al procesar comando", ex);
             }
         }
 
@@ -292,18 +285,109 @@ namespace SoftResWA.Views.Reservas
         {
             try
             {
-                if (e.CommandName == "CrearReserva")
+                int idFila = Convert.ToInt32(e.CommandArgument);
+                var filaEspera = this.listadoFilaEspera.FirstOrDefault(f => f.idFila == idFila);
+
+                if (filaEspera == null)
                 {
-                    int idFilaEspera = Convert.ToInt32(e.CommandArgument);
-                    ViewState["IdFilaEspera"] = idFilaEspera;
-                    btnCrearReserva_Click(sender, e);
+                    throw new Exception("No se encontró la entrada en la lista de espera");
+                }
+
+                switch (e.CommandName)
+                {
+                    case "CrearReserva":
+                        // Crear nueva reserva desde la fila de espera
+                        var nuevaReserva = new SoftResBusiness.ReservaWSClient.reservaDTO
+                        {
+                            usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO
+                            {
+                                idUsuario = filaEspera.usuario.idUsuario,
+                                idUsuarioSpecified = true,
+                                nombreComp = filaEspera.usuario.nombreComp,
+                                email = filaEspera.usuario.email,
+                                telefono = filaEspera.usuario.telefono
+                            },
+                            estado = SoftResBusiness.ReservaWSClient.estadoReserva.PENDIENTE,
+                            estadoSpecified = true
+                        };
+
+                        int idReserva = this.reservaBO.Insertar(nuevaReserva);
+                        if (idReserva > 0)
+                        {
+                            // Eliminar de la lista de espera
+                            this.filaEsperaBO.Eliminar(filaEspera);
+                            MostrarExito("Reserva creada exitosamente");
+                            
+                            // Recargar datos
+                            CargarDatos();
+                            CargarListaEspera();
+                        }
+                        break;
+
+                    case "EliminarEspera":
+                        if (this.filaEsperaBO.Eliminar(filaEspera) > 0)
+                        {
+                            MostrarExito("Entrada eliminada de la lista de espera");
+                            CargarListaEspera();
+                        }
+                        break;
                 }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "errorComando",
-                    $"Swal.fire('Error', 'Error al procesar el comando: {ex.Message}', 'error');", true);
+                MostrarError("Error al procesar la acción de la lista de espera", ex);
             }
+        }
+
+        protected void btnCancelarReserva_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idReserva = Convert.ToInt32(hdnIdReservaCancelar.Value);
+                int idMotivo = Convert.ToInt32(hdnIdMotivoCancelacion.Value);
+
+                var reserva = this.listadoReservas.FirstOrDefault(r => r.idReserva == idReserva);
+                if (reserva != null)
+                {
+                    reserva.estado = SoftResBusiness.ReservaWSClient.estadoReserva.CANCELADA;
+                    reserva.estadoSpecified = true;
+                    reserva.motivoCancelacion = new SoftResBusiness.ReservaWSClient.motivosCancelacionDTO 
+                    { 
+                        idMotivo = idMotivo,
+                        idMotivoSpecified = true
+                    };
+                    reserva.fechaModificacion = DateTime.Now;
+                    reserva.fechaModificacionSpecified = true;
+                    reserva.usuarioModificacion = Session["UsuarioLogueado"]?.ToString();
+
+                    int resultado = this.reservaBO.Modificar(reserva);
+                    if (resultado > 0)
+                    {
+                        CargarDatos();
+                        MostrarExito("La reserva ha sido cancelada exitosamente");
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo cancelar la reserva");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError("Error al cancelar reserva", ex);
+            }
+        }
+
+        private void MostrarError(string titulo, Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "error",
+                $"Swal.fire('{titulo}', '{ex.Message}', 'error');", true);
+        }
+
+        private void MostrarExito(string mensaje)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "exito",
+                $"Swal.fire('¡Éxito!', '{mensaje}', 'success');", true);
         }
     }
 }

@@ -9,10 +9,25 @@
 
 namespace SoftResWA.Views.Reservas
 {
-
-
     public partial class reserva_gestion
     {
+        /// <summary>
+        /// Control lblEsperaCount.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEsperaCount;
+
+        /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
         /// Control txtFechaDesde.
@@ -69,13 +84,13 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.Button btnNuevo;
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control upReservas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.UpdatePanel upReservas;
 
         /// <summary>
         /// Control gvReservas.
@@ -87,13 +102,22 @@ namespace SoftResWA.Views.Reservas
         protected global::System.Web.UI.WebControls.GridView gvReservas;
 
         /// <summary>
-        /// Control gvReservaxMesas.
+        /// Control upListaEspera.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvReservaxMesas;
+        protected global::System.Web.UI.UpdatePanel upListaEspera;
+
+        /// <summary>
+        /// Control gvListaEspera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvListaEspera;
 
         /// <summary>
         /// Control hdnIdReservaCancelar.
