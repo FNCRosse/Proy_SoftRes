@@ -19,14 +19,14 @@ namespace SoftResBusiness
             this.filaEsperaClienteSOAP = new FilaEsperaClient();
         }
 
-        public int Insertar(filaEsperaDTO filaespera)
+        public filaEsperaDTO Insertar(filaEsperaDTO filaespera)
         {
             return this.filaEsperaClienteSOAP.insertar(filaespera);
         }
 
-        public filaEsperaDTO ObtenerPorID(int filaesperaID)
+        public filaEsperaDTO ObtenerPorID(int filaesperaID,int usuarioID)
         {
-            return this.filaEsperaClienteSOAP.obtenerPorId(filaesperaID);
+            return this.filaEsperaClienteSOAP.obtenerPorId(filaesperaID,usuarioID);
         }
 
         public int Modificar(filaEsperaDTO filaespera)

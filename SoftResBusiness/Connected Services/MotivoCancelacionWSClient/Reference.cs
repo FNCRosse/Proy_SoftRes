@@ -152,17 +152,16 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.listarResponse> listarAsync(SoftResBusiness.MotivoCancelacionWSClient.listarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/IOException" +
-            "", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/Interrupted" +
-            "Exception", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/InterruptedE" +
+            "xception", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
+        SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse eliminar(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/obtenerPorIdResponse")]
@@ -190,16 +189,17 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.insertarResponse> insertarAsync(SoftResBusiness.MotivoCancelacionWSClient.insertarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminar/Fault/InterruptedE" +
-            "xception", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.IOException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/IOException" +
+            "", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.MotivoCancelacionWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificar/Fault/Interrupted" +
+            "Exception", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse eliminar(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request);
+        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/MotivoCancelacion/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -233,17 +233,17 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0;
         
-        public modificarRequest() {
+        public eliminarRequest() {
         }
         
-        public modificarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+        public eliminarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -251,17 +251,17 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int @return;
         
-        public modificarResponse() {
+        public eliminarResponse() {
         }
         
-        public modificarResponse(int @return) {
+        public eliminarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -341,17 +341,17 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0;
         
-        public eliminarRequest() {
+        public modificarRequest() {
         }
         
-        public eliminarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+        public modificarRequest(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -359,17 +359,17 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int @return;
         
-        public eliminarResponse() {
+        public modificarResponse() {
         }
         
-        public eliminarResponse(int @return) {
+        public modificarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -423,26 +423,26 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
-            return base.Channel.modificar(request);
+        SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.eliminar(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
         }
         
-        public int modificar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
+        public int eliminar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.MotivoCancelacionWSClient.modificarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificar(inValue);
+            SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).eliminar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
-            return base.Channel.modificarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificarAsync(inValue);
+            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -492,26 +492,26 @@ namespace SoftResBusiness.MotivoCancelacionWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.eliminar(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
+        SoftResBusiness.MotivoCancelacionWSClient.modificarResponse SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificar(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
+            return base.Channel.modificar(request);
         }
         
-        public int eliminar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest();
+        public int modificar(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).eliminar(inValue);
+            SoftResBusiness.MotivoCancelacionWSClient.modificarResponse retVal = ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion.modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.modificarRequest request) {
+            return base.Channel.modificarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
-            SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.eliminarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.MotivoCancelacionWSClient.modificarResponse> modificarAsync(SoftResBusiness.MotivoCancelacionWSClient.motivosCancelacionDTO arg0) {
+            SoftResBusiness.MotivoCancelacionWSClient.modificarRequest inValue = new SoftResBusiness.MotivoCancelacionWSClient.modificarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).eliminarAsync(inValue);
+            return ((SoftResBusiness.MotivoCancelacionWSClient.MotivoCancelacion)(this)).modificarAsync(inValue);
         }
     }
 }

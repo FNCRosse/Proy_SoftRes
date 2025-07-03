@@ -5,11 +5,11 @@
       <xsd:import schemaLocation="http://localhost:8080/SoftResWSCliente/reservaxmesa?xsd=1" namespace="http://services.softres.pucp.edu.pe/" />
     </xsd:schema>
   </types>
-  <message name="insertar">
-    <part name="parameters" element="tns:insertar" />
+  <message name="liberarMesas">
+    <part name="parameters" element="tns:liberarMesas" />
   </message>
-  <message name="insertarResponse">
-    <part name="parameters" element="tns:insertarResponse" />
+  <message name="liberarMesasResponse">
+    <part name="parameters" element="tns:liberarMesasResponse" />
   </message>
   <message name="IOException">
     <part name="fault" element="tns:IOException" />
@@ -17,41 +17,41 @@
   <message name="InterruptedException">
     <part name="fault" element="tns:InterruptedException" />
   </message>
-  <message name="eliminar">
-    <part name="parameters" element="tns:eliminar" />
+  <message name="obtenerMesasDeReserva">
+    <part name="parameters" element="tns:obtenerMesasDeReserva" />
   </message>
-  <message name="eliminarResponse">
-    <part name="parameters" element="tns:eliminarResponse" />
+  <message name="obtenerMesasDeReservaResponse">
+    <part name="parameters" element="tns:obtenerMesasDeReservaResponse" />
   </message>
-  <message name="listar">
-    <part name="parameters" element="tns:listar" />
+  <message name="verificarDisponibilidad">
+    <part name="parameters" element="tns:verificarDisponibilidad" />
   </message>
-  <message name="listarResponse">
-    <part name="parameters" element="tns:listarResponse" />
+  <message name="verificarDisponibilidadResponse">
+    <part name="parameters" element="tns:verificarDisponibilidadResponse" />
   </message>
   <portType name="ReservaxMesa">
-    <operation name="insertar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarRequest" message="tns:insertar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarResponse" message="tns:insertarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="liberarMesas">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasRequest" message="tns:liberarMesas" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasResponse" message="tns:liberarMesasResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesas/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesas/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="eliminar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarRequest" message="tns:eliminar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarResponse" message="tns:eliminarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="obtenerMesasDeReserva">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaRequest" message="tns:obtenerMesasDeReserva" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaResponse" message="tns:obtenerMesasDeReservaResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReserva/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReserva/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
-    <operation name="listar">
-      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest" message="tns:listar" />
-      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse" message="tns:listarResponse" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/IOException" name="IOException" message="tns:IOException" />
-      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
+    <operation name="verificarDisponibilidad">
+      <input wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadRequest" message="tns:verificarDisponibilidad" />
+      <output wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadResponse" message="tns:verificarDisponibilidadResponse" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidad/Fault/IOException" name="IOException" message="tns:IOException" />
+      <fault wsam:Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidad/Fault/InterruptedException" name="InterruptedException" message="tns:InterruptedException" />
     </operation>
   </portType>
   <binding name="ReservaxMesaPortBinding" type="tns:ReservaxMesa">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="insertar">
+    <operation name="liberarMesas">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -66,7 +66,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="eliminar">
+    <operation name="obtenerMesasDeReserva">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
@@ -81,7 +81,7 @@
         <soap:fault use="literal" name="InterruptedException" namespace="" />
       </fault>
     </operation>
-    <operation name="listar">
+    <operation name="verificarDisponibilidad">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

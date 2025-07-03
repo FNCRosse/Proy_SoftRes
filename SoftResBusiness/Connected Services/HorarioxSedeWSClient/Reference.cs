@@ -154,18 +154,6 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
     public interface HorarioxSede {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.IOException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/InterruptedExcept" +
-            "ion", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.HorarioxSedeWSClient.eliminarResponse eliminar(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request);
-        
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/insertarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.IOException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/insertar/Fault/InterruptedExcept" +
@@ -178,6 +166,18 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.insertarResponse> insertarAsync(SoftResBusiness.HorarioxSedeWSClient.insertarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.IOException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminar/Fault/InterruptedExcept" +
+            "ion", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.HorarioxSedeWSClient.eliminarResponse eliminar(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/listarResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.IOException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/listar/Fault/IOException", Name="IOException")]
         [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.HorarioxSedeWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/HorarioxSede/listar/Fault/InterruptedExceptio" +
@@ -188,42 +188,6 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/HorarioxSede/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/HorarioxSede/listarResponse")]
         System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.listarResponse> listarAsync(SoftResBusiness.HorarioxSedeWSClient.listarRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0;
-        
-        public eliminarRequest() {
-        }
-        
-        public eliminarRequest(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public eliminarResponse() {
-        }
-        
-        public eliminarResponse(int @return) {
-            this.@return = @return;
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -258,6 +222,42 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
         }
         
         public insertarResponse(int @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0;
+        
+        public eliminarRequest() {
+        }
+        
+        public eliminarRequest(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public eliminarResponse() {
+        }
+        
+        public eliminarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -326,29 +326,6 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.HorarioxSedeWSClient.eliminarResponse SoftResBusiness.HorarioxSedeWSClient.HorarioxSede.eliminar(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
-        }
-        
-        public int eliminar(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
-            SoftResBusiness.HorarioxSedeWSClient.eliminarRequest inValue = new SoftResBusiness.HorarioxSedeWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            SoftResBusiness.HorarioxSedeWSClient.eliminarResponse retVal = ((SoftResBusiness.HorarioxSedeWSClient.HorarioxSede)(this)).eliminar(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> SoftResBusiness.HorarioxSedeWSClient.HorarioxSede.eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
-            SoftResBusiness.HorarioxSedeWSClient.eliminarRequest inValue = new SoftResBusiness.HorarioxSedeWSClient.eliminarRequest();
-            inValue.arg0 = arg0;
-            return ((SoftResBusiness.HorarioxSedeWSClient.HorarioxSede)(this)).eliminarAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SoftResBusiness.HorarioxSedeWSClient.insertarResponse SoftResBusiness.HorarioxSedeWSClient.HorarioxSede.insertar(SoftResBusiness.HorarioxSedeWSClient.insertarRequest request) {
             return base.Channel.insertar(request);
         }
@@ -369,6 +346,29 @@ namespace SoftResBusiness.HorarioxSedeWSClient {
             SoftResBusiness.HorarioxSedeWSClient.insertarRequest inValue = new SoftResBusiness.HorarioxSedeWSClient.insertarRequest();
             inValue.arg0 = arg0;
             return ((SoftResBusiness.HorarioxSedeWSClient.HorarioxSede)(this)).insertarAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SoftResBusiness.HorarioxSedeWSClient.eliminarResponse SoftResBusiness.HorarioxSedeWSClient.HorarioxSede.eliminar(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
+        }
+        
+        public int eliminar(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
+            SoftResBusiness.HorarioxSedeWSClient.eliminarRequest inValue = new SoftResBusiness.HorarioxSedeWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            SoftResBusiness.HorarioxSedeWSClient.eliminarResponse retVal = ((SoftResBusiness.HorarioxSedeWSClient.HorarioxSede)(this)).eliminar(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> SoftResBusiness.HorarioxSedeWSClient.HorarioxSede.eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SoftResBusiness.HorarioxSedeWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.HorarioxSedeWSClient.horariosxSedesDTO arg0) {
+            SoftResBusiness.HorarioxSedeWSClient.eliminarRequest inValue = new SoftResBusiness.HorarioxSedeWSClient.eliminarRequest();
+            inValue.arg0 = arg0;
+            return ((SoftResBusiness.HorarioxSedeWSClient.HorarioxSede)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

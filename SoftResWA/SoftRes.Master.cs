@@ -72,7 +72,7 @@ namespace SoftResWA
                 Response.Cookies.Add(cookie);
             }
 
-            Response.Redirect("~/Views/Login/Login.aspx");
+            Response.Redirect("~/Views/Cliente/Home/Login_Home.aspx");
         }
         private void CargarNotificaciones()
         {

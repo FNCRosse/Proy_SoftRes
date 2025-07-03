@@ -2,21 +2,75 @@
 <xs:schema xmlns:tns="http://services.softres.pucp.edu.pe/" targetNamespace="http://services.softres.pucp.edu.pe/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="IOException" type="tns:IOException" />
   <xs:element name="InterruptedException" type="tns:InterruptedException" />
+  <xs:element name="buscarSiguienteCompatible" type="tns:buscarSiguienteCompatible" />
+  <xs:element name="buscarSiguienteCompatibleResponse" type="tns:buscarSiguienteCompatibleResponse" />
+  <xs:element name="confirmarDisponibilidad" type="tns:confirmarDisponibilidad" />
+  <xs:element name="confirmarDisponibilidadResponse" type="tns:confirmarDisponibilidadResponse" />
+  <xs:element name="contarUsuariosEnEspera" type="tns:contarUsuariosEnEspera" />
+  <xs:element name="contarUsuariosEnEsperaResponse" type="tns:contarUsuariosEnEsperaResponse" />
   <xs:element name="eliminar" type="tns:eliminar" />
   <xs:element name="eliminarResponse" type="tns:eliminarResponse" />
+  <xs:element name="hayUsuariosEnEspera" type="tns:hayUsuariosEnEspera" />
+  <xs:element name="hayUsuariosEnEsperaResponse" type="tns:hayUsuariosEnEsperaResponse" />
   <xs:element name="insertar" type="tns:insertar" />
   <xs:element name="insertarResponse" type="tns:insertarResponse" />
   <xs:element name="listar" type="tns:listar" />
+  <xs:element name="listarPendientesPorPrioridad" type="tns:listarPendientesPorPrioridad" />
+  <xs:element name="listarPendientesPorPrioridadResponse" type="tns:listarPendientesPorPrioridadResponse" />
   <xs:element name="listarResponse" type="tns:listarResponse" />
   <xs:element name="modificar" type="tns:modificar" />
   <xs:element name="modificarResponse" type="tns:modificarResponse" />
+  <xs:element name="notificarSiguiente" type="tns:notificarSiguiente" />
+  <xs:element name="notificarSiguienteResponse" type="tns:notificarSiguienteResponse" />
   <xs:element name="obtenerPorId" type="tns:obtenerPorId" />
   <xs:element name="obtenerPorIdResponse" type="tns:obtenerPorIdResponse" />
   <xs:complexType name="filaEsperaDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadPersonas" type="xs:int" />
       <xs:element minOccurs="0" name="estado" type="tns:estadoFilaEspera" />
+      <xs:element minOccurs="0" name="fechaHoraDeseada" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaNotificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime" />
       <xs:element minOccurs="0" name="idFila" type="xs:int" />
+      <xs:element minOccurs="0" name="local" type="tns:localDTO" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoMesa" type="tns:tipoMesaDTO" />
+      <xs:element minOccurs="0" name="tipoReserva" type="tns:tipoReserva" />
       <xs:element minOccurs="0" name="usuario" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadMesas" type="xs:int" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idLocal" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="sede" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sedeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="distrito" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="horarios" type="xs:string" />
+      <xs:element minOccurs="0" name="idSede" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tipoMesaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idTipoMesa" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="usuariosDTO">
@@ -54,9 +108,19 @@
   </xs:complexType>
   <xs:complexType name="filaEsperaParametros">
     <xs:sequence>
+      <xs:element minOccurs="0" name="cantPersonas" type="xs:int" />
       <xs:element minOccurs="0" name="estado" type="tns:estadoFilaEspera" />
+      <xs:element minOccurs="0" name="fechaHoraDeseadaFin" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaHoraDeseadaInicio" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaNotificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaRegistroFin" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaRegistroInicio" type="xs:dateTime" />
       <xs:element minOccurs="0" name="idFila" type="xs:int" />
+      <xs:element minOccurs="0" name="idLocal" type="xs:int" />
+      <xs:element minOccurs="0" name="idTipoMesa" type="xs:int" />
       <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoReserva" type="tns:tipoReserva" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="eliminar">
@@ -79,6 +143,19 @@
       <xs:element minOccurs="0" name="message" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="notificarSiguiente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="arg2" type="tns:tipoReserva" />
+      <xs:element minOccurs="0" name="arg3" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="notificarSiguienteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="listar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaParametros" />
@@ -89,9 +166,23 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="buscarSiguienteCompatible">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+      <xs:element minOccurs="0" name="arg1" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="arg2" type="tns:tipoReserva" />
+      <xs:element minOccurs="0" name="arg3" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="buscarSiguienteCompatibleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:filaEsperaDTO" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="obtenerPorId">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:int" />
+      <xs:element minOccurs="0" name="arg1" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="obtenerPorIdResponse">
@@ -109,6 +200,16 @@
       <xs:element minOccurs="0" name="return" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="hayUsuariosEnEspera">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hayUsuariosEnEsperaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="insertar">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:filaEsperaDTO" />
@@ -116,7 +217,38 @@
   </xs:complexType>
   <xs:complexType name="insertarResponse">
     <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:filaEsperaDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="contarUsuariosEnEspera">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="contarUsuariosEnEsperaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="confirmarDisponibilidad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+      <xs:element minOccurs="0" name="arg1" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="confirmarDisponibilidadResponse">
+    <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarPendientesPorPrioridad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarPendientesPorPrioridadResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:filaEsperaDTO" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="estadoFilaEspera">
@@ -126,6 +258,12 @@
       <xs:enumeration value="CANCELADO" />
       <xs:enumeration value="VACIO" />
       <xs:enumeration value="NOTIFICADO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tipoReserva">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="COMUN" />
+      <xs:enumeration value="EVENTO" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

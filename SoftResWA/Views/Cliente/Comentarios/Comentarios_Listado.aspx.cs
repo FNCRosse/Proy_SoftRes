@@ -44,7 +44,7 @@ namespace SoftResWA.Views.Cliente.Comentarios
                 cParametros.estadoSpecified = true;
                 cParametros.estado = true;
                 BindingList<comentariosDTO> comentarios = comentarioBO.Listar(cParametros);
-                rptComentarios.DataSource = comentarios.OrderByDescending(c => c.fechaCreacion).ToList();
+                rptComentarios.DataSource = comentarios.OrderByDescending(c => c.fechaCreacion).Take(20).ToList();
                 rptComentarios.DataBind();
             }
             catch (Exception ex)

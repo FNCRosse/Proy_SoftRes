@@ -49,47 +49,19 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class motivosCancelacionDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string descripcionField;
-        
-        private int idMotivoField;
-        
-        private bool idMotivoFieldSpecified;
+        private string messageField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string descripcion {
+        public string message {
             get {
-                return this.descripcionField;
+                return this.messageField;
             }
             set {
-                this.descripcionField = value;
-                this.RaisePropertyChanged("descripcion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idMotivo {
-            get {
-                return this.idMotivoField;
-            }
-            set {
-                this.idMotivoField = value;
-                this.RaisePropertyChanged("idMotivo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idMotivoSpecified {
-            get {
-                return this.idMotivoFieldSpecified;
-            }
-            set {
-                this.idMotivoFieldSpecified = value;
-                this.RaisePropertyChanged("idMotivoSpecified");
+                this.messageField = value;
+                this.RaisePropertyChanged("message");
             }
         }
         
@@ -103,63 +75,82 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="ReservaxMesaWSClient.ReservaxMesa")]
+    public interface ReservaxMesa {
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesas/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesas/Fault/InterruptedEx" +
+            "ception", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse liberarMesas(SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/liberarMesasResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse> liberarMesasAsync(SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReserva/Fault/IOEx" +
+            "ception", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReserva/Fault/Inte" +
+            "rruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse obtenerMesasDeReserva(SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/obtenerMesasDeReservaResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse> obtenerMesasDeReservaAsync(SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest request);
+        
+        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidad/Fault/IO" +
+            "Exception", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidad/Fault/In" +
+            "terruptedException", Name="InterruptedException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse verificarDisponibilidad(SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/verificarDisponibilidadResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse> verificarDisponibilidadAsync(SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest request);
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class tipoDocumentoDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="liberarMesas", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class liberarMesasRequest {
         
-        private int idTipoDocumentoField;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
         
-        private bool idTipoDocumentoFieldSpecified;
-        
-        private string nombreField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int idTipoDocumento {
-            get {
-                return this.idTipoDocumentoField;
-            }
-            set {
-                this.idTipoDocumentoField = value;
-                this.RaisePropertyChanged("idTipoDocumento");
-            }
+        public liberarMesasRequest() {
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idTipoDocumentoSpecified {
-            get {
-                return this.idTipoDocumentoFieldSpecified;
-            }
-            set {
-                this.idTipoDocumentoFieldSpecified = value;
-                this.RaisePropertyChanged("idTipoDocumentoSpecified");
-            }
+        public liberarMesasRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="liberarMesasResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class liberarMesasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public bool @return;
+        
+        public liberarMesasResponse() {
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
+        public liberarMesasResponse(bool @return) {
+            this.@return = @return;
         }
     }
     
@@ -169,553 +160,13 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class rolDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class mesaDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private bool esClienteField;
+        private int capacidadField;
         
-        private bool esClienteFieldSpecified;
+        private bool capacidadFieldSpecified;
         
-        private int idRolField;
-        
-        private bool idRolFieldSpecified;
-        
-        private string nombreField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public bool esCliente {
-            get {
-                return this.esClienteField;
-            }
-            set {
-                this.esClienteField = value;
-                this.RaisePropertyChanged("esCliente");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool esClienteSpecified {
-            get {
-                return this.esClienteFieldSpecified;
-            }
-            set {
-                this.esClienteFieldSpecified = value;
-                this.RaisePropertyChanged("esClienteSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idRol {
-            get {
-                return this.idRolField;
-            }
-            set {
-                this.idRolField = value;
-                this.RaisePropertyChanged("idRol");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idRolSpecified {
-            get {
-                return this.idRolFieldSpecified;
-            }
-            set {
-                this.idRolFieldSpecified = value;
-                this.RaisePropertyChanged("idRolSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-                this.RaisePropertyChanged("nombre");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class usuariosDTO : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private int cantidadReservacionField;
-        
-        private bool cantidadReservacionFieldSpecified;
-        
-        private string contrasenhaField;
-        
-        private string emailField;
-        
-        private bool estadoField;
-        
-        private bool estadoFieldSpecified;
-        
-        private System.DateTime fechaContratacionField;
-        
-        private bool fechaContratacionFieldSpecified;
-        
-        private System.DateTime fechaCreacionField;
-        
-        private bool fechaCreacionFieldSpecified;
-        
-        private System.DateTime fechaModificacionField;
-        
-        private bool fechaModificacionFieldSpecified;
-        
-        private int idUsuarioField;
-        
-        private bool idUsuarioFieldSpecified;
-        
-        private string nombreCompField;
-        
-        private string numeroDocumentoField;
-        
-        private rolDTO rolField;
-        
-        private double sueldoField;
-        
-        private bool sueldoFieldSpecified;
-        
-        private string telefonoField;
-        
-        private tipoDocumentoDTO tipoDocumentoField;
-        
-        private string usuarioCreacionField;
-        
-        private string usuarioModificacionField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int cantidadReservacion {
-            get {
-                return this.cantidadReservacionField;
-            }
-            set {
-                this.cantidadReservacionField = value;
-                this.RaisePropertyChanged("cantidadReservacion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cantidadReservacionSpecified {
-            get {
-                return this.cantidadReservacionFieldSpecified;
-            }
-            set {
-                this.cantidadReservacionFieldSpecified = value;
-                this.RaisePropertyChanged("cantidadReservacionSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string contrasenha {
-            get {
-                return this.contrasenhaField;
-            }
-            set {
-                this.contrasenhaField = value;
-                this.RaisePropertyChanged("contrasenha");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-                this.RaisePropertyChanged("email");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public bool estado {
-            get {
-                return this.estadoField;
-            }
-            set {
-                this.estadoField = value;
-                this.RaisePropertyChanged("estado");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool estadoSpecified {
-            get {
-                return this.estadoFieldSpecified;
-            }
-            set {
-                this.estadoFieldSpecified = value;
-                this.RaisePropertyChanged("estadoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public System.DateTime fechaContratacion {
-            get {
-                return this.fechaContratacionField;
-            }
-            set {
-                this.fechaContratacionField = value;
-                this.RaisePropertyChanged("fechaContratacion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool fechaContratacionSpecified {
-            get {
-                return this.fechaContratacionFieldSpecified;
-            }
-            set {
-                this.fechaContratacionFieldSpecified = value;
-                this.RaisePropertyChanged("fechaContratacionSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public System.DateTime fechaCreacion {
-            get {
-                return this.fechaCreacionField;
-            }
-            set {
-                this.fechaCreacionField = value;
-                this.RaisePropertyChanged("fechaCreacion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool fechaCreacionSpecified {
-            get {
-                return this.fechaCreacionFieldSpecified;
-            }
-            set {
-                this.fechaCreacionFieldSpecified = value;
-                this.RaisePropertyChanged("fechaCreacionSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public System.DateTime fechaModificacion {
-            get {
-                return this.fechaModificacionField;
-            }
-            set {
-                this.fechaModificacionField = value;
-                this.RaisePropertyChanged("fechaModificacion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool fechaModificacionSpecified {
-            get {
-                return this.fechaModificacionFieldSpecified;
-            }
-            set {
-                this.fechaModificacionFieldSpecified = value;
-                this.RaisePropertyChanged("fechaModificacionSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public int idUsuario {
-            get {
-                return this.idUsuarioField;
-            }
-            set {
-                this.idUsuarioField = value;
-                this.RaisePropertyChanged("idUsuario");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idUsuarioSpecified {
-            get {
-                return this.idUsuarioFieldSpecified;
-            }
-            set {
-                this.idUsuarioFieldSpecified = value;
-                this.RaisePropertyChanged("idUsuarioSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public string nombreComp {
-            get {
-                return this.nombreCompField;
-            }
-            set {
-                this.nombreCompField = value;
-                this.RaisePropertyChanged("nombreComp");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public string numeroDocumento {
-            get {
-                return this.numeroDocumentoField;
-            }
-            set {
-                this.numeroDocumentoField = value;
-                this.RaisePropertyChanged("numeroDocumento");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public rolDTO rol {
-            get {
-                return this.rolField;
-            }
-            set {
-                this.rolField = value;
-                this.RaisePropertyChanged("rol");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public double sueldo {
-            get {
-                return this.sueldoField;
-            }
-            set {
-                this.sueldoField = value;
-                this.RaisePropertyChanged("sueldo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool sueldoSpecified {
-            get {
-                return this.sueldoFieldSpecified;
-            }
-            set {
-                this.sueldoFieldSpecified = value;
-                this.RaisePropertyChanged("sueldoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
-        public string telefono {
-            get {
-                return this.telefonoField;
-            }
-            set {
-                this.telefonoField = value;
-                this.RaisePropertyChanged("telefono");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
-        public tipoDocumentoDTO tipoDocumento {
-            get {
-                return this.tipoDocumentoField;
-            }
-            set {
-                this.tipoDocumentoField = value;
-                this.RaisePropertyChanged("tipoDocumento");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
-        public string usuarioCreacion {
-            get {
-                return this.usuarioCreacionField;
-            }
-            set {
-                this.usuarioCreacionField = value;
-                this.RaisePropertyChanged("usuarioCreacion");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
-        public string usuarioModificacion {
-            get {
-                return this.usuarioModificacionField;
-            }
-            set {
-                this.usuarioModificacionField = value;
-                this.RaisePropertyChanged("usuarioModificacion");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class filaEsperaDTO : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private estadoFilaEspera estadoField;
-        
-        private bool estadoFieldSpecified;
-        
-        private int idFilaField;
-        
-        private bool idFilaFieldSpecified;
-        
-        private usuariosDTO usuarioField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public estadoFilaEspera estado {
-            get {
-                return this.estadoField;
-            }
-            set {
-                this.estadoField = value;
-                this.RaisePropertyChanged("estado");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool estadoSpecified {
-            get {
-                return this.estadoFieldSpecified;
-            }
-            set {
-                this.estadoFieldSpecified = value;
-                this.RaisePropertyChanged("estadoSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int idFila {
-            get {
-                return this.idFilaField;
-            }
-            set {
-                this.idFilaField = value;
-                this.RaisePropertyChanged("idFila");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idFilaSpecified {
-            get {
-                return this.idFilaFieldSpecified;
-            }
-            set {
-                this.idFilaFieldSpecified = value;
-                this.RaisePropertyChanged("idFilaSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public usuariosDTO usuario {
-            get {
-                return this.usuarioField;
-            }
-            set {
-                this.usuarioField = value;
-                this.RaisePropertyChanged("usuario");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public enum estadoFilaEspera {
-        
-        /// <remarks/>
-        PENDIENTE,
-        
-        /// <remarks/>
-        CONFIRMADA,
-        
-        /// <remarks/>
-        CANCELADO,
-        
-        /// <remarks/>
-        VACIO,
-        
-        /// <remarks/>
-        NOTIFICADO,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class reservaDTO : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private int cantidad_personasField;
-        
-        private bool cantidad_personasFieldSpecified;
-        
-        private string descripcionEventoField;
-        
-        private estadoReserva estadoField;
+        private estadoMesa estadoField;
         
         private bool estadoFieldSpecified;
         
@@ -727,79 +178,55 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         
         private bool fechaModificacionFieldSpecified;
         
-        private System.DateTime fecha_HoraField;
+        private int idMesaField;
         
-        private bool fecha_HoraFieldSpecified;
-        
-        private filaEsperaDTO filaEsperaField;
-        
-        private int idReservaField;
-        
-        private bool idReservaFieldSpecified;
+        private bool idMesaFieldSpecified;
         
         private localDTO localField;
         
-        private motivosCancelacionDTO motivoCancelacionField;
-        
-        private string nombreEventoField;
-        
-        private int numeroMesasField;
-        
-        private bool numeroMesasFieldSpecified;
-        
-        private string observacionesField;
+        private string numeroMesaField;
         
         private tipoMesaDTO tipoMesaField;
-        
-        private tipoReserva tipoReservaField;
-        
-        private bool tipoReservaFieldSpecified;
-        
-        private usuariosDTO usuarioField;
         
         private string usuarioCreacionField;
         
         private string usuarioModificacionField;
         
+        private int xField;
+        
+        private bool xFieldSpecified;
+        
+        private int yField;
+        
+        private bool yFieldSpecified;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int cantidad_personas {
+        public int capacidad {
             get {
-                return this.cantidad_personasField;
+                return this.capacidadField;
             }
             set {
-                this.cantidad_personasField = value;
-                this.RaisePropertyChanged("cantidad_personas");
+                this.capacidadField = value;
+                this.RaisePropertyChanged("capacidad");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cantidad_personasSpecified {
+        public bool capacidadSpecified {
             get {
-                return this.cantidad_personasFieldSpecified;
+                return this.capacidadFieldSpecified;
             }
             set {
-                this.cantidad_personasFieldSpecified = value;
-                this.RaisePropertyChanged("cantidad_personasSpecified");
+                this.capacidadFieldSpecified = value;
+                this.RaisePropertyChanged("capacidadSpecified");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string descripcionEvento {
-            get {
-                return this.descripcionEventoField;
-            }
-            set {
-                this.descripcionEventoField = value;
-                this.RaisePropertyChanged("descripcionEvento");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public estadoReserva estado {
+        public estadoMesa estado {
             get {
                 return this.estadoField;
             }
@@ -822,7 +249,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public System.DateTime fechaCreacion {
             get {
                 return this.fechaCreacionField;
@@ -846,7 +273,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public System.DateTime fechaModificacion {
             get {
                 return this.fechaModificacionField;
@@ -870,67 +297,31 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public int idMesa {
+            get {
+                return this.idMesaField;
+            }
+            set {
+                this.idMesaField = value;
+                this.RaisePropertyChanged("idMesa");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idMesaSpecified {
+            get {
+                return this.idMesaFieldSpecified;
+            }
+            set {
+                this.idMesaFieldSpecified = value;
+                this.RaisePropertyChanged("idMesaSpecified");
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public System.DateTime fecha_Hora {
-            get {
-                return this.fecha_HoraField;
-            }
-            set {
-                this.fecha_HoraField = value;
-                this.RaisePropertyChanged("fecha_Hora");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool fecha_HoraSpecified {
-            get {
-                return this.fecha_HoraFieldSpecified;
-            }
-            set {
-                this.fecha_HoraFieldSpecified = value;
-                this.RaisePropertyChanged("fecha_HoraSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public filaEsperaDTO filaEspera {
-            get {
-                return this.filaEsperaField;
-            }
-            set {
-                this.filaEsperaField = value;
-                this.RaisePropertyChanged("filaEspera");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public int idReserva {
-            get {
-                return this.idReservaField;
-            }
-            set {
-                this.idReservaField = value;
-                this.RaisePropertyChanged("idReserva");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idReservaSpecified {
-            get {
-                return this.idReservaFieldSpecified;
-            }
-            set {
-                this.idReservaFieldSpecified = value;
-                this.RaisePropertyChanged("idReservaSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public localDTO local {
             get {
                 return this.localField;
@@ -942,67 +333,19 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public motivosCancelacionDTO motivoCancelacion {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string numeroMesa {
             get {
-                return this.motivoCancelacionField;
+                return this.numeroMesaField;
             }
             set {
-                this.motivoCancelacionField = value;
-                this.RaisePropertyChanged("motivoCancelacion");
+                this.numeroMesaField = value;
+                this.RaisePropertyChanged("numeroMesa");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public string nombreEvento {
-            get {
-                return this.nombreEventoField;
-            }
-            set {
-                this.nombreEventoField = value;
-                this.RaisePropertyChanged("nombreEvento");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public int numeroMesas {
-            get {
-                return this.numeroMesasField;
-            }
-            set {
-                this.numeroMesasField = value;
-                this.RaisePropertyChanged("numeroMesas");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool numeroMesasSpecified {
-            get {
-                return this.numeroMesasFieldSpecified;
-            }
-            set {
-                this.numeroMesasFieldSpecified = value;
-                this.RaisePropertyChanged("numeroMesasSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
-        public string observaciones {
-            get {
-                return this.observacionesField;
-            }
-            set {
-                this.observacionesField = value;
-                this.RaisePropertyChanged("observaciones");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public tipoMesaDTO tipoMesa {
             get {
                 return this.tipoMesaField;
@@ -1014,43 +357,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
-        public tipoReserva tipoReserva {
-            get {
-                return this.tipoReservaField;
-            }
-            set {
-                this.tipoReservaField = value;
-                this.RaisePropertyChanged("tipoReserva");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool tipoReservaSpecified {
-            get {
-                return this.tipoReservaFieldSpecified;
-            }
-            set {
-                this.tipoReservaFieldSpecified = value;
-                this.RaisePropertyChanged("tipoReservaSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
-        public usuariosDTO usuario {
-            get {
-                return this.usuarioField;
-            }
-            set {
-                this.usuarioField = value;
-                this.RaisePropertyChanged("usuario");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public string usuarioCreacion {
             get {
                 return this.usuarioCreacionField;
@@ -1062,7 +369,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
         public string usuarioModificacion {
             get {
                 return this.usuarioModificacionField;
@@ -1070,6 +377,54 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
             set {
                 this.usuarioModificacionField = value;
                 this.RaisePropertyChanged("usuarioModificacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public int x {
+            get {
+                return this.xField;
+            }
+            set {
+                this.xField = value;
+                this.RaisePropertyChanged("x");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool xSpecified {
+            get {
+                return this.xFieldSpecified;
+            }
+            set {
+                this.xFieldSpecified = value;
+                this.RaisePropertyChanged("xSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public int y {
+            get {
+                return this.yField;
+            }
+            set {
+                this.yField = value;
+                this.RaisePropertyChanged("y");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ySpecified {
+            get {
+                return this.yFieldSpecified;
+            }
+            set {
+                this.yFieldSpecified = value;
+                this.RaisePropertyChanged("ySpecified");
             }
         }
         
@@ -1087,16 +442,22 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public enum estadoReserva {
+    public enum estadoMesa {
         
         /// <remarks/>
-        CANCELADA,
+        DISPONIBLE,
         
         /// <remarks/>
-        PENDIENTE,
+        RESERVADA,
         
         /// <remarks/>
-        CONFIRMADA,
+        EN_USO,
+        
+        /// <remarks/>
+        EN_MANTENIMIENTO,
+        
+        /// <remarks/>
+        DESECHADA,
     }
     
     /// <remarks/>
@@ -1601,17 +962,40 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public enum tipoReserva {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerMesasDeReserva", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerMesasDeReservaRequest {
         
-        /// <remarks/>
-        COMUN,
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
         
-        /// <remarks/>
-        EVENTO,
+        public obtenerMesasDeReservaRequest() {
+        }
+        
+        public obtenerMesasDeReservaRequest(int arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="obtenerMesasDeReservaResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class obtenerMesasDeReservaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SoftResBusiness.ReservaxMesaWSClient.mesaDTO[] @return;
+        
+        public obtenerMesasDeReservaResponse() {
+        }
+        
+        public obtenerMesasDeReservaResponse(SoftResBusiness.ReservaxMesaWSClient.mesaDTO[] @return) {
+            this.@return = @return;
+        }
     }
     
     /// <remarks/>
@@ -1620,13 +1004,15 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class mesaDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class reservaDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private int capacidadField;
+        private int cantidadPersonasField;
         
-        private bool capacidadFieldSpecified;
+        private bool cantidadPersonasFieldSpecified;
         
-        private estadoMesa estadoField;
+        private string descripcionEventoField;
+        
+        private estadoReserva estadoField;
         
         private bool estadoFieldSpecified;
         
@@ -1634,59 +1020,85 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         
         private bool fechaCreacionFieldSpecified;
         
+        private System.DateTime fechaHoraRegistroField;
+        
+        private bool fechaHoraRegistroFieldSpecified;
+        
         private System.DateTime fechaModificacionField;
         
         private bool fechaModificacionFieldSpecified;
         
-        private int idMesaField;
+        private filaEsperaDTO filaEsperaField;
         
-        private bool idMesaFieldSpecified;
+        private int idReservaField;
+        
+        private bool idReservaFieldSpecified;
         
         private localDTO localField;
         
-        private string numeroMesaField;
+        private mesaDTO[] mesasAsignadasField;
+        
+        private motivosCancelacionDTO motivoCancelacionField;
+        
+        private string nombreEventoField;
+        
+        private int numeroMesasField;
+        
+        private bool numeroMesasFieldSpecified;
+        
+        private string observacionesField;
         
         private tipoMesaDTO tipoMesaField;
+        
+        private tipoReserva tipoReservaField;
+        
+        private bool tipoReservaFieldSpecified;
+        
+        private usuariosDTO usuarioField;
         
         private string usuarioCreacionField;
         
         private string usuarioModificacionField;
         
-        private int xField;
-        
-        private bool xFieldSpecified;
-        
-        private int yField;
-        
-        private bool yFieldSpecified;
-        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int capacidad {
+        public int cantidadPersonas {
             get {
-                return this.capacidadField;
+                return this.cantidadPersonasField;
             }
             set {
-                this.capacidadField = value;
-                this.RaisePropertyChanged("capacidad");
+                this.cantidadPersonasField = value;
+                this.RaisePropertyChanged("cantidadPersonas");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool capacidadSpecified {
+        public bool cantidadPersonasSpecified {
             get {
-                return this.capacidadFieldSpecified;
+                return this.cantidadPersonasFieldSpecified;
             }
             set {
-                this.capacidadFieldSpecified = value;
-                this.RaisePropertyChanged("capacidadSpecified");
+                this.cantidadPersonasFieldSpecified = value;
+                this.RaisePropertyChanged("cantidadPersonasSpecified");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public estadoMesa estado {
+        public string descripcionEvento {
+            get {
+                return this.descripcionEventoField;
+            }
+            set {
+                this.descripcionEventoField = value;
+                this.RaisePropertyChanged("descripcionEvento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public estadoReserva estado {
             get {
                 return this.estadoField;
             }
@@ -1709,7 +1121,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public System.DateTime fechaCreacion {
             get {
                 return this.fechaCreacionField;
@@ -1733,7 +1145,31 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public System.DateTime fechaHoraRegistro {
+            get {
+                return this.fechaHoraRegistroField;
+            }
+            set {
+                this.fechaHoraRegistroField = value;
+                this.RaisePropertyChanged("fechaHoraRegistro");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaHoraRegistroSpecified {
+            get {
+                return this.fechaHoraRegistroFieldSpecified;
+            }
+            set {
+                this.fechaHoraRegistroFieldSpecified = value;
+                this.RaisePropertyChanged("fechaHoraRegistroSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
         public System.DateTime fechaModificacion {
             get {
                 return this.fechaModificacionField;
@@ -1757,31 +1193,43 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public int idMesa {
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public filaEsperaDTO filaEspera {
             get {
-                return this.idMesaField;
+                return this.filaEsperaField;
             }
             set {
-                this.idMesaField = value;
-                this.RaisePropertyChanged("idMesa");
+                this.filaEsperaField = value;
+                this.RaisePropertyChanged("filaEspera");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public int idReserva {
+            get {
+                return this.idReservaField;
+            }
+            set {
+                this.idReservaField = value;
+                this.RaisePropertyChanged("idReserva");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idMesaSpecified {
+        public bool idReservaSpecified {
             get {
-                return this.idMesaFieldSpecified;
+                return this.idReservaFieldSpecified;
             }
             set {
-                this.idMesaFieldSpecified = value;
-                this.RaisePropertyChanged("idMesaSpecified");
+                this.idReservaFieldSpecified = value;
+                this.RaisePropertyChanged("idReservaSpecified");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public localDTO local {
             get {
                 return this.localField;
@@ -1793,19 +1241,79 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public string numeroMesa {
+        [System.Xml.Serialization.XmlElementAttribute("mesasAsignadas", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=9)]
+        public mesaDTO[] mesasAsignadas {
             get {
-                return this.numeroMesaField;
+                return this.mesasAsignadasField;
             }
             set {
-                this.numeroMesaField = value;
-                this.RaisePropertyChanged("numeroMesa");
+                this.mesasAsignadasField = value;
+                this.RaisePropertyChanged("mesasAsignadas");
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public motivosCancelacionDTO motivoCancelacion {
+            get {
+                return this.motivoCancelacionField;
+            }
+            set {
+                this.motivoCancelacionField = value;
+                this.RaisePropertyChanged("motivoCancelacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string nombreEvento {
+            get {
+                return this.nombreEventoField;
+            }
+            set {
+                this.nombreEventoField = value;
+                this.RaisePropertyChanged("nombreEvento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public int numeroMesas {
+            get {
+                return this.numeroMesasField;
+            }
+            set {
+                this.numeroMesasField = value;
+                this.RaisePropertyChanged("numeroMesas");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool numeroMesasSpecified {
+            get {
+                return this.numeroMesasFieldSpecified;
+            }
+            set {
+                this.numeroMesasFieldSpecified = value;
+                this.RaisePropertyChanged("numeroMesasSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string observaciones {
+            get {
+                return this.observacionesField;
+            }
+            set {
+                this.observacionesField = value;
+                this.RaisePropertyChanged("observaciones");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
         public tipoMesaDTO tipoMesa {
             get {
                 return this.tipoMesaField;
@@ -1817,7 +1325,43 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public tipoReserva tipoReserva {
+            get {
+                return this.tipoReservaField;
+            }
+            set {
+                this.tipoReservaField = value;
+                this.RaisePropertyChanged("tipoReserva");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool tipoReservaSpecified {
+            get {
+                return this.tipoReservaFieldSpecified;
+            }
+            set {
+                this.tipoReservaFieldSpecified = value;
+                this.RaisePropertyChanged("tipoReservaSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        public usuariosDTO usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+                this.RaisePropertyChanged("usuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
         public string usuarioCreacion {
             get {
                 return this.usuarioCreacionField;
@@ -1829,7 +1373,7 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=18)]
         public string usuarioModificacion {
             get {
                 return this.usuarioModificacionField;
@@ -1840,54 +1384,6 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public int x {
-            get {
-                return this.xField;
-            }
-            set {
-                this.xField = value;
-                this.RaisePropertyChanged("x");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xSpecified {
-            get {
-                return this.xFieldSpecified;
-            }
-            set {
-                this.xFieldSpecified = value;
-                this.RaisePropertyChanged("xSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public int y {
-            get {
-                return this.yField;
-            }
-            set {
-                this.yField = value;
-                this.RaisePropertyChanged("y");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ySpecified {
-            get {
-                return this.yFieldSpecified;
-            }
-            set {
-                this.yFieldSpecified = value;
-                this.RaisePropertyChanged("ySpecified");
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -1902,22 +1398,16 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public enum estadoMesa {
+    public enum estadoReserva {
         
         /// <remarks/>
-        DISPONIBLE,
+        CANCELADA,
         
         /// <remarks/>
-        RESERVADA,
+        PENDIENTE,
         
         /// <remarks/>
-        EN_USO,
-        
-        /// <remarks/>
-        EN_MANTENIMIENTO,
-        
-        /// <remarks/>
-        DESECHADA,
+        CONFIRMADA,
     }
     
     /// <remarks/>
@@ -1926,33 +1416,632 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class reservaxMesasDTO : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class filaEsperaDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private mesaDTO mesaField;
+        private int cantidadPersonasField;
         
-        private reservaDTO reservaField;
+        private bool cantidadPersonasFieldSpecified;
+        
+        private estadoFilaEspera estadoField;
+        
+        private bool estadoFieldSpecified;
+        
+        private System.DateTime fechaHoraDeseadaField;
+        
+        private bool fechaHoraDeseadaFieldSpecified;
+        
+        private System.DateTime fechaNotificacionField;
+        
+        private bool fechaNotificacionFieldSpecified;
+        
+        private System.DateTime fechaRegistroField;
+        
+        private bool fechaRegistroFieldSpecified;
+        
+        private int idFilaField;
+        
+        private bool idFilaFieldSpecified;
+        
+        private localDTO localField;
+        
+        private string observacionesField;
+        
+        private tipoMesaDTO tipoMesaField;
+        
+        private tipoReserva tipoReservaField;
+        
+        private bool tipoReservaFieldSpecified;
+        
+        private usuariosDTO usuarioField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public mesaDTO mesa {
+        public int cantidadPersonas {
             get {
-                return this.mesaField;
+                return this.cantidadPersonasField;
             }
             set {
-                this.mesaField = value;
-                this.RaisePropertyChanged("mesa");
+                this.cantidadPersonasField = value;
+                this.RaisePropertyChanged("cantidadPersonas");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cantidadPersonasSpecified {
+            get {
+                return this.cantidadPersonasFieldSpecified;
+            }
+            set {
+                this.cantidadPersonasFieldSpecified = value;
+                this.RaisePropertyChanged("cantidadPersonasSpecified");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public reservaDTO reserva {
+        public estadoFilaEspera estado {
             get {
-                return this.reservaField;
+                return this.estadoField;
             }
             set {
-                this.reservaField = value;
-                this.RaisePropertyChanged("reserva");
+                this.estadoField = value;
+                this.RaisePropertyChanged("estado");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool estadoSpecified {
+            get {
+                return this.estadoFieldSpecified;
+            }
+            set {
+                this.estadoFieldSpecified = value;
+                this.RaisePropertyChanged("estadoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public System.DateTime fechaHoraDeseada {
+            get {
+                return this.fechaHoraDeseadaField;
+            }
+            set {
+                this.fechaHoraDeseadaField = value;
+                this.RaisePropertyChanged("fechaHoraDeseada");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaHoraDeseadaSpecified {
+            get {
+                return this.fechaHoraDeseadaFieldSpecified;
+            }
+            set {
+                this.fechaHoraDeseadaFieldSpecified = value;
+                this.RaisePropertyChanged("fechaHoraDeseadaSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public System.DateTime fechaNotificacion {
+            get {
+                return this.fechaNotificacionField;
+            }
+            set {
+                this.fechaNotificacionField = value;
+                this.RaisePropertyChanged("fechaNotificacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaNotificacionSpecified {
+            get {
+                return this.fechaNotificacionFieldSpecified;
+            }
+            set {
+                this.fechaNotificacionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaNotificacionSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public System.DateTime fechaRegistro {
+            get {
+                return this.fechaRegistroField;
+            }
+            set {
+                this.fechaRegistroField = value;
+                this.RaisePropertyChanged("fechaRegistro");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaRegistroSpecified {
+            get {
+                return this.fechaRegistroFieldSpecified;
+            }
+            set {
+                this.fechaRegistroFieldSpecified = value;
+                this.RaisePropertyChanged("fechaRegistroSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public int idFila {
+            get {
+                return this.idFilaField;
+            }
+            set {
+                this.idFilaField = value;
+                this.RaisePropertyChanged("idFila");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idFilaSpecified {
+            get {
+                return this.idFilaFieldSpecified;
+            }
+            set {
+                this.idFilaFieldSpecified = value;
+                this.RaisePropertyChanged("idFilaSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public localDTO local {
+            get {
+                return this.localField;
+            }
+            set {
+                this.localField = value;
+                this.RaisePropertyChanged("local");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string observaciones {
+            get {
+                return this.observacionesField;
+            }
+            set {
+                this.observacionesField = value;
+                this.RaisePropertyChanged("observaciones");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public tipoMesaDTO tipoMesa {
+            get {
+                return this.tipoMesaField;
+            }
+            set {
+                this.tipoMesaField = value;
+                this.RaisePropertyChanged("tipoMesa");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public tipoReserva tipoReserva {
+            get {
+                return this.tipoReservaField;
+            }
+            set {
+                this.tipoReservaField = value;
+                this.RaisePropertyChanged("tipoReserva");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool tipoReservaSpecified {
+            get {
+                return this.tipoReservaFieldSpecified;
+            }
+            set {
+                this.tipoReservaFieldSpecified = value;
+                this.RaisePropertyChanged("tipoReservaSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public usuariosDTO usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                this.usuarioField = value;
+                this.RaisePropertyChanged("usuario");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public enum estadoFilaEspera {
+        
+        /// <remarks/>
+        PENDIENTE,
+        
+        /// <remarks/>
+        CONFIRMADA,
+        
+        /// <remarks/>
+        CANCELADO,
+        
+        /// <remarks/>
+        VACIO,
+        
+        /// <remarks/>
+        NOTIFICADO,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public enum tipoReserva {
+        
+        /// <remarks/>
+        COMUN,
+        
+        /// <remarks/>
+        EVENTO,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public partial class usuariosDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int cantidadReservacionField;
+        
+        private bool cantidadReservacionFieldSpecified;
+        
+        private string contrasenhaField;
+        
+        private string emailField;
+        
+        private bool estadoField;
+        
+        private bool estadoFieldSpecified;
+        
+        private System.DateTime fechaContratacionField;
+        
+        private bool fechaContratacionFieldSpecified;
+        
+        private System.DateTime fechaCreacionField;
+        
+        private bool fechaCreacionFieldSpecified;
+        
+        private System.DateTime fechaModificacionField;
+        
+        private bool fechaModificacionFieldSpecified;
+        
+        private int idUsuarioField;
+        
+        private bool idUsuarioFieldSpecified;
+        
+        private string nombreCompField;
+        
+        private string numeroDocumentoField;
+        
+        private rolDTO rolField;
+        
+        private double sueldoField;
+        
+        private bool sueldoFieldSpecified;
+        
+        private string telefonoField;
+        
+        private tipoDocumentoDTO tipoDocumentoField;
+        
+        private string usuarioCreacionField;
+        
+        private string usuarioModificacionField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int cantidadReservacion {
+            get {
+                return this.cantidadReservacionField;
+            }
+            set {
+                this.cantidadReservacionField = value;
+                this.RaisePropertyChanged("cantidadReservacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cantidadReservacionSpecified {
+            get {
+                return this.cantidadReservacionFieldSpecified;
+            }
+            set {
+                this.cantidadReservacionFieldSpecified = value;
+                this.RaisePropertyChanged("cantidadReservacionSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string contrasenha {
+            get {
+                return this.contrasenhaField;
+            }
+            set {
+                this.contrasenhaField = value;
+                this.RaisePropertyChanged("contrasenha");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+                this.RaisePropertyChanged("email");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public bool estado {
+            get {
+                return this.estadoField;
+            }
+            set {
+                this.estadoField = value;
+                this.RaisePropertyChanged("estado");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool estadoSpecified {
+            get {
+                return this.estadoFieldSpecified;
+            }
+            set {
+                this.estadoFieldSpecified = value;
+                this.RaisePropertyChanged("estadoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public System.DateTime fechaContratacion {
+            get {
+                return this.fechaContratacionField;
+            }
+            set {
+                this.fechaContratacionField = value;
+                this.RaisePropertyChanged("fechaContratacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaContratacionSpecified {
+            get {
+                return this.fechaContratacionFieldSpecified;
+            }
+            set {
+                this.fechaContratacionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaContratacionSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public System.DateTime fechaCreacion {
+            get {
+                return this.fechaCreacionField;
+            }
+            set {
+                this.fechaCreacionField = value;
+                this.RaisePropertyChanged("fechaCreacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaCreacionSpecified {
+            get {
+                return this.fechaCreacionFieldSpecified;
+            }
+            set {
+                this.fechaCreacionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaCreacionSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public System.DateTime fechaModificacion {
+            get {
+                return this.fechaModificacionField;
+            }
+            set {
+                this.fechaModificacionField = value;
+                this.RaisePropertyChanged("fechaModificacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fechaModificacionSpecified {
+            get {
+                return this.fechaModificacionFieldSpecified;
+            }
+            set {
+                this.fechaModificacionFieldSpecified = value;
+                this.RaisePropertyChanged("fechaModificacionSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public int idUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+                this.RaisePropertyChanged("idUsuario");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idUsuarioSpecified {
+            get {
+                return this.idUsuarioFieldSpecified;
+            }
+            set {
+                this.idUsuarioFieldSpecified = value;
+                this.RaisePropertyChanged("idUsuarioSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string nombreComp {
+            get {
+                return this.nombreCompField;
+            }
+            set {
+                this.nombreCompField = value;
+                this.RaisePropertyChanged("nombreComp");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string numeroDocumento {
+            get {
+                return this.numeroDocumentoField;
+            }
+            set {
+                this.numeroDocumentoField = value;
+                this.RaisePropertyChanged("numeroDocumento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public rolDTO rol {
+            get {
+                return this.rolField;
+            }
+            set {
+                this.rolField = value;
+                this.RaisePropertyChanged("rol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public double sueldo {
+            get {
+                return this.sueldoField;
+            }
+            set {
+                this.sueldoField = value;
+                this.RaisePropertyChanged("sueldo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool sueldoSpecified {
+            get {
+                return this.sueldoFieldSpecified;
+            }
+            set {
+                this.sueldoFieldSpecified = value;
+                this.RaisePropertyChanged("sueldoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string telefono {
+            get {
+                return this.telefonoField;
+            }
+            set {
+                this.telefonoField = value;
+                this.RaisePropertyChanged("telefono");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public tipoDocumentoDTO tipoDocumento {
+            get {
+                return this.tipoDocumentoField;
+            }
+            set {
+                this.tipoDocumentoField = value;
+                this.RaisePropertyChanged("tipoDocumento");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public string usuarioCreacion {
+            get {
+                return this.usuarioCreacionField;
+            }
+            set {
+                this.usuarioCreacionField = value;
+                this.RaisePropertyChanged("usuarioCreacion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public string usuarioModificacion {
+            get {
+                return this.usuarioModificacionField;
+            }
+            set {
+                this.usuarioModificacionField = value;
+                this.RaisePropertyChanged("usuarioModificacion");
             }
         }
         
@@ -1972,19 +2061,75 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
-    public partial class InterruptedException : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class rolDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string messageField;
+        private bool esClienteField;
+        
+        private bool esClienteFieldSpecified;
+        
+        private int idRolField;
+        
+        private bool idRolFieldSpecified;
+        
+        private string nombreField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string message {
+        public bool esCliente {
             get {
-                return this.messageField;
+                return this.esClienteField;
             }
             set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
+                this.esClienteField = value;
+                this.RaisePropertyChanged("esCliente");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool esClienteSpecified {
+            get {
+                return this.esClienteFieldSpecified;
+            }
+            set {
+                this.esClienteFieldSpecified = value;
+                this.RaisePropertyChanged("esClienteSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idRol {
+            get {
+                return this.idRolField;
+            }
+            set {
+                this.idRolField = value;
+                this.RaisePropertyChanged("idRol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idRolSpecified {
+            get {
+                return this.idRolFieldSpecified;
+            }
+            set {
+                this.idRolFieldSpecified = value;
+                this.RaisePropertyChanged("idRolSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
             }
         }
         
@@ -1998,61 +2143,140 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.softres.pucp.edu.pe/", ConfigurationName="ReservaxMesaWSClient.ReservaxMesa")]
-    public interface ReservaxMesa {
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public partial class tipoDocumentoDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertar/Fault/InterruptedExcept" +
-            "ion", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ReservaxMesaWSClient.insertarResponse insertar(SoftResBusiness.ReservaxMesaWSClient.insertarRequest request);
+        private int idTipoDocumentoField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/insertarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.ReservaxMesaWSClient.insertarRequest request);
+        private bool idTipoDocumentoFieldSpecified;
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminar/Fault/InterruptedExcept" +
-            "ion", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ReservaxMesaWSClient.eliminarResponse eliminar(SoftResBusiness.ReservaxMesaWSClient.eliminarRequest request);
+        private string nombreField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaxMesaWSClient.eliminarRequest request);
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int idTipoDocumento {
+            get {
+                return this.idTipoDocumentoField;
+            }
+            set {
+                this.idTipoDocumentoField = value;
+                this.RaisePropertyChanged("idTipoDocumento");
+            }
+        }
         
-        // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.ReservaxMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listar/Fault/InterruptedExceptio" +
-            "n", Name="InterruptedException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.ReservaxMesaWSClient.listarResponse listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idTipoDocumentoSpecified {
+            get {
+                return this.idTipoDocumentoFieldSpecified;
+            }
+            set {
+                this.idTipoDocumentoFieldSpecified = value;
+                this.RaisePropertyChanged("idTipoDocumentoSpecified");
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/ReservaxMesa/listarRequest", ReplyAction="http://services.softres.pucp.edu.pe/ReservaxMesa/listarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request);
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+                this.RaisePropertyChanged("nombre");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://services.softres.pucp.edu.pe/")]
+    public partial class motivosCancelacionDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string descripcionField;
+        
+        private int idMotivoField;
+        
+        private bool idMotivoFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string descripcion {
+            get {
+                return this.descripcionField;
+            }
+            set {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int idMotivo {
+            get {
+                return this.idMotivoField;
+            }
+            set {
+                this.idMotivoField = value;
+                this.RaisePropertyChanged("idMotivo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idMotivoSpecified {
+            get {
+                return this.idMotivoFieldSpecified;
+            }
+            set {
+                this.idMotivoFieldSpecified = value;
+                this.RaisePropertyChanged("idMotivoSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="verificarDisponibilidad", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class verificarDisponibilidadRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0;
+        public SoftResBusiness.ReservaxMesaWSClient.reservaDTO arg0;
         
-        public insertarRequest() {
+        public verificarDisponibilidadRequest() {
         }
         
-        public insertarRequest(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
+        public verificarDisponibilidadRequest(SoftResBusiness.ReservaxMesaWSClient.reservaDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -2060,89 +2284,17 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="insertarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class insertarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="verificarDisponibilidadResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class verificarDisponibilidadResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
+        public bool @return;
         
-        public insertarResponse() {
+        public verificarDisponibilidadResponse() {
         }
         
-        public insertarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0;
-        
-        public eliminarRequest() {
-        }
-        
-        public eliminarRequest(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int @return;
-        
-        public eliminarResponse() {
-        }
-        
-        public eliminarResponse(int @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int arg0;
-        
-        public listarRequest() {
-        }
-        
-        public listarRequest(int arg0) {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="listarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class listarResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return;
-        
-        public listarResponse() {
-        }
-        
-        public listarResponse(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] @return) {
+        public verificarDisponibilidadResponse(bool @return) {
             this.@return = @return;
         }
     }
@@ -2175,72 +2327,72 @@ namespace SoftResBusiness.ReservaxMesaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ReservaxMesaWSClient.insertarResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.insertar(SoftResBusiness.ReservaxMesaWSClient.insertarRequest request) {
-            return base.Channel.insertar(request);
+        SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.liberarMesas(SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest request) {
+            return base.Channel.liberarMesas(request);
         }
         
-        public int insertar(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.insertarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.insertarRequest();
+        public bool liberarMesas(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.ReservaxMesaWSClient.insertarResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).insertar(inValue);
+            SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).liberarMesas(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.insertarResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.insertarAsync(SoftResBusiness.ReservaxMesaWSClient.insertarRequest request) {
-            return base.Channel.insertarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.liberarMesasAsync(SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest request) {
+            return base.Channel.liberarMesasAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.insertarResponse> insertarAsync(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.insertarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.insertarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse> liberarMesasAsync(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.liberarMesasRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).insertarAsync(inValue);
+            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).liberarMesasAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ReservaxMesaWSClient.eliminarResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.eliminar(SoftResBusiness.ReservaxMesaWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
+        SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.obtenerMesasDeReserva(SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest request) {
+            return base.Channel.obtenerMesasDeReserva(request);
         }
         
-        public int eliminar(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.eliminarRequest();
+        public SoftResBusiness.ReservaxMesaWSClient.mesaDTO[] obtenerMesasDeReserva(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.ReservaxMesaWSClient.eliminarResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).eliminar(inValue);
+            SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).obtenerMesasDeReserva(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.eliminarResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.eliminarAsync(SoftResBusiness.ReservaxMesaWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.obtenerMesasDeReservaAsync(SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest request) {
+            return base.Channel.obtenerMesasDeReservaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.eliminarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.eliminarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse> obtenerMesasDeReservaAsync(int arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).eliminarAsync(inValue);
+            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).obtenerMesasDeReservaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.ReservaxMesaWSClient.listarResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listar(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
-            return base.Channel.listar(request);
+        SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.verificarDisponibilidad(SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest request) {
+            return base.Channel.verificarDisponibilidad(request);
         }
         
-        public SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO[] listar(int arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
+        public bool verificarDisponibilidad(SoftResBusiness.ReservaxMesaWSClient.reservaDTO arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.ReservaxMesaWSClient.listarResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listar(inValue);
+            SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse retVal = ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).verificarDisponibilidad(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.listarAsync(SoftResBusiness.ReservaxMesaWSClient.listarRequest request) {
-            return base.Channel.listarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse> SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa.verificarDisponibilidadAsync(SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest request) {
+            return base.Channel.verificarDisponibilidadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.listarResponse> listarAsync(int arg0) {
-            SoftResBusiness.ReservaxMesaWSClient.listarRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.listarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse> verificarDisponibilidadAsync(SoftResBusiness.ReservaxMesaWSClient.reservaDTO arg0) {
+            SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest inValue = new SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).listarAsync(inValue);
+            return ((SoftResBusiness.ReservaxMesaWSClient.ReservaxMesa)(this)).verificarDisponibilidadAsync(inValue);
         }
     }
 }

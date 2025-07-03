@@ -135,15 +135,14 @@ namespace SoftResWA.Views.Cliente.Home
                 if (usuarioLogueado != null && !string.IsNullOrEmpty(usuarioLogueado.rol.nombre))
                 {
                     string rol = usuarioLogueado.rol.nombre.ToLower();
+                    Session["UsuarioLogueado"] = usuarioLogueado;
                     if (rol == "cliente normal" || rol == "cliente vip")
                     {
-                        Session["UsuarioLogueado"] = usuarioLogueado;
                         Response.Redirect("~/Views/Cliente/Home/Home_Cliente.aspx");
                     }
                     else
                     {
-                        lblLoginError.Text = "Acceso no permitido para este tipo de usuario.";
-                        lblLoginError.Visible = true;
+                        Response.Redirect("~/Views/Home/home.aspx");
                     }
                 }
                 else

@@ -28,15 +28,16 @@
   </xs:complexType>
   <xs:complexType name="reservaDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="cantidad_personas" type="xs:int" />
+      <xs:element minOccurs="0" name="cantidadPersonas" type="xs:int" />
       <xs:element minOccurs="0" name="descripcionEvento" type="xs:string" />
       <xs:element minOccurs="0" name="estado" type="tns:estadoReserva" />
       <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaHoraRegistro" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="fecha_Hora" type="xs:dateTime" />
       <xs:element minOccurs="0" name="filaEspera" type="tns:filaEsperaDTO" />
       <xs:element minOccurs="0" name="idReserva" type="xs:int" />
       <xs:element minOccurs="0" name="local" type="tns:localDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="mesasAsignadas" nillable="true" type="tns:mesaDTO" />
       <xs:element minOccurs="0" name="motivoCancelacion" type="tns:motivosCancelacionDTO" />
       <xs:element minOccurs="0" name="nombreEvento" type="xs:string" />
       <xs:element minOccurs="0" name="numeroMesas" type="xs:int" />
@@ -50,9 +51,51 @@
   </xs:complexType>
   <xs:complexType name="filaEsperaDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadPersonas" type="xs:int" />
       <xs:element minOccurs="0" name="estado" type="tns:estadoFilaEspera" />
+      <xs:element minOccurs="0" name="fechaHoraDeseada" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaNotificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime" />
       <xs:element minOccurs="0" name="idFila" type="xs:int" />
+      <xs:element minOccurs="0" name="local" type="tns:localDTO" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoMesa" type="tns:tipoMesaDTO" />
+      <xs:element minOccurs="0" name="tipoReserva" type="tns:tipoReserva" />
       <xs:element minOccurs="0" name="usuario" type="tns:usuariosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantidadMesas" type="xs:int" />
+      <xs:element minOccurs="0" name="direccion" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="idLocal" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="sede" type="tns:sedeDTO" />
+      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sedeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="distrito" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="horarios" type="xs:string" />
+      <xs:element minOccurs="0" name="idSede" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
+      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tipoMesaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idTipoMesa" type="xs:int" />
+      <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="usuariosDTO">
@@ -88,44 +131,26 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="localDTO">
+  <xs:complexType name="mesaDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="cantidadMesas" type="xs:int" />
-      <xs:element minOccurs="0" name="direccion" type="xs:string" />
-      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="capacidad" type="xs:int" />
+      <xs:element minOccurs="0" name="estado" type="tns:estadoMesa" />
       <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="idLocal" type="xs:int" />
-      <xs:element minOccurs="0" name="nombre" type="xs:string" />
-      <xs:element minOccurs="0" name="sede" type="tns:sedeDTO" />
-      <xs:element minOccurs="0" name="telefono" type="xs:string" />
+      <xs:element minOccurs="0" name="idMesa" type="xs:int" />
+      <xs:element minOccurs="0" name="local" type="tns:localDTO" />
+      <xs:element minOccurs="0" name="numeroMesa" type="xs:string" />
+      <xs:element minOccurs="0" name="tipoMesa" type="tns:tipoMesaDTO" />
       <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
       <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="sedeDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="distrito" type="xs:string" />
-      <xs:element minOccurs="0" name="estado" type="xs:boolean" />
-      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="fechaModificacion" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="horarios" type="xs:string" />
-      <xs:element minOccurs="0" name="idSede" type="xs:int" />
-      <xs:element minOccurs="0" name="nombre" type="xs:string" />
-      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string" />
-      <xs:element minOccurs="0" name="usuarioModificacion" type="xs:string" />
+      <xs:element minOccurs="0" name="x" type="xs:int" />
+      <xs:element minOccurs="0" name="y" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="motivosCancelacionDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="descripcion" type="xs:string" />
       <xs:element minOccurs="0" name="idMotivo" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="tipoMesaDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="idTipoMesa" type="xs:int" />
-      <xs:element minOccurs="0" name="nombre" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="comentarioParametros">
@@ -217,6 +242,15 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="COMUN" />
       <xs:enumeration value="EVENTO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estadoMesa">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DISPONIBLE" />
+      <xs:enumeration value="RESERVADA" />
+      <xs:enumeration value="EN_USO" />
+      <xs:enumeration value="EN_MANTENIMIENTO" />
+      <xs:enumeration value="DESECHADA" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

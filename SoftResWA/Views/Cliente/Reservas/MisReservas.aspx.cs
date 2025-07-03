@@ -81,7 +81,7 @@ namespace SoftResWA.Views.Cliente.Reservas
                 if (!string.IsNullOrEmpty(ddlEstado.SelectedValue)) { parametros.estado = (estadoReserva)Enum.Parse(typeof(estadoReserva), ddlEstado.SelectedValue); parametros.estadoSpecified = true; }
 
                 BindingList<reservaDTO> reservas = reservaBO.Listar(parametros);
-                rptReservas.DataSource = reservas.OrderByDescending(r => r.fecha_Hora).ToList();
+                rptReservas.DataSource = reservas.OrderByDescending(r => r.fechaHoraRegistro).ToList();
                 rptReservas.DataBind();
             }
             catch (Exception ex) { MostrarAlerta("Error", "No se pudieron cargar tus reservas.", "error"); }
@@ -106,7 +106,7 @@ namespace SoftResWA.Views.Cliente.Reservas
             Control botonClickeado = e.CommandSource as Control;
             reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
             if (reserva == null) return;
-            if (!PuedeModificarCancelar(reserva.fecha_Hora))
+            if (!PuedeModificarCancelar(reserva.fechaHoraRegistro))
             {
                 MostrarAlerta("Acción no permitida", "No puedes modificar o cancelar una reserva con menos de una hora de anticipación.", "warning");
                 return; // Detenemos la ejecución
@@ -120,7 +120,7 @@ namespace SoftResWA.Views.Cliente.Reservas
 
                     hdnReservaIdEditar.Value = idReserva.ToString();
                     btnCancelarEnModal.CommandArgument = idReserva.ToString();
-                    txtPersonasModal.Text = reservaEditar.cantidad_personas.ToString();
+                    txtPersonasModal.Text = reservaEditar.cantidadPersonas.ToString();
                     txtMesasModal.Text = reservaEditar.numeroMesas.ToString();
                     txtObservacionesModal.Text = reservaEditar.observaciones;
 
@@ -147,21 +147,17 @@ namespace SoftResWA.Views.Cliente.Reservas
                     break;
 
                 case "Confirmar":
-                    reservaDTO reservaConfirmar = reservaBO.ObtenerPorID(idReserva);
-                    if (reservaConfirmar == null) return;
+                    int resultado = reservaBO.ConfirmarReserva(idReserva, UsuarioActual.idUsuario);
 
-                    reservaConfirmar.estado = estadoReserva.CONFIRMADA;
-                    reservaConfirmar.estadoSpecified = true;
-                    reservaConfirmar.usuarioModificacion = UsuarioActual.nombreComp;
-                    reservaConfirmar.fechaModificacion = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-                    reservaConfirmar.fechaModificacionSpecified = true;
-                    reservaConfirmar.filaEspera = null;
-
-                    if (reservaBO.Modificar(reservaConfirmar) > 0)
+                    if (resultado > 0)
                     {
                         MostrarAlerta("¡Éxito!", "Tu reserva ha sido confirmada.", "success");
                     }
-                    BindGrid();
+                    else
+                    {
+                        MostrarAlerta("Error", "No se pudo confirmar la reserva. Por favor, inténtalo de nuevo.", "error");
+                    }
+                    BindGrid(); // Refrescar la vista
                     break;
 
                 case "AbrirCancelar":
@@ -184,7 +180,7 @@ namespace SoftResWA.Views.Cliente.Reservas
                     if (!string.IsNullOrEmpty(e.CommandArgument?.ToString()))
                     {
                         int idReserva = int.Parse(e.CommandArgument.ToString());
-                        CancelarReserva(idReserva); // Llama a una versión sobrecargada del método
+                        CancelarReserva(idReserva); // Llama al método que contiene la lógica
                     }
                     break;
                 case "AbrirCancelarDesdeModal":
@@ -200,14 +196,14 @@ namespace SoftResWA.Views.Cliente.Reservas
         {
             int idReserva = int.Parse(hdnReservaIdEditar.Value);
             reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
-            if (!PuedeModificarCancelar(reserva.fecha_Hora))
+            if (!PuedeModificarCancelar(reserva.fechaHoraRegistro))
             {
                 MostrarAlerta("Acción no permitida", "El tiempo para modificar esta reserva ha expirado.", "error");
                 return;
             }
             reserva.idReserva = idReserva;
             reserva.idReservaSpecified = true;
-            reserva.cantidad_personas = int.Parse(txtPersonasModal.Text);
+            reserva.cantidadPersonas = int.Parse(txtPersonasModal.Text);
             reserva.numeroMesas = int.Parse(txtMesasModal.Text);
             reserva.observaciones = txtObservacionesModal.Text;
             if (reserva.tipoReserva == tipoReserva.EVENTO)
@@ -235,30 +231,37 @@ namespace SoftResWA.Views.Cliente.Reservas
         // Ahora el método recibe el ID como parámetro
         private void CancelarReserva(int idReserva)
         {
-            Page.Validate("CancelarGroup");
+            Page.Validate("CancelarGroup"); 
             if (!Page.IsValid) return;
             try
             {
-                reservaDTO reserva = reservaBO.ObtenerPorID(idReserva);
-                if (reserva == null)
+                reservaDTO reservaOriginal = reservaBO.ObtenerPorID(idReserva);
+                if (reservaOriginal == null)
                 {
-                    MostrarAlerta("Error", "No se encontró la reserva para cancelar.", "error");
+                    MostrarAlerta("Error", "La reserva no fue encontrada.", "error");
                     return;
                 }
-                if (!PuedeModificarCancelar(reserva.fecha_Hora))
+                if (!PuedeModificarCancelar(reservaOriginal.fechaHoraRegistro))
                 {
                     MostrarAlerta("Acción no permitida", "El tiempo para cancelar esta reserva ha expirado.", "error");
                     return;
                 }
-                reserva.estado = estadoReserva.CANCELADA;
-                reserva.estadoSpecified = true;
-                reserva.motivoCancelacion = new motivosCancelacionDTO();
-                reserva.motivoCancelacion.idMotivoSpecified = true;
-                reserva.motivoCancelacion.idMotivo = int.Parse(ddlMotivoCancelacion.SelectedValue);
+                reservaOriginal.idReserva = idReserva;
+                reservaOriginal.idReservaSpecified= true;
+                reservaOriginal.usuario = new SoftResBusiness.ReservaWSClient.usuariosDTO();
+                reservaOriginal.usuario.idUsuario = UsuarioActual.idUsuario;
+                reservaOriginal.usuario.idUsuarioSpecified = true;
+                reservaOriginal.motivoCancelacion = new motivosCancelacionDTO();
+                reservaOriginal.motivoCancelacion.idMotivo = int.Parse(ddlMotivoCancelacion.SelectedValue);
+                reservaOriginal.motivoCancelacion.idMotivoSpecified = true;
+                reservaOriginal.usuarioModificacion = UsuarioActual.nombreComp;
 
-                if (reservaBO.Eliminar(reserva) > 0)
+                int resultado = reservaBO.Cancelar(reservaOriginal);
+
+                if (resultado > 0)
                 {
                     MostrarAlerta("Reserva Cancelada", "Tu reserva ha sido cancelada exitosamente.", "info");
+                    // La lógica de liberar mesas y enviar correo ahora está en el backend.
                 }
                 else
                 {
@@ -268,7 +271,7 @@ namespace SoftResWA.Views.Cliente.Reservas
             }
             catch (Exception ex)
             {
-                MostrarAlerta("Error Inesperado", $"Ocurrió un error al cancelar: {ex.Message}", "error");
+                MostrarAlerta("Error Inesperado", $"Ocurrió un error: {ex.Message}", "error");
             }
         }
 
