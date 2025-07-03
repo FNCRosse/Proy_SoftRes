@@ -19,25 +19,25 @@ namespace SoftResBusiness
             this.rxmClienteSOAP = new ReservaxMesaClient();
         }
 
-        public int Insertar(reservaxMesasDTO rxm)
-        {
-            return this.rxmClienteSOAP.insertar(rxm);
-        }
+        //public int Insertar(reservaxMesasDTO rxm)
+        //{
+        //    return this.rxmClienteSOAP.insertar(rxm);
+        //}
 
-        public int Eliminar(reservaxMesasDTO rxm)
-        {
-            return this.rxmClienteSOAP.eliminar(rxm);
-        }
+        //public int Eliminar(reservaxMesasDTO rxm)
+        //{
+        //    return this.rxmClienteSOAP.eliminar(rxm);
+        //}
 
-        public BindingList<reservaxMesasDTO> Listar(int idReserva)
-        {
-            var lista = this.rxmClienteSOAP.listar(idReserva);
+        //public BindingList<reservaxMesasDTO> Listar(int idReserva)
+        //{
+        //    var lista = this.rxmClienteSOAP.listar(idReserva);
 
-            if (lista == null)
-                return new BindingList<reservaxMesasDTO>(); // lista vacía sin error
+        //    if (lista == null)
+        //        return new BindingList<reservaxMesasDTO>(); // lista vacía sin error
 
-            return new BindingList<reservaxMesasDTO>(lista);
-        }
+        //    return new BindingList<reservaxMesasDTO>(lista);
+        //}
     }
 
 }

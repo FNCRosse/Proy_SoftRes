@@ -89,7 +89,7 @@ namespace SoftResWA.Views.Cliente.Comentarios
                     ddlReservas.DataSource = reservas.Select(r => new
                     {
                         Id = r.idReserva,
-                        Texto = $"Reserva del {r.fecha_Hora:dd/MM/yyyy} en {r.local?.nombre ?? "Local"}"
+                        Texto = $"Reserva del {r.fechaHoraRegistro:dd/MM/yyyy} en {r.local?.nombre ?? "Local"}"
                     }).ToList();
                     ddlReservas.DataTextField = "Texto";
                     ddlReservas.DataValueField = "Id";

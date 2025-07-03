@@ -17,11 +17,6 @@
             </button>
             <br />
 
-            <!-- Botón Google -->
-            <button type="button" class="btn btn-google mb-3" onclick="loginConGoogle()">
-                INICIAR SESIÓN CON GOOGLE
-            </button>
-
             <p class="text-dark small mx-4">
                 Al iniciar sesión con Google, aceptas nuestros
                 <strong>términos y condiciones</strong> y

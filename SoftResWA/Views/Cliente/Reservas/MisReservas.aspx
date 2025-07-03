@@ -46,20 +46,20 @@
                                     <div class="card-reserva p-4">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <div>
-                                                <span class="fw-bold text-danger">Fecha:</span> <%# Eval("fecha_Hora", "{0:dd 'de' MMMM, yyyy}") %>
-                                                <span class="fw-bold text-danger ms-4">Hora:</span> <%# Eval("fecha_Hora", "{0:hh:mm tt}") %>
+                                                <span class="fw-bold text-danger">Fecha:</span> <%# Eval("fechaHoraRegistro", "{0:dd 'de' MMMM, yyyy}") %>
+                                                <span class="fw-bold text-danger ms-4">Hora:</span> <%# Eval("fechaHoraRegistro", "{0:hh:mm tt}") %>
                                                 <span class="fw-bold text-danger ms-4">Local:</span> <%# Eval("local.nombre") %>
                                                 <span class="fw-bold text-danger ms-4">Estado:</span> <span class='<%# GetEstadoCssClass(Eval("estado")) %>'><%# Eval("estado") %></span>
                                             </div>
                                             <!-- Icono de advertencia si la reserva está próxima y no se puede modificar -->
-                                            <asp:Panel ID="pnlAdvertencia" runat="server" Visible='<%# !PuedeModificarCancelar(Eval("fecha_Hora")) %>'>
+                                            <asp:Panel ID="pnlAdvertencia" runat="server" Visible='<%# !PuedeModificarCancelar(Eval("fechaHoraRegistro")) %>'>
                                                 <i class="fas fa-exclamation-triangle text-warning" title="No se puede modificar/cancelar con menos de 1 hora de anticipación."></i>
                                             </asp:Panel>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <p class="fw-bold text-danger mb-1">Cantidad de Personas:</p>
-                                                <p><%# Eval("cantidad_personas") %></p>
+                                                <p><%# Eval("cantidadPersonas") %></p>
                                                 <p class="fw-bold text-danger mb-1">Cantidad de Mesas:</p>
                                                 <p><%# Eval("numeroMesas") %></p>
                                             </div>
@@ -77,17 +77,17 @@
                                             <!-- Botón EDITAR: Visible solo si está CONFIRMADA y se puede modificar -->
                                             <asp:LinkButton ID="btnEditar" runat="server" CssClass="btn btn-danger px-4"
                                                 Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("idReserva") %>'
-                                                Visible='<%# Eval("estado").ToString() == "CONFIRMADA" && PuedeModificarCancelar(Eval("fecha_Hora")) %>' CausesValidation="false" />
+                                                Visible='<%# Eval("estado").ToString() == "CONFIRMADA" && PuedeModificarCancelar(Eval("fechaHoraRegistro")) %>' CausesValidation="false" />
 
                                             <!-- Botón CONFIRMAR: Visible solo si está PENDIENTE y se puede modificar -->
                                             <asp:LinkButton ID="btnConfirmar" runat="server" CssClass="btn btn-warning px-4 text-dark"
                                                 Text="Confirmar" CommandName="Confirmar" CommandArgument='<%# Eval("idReserva") %>'
-                                                Visible='<%# Eval("estado").ToString() == "PENDIENTE" && PuedeModificarCancelar(Eval("fecha_Hora")) %>' CausesValidation="false" />
+                                                Visible='<%# Eval("estado").ToString() == "PENDIENTE" && PuedeModificarCancelar(Eval("fechaHoraRegistro")) %>' CausesValidation="false" />
 
                                             <!-- Botón CANCELAR: Visible solo si está PENDIENTE y se puede modificar -->
                                             <asp:LinkButton ID="btnCancelar" runat="server" CssClass="btn btn-outline-danger px-4"
                                                 Text="Cancelar" CommandName="AbrirCancelar" CommandArgument='<%# Eval("idReserva") %>'
-                                                Visible='<%# Eval("estado").ToString() == "PENDIENTE" && PuedeModificarCancelar(Eval("fecha_Hora")) %>' CausesValidation="false" />
+                                                Visible='<%# Eval("estado").ToString() == "PENDIENTE" && PuedeModificarCancelar(Eval("fechaHoraRegistro")) %>' CausesValidation="false" />
                                         </div>
                                     </div>
                                 </ItemTemplate>

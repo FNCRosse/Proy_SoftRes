@@ -48,6 +48,17 @@ namespace SoftResBusiness
 
             return new BindingList<reservaDTO>(lista);
         }
+
+        public int ConfirmarReserva(int reservaID, int UsuarioID)
+        {
+            if (reservaID <= 0 || UsuarioID <= 0) return 0;
+            return this.reservaClienteSOAP.confirmarPost(reservaID, UsuarioID);
+        }
+
+        public int Cancelar(reservaDTO reserva)
+        {
+            return this.reservaClienteSOAP.cancelar(reserva);
+        }
     }
 
 }

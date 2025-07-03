@@ -140,15 +140,16 @@ namespace SoftResBusiness.TipoMesaWSClient {
     public interface TipoMesa {
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/eliminarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/InterruptedException", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/InterruptedException" +
+            "", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.TipoMesaWSClient.eliminarResponse eliminar(SoftResBusiness.TipoMesaWSClient.eliminarRequest request);
+        SoftResBusiness.TipoMesaWSClient.modificarResponse modificar(SoftResBusiness.TipoMesaWSClient.modificarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/eliminarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.TipoMesaWSClient.eliminarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> modificarAsync(SoftResBusiness.TipoMesaWSClient.modificarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/insertarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/insertarResponse")]
@@ -173,16 +174,15 @@ namespace SoftResBusiness.TipoMesaWSClient {
         System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.listarResponse> listarAsync(SoftResBusiness.TipoMesaWSClient.listarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/IOException", Name="IOException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoMesa/modificar/Fault/InterruptedException" +
-            "", Name="InterruptedException")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/eliminarResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.IOException), Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/IOException", Name="IOException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SoftResBusiness.TipoMesaWSClient.InterruptedException), Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminar/Fault/InterruptedException", Name="InterruptedException")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        SoftResBusiness.TipoMesaWSClient.modificarResponse modificar(SoftResBusiness.TipoMesaWSClient.modificarRequest request);
+        SoftResBusiness.TipoMesaWSClient.eliminarResponse eliminar(SoftResBusiness.TipoMesaWSClient.eliminarRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/modificarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/modificarResponse")]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> modificarAsync(SoftResBusiness.TipoMesaWSClient.modificarRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/eliminarRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/eliminarResponse")]
+        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.TipoMesaWSClient.eliminarRequest request);
         
         // CODEGEN: El parámetro 'return' requiere información adicional de esquema que no se puede capturar con el modo de parámetros. El atributo específico es 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.softres.pucp.edu.pe/TipoMesa/obtenerPorIdRequest", ReplyAction="http://services.softres.pucp.edu.pe/TipoMesa/obtenerPorIdResponse")]
@@ -200,17 +200,17 @@ namespace SoftResBusiness.TipoMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0;
         
-        public eliminarRequest() {
+        public modificarRequest() {
         }
         
-        public eliminarRequest(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+        public modificarRequest(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -218,17 +218,17 @@ namespace SoftResBusiness.TipoMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class eliminarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class modificarResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int @return;
         
-        public eliminarResponse() {
+        public modificarResponse() {
         }
         
-        public eliminarResponse(int @return) {
+        public modificarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -300,17 +300,17 @@ namespace SoftResBusiness.TipoMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminar", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0;
         
-        public modificarRequest() {
+        public eliminarRequest() {
         }
         
-        public modificarRequest(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+        public eliminarRequest(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
             this.arg0 = arg0;
         }
     }
@@ -318,17 +318,17 @@ namespace SoftResBusiness.TipoMesaWSClient {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="modificarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
-    public partial class modificarResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="eliminarResponse", WrapperNamespace="http://services.softres.pucp.edu.pe/", IsWrapped=true)]
+    public partial class eliminarResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.softres.pucp.edu.pe/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public int @return;
         
-        public modificarResponse() {
+        public eliminarResponse() {
         }
         
-        public modificarResponse(int @return) {
+        public eliminarResponse(int @return) {
             this.@return = @return;
         }
     }
@@ -397,26 +397,26 @@ namespace SoftResBusiness.TipoMesaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.TipoMesaWSClient.eliminarResponse SoftResBusiness.TipoMesaWSClient.TipoMesa.eliminar(SoftResBusiness.TipoMesaWSClient.eliminarRequest request) {
-            return base.Channel.eliminar(request);
+        SoftResBusiness.TipoMesaWSClient.modificarResponse SoftResBusiness.TipoMesaWSClient.TipoMesa.modificar(SoftResBusiness.TipoMesaWSClient.modificarRequest request) {
+            return base.Channel.modificar(request);
         }
         
-        public int eliminar(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
-            SoftResBusiness.TipoMesaWSClient.eliminarRequest inValue = new SoftResBusiness.TipoMesaWSClient.eliminarRequest();
+        public int modificar(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+            SoftResBusiness.TipoMesaWSClient.modificarRequest inValue = new SoftResBusiness.TipoMesaWSClient.modificarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.TipoMesaWSClient.eliminarResponse retVal = ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).eliminar(inValue);
+            SoftResBusiness.TipoMesaWSClient.modificarResponse retVal = ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).modificar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> SoftResBusiness.TipoMesaWSClient.TipoMesa.eliminarAsync(SoftResBusiness.TipoMesaWSClient.eliminarRequest request) {
-            return base.Channel.eliminarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> SoftResBusiness.TipoMesaWSClient.TipoMesa.modificarAsync(SoftResBusiness.TipoMesaWSClient.modificarRequest request) {
+            return base.Channel.modificarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
-            SoftResBusiness.TipoMesaWSClient.eliminarRequest inValue = new SoftResBusiness.TipoMesaWSClient.eliminarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> modificarAsync(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+            SoftResBusiness.TipoMesaWSClient.modificarRequest inValue = new SoftResBusiness.TipoMesaWSClient.modificarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).eliminarAsync(inValue);
+            return ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).modificarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -464,26 +464,26 @@ namespace SoftResBusiness.TipoMesaWSClient {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SoftResBusiness.TipoMesaWSClient.modificarResponse SoftResBusiness.TipoMesaWSClient.TipoMesa.modificar(SoftResBusiness.TipoMesaWSClient.modificarRequest request) {
-            return base.Channel.modificar(request);
+        SoftResBusiness.TipoMesaWSClient.eliminarResponse SoftResBusiness.TipoMesaWSClient.TipoMesa.eliminar(SoftResBusiness.TipoMesaWSClient.eliminarRequest request) {
+            return base.Channel.eliminar(request);
         }
         
-        public int modificar(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
-            SoftResBusiness.TipoMesaWSClient.modificarRequest inValue = new SoftResBusiness.TipoMesaWSClient.modificarRequest();
+        public int eliminar(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+            SoftResBusiness.TipoMesaWSClient.eliminarRequest inValue = new SoftResBusiness.TipoMesaWSClient.eliminarRequest();
             inValue.arg0 = arg0;
-            SoftResBusiness.TipoMesaWSClient.modificarResponse retVal = ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).modificar(inValue);
+            SoftResBusiness.TipoMesaWSClient.eliminarResponse retVal = ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).eliminar(inValue);
             return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> SoftResBusiness.TipoMesaWSClient.TipoMesa.modificarAsync(SoftResBusiness.TipoMesaWSClient.modificarRequest request) {
-            return base.Channel.modificarAsync(request);
+        System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> SoftResBusiness.TipoMesaWSClient.TipoMesa.eliminarAsync(SoftResBusiness.TipoMesaWSClient.eliminarRequest request) {
+            return base.Channel.eliminarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.modificarResponse> modificarAsync(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
-            SoftResBusiness.TipoMesaWSClient.modificarRequest inValue = new SoftResBusiness.TipoMesaWSClient.modificarRequest();
+        public System.Threading.Tasks.Task<SoftResBusiness.TipoMesaWSClient.eliminarResponse> eliminarAsync(SoftResBusiness.TipoMesaWSClient.tipoMesaDTO arg0) {
+            SoftResBusiness.TipoMesaWSClient.eliminarRequest inValue = new SoftResBusiness.TipoMesaWSClient.eliminarRequest();
             inValue.arg0 = arg0;
-            return ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).modificarAsync(inValue);
+            return ((SoftResBusiness.TipoMesaWSClient.TipoMesa)(this)).eliminarAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

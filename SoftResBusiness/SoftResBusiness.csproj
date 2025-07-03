@@ -166,19 +166,37 @@
     <None Include="Connected Services\FilaEsperaWSClient\filaEspera.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.buscarSiguienteCompatibleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.confirmarDisponibilidadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.contarUsuariosEnEsperaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.eliminarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.filaEsperaDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.hayUsuariosEnEsperaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.insertarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.listarPendientesPorPrioridadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.listarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.modificarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.notificarSiguienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FilaEsperaWSClient\SoftResBusiness.FilaEsperaWSClient.obtenerPorIdResponse.datasource">
@@ -314,6 +332,15 @@
     <None Include="Connected Services\ReservaWSClient\reservas.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.cancelarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.confirmarPostResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.confirmarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ReservaWSClient\SoftResBusiness.ReservaWSClient.eliminarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -336,16 +363,16 @@
     <None Include="Connected Services\ReservaxMesaWSClient\reservaxmesa.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.eliminarResponse.datasource">
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.liberarMesasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.insertarResponse.datasource">
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.mesaDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.listarResponse.datasource">
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.obtenerMesasDeReservaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.reservaxMesasDTO.datasource">
+    <None Include="Connected Services\ReservaxMesaWSClient\SoftResBusiness.ReservaxMesaWSClient.verificarDisponibilidadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\RolWSClient\rol.wsdl" />
